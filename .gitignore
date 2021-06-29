@@ -5,3 +5,6 @@ db.sqlite3
 desktop.ini
 main.js
 media/
+.venv/
+venv/
+node_modules/
