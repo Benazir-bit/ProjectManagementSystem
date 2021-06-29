@@ -1,0 +1,121 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+{% block title %} Summary {% endblock %}
+{% load tz %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body"> 
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div">
+				<div class="row" id="main_body_header">				
+					<div class="col-xs-12" id="inbox_title">
+                        <p><b>Summary</b></p>
+                    </div>
+				</div>
+                
+				<div class="row">
+				    <div id="week_report_table" class="col-sm-12">
+                        <form id="search_form">
+                            <div class="col-sm-2">
+                                <select name="group_id" class="form-control" onchange="get_employee_list(this.value)" required>
+                                    <option value="">Select Group</option>
+                                    {% for group in groups %}
+                                        <option value="{{group.id}}">{{group}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-sm-2" id="employee_list">
+                                <select name="emp_id" id="emp_select" class="form-control" required disabled>
+                                    <option value="">Select Employee</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+								<label for="from_date" style="display: inline-block">From: </label>&emsp;
+								<input type="date" id="from_date" name="from_date" value="05-12-2018" class="datepicker form-control" required="">
+							</div>
+
+							<div class="col-sm-3">
+								<label for="to_date" style="display: inline-block">To:</label>&emsp;
+								<input type="date" id="to_date" name="to_date" value="05-12-2018" class="datepicker form-control " required="">
+							</div>
+							<div class="col-sm-2" id="inbox_filt_btn">
+                                <input type="submit" class="btn btn-primary" name="filt_search" value="Search">							    
+							</div>
+						</form>
+                    </div>
+                </div>
+                
+                <div class="row" id="change_section">
+					
+				</div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block external_js %}
+<script>
+    function get_employee_list(group_id) {
+        document.getElementById("emp_select").value = "";
+        document.getElementById("emp_select").disabled = true;
+        $.ajax({
+        	type: "GET",
+		    url: '{% url 'weekly_status:get_employee_list' %}',
+		    data: {
+		        'group_id': group_id,
+		    },
+	    }).done(function(response) {
+        	$('#employee_list').empty();
+	    	$('#employee_list').html(response);
+	    	$('.selectpicker').selectpicker('refresh');
+    	});
+    }
+</script>
+
+<script>
+    var form = $('#search_form');
+    form.submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+        	type: "GET",
+		    url: '{% url 'weekly_status:get_summary' %}',
+		    data: form.serialize(),
+	    }).done(function(response) {
+           $('#change_section').html(response);
+    	});
+    });
+
+</script>
+{% endblock %}

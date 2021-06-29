@@ -1,0 +1,12 @@
+{% autoescape off %}
+<p>Hi {{ supervisor.first_name }},</p>
+{% if submitted %}
+<p>{{user.get_full_name}}({{user.username}}) has cancelled the submission of "<a href="{{domain}}{% url 'uspl:task_detail' task.id %}"><b>{{task.name}}</b></a>" task.
+<p>Please wait for the resubmission.</p>
+{% else %}
+<p>{{user.get_full_name}}({{user.username}}) has submitted the "<a href="{{domain}}{% url 'uspl:task_detail' task.id %}"><b>{{task.name}}</b></a>" task of the project "<a href="{{domain}}{% url 'uspl:project_detail' task.project.id %}"><b>{{task.project.name}}</b></a>" for your review.</p>
+<p>Please mark the Task as done if it's ready to deliver. Otherwise, give your feedback to {{user.first_name}}.</p>
+{% endif %}
+<p>Sincerely,</p>
+<p>The Ulkasemi EMS Team</p>
+{% endautoescape %}

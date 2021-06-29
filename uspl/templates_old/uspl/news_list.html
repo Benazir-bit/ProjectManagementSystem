@@ -1,0 +1,67 @@
+{% extends "uspl/base.html" %}
+{% block title %}All News{% endblock %}
+
+
+{% block content %}
+<div id="base-main-body" class="col-sm-8"> 
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div"> <!--added new div-->
+				<div id="main_body_header" class="row">				
+					<p><b>All News</b></p>
+				</div>
+				<br>
+				
+				<div class="col-sm-12">
+					<br>
+					{% regroup all_news by created_date.date as section_list %}
+					{% for created_date in section_list %}
+					    <i class="fa fa-calendar" id="newspage_date"> {{created_date.grouper}}</i><br><br>
+					    {% for news in created_date.list %}
+							<div class="row event">
+								<div class="col-xs-1" id="news-pic_all">
+									<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+								</div>
+								<div class="col-xs-9" id="news_msg">
+									<p><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a> {{news.message}}<br></p>
+				
+								</div>
+								<div class="col-xs-2 " id="news_msg_date">
+									<span class="glyphicon glyphicon-time"></span>  {{news.created_date.time}}
+								</div>
+							</div>
+							<hr id="hr_news_all">
+					    {% endfor %}
+					{% endfor %}
+				</div>
+				<br>
+				<div class="row" align="center">				
+					{% if all_news.has_other_pages %}
+                        <ul class="pagination">
+                            {% if all_news.has_previous %}
+                            	<li><a href="?page=1">&laquo;</a></li>
+                                <li><a href="?page={{ all_news.previous_page_number }}">&lt;</a></li>	
+                            {% endif %}
+                            
+                             {% for num in all_news.paginator.page_range %}
+                            	{% if all_news.number == num %}
+    								<li class="active"><span>{{ num }} <span class="sr-only">(current)</span></span></li>
+    							{% elif num > all_news.number|add:'-3' and num < all_news.number|add:'3' %}
+    								<li><a href="?page={{ num }}">{{ num }}</a></li>
+    							{% endif %}
+  							{% endfor %}
+                            
+                            
+                            {% if all_news.has_next %}
+                                <li><a href="?page={{ all_news.next_page_number }}">&gt;</a></li>
+                                <li><a href="?page={{ all_news.paginator.num_pages }}">&raquo;</a></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+				</div>
+			</div>	
+		</div>	
+	</div>
+</div>
+{% endblock %}

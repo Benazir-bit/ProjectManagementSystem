@@ -1,0 +1,356 @@
+{% extends "uspl/base.html" %}
+{% block title %}{{employee.get_full_name}}{% endblock %}
+
+{% load staticfiles %}
+
+
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body"> 
+	<div class="row">
+		<div class="col-sm-12">
+			<div id="main-body-div">
+				<br>
+				<div id="main_body_header" class="row">
+					<p><b>Profile</b></p>
+				</div>
+				<br>	
+				<div class="row" id = "profile_pic_row">
+					<div class="col-sm-6" id="cont">
+						<img id="employee_pic" class="img-reg" width="200" height="200" src="{{ employee.profile.image.url }}" alt="{{ employee.first_name }}"/><br>
+						{% if request.user == employee %}
+							<div class="middle">
+								<button class="btn btn-default btn-sm" id="change_img" data-toggle="modal" data-target="#uploadImage"><b>Upload Image</b></button></a>
+							</div>
+						{% endif %}
+					</div>
+					<div class="col-sm-6" id="profile_cont">
+						<h3 id = "employee_name">
+							{{employee.get_full_name}}
+							{% if request.user != employee %}
+								{% if current_tasks.count > 0 %}
+									<span class="badge" id="busy_badge">Busy</span>
+								{% else %}
+									<span class="badge" id="idle_badge">Idle</span>
+								{% endif %}
+							{% endif %}
+						</h3>
+						<h4 id="profile_info">
+							<span>{% if employee.teamleader_set.all %}Team Leader, {% endif %}{{employee.profile.dsg.title}}</span>
+							<br>
+							<span>{% for group in employee.groups.all %}{{group.name}}{% if not forloop.last %}, {% endif %} {% endfor %}</span>
+							<br>
+							<span><b>Contact: </b>{{employee.profile.phone_number}}</span>
+							<br>
+							<span><b>Email: </b>{{employee.email}}</span>
+						</h4>
+						{% if request.user == employee %}
+							<a href="{% url 'uspl:reset_password' %}" class="btn btn-danger" id="reset_password"><b>Reset Password</b></button></a>
+							<a href="{% url 'uspl:update_employee_profile' employee.id %}" class="btn btn-info" id = "profile_update"><b>Update Profile</b></button></a>
+							<br><br>
+						{% endif %}
+					</div>
+				</div><br>
+				{% if not employee.is_staff %}
+					<div class="row" id ="profile_table_row">
+						<div class="col-md-7" id="profile_table_div">
+							<table  class="table" id = "profile_table">
+								<tr>
+									<td id = "profile_category"><b>Employee ID</b></td>
+									<td id = "profile_description">{{employee.username}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Date of Joining</b></td>
+									<td id = "profile_description">{{employee.profile.date_of_joining}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Date of Birth</b></td>
+									<td id = "profile_description">{{employee.profile.date_of_birth}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Phone Number</b></td>
+									<td id = "profile_description">{{employee.profile.phone_number}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Present Address</b></td>
+									<td id = "profile_description">{{employee.profile.present_address}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Highest Degree</b></td>
+									<td id = "profile_description">{{employee.profile.highest_degree}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Blood Group</b></td>
+									<td id = "profile_description">{{employee.profile.blood_group}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Emergency Contact</b></td>
+									<td id = "profile_description">{{employee.profile.emergency_contact}}</td>
+								</tr>
+							</table>
+						</div>
+						{% if not request.user.profile.is_hr %}
+							<div class="col-md-5" id="employee_detail_div">
+								<table class="table" id = "detail_table">
+									<tr>		
+										<td id = "detail_button">
+											{% if request.user == employee %}
+												<a href="{% url 'uspl:own_project_list' %}" class="btn btn-info" id = "profile_button"><b>Current Project ({{projects.count}})</b></a>
+											{% else %}
+												<a href="{% url 'uspl:employee_project_list' employee.id %}" class="btn btn-info" id = "profile_button"><b>Current Project ({{projects.count}})</b></a>
+											{% endif %}
+										</td>
+									</tr>
+									<tr>
+										<td id = "detail_button">
+											<a href ="{% url 'uspl:user_task_list_current' employee.id %}" class="btn btn-warning" id = "profile_button"><b>Ongoing Task ({{tasks.count}})</b></a>
+										</td>
+									</tr>
+									<tr>
+										<td id = "detail_button">
+											<a href="{% url 'uspl:user_issues' employee.id %}" class="btn btn-danger" id = "profile_button"><b>Raised Issues ({{raised_issues.count}})</b></a>
+										</td>
+									</tr>
+									<tr>		
+										<td id = "detail_button">
+											<a href ="{% url 'uspl:solved_issues' employee.id %}" class="btn btn-success" id = "profile_button"><b>Solved Issues</b></a>
+										</td>
+									</tr>
+									{% if request.user.is_staff or request.user.teamleader_set.all or request.user == employee %}
+										<tr>		
+											<td id = "detail_button">
+												{% now "Y" as current_year %}
+												<a href ="{% url 'uspl:user_kpi' employee.id current_year %}" class="btn btn-info" id = "profile_button"><b>View Kpi</b></a>
+											</td>
+										</tr>
+									{% endif %}
+								</table><br>
+							</div>
+						{% endif %}
+					</div><br>
+				{% else %}
+					<div class="row" id ="profile_table_row">
+						<div class="col-md-12" id="profile_table_div">
+							<table  class="table" id = "profile_table">
+								<tr>
+									<td id = "profile_category"><b>Employee ID</b></td>
+									<td id = "profile_description">{{employee.username}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Date of Joining</b></td>
+									<td id = "profile_description">{{employee.profile.date_of_joining}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Date of Birth</b></td>
+									<td id = "profile_description">{{employee.profile.date_of_birth}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Phone Number</b></td>
+									<td id = "profile_description">{{employee.profile.phone_number}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Present Address</b></td>
+									<td id = "profile_description">{{employee.profile.present_address}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Highest Degree</b></td>
+									<td id = "profile_description">{{employee.profile.highest_degree}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Blood Group</b></td>
+									<td id = "profile_description">{{employee.profile.blood_group}}</td>
+								</tr>
+								<tr>
+									<td id = "profile_category"><b>Emergency Contact</b></td>
+									<td id = "profile_description">{{employee.profile.emergency_contact}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				
+				{% endif %}
+				
+				{% if not employee.is_staff %}
+					{% if request.user.is_staff or request.user.teamleader_set.all or request.user == employee %}
+						<div id="main_body_header" class="row">
+							<p><b>Employee KPI</b></p>
+						</div>
+						{% if employee_kpi %}
+						<div class="col-sm-7">
+							<br>
+							<div class="row">
+								<div class="col-sm-3" id="progress_fix"> 
+									<p id="emp_profile_kpi">Skill</p>
+								</div>	
+								<div class="col-sm-9" id="profile_kpi_progress"> 
+									<div class="progress">
+										<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="{{avg.skill__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.skill__avg 10 100 %}%">{{avg.skill__avg|floatformat:"2"}}
+										</div>
+									</div><br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3" id="progress_fix"> 
+									<p id="emp_profile_kpi">Attitude</p>
+								</div>	
+								<div class="col-sm-9" id="profile_kpi_progress"> 
+									<div class="progress">
+										<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="{{avg.attitude__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.attitude__avg 10 100 %}%">{{avg.attitude__avg|floatformat:"2"}}
+										</div>
+									</div><br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3" id="progress_fix"> 
+									<p id="emp_profile_kpi">Motivation</p>
+								</div>	
+								<div class="col-sm-9" id="profile_kpi_progress"> 
+									<div class="progress">
+										<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{{avg.motivation__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.motivation__avg 10 100 %}%">{{avg.motivation__avg|floatformat:"2"}}
+										</div>
+									</div><br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3" id="progress_fix"> 
+									<p id="emp_profile_kpi">Communication</p>
+								</div>	
+								<div class="col-sm-9" id="profile_kpi_progress"> 
+									<div class="progress">
+										<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="{{avg.communication__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.communication__avg 10 100 %}%">{{avg.communication__avg|floatformat:"2"}}
+										</div>
+									</div><br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3" id="progress_fix"> 
+									<p id="emp_profile_kpi">Time Management</p>
+								</div>	
+								<div class="col-sm-9" id="profile_kpi_progress"> 
+									<div class="progress">
+										<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.time_management__avg 10 100 %}%">{{avg.time_management__avg|floatformat:"2"}}
+										</div>
+									</div><br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3" id="progress_fix"> 
+									<p id="emp_profile_kpi">Reliability</p>
+								</div>	
+								<div class="col-sm-9" id="profile_kpi_progress"> 
+									<div class="progress">
+										<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="{{avg.reliability__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.reliability__avg 10 100 %}%">{{avg.reliability__avg|floatformat:"2"}}
+										</div>
+									</div><br>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-sm-5" id="bar_tab">
+							<br>
+							<div class="progress-bar position" id="bar_position" data-percent="{{overall_avg|floatformat:"2"}}" data-color="#e5e5e5, #049dff"></div>
+						</div>
+						{% else %}
+							<br>
+							<br>
+							<div class="row">
+								<h4 id="not-available-msg">No KPIs available</h4>
+							</div>
+						{% endif %}
+					
+					{% endif %}
+				{% endif %}
+
+			</div>
+			<br>
+			<br>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="uploadImage" role="dialog">
+	<div class="modal-dialog modal-dialog-centered">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title"><b>Upload Image<b></h3>
+			</div>
+			<div class="modal-body">
+				<form method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<input type="file" name="new_pic" id="new_pic" accept="image/*" required>
+					<input class="btn btn-sm btn-primary" type="submit" name="upload_image" id="upload_image" value="Upload">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block news %}
+{% if not employee.is_staff %}
+	{% if not request.user.profile.is_hr %}
+	<!-- News -->
+	<div class="col-sm-2">
+		<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+			<p id="news_header"><b>{% if request.user == employee %}My{% else %}Employee{% endif %} Activities</b></p><br>
+			<div class="scrollbar">
+				{% for news in profile_news %}
+					<div class="row event">
+						<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+							<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+						</div>
+						<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+							<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+							<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+						</div>
+					</div>
+					<hr>
+				{% endfor %}
+				</div>
+					<p id="news_header"><b><a href="{% url 'uspl:employee_news_all' employee.id %}">View All</a></b></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% else %}
+	{% if not request.user.profile.is_hr %}
+	<!-- News -->
+	<div class="col-sm-2">
+		<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+			<p id="news_header"><b>Recent Activities</b></p><br>
+			<div class="scrollbar">
+				{% for news in newses %}
+					<div class="row event">
+						<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+							<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+						</div>
+						<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+							<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+							<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+						</div>
+					</div>
+					<hr>
+				{% endfor %}
+				</div>
+					<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% endif %}
+{% endblock %}
+
+{% block external_js %}
+<script>
+		$(".progress-bar").loading();
+		$('input').on('click', function () {
+		 $(".progress-bar").loading();
+		});
+</script>
+
+{% endblock %}

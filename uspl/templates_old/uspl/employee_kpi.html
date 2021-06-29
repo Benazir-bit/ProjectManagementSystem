@@ -1,0 +1,353 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+{% block title %}KPI{% endblock %}
+
+{% block content %}
+<div id="base-main-body" class="col-sm-8">
+	<div class="row">
+		<div class="col-sm-12">
+			<div id="main-body-div">
+				<br>
+				<div id="main_body_header_projecttask" class="row">
+					<div class="col-md-10 col-xs-12">
+						<p><b>{% if request.user == employee %}My{% else %}{{employee.first_name}}'s{% endif %} KPI ({{filter}})</b></p>
+					</div>
+					<div class="col-md-2 col-xs-12 btn-group btn-group-dropdown" id="filter_search">
+						<select class="btn btn-default form-control" id="DropDown" name="DropDown" onchange="gotoPage(this)">
+							{% for year_opt in year_list %}
+								<option value="{% url 'uspl:user_kpi' employee.id year_opt %}" {% if year_opt == filter %}selected{% endif %}>{{year_opt}}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				{% if kpis %}
+				<br>
+				<div class="col-sm-3" id="kpi_page_col3">
+					<div class="card" id="kpi_table_height">
+						<div id="Manager_project_dashboard_table" class="card-header card-header-warning">
+							<h4 class="card-title">Overview ({{year}})</h4>
+						</div>
+						
+						<div id="dashboard_kpi_table" class="card-body table-responsive">
+							<center class="wrapper">
+								<a href="{% url 'uspl:employee_profile' employee.id %}">
+									<img src="{{ employee.profile.image.url }}" class="img-circle" id="kpi_member_pic" alt="{{employee.get_full_name}}">
+								</a><br>
+								<a href="{% url 'uspl:employee_profile' employee.id %}">{{employee.get_full_name}}</a><br>
+								<small id ="text_small">{% if employee.teamleader_set.all %}Team Leader, {% endif %}{{employee.profile.dsg.title}}</small>
+							</center>
+							<br>
+							<table class="table table-hover">
+								<tbody>
+									<tr>
+										<td>Assisted Projects</td>
+										<td>{{project_count}}</td>
+									</tr>
+									{% if supervised_project_count %}
+										<tr>
+											<td>Supervised Projects</td>
+											<td>{{supervised_project_count}}</td>
+										</tr>
+									{% endif %}
+									<tr>
+										<td>Completed Tasks</td>
+										<td>{{tasks_count}}</td>
+									</tr>
+									<tr>
+										<td>Raised Issues</td>
+										<td>{{raised_issues_count}}</td>
+									</tr>
+									<tr>
+										<td>Solved Issues</td>
+										<td>{{solved_issues_count}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-9" id="kpi_page_col1">
+					<div class="card" id="kpi_table_height">
+						<div id="Manager_project_dashboard_table" class="card-header card-header-warning">
+							<h4 class="card-title">Average Ratings ({{year}})</h4>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-7">
+								<div class="row">
+									<div class="col-sm-5"> 
+										<p id="employee_kpi_category">Skill</p>
+									</div>	
+									<div class="col-sm-7" id ="progress_style"> 
+										<div class="progress" id="progress_category">
+											<div class="progress-bar" role="progressbar" aria-valuenow="{{avg.skill__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.skill__avg 10 100 %}%">{{avg.skill__avg|floatformat:"2"}}
+											</div>
+										</div><br>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-5"> 
+										<p id="employee_kpi_category">Attitude</p>
+									</div>	
+									<div class="col-sm-7" id ="progress_style"> 
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="{{avg.attitude__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.attitude__avg 10 100 %}%">{{avg.attitude__avg|floatformat:"2"}}
+											</div>
+										</div><br>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-5"> 
+										<p id="employee_kpi_category">Motivation</p>
+									</div>	
+									<div class="col-sm-7" id ="progress_style"> 
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="{{avg.motivation__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.motivation__avg 10 100 %}%">{{avg.motivation__avg|floatformat:"2"}}
+											</div>
+										</div><br>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-5"> 
+										<p id="employee_kpi_category">Communication</p>
+									</div>	
+									<div class="col-sm-7" id ="progress_style"> 
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="{{avg.communication__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.communication__avg 10 100 %}%">{{avg.communication__avg|floatformat:"2"}}
+											</div>
+										</div><br>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-5"> 
+										<p id="employee_kpi_category">Time Management</p>
+									</div>	
+									<div class="col-sm-7" id ="progress_style"> 
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="{{avg.time_management__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.time_management__avg 10 100 %}%">{{avg.time_management__avg|floatformat:"2"}}
+											</div>
+										</div><br>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-5"> 
+										<p id="employee_kpi_category">Reliability</p>
+									</div>	
+									<div class="col-sm-7" id ="progress_style"> 
+										<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="{{avg.reliability__avg}}" aria-valuemin="0" aria-valuemax="10" style="width:{% widthratio avg.reliability__avg 10 100 %}%">{{avg.reliability__avg|floatformat:"2"}}
+											</div>
+										</div><br>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-5" id="kpi_page_col2">
+								<div class="progress-bar position" id="bar_kpi_position" data-percent="{{overall_avg|floatformat:"2"}}"  data-color="#e5e5e5, #049dff"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{% if not request.user.profile.is_hr %}
+					<div class="row">
+						<div class="col-sm-12">
+							<br>
+							<div id="main_body_header" class="row">
+								<p><b>All KPIs</b></p>
+							</div>
+							<div class="table-responsive">
+								<table  class="table table-hover">
+									<thead>
+										<tr>
+											<th>Task Title</th>
+											<th>Rated On</th>
+											<th>Performance</th>
+										</tr>
+									</thead>
+									<tbody class="infinite-container">
+										{% for kpi in kpis %}
+											<tr id="{{ kpi.id }}" class="infinite-item">
+												<td>
+													<a  href="{% url 'uspl:task_detail' kpi.task.id %}">{{ kpi.task.name|truncatewords:10 }}</a>
+												</td>
+												<td>
+													{{ kpi.task.completed_date }}
+												</td>
+												<td>
+													<div class="progress">
+													  <div class="progress-bar" role="progressbar" style="width: {{kpi.get_kpi_average}}%" aria-valuenow="{{kpi.get_kpi_average}}" aria-valuemin="0" aria-valuemax="100">{{kpi.get_kpi_average|floatformat:"2"}}%</div>
+													</div>
+												</td>
+												<td>
+													<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal{{kpi.id}}">Details</button>
+													<div class="modal fade" id="myModal{{kpi.id}}" role="dialog">
+														<div class="modal-dialog" id="kpi-modal-dialog">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header" id="kpi_modal_head">
+																	<button type="button" id="modal-cross" class="close" data-dismiss="modal">&times;</button>
+																	<h3 id="kpi_modal_title"><b>Performance Report<b></h3>
+																	<h5><b>Employee:</b> {{kpi.task.assigned_to.get_full_name}} ({{kpi.task.assigned_to}})</h5>
+																	<h5><b>Task:</b> {{kpi.task.name}}</h5>
+																	<h5><b>Rated by:</b> {{kpi.task.project.supervisor.get_full_name}}</h5>
+																	<h5><b>Rated on:</b> {{kpi.task.completed_date}}</h5>
+																</div>
+																<form style="margin:0">
+																	<div class="modal-body">
+										                                <div class="row" id="slidecontainer">
+										                                    <h4 id="kpi-table-heading"><b>Skill&nbsp;(10)</b></h4>
+										                                    <div class="col-xs-9">
+										                                        <input class= "rangeslider" id="range_one" type="range" value="{{kpi.skill}}"  min="0" max="10.0" step="0.5" disabled>
+										                                    </div>
+										                                    <div class="col-xs-3">
+										                                        <input type="number" name="skill" class="inval" id="inval-range_one" value="{{kpi.skill}}" min="0" max="10.0" step="0.5" readonly>
+										                                    </div>      
+										                                </div>
+										                                
+										                                <div class="row" id="slidecontainer">
+										                                    <h4 id="kpi-table-heading"><b>Attitude&nbsp;(10)</b></h4>
+										                                    <div class="col-xs-9">
+										                                        <input class= "rangeslider" id="range_two" type="range" value="{{kpi.attitude}}" min="0" max="10.0" step="0.5" disabled>
+										                                    </div>
+										                                    <div class="col-xs-3">
+										                                        <input type="number" name="attitude" class="inval" id="inval-range_two" value="{{kpi.attitude}}" min="0" max="10.0" step="0.5" readonly>
+										                                    </div>
+										                                </div>
+															
+										                                <div class="row" id="slidecontainer">
+										                                    <h4 id="kpi-table-heading"><b>Motivation&nbsp;(10)</b></h4>
+										                                    <div class="col-xs-9">
+										                                        <input class= "rangeslider" id="range_three" type="range" value="{{kpi.motivation}}" min="0" max="10.0" step="0.5" disabled>
+										                                    </div>
+										                                    <div class="col-xs-3">
+										                                        <input type="number" name="motivation" class="inval" id="inval-range_three" value="{{kpi.motivation}}" min="0" max="10.0" step="0.5" readonly>
+										                                    </div>
+										                                </div>
+										
+										                                <div class="row" id="slidecontainer">
+										                                     <h4 id="kpi-table-heading"><b>Communication&nbsp;(10)</b></h4>
+										                                    <div class="col-xs-9">
+										                                        <input class= "rangeslider" id="range_four" type="range" value="{{kpi.communication}}" min="0" max="10.0" step="0.5" disabled>
+										                                    </div>
+										                                    <div class="col-xs-3">
+										                                        <input type="number" name="communication" class="inval" id="inval-range_four" value="{{kpi.communication}}" min="0" max="10.0" step="0.5" readonly>
+										                                    </div>
+										                                </div>
+										                                
+										                                <div class="row" id="slidecontainer">
+										                                    <h4 id="kpi-table-heading"><b>Time Management&nbsp;(10)</b></h4>
+										                                    <div class="col-xs-9">
+										                                        <input class= "rangeslider" id="range_five" type="range" value="{{kpi.time_management}}" min="0" max="10.0" step="0.5" disabled>
+										                                    </div>
+										                                    <div class="col-xs-2">
+										                                        <input type="number" name="time_management" class="inval" id="inval-range_five" value="{{kpi.time_management}}" min="0" max="10.0" step="0.5" readonly>
+										                                    </div>
+										                                </div>
+										                                
+										                                <div class="row" id="slidecontainer">
+										                                    <h4 id="kpi-table-heading"><b>Reliability&nbsp;(10)</b></h4>
+										                                    <div class="col-xs-9">
+										                                        <input class= "rangeslider" id="range_six" type="range" value="{{kpi.reliability}}" min="0" max="10.0" step="0.5" disabled>
+										                                    </div>
+										                                    
+										                                    <div class="col-xs-3">
+										                                        <input type="number" name="reliability" class="inval" id="inval-range_six" value="{{kpi.reliability}}" min="0" max="10.0" step="0.5" readonly>
+										                                    </div>
+										                                </div>
+										                                <br>
+																	</div>
+																	<div class="modal-footer" id="kpi_modal_footer">
+																		<button type="button" id="cancel_btn" class="btn btn-default modal-btn" data-dismiss="modal">Close</button>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+								{% if kpis.has_next %}
+										<a class="infinite-more-link lds-ellipsis" href="?page={{ kpis.next_page_number }}"></a>
+		  						{% endif %}
+		  						{% if kpis.has_next %}
+		  						<div class="loading" style="text-align:center">
+	  								<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+	  							</div>
+	  							{% endif %}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+				{% else %}
+					<br>
+					<br>
+					<div class="row">
+						<h4 id="not-available-msg">No KPIs available</h4>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container'),
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+		
+</script>
+<script>
+		$(".progress-bar").loading();
+		$('input').on('click', function () {
+		 $(".progress-bar").loading();
+		});
+</script>
+
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block external_js %}
+	<script type="text/javascript">
+	
+		function gotoPage(select){
+  		 window.location = select.value;
+		}
+	
+	</script>
+	
+	
+{% endblock %}

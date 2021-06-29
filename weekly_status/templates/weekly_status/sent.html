@@ -1,0 +1,181 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+{% block title %} Sent {% endblock %}
+{% load tz %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body"> 
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div">
+				<div class="row" id="main_body_header">				
+                     <p><b>Sent</b></p>
+				</div>
+                
+				<div class="row">
+				    <div class="col-xs-12" id="dash_table_height" class="inbox_table">
+                        <div id="dash_table_height" class="">
+                            <div class="table table-responsive" id="task_report_table">
+                                <div id="week_report_table" class="col-sm-12">
+                                    <div class="col-sm-3">
+    									<label for="from_date" style="display: inline-block">From: </label>&emsp;
+    									<input type="date" id="from_date" name="from_date" value="05-12-2018" class="form-control" required="">
+    								</div>
+    
+    								<div class="col-sm-3">
+    									<label for="to_date" style="display: inline-block">To:</label>&emsp;
+    									<input type="date" id="to_date" name="to_date" value="05-12-2018" class="form-control " required="">
+    								</div>
+    								<div class="col-sm-2" id="inbox_filt_btn">
+                                        <input type="submit" class="btn btn-primary" name="filt_search" value="Search">							    
+    								</div>
+    								<div class="col-sm-4" id="new_status_btn">
+    								    <a href="{% url 'weekly_status:new_status' %}" class="btn btn-info"><i style="margin-left: 3px;" class="fa fa-plus"></i> New Weekly Status</a>
+    								</div>    
+                                </div>
+                                <table class="table table-inbox table-hover" id="inbox_table_height">
+                                    <thead id="inbox_thead">
+                                        <tr>
+                                            <th>Status</th>
+                                            {% if request.user.is_staff %}
+                                            <th>Group</th>
+                                            {% endif %}
+                                            <th>Recipient</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if messages %}
+                                            {% for message in messages %}
+                                                {% if message.get_type == "status" %}
+                                                    <tr style="height:5%">
+                                                        <td style="text-align:center">
+                                                            <a href="{% url 'weekly_status:status_report' message.id %}">{{message}}</a>
+                                                        </td>
+                                                        {% if request.user.is_staff %}
+                                                        <td style="text-align:center">
+                                                            <a href="{% url 'uspl:group_details' message.group.id %}">
+                                                            {{message.group}}
+                                                            </a>
+                                                        </td>
+                                                        {% endif %}
+                                                        <td style="text-align:center">
+                                                            <a href="{% url 'uspl:employee_profile' message.recipent.id %}">
+                                                                <img src="{{message.recipent.profile.image.url}}" class="img-circle" width="30" height="30" alt="{{message.recipent.get_full_name}}">
+                                                            </a>
+                                                            <a href="{% url 'uspl:employee_profile' message.recipent.id %}">{{message.recipent.get_full_name}}</a>
+                                                        </td>
+                                                        <td style="text-align:center">{{message.updated}}</i></td>
+                                                    </tr>
+                                                {% elif message.get_type == "feedback" %}
+                                                    <tr style="height:5%">
+                                                        <td style="text-align:center">
+                                                            <a href="{% url 'weekly_status:feedback' message.id %}">{{message}}</a>
+                                                        </td>
+                                                        {% if request.user.is_staff %}
+                                                        <td style="text-align:center">
+                                                            <a href="{% url 'uspl:group_details' message.task.project.group.id %}">
+                                                            {{message.task.project.group}}
+                                                            </a>
+                                                        </td>
+                                                        {% endif %}
+                                                        <td style="text-align:center">
+                                                            <a href="{% url 'uspl:employee_profile' message.task.project.supervisor.id %}">
+                                                                <img src="{{message.task.project.supervisor.profile.image.url}}" class="img-circle" width="30" height="30" alt="{{message.task.project.supervisor.get_full_name}}">
+                                                            </a>
+                                                            <a href="{% url 'uspl:employee_profile' message.task.project.supervisor.id %}">{{message.task.project.supervisor.get_full_name}}</a>
+                                                        </td>
+                                                        <td style="text-align:center">{{message.updated}}</i></td>
+                                                    </tr>
+                                                {% elif message.get_type == "fdreply" %}
+                                                    <tr style="height:5%">
+                                                        <td style="text-align:center">
+                                                            <a href="{% url 'weekly_status:feedback' message.feedback.id %}">{{message.feedback}}</a>
+                                                        </td>
+                                                        {% if request.user.is_staff %}
+                                                        <td style="text-align:center">
+                                                            <a href="{% url 'uspl:group_details' message.feedback.task.project.group.id %}">
+                                                            {{message.feedback.task.project.group}}
+                                                            </a>
+                                                        </td>
+                                                        {% endif %}
+                                                        <td style="text-align:center">
+                                                            <a href="{% url 'uspl:employee_profile' message.feedback.task.project.supervisor.id %}">
+                                                                <img src="{{message.feedback.task.project.supervisor.profile.image.url}}" class="img-circle" width="30" height="30" alt="{{message.feedback.task.project.supervisor.get_full_name}}">
+                                                            </a>
+                                                            <a href="{% url 'uspl:employee_profile' message.feedback.task.project.supervisor.id %}">{{message.feedback.task.project.supervisor.get_full_name}}</a>
+                                                        </td>
+                                                        <td style="text-align:center">{{message.feedback.updated}}</i></td>
+                                                    </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="5" id="no_msg_td">No Message Found</td>
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <br>
+            				<div class="row" align="center">				
+            					{% if messages.has_other_pages %}
+            	                    <ul class="pagination">
+            	                        {% if messages.has_previous %}
+            	                        	<li><a href="?page=1">&laquo;</a></li>
+            	                            <li><a href="?page={{ messages.previous_page_number }}">&lt;</a></li>	
+            	                        {% endif %}
+            	                        
+            	                         {% for num in messages.paginator.page_range %}
+            	                        	{% if messages.number == num %}
+            									<li class="active"><span>{{ num }} <span class="sr-only">(current)</span></span></li>
+            								{% elif num > messages.number|add:'-3' and num < messages.number|add:'3' %}
+            									<li><a href="?page={{ num }}">{{ num }}</a></li>
+            								{% endif %}
+            	  						{% endfor %}
+            	                        {% if messages.has_next %}
+            	                            <li><a href="?page={{ messages.next_page_number }}">&gt;</a></li>
+            	                            <li><a href="?page={{ messages.paginator.num_pages }}">&raquo;</a></li>
+            	                        {% endif %}
+            	                    </ul>
+            	                {% endif %}
+            				</div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

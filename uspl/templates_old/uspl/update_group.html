@@ -1,0 +1,43 @@
+{% extends "uspl/base.html" %}
+{% block title %} Update Profile {% endblock %}
+{% block pagetitle %} Update Profile {% endblock %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body"> 
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div">
+				<div id="main_body_header" class="row">
+					<p><b>Update Group</b></p>
+				</div>
+				<br>	
+		        <form method="post">
+		        	{% csrf_token %}
+		         	<table class="table table-striped">
+			            <tr>
+							<td colspan="1" id = "table-form">
+								<label for="name">Name</label>
+							</td>
+							<td>
+								{{update_group_form.name}}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="username">Teamleader</label>
+							</td>
+							<td>
+								{{update_teamleader_form.users}}
+							</td>
+						</tr>
+					</table>
+					<div style="text-align:center">
+			            <button class="btn btn-primary" type="submit">Update Profile</button>
+			         </div>
+		        </form>
+      		</div>
+    	</div>
+	</div>
+</div>
+{% endblock %}

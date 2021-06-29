@@ -1,0 +1,139 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+{% block title %}{{feedback}}{% endblock %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body"> 
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div"> 
+				<div id="main_body_header" class="row">	
+					<p><b>{{feedback}}</b></p>
+				</div>
+				<div class="row">
+					<br>
+					<div class="col-sm-12">
+						<div style="background-color: #dae1e7;">
+							<div id="table_scroll_new">	
+								<div class = "col-sm-12">
+									<ul id="comments">
+										<li class="cmmnt">
+											<div class="avatar">
+												<a href="{% url 'uspl:employee_profile' feedback.author.id %}">
+													<img src="{{feedback.author.profile.image.url}}" class="img-circle" width="50" height="50" alt="{{feedback.author.get_full_name}}">
+												</a>
+											</div>
+											<div class="cmmnt-content">
+												<header id="name_feedback">
+													<a href="{% url 'uspl:employee_profile' feedback.author.id %}" class="userlink">
+													  {{feedback.author.get_full_name}}
+													</a> - <span class="pubdate">posted on {{feedback.created_date}}</span>
+													<a href="{% url 'uspl:task_detail' feedback.task.id %}" class="btn btn-sm btn-primary" style="float: right;"><i class="fa fa-eye" aria-hidden="true"></i> View Task</a>
+												</header>
+													
+												<p id="paragraph_justify"><p>{{feedback.body|linebreaks}}</p></p>
+												
+											</div> 
+											<hr id="feedback_hr">
+											{% for reply in replies %}
+											<ul id="comments">
+												<li class="cmmnt">
+													<div class="avatar">
+														<a href="{% url 'uspl:employee_profile' reply.author.id %}">
+															<img src="{{reply.author.profile.image.url}}" class="img-circle" width="50" height="50" alt="{{reply.author.get_full_name}}">
+														</a>
+													</div>
+													<div class="cmmnt-content">
+														<header id="name_feedback">
+															<a href="{% url 'uspl:employee_profile' reply.author.id %}" class="userlink">
+															  {{reply.author.get_full_name}}
+															</a> - <span class="pubdate">posted on {{reply.timestamp}}</span>
+															
+														</header>
+															
+														<p id="paragraph_justify"></p><p>{{reply.body|linebreaks}}</p><p></p>
+														
+													</div> 
+												</li>
+											</ul>
+											{% endfor %}
+											<div class="col-sm-12" id="send-box" >
+												<button class="btn btn-sm btn-primary" onclick="openreply()" id="reply-box-sec" >
+													<i class="fa fa-reply" aria-hidden="true" style="margin-right: 8px;"></i>Reply
+												</button>
+											</div>
+											<form action="" method="post" id="reply-box" style="display:none">
+												{% csrf_token %}
+												{% if request.user == feedback.task.assigned_to %}
+												<input type="hidden" name="target" value="{{feedback.task.project.supervisor.id}}">
+												{% else %}
+												<input type="hidden" name="target" value="{{feedback.task.assigned_to.id}}">
+												{% endif %}
+												<div class="form-group">
+													<textarea class="form-control" name="comment-body" onkeyup="height_adjust()" placeholder="Write your comments here.." required="" rows="1"></textarea>
+													<button type="submit" class="btn btn-sm send" name="send-reply" id="snd-btn" ><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+												</div>
+											</form>
+										</li>
+									</ul>
+								</div>
+							</div>	
+						</div>	
+					</div>
+					
+				</div>	
+			</div>
+		</div>
+		<br><br>
+	</div>
+</div>
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block external_js %}
+<script>
+	function openreply(){
+	    console.log("dfd");
+		document.getElementById("reply-box").style.display ="block";
+		document.getElementById("send-box").style.display ="none";
+	
+	}
+</script>
+<script>
+	function height_adjust(){
+		$('textarea').on('input', function () {
+			this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+			this.style.height = 'auto';
+			this.style.height = (this.scrollHeight) + 'px';
+		});
+	}
+</script>
+{% endblock %}

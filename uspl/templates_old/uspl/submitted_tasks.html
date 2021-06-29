@@ -1,0 +1,123 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+{% block title %}Submitted Tasks{% endblock %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body">
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div">
+				<div class="row" id="main_body_header">
+					<p><b>Tasks Submitted For Review</b></p>
+				</div>
+				<div>
+					<br>
+					<div class="row">
+						<div>
+							<div class=" panel panel-bd lobidrag ext_panel">
+								<div class="table-responsive">
+									<div id="printDiv" style="margin:1em">
+										<table class="responsive-table-report">
+											<thead class="thead-report-temp">
+												<tr>
+													<th scope="col" style="width: 3%;">SL</th>
+													<th scope="col" style="width: 26%;">Task Name</th>
+													<th scope="col" style="width: 26%;">Supervisor</th>
+													<th scope="col" style="width: 26%;">Submitted On</th>
+													<th scope="col" style="width: 13%;">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+											    {% for task in submitted_tasks %}
+												<tr>
+													<td data-title="SL">{{forloop.counter}}</td>
+													<td data-title="Task Name"><a href="{% url 'uspl:task_detail' task.id %}">{{task.name}}</a></td>
+													<td data-title="Supervisor">
+													    <a href="{% url 'uspl:employee_profile' task.project.supervisor.id %}" style="text-decoration:none">
+													        <img class="img-circle" id="news_pic" src="{{task.project.supervisor.profile.image.url}}">
+											            </a>
+								                        <a href="{% url 'uspl:employee_profile' task.project.supervisor.id %}" style="font-size:14px">{{task.project.supervisor.get_full_name}}</a>
+								                    </td>
+													<td data-title="Submitted On">{{task.submitted_date}}</td>
+													<td data-title="Action">
+														<div class="messageBox msg-incol-backcolor">
+															<div class="messageBoxHeader"><a  data-toggle="modal" data-target="#show_remark"><img height= "28" src="{% static 'uspl/img/mail.png' %}" title="Send Reminder To Supervisor"></a></span>
+															</div>
+														</div>
+													</td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<br>
+				</div>
+			</div>
+			<div class="modal fade" id="show_remark" role="dialog">
+				<div class="modal-dialog" >
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header" id="showSlots_modal_head">
+							<button type="button" id="modal-cross" class="close" data-dismiss="modal">&times;</button>
+							<h3 id="book_modal_title"><b>Send Message</b></h3>
+						</div>
+						
+						<div class="modal-body">
+							<table class="table-responsive">
+							    <tr>
+									<td id="remark-mod" class="">Recipient:</td>
+									<td style="width:500">
+									</td>
+								</tr>
+								<tr>
+									<td id="remark-mod" class="">Remarks:</td>
+									<td style="width:500">
+										<textarea placeholder="Write some remarks here to remind supervisor to review this task.." class="form-control" required aria-required="true"></textarea>
+									</td>
+								</tr>
+							</table>
+						</div>
+						
+						<div class="modal-footer">
+							<button type="button" id="cancel_btn" class="btn btn-default modal-btn" data-dismiss="modal">Close</button>
+							<button type="button" id="" class="btn btn-primary">Send</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block news %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

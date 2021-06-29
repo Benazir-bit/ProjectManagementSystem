@@ -1,0 +1,105 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	<br>
+	<h3 class="modal-title"><b>{{employee.get_full_name}}<b></h3>
+</div>
+<div class="modal-body">
+	<div class= "row">
+		<div class="col-md-7">
+			<div class="table-responsive">
+				<table  class="table table-hover">
+					<tr>
+						<td id = "profile_category"><b>ID</b></td>
+						<td id = "profile_description">{{employee.username}}</td>
+					</tr>
+					<tr>
+						<td id = "profile_category"><b>Email</b></td>
+						<td id = "profile_description">{{employee.email}}</td>
+					</tr>
+					<tr>
+						<td id = "profile_category"><b>Designation</b></td>
+						<td id = "profile_description">{% if employee.teamleader_set.all %}Team Leader, {% endif %}{{employee.profile.dsg.title}}</td>
+					</tr>
+					<tr>
+						<td id = "profile_category"><b>Department</b></td>
+						<td id = "profile_description">
+							{% for group in employee.groups.all %}
+								{{group.name}}{% if not forloop.last %}, {% endif %}
+							{% endfor %}
+						</td>
+					</tr>
+					<tr>
+						<td id = "profile_category"><b>Date of Joining</b></td>
+						<td id = "profile_description">{{employee.profile.date_of_joining}}</td>
+					</tr>
+					<tr>
+						<td id = "profile_category"><b>Current Status</b></td>
+						<td>
+						    {% if employee.profile.get_status == "Busy" %}
+						        <span class="badge" id="busy_badge">Busy</span>
+						    {% else %}
+						        <span class="badge" id="idle_badge">Idle</span>
+						    {% endif %}
+						</td>
+					</tr>
+				</table>
+			</div><br><br>
+		</div>
+		<div class="col-md-5"><br><br>
+			<a href="{% url 'uspl:employee_profile' employee.id %}">
+				<img class="img-circle" width="180" height="180" src="{{ employee.profile.image.url }}" alt="{{ employee.first_name }}"/>
+			</a>
+			<br><br>
+		</div>
+	</div>
+	<br>
+	{% if not employee.is_staff %}
+	<div class="row">	
+		<div class="col-md-12">		
+			<div class="col-sm-7">
+				<br>
+				<table class="table" id = "detail_table_modal">
+					<tr>		
+						<td id = "detail_button_modal">
+							{% if request.user == employee %}
+								<a href="{% url 'uspl:own_project_list' %}" class="btn btn-info" id = "profile_button"><b>Current Projects</b></a>
+							{% else %}
+								<a href="{% url 'uspl:employee_project_list' employee.id %}" class="btn btn-info" id = "profile_button"><b>Current Projects</b></a>
+							{% endif %}
+						</td>
+					</tr>
+					<tr>
+						<td id = "detail_button">
+							<a href ="{% url 'uspl:user_task_list_ongoing' employee.id %}" class="btn btn-warning" id = "profile_button"><b>Ongoing Tasks</b></a>
+						</td>
+					</tr>
+					<tr>
+						<td id = "detail_button">
+							<a href="{% url 'uspl:user_issues' employee.id %}" class="btn btn-danger" id = "profile_button"><b>Raised Issues</b></a>
+						</td>
+					</tr>
+					<tr>		
+						<td id = "detail_button">
+							<a href ="{% url 'uspl:solved_issues' employee.id %}" class="btn btn-success" id = "profile_button"><b>Solved Issues</b></a>
+						</td>
+					</tr>
+					{% if request.user.is_staff or request.user == employee %}
+						<tr>		
+							<td id = "detail_button">
+								{% now "Y" as current_year %}
+								<a href ="{% url 'uspl:user_kpi' employee.id current_year %}" class="btn btn-info" id = "profile_button"><b>View Kpi</b></a>
+							</td>
+						</tr>
+					{% endif %}
+				</table><br>
+			</div>
+			<div class="col-sm-4">
+				<br>
+				<h4 id="kpi_average">Average KPI</h4>
+				<div class="progress-bar position" id="bar_position_modal" data-percent="{{employee.profile.get_employee_kpi_average|floatformat:"2"}}" data-color="#e5e5e5, #049dff"></div>
+			</div>
+		</div>	
+	</div>
+	{% endif %}
+</div>
+	

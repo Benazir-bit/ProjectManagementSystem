@@ -1,0 +1,7 @@
+*py[cod]
+__pycache__/
+.vscode/
+db.sqlite3
+desktop.ini
+main.js
+media/

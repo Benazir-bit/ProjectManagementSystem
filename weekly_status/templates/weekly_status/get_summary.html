@@ -1,0 +1,222 @@
+<div>
+	<div class=" panel panel-bd lobidrag ext_panel">
+		<div class="table-responsive">
+			<div id="printDiv" style="margin:1em">
+				<header>
+					<div class="col-xs-12" id="details-report-temp1">
+					    {% if user_q %}
+						<div class="col-sm-6 col-xs-12">
+							<div class="row">
+								<a href="{% url 'uspl:employee_profile' user.id %}" style="text-decoration:none">
+									<img class="img-circle" id="news_pic" src="{{user.profile.image.url}}">
+								</a>
+								<a href="{% url 'uspl:employee_profile' user.id %}" style="font-size:14px">{{user.get_full_name}}</a>
+							</div>
+							<div class="row">
+								<i style="font-size:11px">{{user.profile.dsg.title}}, {{group}}</i>
+							</div>
+						</div>
+						{% else %}
+						<div class="col-sm-6 col-xs-12">
+						    <div class="row">
+						        <a href="{% url 'uspl:group_details' group.id %}">{{group.name}}</a>
+						    </div>
+							<div class="row">
+							    <div class="col-sm-6" style="width:auto; padding:0">
+							        <h6><b>Managers:</b></h6>
+							    </div>
+							    <div class="col-sm-6">
+    							    {% for emp in group.teamleader.employees.all %}
+    								<a href="{% url 'uspl:employee_profile' emp.id %}" style="text-decoration:none">
+    									<img class="img-circle" id="news_pic" src="{{emp.profile.image.url}}" title="{{emp.get_full_name}}">
+    								</a>
+    								{% endfor %}
+								</div>
+							</div>
+						</div>
+						{% endif %}
+						<div class="col-sm-6 col-xs-12" id="details-report-temp">
+							<div class="row">
+								<h6 id="h6-reprt-temp"><b>Duration:</b> {{from_date}} - {{to_date}}</h6>
+							</div>
+							<div class="row">
+								<i id="nb_msg"><b>N.B.</b> Following data are only for the above duration</i>
+							</div>
+						</div>
+					</div>
+				</header>
+				<table class="responsive-table-report">
+					<caption id="top-row-header">TASKS COMPLETED</caption>
+					<thead class="thead-report-temp">
+						<tr>
+							<th scope="col" style="width: 3%;">SL</th>
+							<th scope="col" style="width: 19%;">Task Title</th>
+							<th scope="col" style="width: 25%;">Project</th>
+							<th scope="col" style="width: 14%;">Start Date</th>
+							<th scope="col" style="width: 14%;">Completed On</th>
+							{% if not user_q %}
+							<th scope="col" style="width: 25%;">Owner</th>
+							{% endif %}
+						</tr>
+					</thead>
+					<tbody>
+					    {% if completed_tasks %}
+    					    {% for task in completed_tasks %}
+    						<tr>
+    							<td data-title="SL.">{{forloop.counter}}</td>
+    							<td data-title="Task Title"><a href="{% url 'uspl:task_detail' task.id %}">{{task.name}}</a></td>
+    							<td data-title="Project"><a href="{% url 'uspl:project_detail' task.project.id %}">{{task.project.name}}</a></td>
+    							<td data-title="Start Date">{{task.started_date}}</td>
+    							<td data-title="Completed On">{{task.completed_date}}</td>
+    							{% if not user_q %}
+    							<td data-title="Supervisor" id="summary_owner_td">
+    							    <a href="{% url 'uspl:employee_profile' task.assigned_to.id %}" style="text-decoration:none">
+    									<img class="img-circle" id="news_pic" src="{{task.assigned_to.profile.image.url}}">
+    								</a>
+    							    <a href="{% url 'uspl:employee_profile' task.assigned_to.id %}">{{task.assigned_to.get_full_name}}</a>
+    							</td>
+    							{% endif %}
+    						</tr>
+    						{% endfor %}
+						{% else %}
+    						<tr>
+    						    <td colspan={% if not user_q %}"6"{% else %}"5"{% endif %}>
+    						        <h4>No Completes Tasks</h4>
+    						    </td>
+    						</tr>
+						{% endif %}
+					</tbody>
+				</table>
+				<table class="responsive-table-report">
+					<caption id="top-row-header">TASKS IN PROGRESS</caption>
+					<thead class="thead-report-temp">
+						<tr>
+							<th scope="col" style="width: 3%;">SL</th>
+							<th scope="col" style="width: 19%;">Task Title</th>
+							<th scope="col" style="width: 25%;">Project</th>
+							<th scope="col" style="width: 14%;">Start Date</th>
+							<th scope="col" style="width: 14%;">Due Date</th>
+							{% if not user_q %}
+							<th scope="col" style="width: 25%;">Owner</th>
+							{% endif %}
+						</tr>
+					</thead>
+					<tbody>
+					    {% if ongoing_tasks %}
+					        {% for task in ongoing_tasks %}
+        						<tr>
+        							<td data-title="SL.">{{forloop.counter}}</td>
+        							<td data-title="Task Title"><a href="{% url 'uspl:task_detail' task.id %}">{{task.name}}</a></td>
+        							<td data-title="Project"><a href="{% url 'uspl:project_detail' task.project.id %}">{{task.project.name}}</a></td>
+        							<td data-title="Due Date">{{task.started_date}}</td>
+        							<td data-title="Project">{{task.deadline}}</td>
+        							{% if not user_q %}
+        							<td data-title="Supervisor" id="summary_owner_td">
+        							    <a href="{% url 'uspl:employee_profile' task.assigned_to.id %}" style="text-decoration:none">
+        									<img class="img-circle" id="news_pic" src="{{task.assigned_to.profile.image.url}}">
+        								</a>
+        							    <a href="{% url 'uspl:employee_profile' task.assigned_to.id %}">{{task.assigned_to.get_full_name}}</a>
+        							</td>
+        							{% endif %}
+        						</tr>
+        					{% endfor %}
+						{% else %}
+						    <tr>
+    						    <td colspan={% if not user_q %}"6"{% else %}"5"{% endif %}>
+    						        <h4>No Ongoing Tasks</h4>
+    						    </td>
+    						</tr>
+    					{% endif %}
+					</tbody>
+				</table>
+				<table class="responsive-table-report">
+					<caption id="top-row-header">
+					    TASKS NOT STARTED
+					    <button type="button" id="toggle-hide-show" class="btn btn-info"  style="float: right;margin-top: -7px;height: 32px;margin-bottom: -7px;">Show</button> 
+					</caption>
+					<thead class="thead-report-temp" id="thead-hide-show">
+						<tr>
+							<th scope="col" style="width: 3%;">SL</th>
+							<th scope="col" style="width: 19%;">Task Title</th>
+							<th scope="col" style="width: 25%;">Project</th>
+							<th scope="col" style="width: 14%;">Created Date</th>
+							<th scope="col" style="width: 14%;">Due Date</th>
+							{% if not user_q %}
+							<th scope="col" style="width: 25%;">Owner</th>
+							{% endif %}
+						</tr>
+					</thead>
+					<tbody id="tbody-hide-show">
+					    {% if pending_tasks %}
+					        {% for task in pending_tasks %}
+        						<tr>
+        							<td data-title="SL.">{{forloop.counter}}</td>
+        							<td data-title="Task Title"><a href="{% url 'uspl:task_detail' task.id %}">{{task.name}}</a></td>
+        							<td data-title="Project"><a href="{% url 'uspl:project_detail' task.project.id %}">{{task.project.name}}</a></td>
+        							<td data-title="Due Date">{{task.created_date}}</td>
+        							<td data-title="Project">{{task.deadline}}</td>
+        							{% if not user_q %}
+        							<td data-title="Supervisor" id="summary_owner_td">
+        							    <a href="{% url 'uspl:employee_profile' task.assigned_to.id %}" style="text-decoration:none">
+        									<img class="img-circle" id="news_pic" src="{{task.assigned_to.profile.image.url}}">
+        								</a>
+        							    <a href="{% url 'uspl:employee_profile' task.assigned_to.id %}">{{task.assigned_to.get_full_name}}</a>
+        							</td>
+        							{% endif %}
+        						</tr>
+        					{% endfor %}
+						{% else %}
+						    <tr>
+    						    <td colspan={% if not user_q %}"6"{% else %}"5"{% endif %}>
+    						        <h4>No Pending Tasks</h4>
+    						    </td>
+    						</tr>
+						{% endif %}
+					</tbody>
+				</table>
+				<table class="responsive-table-report">
+					<caption id="top-row-header">ISSUES</caption>
+					<thead class="thead-report-temp">
+						<tr>
+							<th scope="col" style="width: 3%;">SL</th>
+							<th scope="col" style="width: 19%;">Issue Name</th>
+							<th scope="col" style="width: 19%;">Raised On</th>
+							<th scope="col" style="width: 14%;">Task Name</th>
+							<th scope="col" style="width: 25%;">Project</th>
+							{% if not user_q %}
+							<th scope="col" style="width: 25%;">Raised By</th>
+							{% endif %}
+						</tr>
+					</thead>
+					<tbody>
+					    {% if issues %}
+					        {% for issue in issues %}
+        						<tr>
+        							<td data-title="SL.">{{forloop.counter}}</td>
+        							<td data-title="Issue Name"><a href="{% url 'uspl:issue_detail' issue.id %}">{{issue.name}}</a></td>
+        							<td data-title="Raised On">{{issue.raised_date}}</td>
+        							<td data-title="Task Name"><a href="{% url 'uspl:task_detail' issue.task.id %}">{{issue.task.name}}</a></td>
+        							<td data-title="Project"><a href="{% url 'uspl:project_detail' issue.task.project.id %}">{{issue.task.project.name}}</a></td>
+        							{% if not user_q %}
+        							<td data-title="Supervisor" id="summary_owner_td">
+        							    <a href="{% url 'uspl:employee_profile' issue.task.assigned_to.id %}" style="text-decoration:none">
+        									<img class="img-circle" id="news_pic" src="{{issue.task.assigned_to.profile.image.url}}">
+        								</a>
+        							    <a href="{% url 'uspl:employee_profile' issue.task.assigned_to.id %}">{{issue.task.assigned_to.get_full_name}}</a>
+        							</td>
+        							{% endif %}
+        						</tr>
+        					{% endfor %}
+						{% else %}
+						    <tr>
+    						    <td colspan={% if not user_q %}"6"{% else %}"5"{% endif %}>
+    						        <h4>No Issue</h4>
+    						    </td>
+    						</tr>
+    					{% endif %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

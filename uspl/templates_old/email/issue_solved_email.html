@@ -1,0 +1,15 @@
+{% autoescape off %}
+<p>Hi {{ to_mail.first_name }},</p>
+<p>You have been assigned by {{task.project.supervisor.get_full_name}} ({{task.project.supervisor}}) to solve an issue raised by {{issue.raised_by.get_full_name}} ({{issue.raised_by.username}}).</p>
+<br>
+<p><b>Details:</b></p>
+<p><b>Name of the Issue:</b> {{issue.name}}</p>
+<p><b>Task Name: </b><a href="{{domain}}{% url 'uspl:task_detail' issue.task.id %}">{{issue.task.name}}</a></p>
+<p><b>Project Name: </b><a href="{{domain}}{% url 'uspl:project_detail' issue.task.project.id %}">{{issue.task.project.name}}</p>
+<p><b>Raised By: </b>{{issue.raised_by.get_full_name}}</p>
+<p><b>Raised Date: </b>{{issue.raised_date}}</p>
+<p><b>Details:</b> {{issue.details|linebreaks}}</p>
+<br>
+<p>Sincerely,</p>
+<p>The Ulkasemi EMS Team</p>
+{% endautoescape %}

@@ -1,0 +1,11 @@
+{% autoescape off %}
+Hi {{ user.get_full_name }},
+Your Ulkasemi EMS account has been created. Please use the following credentials to sign in to your account:
+Username: {{user.username}}
+Password(Randomly Generated): {{password}}
+Please go to the following link to sign in to your account.
+{{ domain }}
+
+Sincerely,
+The Ulkasemi EMS Team
+{% endautoescape %}

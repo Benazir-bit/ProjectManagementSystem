@@ -1,0 +1,54 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Delete Task{% endblock %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body">
+  {% if user.is_staff or user == task.project.supervisor %}
+    <h1>Delete task: {{ task.name }}?</h1>
+    <p> Are you sure you want to do that? </p>
+    <form action="" method="post" accept-charset="utf-8">
+      {% csrf_token %}
+      <input type="hidden" name="task" value="{{ task.id }}">
+      <p>
+        <a href="{% url 'uspl:task_detail' task.id %}" class="btn btn-success">Cancel</a>
+        <input type="submit" name="delete-confirm" value="Do it! &rarr;" class="btn btn-danger">
+      </p>
+    </form>
+  {% else %}
+    <p>Sorry, you don't have permission to delete lists. Please contact your group administrator.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block news %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Task Activities</b></p><br>
+		<div class="scrollbar">
+			{% if task_news %}
+				{% for news in task_news %}
+					<div class="row event">
+						<div class="col-xs-4 col-md-4 col-lg-3" >
+							<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+						</div>
+						<div class="col-xs-8 col-md-8 col-lg-9" id="news_msg">
+							<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+							<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+						</div>
+					</div>
+					<hr>
+				{% endfor %}
+				</div>
+					<p id="news_header"><b><a href="#">View All</a></b></p>
+				</div>
+			{% else %}
+				<h3 id="not-available-msg">No Recent Activities.</h3>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

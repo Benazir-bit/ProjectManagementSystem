@@ -1,0 +1,11 @@
+{% autoescape off %}
+Hi {{ submitted_to.get_full_name }},
+
+{{submitted_by.get_full_name}} submitted the appraisal of {{created_for.get_full_name}} for your review. Please go to
+the following link or login to your EMS account to review the appraisal.
+{{ domain }}
+
+
+Sincerely,
+The Ulkasemi EMS Team
+{%endautoescape %}

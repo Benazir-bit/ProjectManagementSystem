@@ -1,0 +1,514 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Project: {{ project.name }}{% endblock %}
+
+{% block content %}
+<div id="base-main-body" class="col-sm-8">
+	<div class="row">
+		<div class="col-sm-12">
+			<div id="main-body-div">
+				<br>
+				<div id="main_body_header" class="row">	
+					<p><b>{{project.name}}</b></p>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-5 col-xs-12" id="proj_details">
+						<br>
+						<h4><b>Details</b></h4>
+						<p id="task-paragraph">{{project.details|linebreaks}}</p>
+						<hr>
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<tr>
+									<td id = "project_grp"><b>Group</b></td>
+									<td id = "project_descrption">
+										<a href="{% url 'uspl:group_details' project.group.id %}">{{project.group}}</a>
+									</td>
+								</tr>		
+								<tr>
+									<td id = "project_grp"><b>Start Date</b></td>
+									<td id = "project_descrption">
+										{{project.created_date}}
+									</td>
+								</tr>
+								<tr>
+									<td id = "project_grp"><b>Due Date</b></td>
+									<td id = "project_descrption">
+										{{project.due_date}}
+									</td>
+								</tr>
+								<tr>
+									<td id = "project_grp"><b>Supervisor</b></td>
+									<td id = "project_descrption">
+										<a href="{% url 'uspl:employee_profile' project.supervisor.id %}">
+											<img src="{{ project.supervisor.profile.image.url }}" class="img-circle" id="member_pic" alt={{project.supervisor.first_name}}>
+										</a>
+										<a href="{% url 'uspl:employee_profile' project.supervisor.id %}">{{project.supervisor.get_full_name}}</a>
+									</td>
+								</tr>
+								<tr>
+									<td id = "project_grp"><b>Status</b></td>
+									<td id = "project_descrption">
+										{% if project.completed %}
+											Completed
+										{% else %}
+											<div class="progress">
+												<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{project.get_completeion_rate}}" aria-valuemin="0" aria-valuemax="100" style="width:{{project.get_completeion_rate}}%">
+													{{project.get_completeion_rate|floatformat:"2"}}%
+												</div>
+											</div>
+										{% endif %}
+									</td>
+								</tr>
+								{% if not project.completed and request.user == project.supervisor %}
+								<tr>
+									<td id = "project_grp"><b>Change Status</b></td>
+									<td id = "project_descrption">
+										{% if incomplete_task.count > 0 %}
+										<button type="button" class="btn btn-info btn-sm disabled" id="disabledButton">Mark as Complete</button>
+										{% elif incomplete_task.count == 0 %}
+										<a href="{% url 'uspl:project_toggle_complete' project.id %}" class="btn btn-info btn-sm">Mark as Complete</a>
+									  {% endif %}
+									</td>
+								</tr>
+								{% endif %}
+								{% if project.completed %}
+								<tr>
+									<td id = "project_grp"><b>Completed Date</b></td>
+									<td id = "project_descrption">
+										{{project.completed_date}}
+									</td>
+								</tr>
+								{% endif %}
+							</table>
+						</div>
+					</div>
+					<div class="col-sm-4 col-xs-12" id="proj_details_graph">
+						<br>
+						<h4><b>Project Status</b></h4>	
+						<ul class="pieID le">
+							<li style="border-color: #ffa500;">
+								<em>Total Tasks</em>
+								<span>{{project.task_set.all.count}}</span>
+							</li>
+							<li style="border-color: rgb(0, 36, 91);">
+								<em>Ongoing</em>
+								<span>{{project.get_ongoing_task.count}}</span>
+							</li>
+							<li style="border-color: rgb(15, 72, 127);">
+								<em>Completed</em>
+								<span>{{project.get_completed_task.count}}</span>
+							</li>
+							<li style="border-color: rgb(52, 109, 164);">
+								<em>Waiting For Review</em>
+								<span>{{project.get_waiting_for_review_task.count}}</span>
+							</li>
+							<li style="border-color: rgb(88, 145, 200);">
+								<em>Not Started Yet</em>
+								<span>{{project.get_not_started_task.count}}</span>
+							</li>
+						</ul>
+						{% if project.task_set.all.count > 0 %}
+							<div id="pie_cont" style="min-width: 200px; height: 250px; max-width: 230px; margin: 0 12% !important"></div>
+						{% else %}
+							<div class="c100 big"><span>0%</span><br><span id="txt_zero" >Project Not Started Yet</span></div>
+						{% endif %}
+					</div>
+					<div class="col-sm-3 col-xs-12" id="proj_mem">
+						<br>
+						<h4><b style="margin-left:10px">Members</b><br><br>
+						{% if members %}
+						<div class="table_scroll_project_members">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<tbody> 
+									{% for member in members %}
+										<tr>
+											<td>
+												<a href="{% url 'uspl:employee_profile' member.id %}">
+													<img src="{{ member.profile.image.url }}" class="img-circle" id="member_pic" alt="{{member.first_name}}">
+												</a>
+												<a href="{% url 'uspl:employee_profile' member.id %}">{{member.get_full_name}}</a>
+											</td>
+										</tr>
+									{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						{% else %}
+							<div style="margin-left:10px">
+								<h5><b>No Members!</b></h5>
+								<h5>Members with assigned task on this project will appear here</h5>
+							</div>
+						{% endif %}
+					</div>	
+				</div>			
+				<br>
+				<div class="row">
+					<div class="col-sm-12">
+						<br>
+						<div class="row" id="main_body_header_projecttask">
+							<div class="col-md-9 col-xs-12">
+								<p><b>All Tasks</b></p>
+							</div>
+							<div class="col-md-3 col-xs-12 btn-group btn-group-dropdown" id="filter_search">
+								<select class="btn btn-default form-control" id="DropDown" name="DropDown" onchange="gotoPage(this)">
+									<option value="{% url 'uspl:project_detail' project.id %}" {% if filter == 'all' %}selected{% endif %}>All</option>
+									<option value="{% url 'uspl:project_detail_not_started' project.id %}" {% if filter == 'notstarted' %}selected{% endif %}>Not Started</option>
+									<option value="{% url 'uspl:project_detail_started' project.id %}" {% if filter == 'ongoing' %}selected{% endif %}>Ongoing</option>
+									<option value="{% url 'uspl:project_detail_paused' project.id %}" {% if filter == 'paused' %}selected{% endif %}>Paused</option>
+									<option value="{% url 'uspl:project_detail_waiting_for_review' project.id %}" {% if filter == 'submitted' %}selected{% endif %}>Waiting For Review</option>
+									<option value="{% url 'uspl:project_detail_completed' project.id %}" {% if filter == 'completed' %}selected{% endif %}>Completed</option>
+								</select>
+							</div>
+						</div>
+
+						{% if tasks %}
+						<div class="table-responsive" id = "table_scroll_all_list">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Task Title</th>
+										<th>Created</th>
+										<th>Due Date</th>
+										<th>Assigned To</th>
+										<th>Status</th>
+										<th>Issues</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for task in tasks %}
+									<tr id="{{ task.id }}">
+										<td>
+											<a href="{% url 'uspl:task_detail' task.id %}">{{ task.name|truncatewords:10 }}</a>
+										</td>
+										<td>
+											{{ task.created_date }}
+										</td>
+										<td>
+											{{ task.deadline }}
+											{% if not task.completed %}
+												{% if task.overdue_status %}
+													<span class="badge" id="overdue_badge">overdue</span>
+												{% endif %}
+											{% endif %}
+										</td>
+										<td>
+											<a href="{% url 'uspl:employee_profile' task.assigned_to.id %}">
+												<img src="{{ task.assigned_to.profile.image.url }}" class="img-circle" width="30" height="30" alt={{task.assigned_to.first_name}}>
+											</a>
+											<a href="{% url 'uspl:employee_profile' task.assigned_to.id %}">
+												{{ task.assigned_to.get_full_name }}
+											</a>
+										</td>
+										<td>
+											{% if not task.started %}
+												Not Started
+											{% elif not task.submitted and not task.paused %}
+												Ongoing
+											{% elif not task.submitted and task.paused %}
+												Paused
+											{% elif not task.paused and not task.completed and task.submitted %}
+												Waiting for review
+											{% elif task.submitted and task.completed %}
+												Completed
+											{% endif %}
+										</td>
+										<td>
+											{% if task.get_unsolved_issues > 0 %}
+												<span class="badge" id="issue_badge">{{task.get_unsolved_issues}}</span>
+											{% else %}
+												<span class="badge" id="no_issue_badge">0</span>
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						{% else %}
+							<h4>No tasks on this project yet (add one!)</h4>
+						{% endif %}
+						<br>
+						<div class="row" align="center">
+							<a href="{% url 'uspl:project_issues' project.id %}" id="button_all_project" class="btn btn-danger" role="button"><b>All Issues<b></a>
+							{% if not project.completed %}
+								{% if request.user == project.supervisor or request.user.is_staff or request.user in project.group.teamleader.employees.all %}
+									<button type="button" id="button_all_project" class="btn btn-primary" data-toggle="modal" data-target="#addTask"><b>Add New Task</b></button>
+									<button type="button" id="button_all_project" class="btn btn-success" data-toggle="modal" data-target="#updateProject"><b>Update Project</b></button>
+								{% endif %}
+							{% endif %}
+							{% if request.user.is_staff or request.user in project.group.teamleader.employees.all %}
+								<a href="{% url 'uspl:delete_project' project.id %}" id="button_all_project" class="btn btn-danger" role="button"><b>Delete Project</b></a>
+							{% endif %}
+						</div>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Add Task Modal -->
+<div class="modal fade" id="addTask" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title"><b>Add New Task<b></h3>
+				<h3><b>Project: <b>{{project.name}}</h3>
+			</div>
+			<div class="modal-body">
+				<form method="post" id="add_task_form" class = "form-set"> 
+					{% csrf_token %}
+					<table class="table table-striped">
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="name">Task Name:</label>
+							</td>
+							<td>
+								<input type="text" name="name" class="form-control" placeholder="Enter Task Name" required>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="details">Details</label>
+							</td>
+							<td>
+								<textarea class="form-control" id = "form-ctrl" rows="5" name="details" maxlength="250" placeholder="Enter Task Details" required></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="deadline">Due Date:</label>
+							</td>
+							<td>
+								<input type="date" name="deadline" min="{{timenow.date|date:"Y-m-d"}}" max="{{project.due_date|date:"Y-m-d"}}"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="assigned_to">Assigned To:</label>
+							</td>
+							<td>
+								{{add_task_form.assigned_to}}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="note">Notes:</label>
+							</td>
+							<td>
+								<textarea class="form-control" id = "form-ctrl" rows="5" name="note" maxlength="250" placeholder="Enter Project Notes"></textarea>
+							</td>
+						</tr>
+					</table>
+					<div class="row" align="center">
+						<input class="btn btn-primary" type="submit" name="add_task" value="Submit">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Update Project Modal -->
+<div class="modal fade" id="updateProject" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3><b>Update Project<b></h3>
+			</div>
+			<div class="modal-body">
+				<form method="post" class = "form-set"> 
+					{% csrf_token %}
+					<table class="table table-striped">
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="name">Name:</label>
+							</td>
+							<td>
+								{{update_project_form.name}}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="details">Details:</label>
+							</td>
+							<td>
+								{{update_project_form.details}}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="due_date">Due Date:</label>
+							</td>
+							<td>
+								{{update_project_form.due_date}}
+							</td>
+						</tr>
+						{% if request.user.is_staff or request.user in project.group.teamleader.employees.all %}
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="supervisor">Supervisor:</label>
+							</td>
+							<td>
+								<select name="supervisor" style="width:62%" required>
+									{% for user in project.group.user_set.all %}
+										<option value="{{user.id}}" {% if user == project.supervisor %}selected{% endif %}>{{user.get_full_name}} ({{user.username}})</option>
+									{% endfor %}
+								</select>
+							</td>
+						</tr>
+						{% endif %}
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="note">Notes:</label>
+							</td>
+							<td>
+								{{update_project_form.note}}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="priority">Priority:</label>
+							</td>
+							<td>
+								{{update_project_form.priority}}
+							</td>
+						</tr>
+					</table>
+					<div class="row" align="center">
+						<button class="btn btn-primary" type="submit" name="update_project" role="button"><b>Submit<b></button>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>	
+		  
+{% endblock %}
+
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Project Activities</b></p><br>
+		<div class="scrollbar">
+			{% if project_newses %}
+				{% for news in project_newses %}
+					<div class="row event">
+						<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+							<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+						</div>
+						<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+							<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+							<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+						</div>
+					</div>
+					<hr>
+				{% endfor %}
+				</div>
+					<p id="news_header"><b><a href="{% url 'uspl:project_news_all' project.id %}">View All</a></b></p>
+				</div>
+			{% else %}
+				<h3 id="not-available-msg">No Recent Activities.</h3>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+
+
+{% block external_js %}
+	<script type="text/javascript">
+		function gotoPage(select){
+  		 window.location = select.value;
+		}
+		
+		$('#disabledButton').on('click',function(e){
+			if( $(this).hasClass('disabled') ){
+				e.preventDefault();
+		  	alert('You have {{incomplete_task.count}} incomplete tasks. You will be able to mark this project as complete once all tasks are completed.');
+			}else{
+		  	alert('go ahead...');
+			}
+		});
+	</script>
+	<script>
+		// Make monochrome colors
+		var pieColors = (function () {
+		  var colors = [],
+			base = Highcharts.getOptions().colors[0],
+			i;
+
+		  for (i = 0; i < 10; i += 1) {
+			// Start out with a darkened base color (negative brighten), and end
+			// up with a much brighter color
+			colors.push(Highcharts.Color(base).brighten((i - 4) / 7).get());
+		  }
+		  return colors;
+		}());
+
+		// Build the chart
+		Highcharts.chart('pie_cont', {
+		  chart: {
+			    backgroundColor:'transparent' ,	
+			    plotBackgroundColor: null,
+			    plotBorderWidth: null,
+			    plotShadow: false,
+			    type: 'pie'
+			  },
+		  title: {
+			text: ''
+		  },
+			tooltip: {
+			pointFormat: '<b>{point.percentage:.1f}%</b>'
+		  },
+		  plotOptions: {
+			pie: {
+			  allowPointSelect: true,
+			  cursor: 'pointer',
+			  colors: pieColors,
+			  dataLabels: {
+				enabled: true,
+				format: '{point.percentage:.1f} %',
+				distance: -50,
+				filter: {
+				  property: 'percentage',
+				  operator: '>',
+				  value: 4
+				}
+			  }
+			}
+		  },
+		  series: [{
+			name: 'status',
+			data: [
+			  { name: 'Ongoing', y: {% widthratio project.get_ongoing_task.count project.task_set.count 100 %} },
+			  { name: 'Completed', y: {% widthratio project.get_completed_task.count project.task_set.count 100 %} },
+			  { name: 'Waiting For Review', y: {% widthratio project.get_waiting_for_review_task.count project.task_set.count 100 %} },
+			  { name: 'Not Started', y: {% widthratio project.get_not_started_task.count project.task_set.count 100 %} },
+			]
+		  }]
+		});
+	</script>
+{% endblock %}

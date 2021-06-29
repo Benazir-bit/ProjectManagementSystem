@@ -1,0 +1,241 @@
+{% extends "uspl/base.html" %}
+{% block title %}{% if view_all %}All Members{% else %}Members: {{group.name}}{% endif %}{% endblock %}
+
+
+{% block content %} 
+<div id="base-main-body" class="col-sm-8"> 
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div">
+				<div id="main_body_header" class="row">
+					<div class="{% if request.user.is_staff %}col-md-9 col-xs-12{% else %}col-sm-12{% endif %}">
+						<p><b>{% if view_all %}All Members{% else %}Members: {{group.name}}{% endif %}</b></p>
+					</div>
+					{% if request.user.is_staff %}
+					<div id="filter_search" class="col-md-3 col-xs-12 btn-group btn-group-dropdown">
+						<select class="btn btn-default form-control" id="DropDown" name="DropDown" onchange="gotoPage(this)">
+							<option value="{% url 'uspl:group_members_all' %}" {% if filter == 'all' %}selected{% endif %} %>All Members</option>
+							{% for group in groups %}
+								<option value="{% url 'uspl:group_members' group.id %}" {% if filter == group.name %}selected{% endif %}>{{group.name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					{% endif %}
+				</div>
+				{% if users %}
+				<div class="table-responsive">
+					<table id="member_table" class="table table-hover">
+						<thead>
+							<tr>
+								<th style="width: 30%">Name</th>
+								<th>ID</th>
+								{% if view_all %}
+								<th>Group</th>
+								{% endif %}
+								<th>Designation</th>
+								{% if request.user.teamleader_set.all or request.user.is_staff %}
+								<th></th>
+								{% endif %}
+								{% if request.user.is_staff %}
+								<th></th>
+								<th></th>
+								{% endif %}
+							</tr>
+						</thead>
+						<tbody>
+							{% for employee in users %}
+								<tr id="row_{{employee.id}}">
+									<td>
+										<a href="{% url 'uspl:employee_profile' employee.id %}">
+											<img class="img-circle" id="member_pic" src="{{ employee.profile.image.url }}" alt="{{ employee.first_name }}"/>
+										</a>
+										<a href="{% url 'uspl:employee_profile' employee.id %}">
+											{{employee.get_full_name}}
+										</a>
+										{% if employee.profile.get_status == "Busy" %}
+											<span class="badge" id="busy_badge">Busy</span>
+										{% else %}
+											<span class="badge" id="idle_badge">Idle</span>
+										{% endif %}
+									</td>
+									<td>{{employee.username}}</td>
+									{% if view_all %}
+									<td>
+										{% for group in employee.groups.all %}
+											{% if request.user.profile.is_hr %}
+												<a href="{% url 'uspl:group_members' group.id %}">{{group.name}}</a>{% if not forloop.last %}, {% endif %}
+											{% else %}
+												<a href="{% url 'uspl:group_details' group.id %}">{{group.name}}</a>{% if not forloop.last %}, {% endif %}
+											{% endif %}
+										{% endfor %}
+									</td>
+									{% endif %}
+									<td>
+										{% if employee.teamleader_set.all %}Team Leader, {% endif %}{{employee.profile.dsg.title}}
+									</td>
+									
+									{% if request.user.teamleader_set.all or request.user.is_staff %}
+									<td>
+										<button id="btn_status" type="button" class="btn btn-info btn-sm detailsbtn_{{employee.id}}" onclick="get_profile_modal({{employee.id}})">Details</button>
+									</td>
+									{% endif %}
+									{% if request.user.is_staff %}
+									<td>
+										<button id="btn_status" type="button" class="btn btn-warning btn-sm updatebtn_{{employee.id}}"  style="width:70px" onclick="get_update_profile_modal({{employee.id}})">Edit Info</button>
+									</td>
+									<td>
+										<label class="switch">
+											<input id="{{employee.id}}" onClick="onClick(this.id)" type="checkbox" {% if employee.is_active %}checked{% endif %}>
+											<div class="slider round"></div>
+										</label>
+									</td>
+									{% endif %}
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<br>
+				<br>
+				{% else %}
+					<br>
+					<br>
+					<br>
+					<center>
+						<h2>No User Found! Try adding some <a href="{% url 'uspl:create_user' %}">New Users</a> to this group.</h2>
+					</center>
+				{% endif %}
+			</div>	
+		</div>
+	</div>
+</div>
+
+<!-- Profile Modal -->
+<div class="modal fade" id="detailsModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div id="profile_modal_section">
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div><br>
+	</div>
+</div>
+
+<div class="modal fade" id="editModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div id="update_profile_section">
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+{% block external_js %}
+<script type="text/javascript">
+	function gotoPage(select){
+  	 window.location = select.value;
+	}
+</script>
+
+<script>
+	$(".progress-bar").loading();
+	$('input').on('click', function () {
+	$(".progress-bar").loading();
+	});
+</script>
+
+<script>
+    function onClick(id) {
+		var checkBox = document.getElementById(id);
+		
+		if (checkBox.checked == true){
+			document.getElementById('row_'+id).style.backgroundColor = '';
+		} else {
+		   document.getElementById('row_'+id).style.backgroundColor = '#e2c7c7';
+		}
+		
+		$.ajax({
+	        url: '/../uspl/ajax/toggle_user_status/',
+	        data: {
+	        	'id':id
+	        },
+	        dataType: 'json',
+	        success: function (data) {
+	        	alert(data.message);
+	        }
+	      });
+		
+	}
+</script>
+
+<script>
+	function get_profile_modal(id) {
+		$('.detailsbtn_'+id).html("Loading..");
+		$.ajax({
+			type:'GET',
+			url: '{% url 'uspl:ajax_get_profile_modal' %}',
+			data: {'user_id': id },
+			success: function(data) {
+				$('#profile_modal_section').html(data);
+				$('#detailsModal').modal('show');
+				$('.detailsbtn_'+id).html("Details");
+			}
+		})
+	}
+	function get_update_profile_modal(id) {
+		$('.updatebtn_'+id).html("Loading..");
+		$.ajax({
+			type:'GET',
+			url: '{% url 'uspl:ajax_get_update_profile_modal' %}',
+			data: {'user_id': id },
+			success: function(data) {
+				$('#update_profile_section').html(data);
+				$('.selectpicker').selectpicker('refresh');
+				$('#editModal').modal('show');
+				$('.updatebtn_'+id).html("Details");
+			}
+		})
+	}
+</script>
+
+{% endblock %}

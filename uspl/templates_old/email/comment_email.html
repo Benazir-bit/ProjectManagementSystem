@@ -1,0 +1,8 @@
+{% autoescape off %}
+<p>Hi {{ issue.raised_by.first_name }},</p>
+<p>{{author.get_full_name}} ({{author.username}}) commented on you raised issue "<a href="{{domain}}{% url 'uspl:issue_detail' issue.id %}"><b>{{issue.name}}</b></a>".
+<p>If it works for you, please mark this as the solution of this issue .</p>
+
+<p>Sincerely,</p>
+<p>The Ulkasemi EMS Team</p>
+{% endautoescape %}

@@ -1,0 +1,6 @@
+<select name="emp_id" class="form-control selectpicker" id="emp_select">
+    <option value="">Select Employee</option>
+    {% for user in users %}
+    <option value="{{user.id}}" data-thumbnail="{{user.profile.image.url}}">{{user.get_full_name}}</option>
+    {% endfor %}
+</select>

@@ -1,0 +1,224 @@
+{% extends "uspl/base.html" %}
+{% block title %}Job Title & Descriptions{% endblock %}
+
+{% block content %}
+<div id="base-main-body" class="col-sm-8">
+  <div class="row">
+  		<br>
+		<div class="col-sm-12">
+			<div id="main-body-div">
+				<div id="main_body_header" class="row">
+					<p><b>Job Titles & Descriptions</b></p>
+				</div>
+			</div>
+			<br>
+			{% if designations %}
+				<div>
+					<div class="row" id = "card_member">
+						{% regroup designations by group as section_list %}
+						{% for group in section_list %}
+						<div class="col-lg-4 col-md-12">
+							<div class="card" id="dash_table_height">
+								<div id="Manager_project_dashboard_table" class="card-header card-header-warning">
+									<h4 class="card-title">{{group.grouper}}</h4>
+								</div>
+								<div id="dashboard_proj_table" class="card-body table-responsive">
+									<table id="dsg_member_table" class="table table-hover">
+										<tbody>
+											{% for dsg in group.list %}
+												<tr id="row_mem{{group.id}}">
+													<td id="hr_td">
+														{{dsg.title}}
+													</td>
+													<td>
+														<button class="btn btn-info btn-sm" data-toggle="modal" data-target="#viewJD{{dsg.id}}">
+															<span class="glyphicon glyphicon-eye-open"></span> View
+				        								</button>
+				        								
+				        								<!--View JD -->
+														<div class="modal fade" id="viewJD{{dsg.id}}" role="dialog">
+															<div class="modal-dialog">
+																<!-- Modal content-->
+																<div class="modal-content" id="jd_modal_cotent">
+																	<div class="modal-header">
+																		<button type="button" class="close" data-dismiss="modal">&times;</button>
+																		<h3 class="modal-title"><b>Job Description<b></h3>
+																		<h2 class="modal-title"><b>Job Title: {{dsg.title}}<b></h2>
+																		<h2 class="modal-title"><b>Group: {{dsg.group}}<b></h2>
+																	</div>
+																	<div class="modal-body" id="jd_desc">
+																		<table class="table">
+																			<tr>
+																				<td>
+																					<p>{{dsg.job_description|linebreaks}}</p>
+																				</td>
+																			</tr>
+																		</table>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</td>
+													<td>
+				        								
+				        								
+														<button class="btn btn-info btn-sm" data-toggle="modal" data-target="#editDSG{{dsg.id}}">
+															<span class="glyphicon glyphicon-edit"></span> Edit
+				        								</button>
+				        								
+				        								<!--Edit Title & JD -->
+														<div class="modal fade" id="editDSG{{dsg.id}}" role="dialog">
+															<div class="modal-dialog">
+																<!-- Modal content-->
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<button type="button" class="close" data-dismiss="modal">&times;</button>
+																		<h3 class="modal-title"><b>Update Job Title & Descrition<b></h3>
+																	</div>
+																	<div class="modal-body">
+																		<form method="post" class = "form-set"> 
+																			{% csrf_token %}
+																			<table class="table table-striped">
+																				<input type="hidden" name="dsg_id" value="{{dsg.id}}">
+																				<tr>
+																					<td id = "table-form">
+																						<label for="new_name">Title:</label>
+																					</td>
+																					<td>
+																						<input type="text" name="new_name" class="form-control" value="{{dsg.title}}">
+																					</td>
+																				</tr>
+																				<tr>
+																					<td id="table-form">
+																						<label for="new_jd">Job Description:</label>
+																					</td>
+																					<td>
+																						<textarea class="form-control" name="new_jd" rows="10">{{dsg.job_description}}</textarea>
+																					</td>
+																				</tr>
+																			</table>
+																			<div class="row" align="center">
+																				<button class="btn btn-primary" type="submit" role="button" name="update_dsg"><b>Update<b></button>
+																			</div>
+																		</form>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</td>
+													<td>
+														<a class="btn btn-danger btn-sm" href="{% url 'uspl:delete_dsg' dsg.id %}">
+				          									<span class="glyphicon glyphicon-trash"></span> Delete 
+				        								</a>
+													</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+		</div>
+		<br>
+		<center>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDSG"><span class="glyphicon glyphicon-plus"></span> Add New Job Title</button>
+		</center>
+		<br>
+		<br>
+	</div>
+</div>	
+
+<!--Add Group Modal -->
+<!--Edit Title & JD -->
+<div class="modal fade" id="addDSG" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title"><b>Add New Job Title & Descrition<b></h3>
+			</div>
+			<div class="modal-body">
+				<form method="post" class = "form-set"> 
+					{% csrf_token %}
+					<table class="table table-striped">
+						<tr>
+							<td id = "table-form">
+								<label for="title">Title:</label>
+							</td>
+							<td>
+								<input type="text" name="title" class="form-control" maxlength="100" placeholder="Enter Job Title Here" required>
+							</td>
+						</tr>
+						<tr>
+							<td id = "table-form">
+								<label for="group_id">Group:</label>
+							</td>
+							<td>
+								<select name="group_id" required>
+										<option value="">Select Group</option>
+									{% for group in groups %}
+								    	<option value="{{group.id}}">{{group.name}}</option>
+									{% endfor %}
+								 </select>
+							</td>
+						</tr>
+						<tr>
+							<td id="table-form">
+								<label for="jd">Job Description:</label>
+							</td>
+							<td>
+								<textarea class="form-control" name="jd" maxlength="5000" rows="10" placeholder="Enter Job Description Here" required></textarea>
+							</td>
+						</tr>
+					</table>
+					<div class="row" align="center">
+						<button class="btn btn-primary" type="submit" role="button" name="add_dsg"><b>Add<b></button>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

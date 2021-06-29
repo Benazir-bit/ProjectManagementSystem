@@ -1,0 +1,141 @@
+{% extends "uspl/base.html" %}
+
+{% block title %}Group Issues{% endblock %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body"> 
+    <div class="row">
+	   	<div class="col-sm-12">
+			<br>
+			<div id="main-body-div">
+				{% if issues %}
+	    			{% regroup issues by solved as section_list %}
+					{% for solved in section_list %}
+						<div {% if solved.grouper == True %}id="solved_issue_header"{% else %}id="issue_header"{% endif %} class="row">
+		    				<div class="col-sm-12">				
+		    					<p><b>Group Issues - {% if solved.grouper == True %}Solved{% else %}Unresolved{% endif %}</b></p>
+		    				</div>
+						</div>
+						<div class="table-responsive">
+							<table  class="table">
+								<thead>
+									<tr>
+										<th>Issue Name</th>
+		    							<th>Task Name</th>
+		    							{% if solved.grouper == True %}
+		    								<th>Raised By</th>
+		    								<th>Solved On</th>
+		    								<th>Solved By</th>
+		    							{% else %}
+		    								<th>Raised On</th>
+		    								<th>Raised By</th>
+		    								<th>Comments</th>
+		    							{% endif %}
+		    						</tr>
+		    					</thead>
+		    					<tbody>
+		    					    {% for issue in solved.list %}
+		        				        <tr>
+		        						    <td>
+		        								<a href="{% url 'uspl:issue_detail' issue.id %}">{{issue.name|truncatechars:40}}</a>
+		        							</td>
+		        							<td>
+		        								<a href="{% url 'uspl:task_detail' issue.task.id %}">{{issue.task.name|truncatechars:40}}</a>
+		        							</td>
+		        							{% if solved.grouper == True %}
+		        								<td>
+		        									<a href="{% url 'uspl:employee_profile' issue.raised_by.id %}">
+														<img src="{{ issue.raised_by.profile.image.url }}" class="img-circle" id="news_pic" alt={{issue.raised_by.first_name}}>
+													</a>
+													<a href="{% url 'uspl:employee_profile' issue.raised_by.id %}">{{issue.raised_by.get_full_name}}</a>
+		        								</td>
+		        								<td>
+		        									{{issue.solved_date}}
+		        								</td>
+		        								<td>
+		        									<a href="{% url 'uspl:employee_profile' issue.solved_by.id %}">
+														<img src="{{ issue.solved_by.profile.image.url }}" class="img-circle" id="news_pic" alt={{issue.solved_by.first_name}}>
+													</a>
+													<a href="{% url 'uspl:employee_profile' issue.solved_by.id %}">{{issue.solved_by.get_full_name}}</a>
+		        								</td>
+		        							{% else %}
+		        								<td>
+		        									{{issue.raised_date}}
+		        								</td>
+		        								<td>
+		        									<a href="{% url 'uspl:employee_profile' issue.raised_by.id %}">
+														<img src="{{ issue.raised_by.profile.image.url }}" class="img-circle" id="news_pic" alt={{issue.raised_by.first_name}}>
+													</a>
+													<a href="{% url 'uspl:employee_profile' issue.raised_by.id %}">{{issue.raised_by.get_full_name}}</a>
+		        								</td>
+		        								<td>
+		        									<span id="no_issue_badge" class="badge">{{issue.comment_set.all.count}}</span>
+		        								</td>
+		        							{% endif %}
+		        						</tr>
+		                            {% endfor %}
+		    					</tbody>
+		    				</table>
+						</div>
+						<br>
+					{% endfor %}
+					<div class="row" align="center">				
+						{% if issues.has_other_pages %}
+	                        <ul class="pagination">
+	                            {% if issues.has_previous %}
+	                            	<li><a href="?page=1">&laquo;</a></li>
+	                                <li><a href="?page={{ issues.previous_page_number }}">&lt;</a></li>	
+	                            {% endif %}
+	                             {% for num in issues.paginator.page_range %}
+	                            	{% if issues.number == num %}
+	    								<li class="active"><span>{{ num }} <span class="sr-only">(current)</span></span></li>
+	    							{% elif num > issues.number|add:'-3' and num < all_news.number|add:'3' %}
+	    								<li><a href="?page={{ num }}">{{ num }}</a></li>
+	    							{% endif %}
+	  							{% endfor %}
+	                            {% if issues.has_next %}
+	                                <li><a href="?page={{ issues.next_page_number }}">&gt;</a></li>
+	                                <li><a href="?page={{ issues.paginator.num_pages }}">&raquo;</a></li>
+	                            {% endif %}
+	                        </ul>
+	                    {% endif %}
+					</div>
+				{% else %}
+					<p id="no-issue-msg">No Issues Yet!</p>
+				{% endif %}
+			</div>	
+        </div>
+  	</div>
+</div>
+{% endblock %}
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+
+

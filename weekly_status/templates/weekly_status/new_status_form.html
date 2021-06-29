@@ -1,0 +1,753 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+{% block title %} New Status {% endblock %}
+
+{% block content %}
+<!-- Content Starts From Here -->
+<div class="col-sm-8" id="base-main-body">
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div">
+				<div class="row" id="main_body_header">
+					<p><b>Weekly Status Report</b></p>
+				</div>
+				<div>
+					<br>
+					<div class="row">
+						<div>
+							<div class="panel panel-bd lobidrag ext_panel">
+								<form action="#" class="form-vertical" id="statusForm" method="post" accept-charset="utf-8">
+									{% csrf_token %}
+									{% if form.errors %}{{form.errors}}{% endif %}
+									<div class="panel-body" id="panel-body-frame">
+										<div class="col-sm-12">
+											<div class="form-group row">
+												<div class="col-sm-2" id="recipent-label" style="width:11%">
+													<label for="from_date" class="col-form-label status_date_label">Recipient</label>
+												</div>
+												<div class="col-sm-10" >
+													<a href="{% url 'uspl:employee_profile' recipent.id %}" style="text-decoration:none">
+														<img class="img-circle" id="news_pic" src="{{recipent.profile.image.url}}">
+													</a>
+													<a href="{% url 'uspl:employee_profile' recipent.id %}">{{recipent.get_full_name}}</a>
+												</div>
+												<input type="hidden" name="recipent_id" value="{{recipent.id}}">
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="form-group row">
+												<div class="col-sm-1">
+													<label for="from_date" class="col-form-label status_date_label">Group</label>
+												</div>
+												<div class="col-sm-3">
+													<select name="group_id" class="form-control" required>
+														{% for group in request.user.groups.all %}
+														<option value="{{group.id}}">{{group}}</option>
+														{% endfor %}
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="form-group row">
+												<div class="col-sm-1">
+													<label for="from_date" class="col-form-label status_date_label">Week</label>
+												</div>
+												<div class="col-sm-3">
+												    <input id="wk_status_date" class="form-control border-none" name="week"  value="{{week}}" type="week" onchange="getDateRange(this.value)" required aria-required="true">
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="form-group row">
+												<div class="col-sm-1">
+													<label for="from_date" class="col-form-label status_date_label">From</label>
+												</div>
+												<div class="col-sm-3">
+												    <input id="wk_status_from_date" class="form-control border-none" name="from_date"  type="date" {% if saved_data_found %}value="{{temp_status.from_date|date:"Y-m-d"}}"{% else %}value=""{% endif %} required aria-required="true" readonly>
+												</div>
+												<div class="col-sm-1">
+													<label for="to_date" class="col-form-label status_date_label">To</label>
+												</div>
+												<div class="col-sm-3">
+												    <input id="wk_status_to_date" class="form-control border-none" name="to_date"  type="date" {% if saved_data_found %}value="{{temp_status.from_date|date:"Y-m-d"}}"{% else %}value=""{% endif %} required aria-required="true" readonly>
+												</div>
+											</div>
+										</div>
+										{% if saved_data_found %}
+										<input type="hidden" type="text" value="{{temp_status.id}}" name="temp_status_id" >
+										{% endif %}
+										<div class="col-sm-12">
+											<div class="panel-body" style="padding: 0;">
+												<div class="table-responsive">
+													<div class="form-inline">
+														<table class="table table-bordered table-striped" role="grid" id="report_table">
+															<thead id="report_new_table_th">
+																<tr role="row" id="row-head-header" >
+																	<td colspan="4" style="text-align:center">ACTIVITIES COMPLETED THIS WEEK</td>
+																</tr>
+																<tr role="row">
+																	<th style="width: 10px;">SL.</th>
+																	<th style="width: 25%">Task</th>
+																	<th>Description of effort</th>
+																	<th style="width: 7%;">Delete</th>
+																</tr>
+															</thead>
+															<tbody id="table1" class="tbody-white">
+																{% if saved_data_found %}
+																	{% for task in temp_status.acompleted_set.all %}
+																	<tr id="a" role="row" class="item-row">
+																		<td id="sl_report_gen">
+																			<input id="white" class="form-control border-none rpt_txtinput_width inph border_none" value="{{forloop.counter}}" readonly type="text" required aria-required="true">
+																		</td>
+																		<td>
+																			<textarea onchange="height_adjust()" id="task_{{forloop.counter}}" class="form-control border-none rpt_txtinput_width" name="a_comp_week_task" required aria-required="true">{{task.task}}</textarea>
+																		</td>
+																		<td>
+																			<textarea onchange="height_adjust()" id="description_{{forloop.counter}}" class="form-control border-none rpt_txtinput_width" name="a_comp_week_descrip" max="5000" required aria-required="true">{{task.description}}</textarea>
+																		</td>
+																		<td>
+																			<center>
+																				<a class="delete_inv" id="del_{{forloop.counter}}" onclick="deleteRow_table1(this.id)"><i class="fa fa-remove" aria-hidden="true" id="report_remove"></i></a>
+																			</center>
+																		</td>
+																	</tr>
+																	{% endfor %}
+																{% else %}
+																<tr id="a" role="row" class="item-row">
+																	<td id="sl_report_gen">
+																		<input id="white" class="form-control border-none rpt_txtinput_width inph border_none" value="1" readonly type="text" required aria-required="true">
+																	</td>
+																	<td>
+																		<textarea onchange="height_adjust()" id="task_1" class="form-control border-none rpt_txtinput_width" name="a_comp_week_task" required aria-required="true">None</textarea>
+																	</td>
+																	<td>
+																		<textarea onchange="height_adjust()" id="description_1" class="form-control border-none rpt_txtinput_width" name="a_comp_week_descrip" max="5000" required aria-required="true">None</textarea>
+																	</td>
+																	<td>
+																		<center>
+																			<a class="delete_inv" id="del_1" onclick="deleteRow_table1(this.id)"><i class="fa fa-remove" aria-hidden="true" id="report_remove"></i></a>
+																		</center>
+																	</td>
+																</tr>
+																{% endif %}
+															</tbody>
+														</table>
+														<button type="button" id="add-report-item" class="btn btn-info" onclick="addRow_table1()" onclick="addrow()"><i style="margin-left: 3px;" class="fa fa-plus"></i></button>
+													</div>
+												</div>
+											</div>
+											<br><br>
+											<div class="panel-body" style="padding: 0;">
+												<div class="table-responsive">
+													<div class="form-inline">
+														<table class="table table-bordered table-striped" role="grid" id="report_table">
+															<thead id="report_new_table_th">
+																<tr role="row"  id="report-submit-row">
+																	<td colspan="5" style="text-align:center">ACTIVITIES IN PROGRESS</td>
+																</tr>
+																<tr role="row">
+																	<th style="width: 10px;">SL.</th>
+																	<th>Activities in Progress</th>
+																	<th>Next Action</th>
+																	<th style="width: 10%;">Due Date</th>
+																	<th style="width: 7%;">Delete</th>
+																</tr>
+															</thead>
+															<tbody id="table2" class="tbody-white">
+																{% if saved_data_found %}
+																	{% for task in temp_status.progress_set.all %}
+																	<tr id="a" role="row" class="item-row">
+																		<td id="sl_report_gen">
+																			<input id="white" class="form-control border-none rpt_txtinput_width inph" value="{{forloop.counter}}" readonly type="text" required aria-required="true">
+																		</td>
+																		<td>
+																			<textarea onchange="height_adjust()" id="act_progress_{{forloop.counter}}" class="form-control border-none rpt_txtinput_width" name="a_progress_inprogress" type="text" required aria-required="true">{{task.current}}</textarea>
+																		</td>
+																		<td>
+																			<textarea onchange="height_adjust()" id="next_action_{{forloop.counter}}" class="form-control border-none rpt_txtinput_width" name="a_progress_nxt_action" type="text" required aria-required="true">{{task.next}}</textarea>
+																		</td>
+																		<td>
+																			<input id="due_date_{{forloop.counter}}" value="{{task.due_date|date:"Y-m-d"}}" class="form-control border-none rpt_txtinput_width inpd" name="a_progress_due_date" type="date" required aria-required="true">
+																		</td>
+																		<td>
+																			<center>
+																				<a class="delete_inv" id="del_tab1_{{forloop.counter}}" onclick="deleteRow_table2(this.id)"><i class="fa fa-remove" aria-hidden="true" id="report_remove"></i></a>
+																			</center>
+																		</td>
+																	</tr>
+																	{% endfor %}
+																
+																{% else %}
+																<tr id="a" role="row" class="item-row">
+																	<td id="sl_report_gen">
+																		<input id="white" class="form-control border-none rpt_txtinput_width inph" value="1" readonly type="text" required aria-required="true">
+																	</td>
+																	<td>
+																		<textarea onchange="height_adjust()" id="act_progress_1" class="form-control border-none rpt_txtinput_width" name="a_progress_inprogress" type="text" required aria-required="true">None</textarea>
+																	</td>
+																	<td>
+																		<textarea onchange="height_adjust()" id="next_action_1" class="form-control border-none rpt_txtinput_width" name="a_progress_nxt_action" type="text" required aria-required="true">None</textarea>
+																	</td>
+																	<td>
+																		<input id="due_date_1" class="form-control border-none rpt_txtinput_width inpd" name="a_progress_due_date" type="date" required aria-required="true">
+																	</td>
+																	<td>
+																		<center>
+																			<a class="delete_inv" id="del_tab1_1" onclick="deleteRow_table2(this.id)"><i class="fa fa-remove" aria-hidden="true" id="report_remove"></i></a>
+																		</center>
+																	</td>
+																</tr>
+																{% endif %}
+															</tbody>
+														</table>
+														<button type="button" id="add-report-item" class="btn btn-info" onclick="addRow_table2()" onclick="addrow()"><i style="margin-left: 3px;" class="fa fa-plus"></i></button>
+
+													</div>
+												</div>
+											</div>
+											<br><br>
+											<div class="panel-body" style="padding: 0;">
+												<div class="table-responsive">
+													<div class="form-inline">
+														<table class="table table-bordered table-striped" role="grid" id="report_table">
+															<thead id="report_new_table_th">
+																<tr role="row" id="row-head-header">
+																	<td colspan="4" style="text-align:center">ACTIVITIES TO BE STARTED NEXT WEEK</td>
+																</tr>
+																<tr role="row">
+																	<th style="width: 10px;">SL.</th>
+																	<th style="width: 25%">Task</th>
+																	<th>Description of effort</th>
+																	<th style="width: 7%;">Delete</th>
+																</tr>
+															</thead>
+															<tbody id="table3" class="tbody-white">
+																{% if saved_data_found %}
+																	{% for task in temp_status.anextweek_set.all %}
+																	<tr id="a" role="row" class="item-row">
+																		<td id="sl_report_gen">
+																			<input id="white" class="form-control border-none rpt_txtinput_width inph" value="{{forloop.counter}}" readonly type="text" required aria-required="true">
+																		</td>
+																		<td>
+																			<textarea onchange="height_adjust()" id="task_{{forloop.counter}}" class="form-control border-none rpt_txtinput_width" name="a_started_nxt_week_task" required aria-required="true">{{task.task}}</textarea>
+																		</td>
+																		<td>
+																			<textarea onchange="height_adjust()" id="description_{{forloop.counter}}" class="form-control border-none rpt_txtinput_width" name="a_started_nxt_week_descrip" max="5000" required aria-required="true">{{task.description}}</textarea>
+																		</td>
+																		<td>
+																			<center>
+																				<a class="delete_inv" id="del_{{forloop.counter}}" onclick="deleteRow_table3(this.id)"><i class="fa fa-remove" aria-hidden="true" id="report_remove"></i></a>
+																			</center>
+																		</td>
+																	</tr>
+																	{% endfor %}
+																{% else %}
+																<tr id="a" role="row" class="item-row">
+																	<td id="sl_report_gen">
+																		<input id="white" class="form-control border-none rpt_txtinput_width inph" value="1" readonly type="text" required aria-required="true">
+																	</td>
+																	<td>
+																		<textarea onchange="height_adjust()" id="task_1" class="form-control border-none rpt_txtinput_width" name="a_started_nxt_week_task" required aria-required="true">None</textarea>
+																	</td>
+																	<td>
+																		<textarea onchange="height_adjust()" id="description_1" class="form-control border-none rpt_txtinput_width" name="a_started_nxt_week_descrip" max="5000" required aria-required="true">None</textarea>
+																	</td>
+																	<td>
+																		<center>
+																			<a class="delete_inv" id="del_1" onclick="deleteRow_table3(this.id)"><i class="fa fa-remove" aria-hidden="true" id="report_remove"></i></a>
+																		</center>
+																	</td>
+																</tr>
+																{% endif %}
+															</tbody>
+														</table>
+														<button type="button" id="add-report-item" class="btn btn-info" onclick="addRow_table3()" onclick="addrow()"><i style="margin-left: 3px;" class="fa fa-plus"></i></button>
+													</div>
+												</div>
+											</div>
+											<br><br>
+											<div class="panel-body" style="padding: 0;">
+												<div class="table-responsive">
+													<div class="form-inline">
+														<table class="table table-bordered table-striped" role="grid" id="report_table">
+															<thead id="report_new_table_th">
+																<tr role="row" id="row-head-header">
+																	<td colspan="4" style="text-align:center">ISSUES FOR IMMEDIATE ATTENTION</td>
+																</tr>
+																<tr role="row">
+																	<th style="width: 10px;">SL.</th>
+																	<th style="width: 25%">Issue Name</th>
+																	<th>Description of issue</th>
+																	<th style="width: 7%;">Delete</th>
+																</tr>
+															</thead>
+															<tbody id="table4" class="tbody-white">
+																{% if saved_data_found %}
+																	{% for issue in temp_status.aissue_set.all %}
+																	<tr id="a" role="row" class="item-row">
+																		<td id="sl_report_gen">
+																			<input id="white" class="form-control border-none rpt_txtinput_width inph" value="{{forloop.counter}}" readonly type="text" required aria-required="true">
+																		</td>
+																		<td>
+																			<textarea onchange="height_adjust()" id="task_{{forloop.counter}}" class="form-control border-none rpt_txtinput_width" name="a_issue_action_name" required aria-required="true">{{issue.name}}</textarea>
+																		</td>
+																		<td>
+																			<textarea onchange="height_adjust()" id="description_{{forloop.counter}}" class="form-control border-none rpt_txtinput_width" name="a_issue_action_descrip" max="5000" required aria-required="true">{{issue.description}}</textarea>
+																		</td>
+																		<td>
+																			<center>
+																				<a class="delete_inv" id="del_{{forloop.counter}}" onclick="deleteRow_table4(this.id)"><i class="fa fa-remove" aria-hidden="true" id="report_remove"></i></a>
+																			</center>
+																		</td>
+																	</tr>
+																	{% endfor %}
+																{% else %}
+																<tr id="a" role="row" class="item-row">
+																	<td id="sl_report_gen">
+																		<input id="white" class="form-control border-none rpt_txtinput_width inph" value="1" readonly type="text" required aria-required="true">
+																	</td>
+																	<td>
+																		<textarea onchange="height_adjust()" id="task_1" class="form-control border-none rpt_txtinput_width" name="a_issue_action_name" required aria-required="true">None</textarea>
+																	</td>
+																	<td>
+																		<textarea onchange="height_adjust()" id="description_1" class="form-control border-none rpt_txtinput_width" name="a_issue_action_descrip" max="5000" required aria-required="true">None</textarea>
+																	</td>
+																	<td>
+																		<center>
+																			<a class="delete_inv" id="del_1" onclick="deleteRow_table4(this.id)"><i class="fa fa-remove" aria-hidden="true" id="report_remove"></i></a>
+																		</center>
+																	</td>
+																</tr>
+																{% endif %}
+															</tbody>
+														</table>
+														<button type="button" id="add-report-item" class="btn btn-info" onclick="addRow_table4()" onclick="addrow()"><i style="margin-left: 3px;" class="fa fa-plus"></i></button>
+													</div>
+												</div>
+											</div>
+											
+										</div>
+										<div class="form-group row" style="text-align:center">
+											<button type="submit" name="save_status_report" class="btn btn-large btn-save_add" id="submit_report">Save as Draft</button>
+											<button type="button" class="btn btn-large btn-save_add" id="send_report" ><i class="fa fa-paper-plane"></i> Send</button>
+										</div>
+									</div>
+								</form>                
+							</div>
+						</div>
+					</div>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END -->
+
+
+
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block external_js %}
+	{% if not saved_data_found %}
+	<script>
+		$('document').ready(function() {
+			getDateRange("{{week}}");
+		});
+	</script>
+	{% endif %}
+	<script>
+	    $('#send_report').click(function(e) {
+	    	var form = document.getElementById("statusForm");
+	    	var isValid = form.checkValidity();
+	    	console.log(isValid);
+	    	if (isValid) {
+	            swal({
+	                title: "Confirm Send",
+	                text: "Are you sure all entries are correct? If not, please recheck all the entries again. You won't be able to edit/change this later.",
+	                icon: "warning",
+	                buttons: ['Cancel', 'Confirm'],
+	            })
+	            .then((confirmed) => {
+	                if (confirmed) {
+	                	$('#submit_report').attr("name", "submit_status_report");
+	                	setTimeout(function() {
+					        $('#submit_report').click();
+					    }, 100);
+	                	swal({
+			                title: "Status Sent Successfully!",
+			                icon: "success",
+			                showConfirmButton: false,
+			            });
+			            
+	                } else {
+	                   $('#submit_report').attr("name", "save_status_report");
+	                }
+	            });
+	    	} else {
+	    		$('#submit_report').click();
+	    	}
+	    });
+	</script>
+	<script>
+		function getDateRange(week){
+			year = week.split("-")[0]
+			week_num = week.split("-W")[1]
+			var d = new Date("Jan 01, " + year + " 01:00:00");
+			var dayMs = (24 * 60 * 60 * 1000);
+			var offSetTimeStart = dayMs * (d.getDay() - 1);
+			var w = d.getTime() + 604800000 * (week_num - 1) - offSetTimeStart; //reducing the offset here
+			var n1 = new Date(w);
+			var n2 = new Date(w + 518400000);
+			var first_date = n1.toString('yyyy-MM-dd');
+			var last_date = n2.toString('yyyy-MM-dd');
+			document.getElementById("wk_status_from_date").value = first_date;
+			document.getElementById("wk_status_to_date").value = last_date;
+		}
+		
+	</script>
+	
+    <script>
+    function height_adjust(){
+        $(this).setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+		$(this).each(function () {
+			this.style.height = 'auto';
+			this.style.height = (this.scrollHeight) + 'px';
+		});
+    	  
+    
+    }
+	</script>
+	<script>
+    	function addRow_table1() {
+    		var table = document.getElementById("table1");
+    		var rowC = table.rows.length;
+    		var rowCount = rowC;
+    		var row = table.insertRow(rowCount);
+    		var colCount = table.rows[0].cells.length;
+    
+    		for(var i=0; i<colCount; i++) {
+    			var newcell = row.insertCell(i);
+    			if(i==0){
+    				newcell.className = "form-control border-none rpt_txtinput_width inph";
+    				newcell.innerHTML = (rowCount+1)
+    			 }
+    			else if(i==1){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("textarea")[0].id = ("task_"+(rowCount+1));
+    				newcell.getElementsByTagName("textarea")[0].innerHTML = "";
+    			}
+    			else if(i==2){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("textarea")[0].id = ("description_"+(rowCount+1));
+    				newcell.getElementsByTagName("textarea")[0].innerHTML = "";
+    			}
+    			else if(i==3){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("a")[0].id = ("del_"+(rowCount+1));
+    			}
+    			else{
+    			newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    			   }
+    		}
+    	}
+    	function regroup_table1(i,rc,ti)
+    	{
+    	  for(j = (i+1);j<rc;j++)
+    		{ var count = i+1;
+    		  document.getElementById(ti).rows[j].cells[0].innerHTML = j+1;
+    		  document.getElementById(ti).rows[j].cells[3].getElementsByTagName("a")[0].id = "del_"+count;
+    		  }
+    	}
+    
+    	function deleteRow_table1(rownumb) {
+    		try {
+    			var table = document.getElementById("table1");
+    			var rowC = table.rows.length;
+    			var rowCount = rowC;
+    			var current = '';
+    
+    			for(var i=0; i<rowCount; i++) {
+    				var row = table.rows[i];
+    				var chkbox = row.cells[3].getElementsByTagName("a")[0].id;
+   
+    				if(chkbox ==rownumb) {
+    					if(rowCount <= 1) {
+    						break;
+    					}
+    					table.deleteRow(i);
+    					rowCount--;
+    					i--;
+    					console.log("i"+i);
+    				  regroup_table1(i,rowCount,"table1");
+    				  break;
+    				}
+    			}
+    			}catch(e) {
+    				alert(e);
+    			}
+    	}
+
+	</script>
+	<script>
+
+    	function addRow_table2() {
+    		var table = document.getElementById("table2");
+    		var rowC = table.rows.length;
+    		var rowCount = rowC;
+    		var row = table.insertRow(rowCount);
+    		//console.log(rowCount);
+    		var colCount = table.rows[0].cells.length;
+    
+    		for(var i=0; i<colCount; i++) {
+    			var newcell = row.insertCell(i);
+    			if(i==0){
+    				newcell.className = "form-control border-none rpt_txtinput_width inph";
+    				newcell.innerHTML = (rowCount+1)
+    			 }
+    			else if(i==1){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("textarea")[0].id = ("act_progress_"+(rowCount+1));
+    				newcell.getElementsByTagName("textarea")[0].innerHTML = "";
+    			}
+    			else if(i==2){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("textarea")[0].id = ("next_action_"+(rowCount+1));
+    				newcell.getElementsByTagName("textarea")[0].innerHTML = "";
+    			}
+    			else if(i==3){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("input")[0].id = ("due_date_"+(rowCount+1));
+    				newcell.getElementsByTagName("input")[0].value = "";
+    			}
+    			else if(i==4){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("a")[0].id = ("del_"+(rowCount+1));
+    			}
+    			else{
+    			newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    			   }
+    		}
+    	}
+    	function regroup_table2(i,rc,ti)
+    	{
+    	  for(j = (i+1);j<rc;j++)
+    		{ var count = i+1;
+    		  document.getElementById(ti).rows[j].cells[0].innerHTML = j+1;
+    		  document.getElementById(ti).rows[j].cells[4].getElementsByTagName("a")[0].id = "del_"+count;
+    		  }
+    	}
+    	function deleteRow_table2(rownumb) {
+    		try {
+    			var table = document.getElementById("table2");
+    			var rowC = table.rows.length;
+    			var rowCount = rowC;
+    			var current = '';
+    
+    			for(var i=0; i<rowCount; i++) {
+    				var row = table.rows[i];
+    				var chkbox = row.cells[4].getElementsByTagName("a")[0].id;
+    
+    				console.log(chkbox);
+    				if(chkbox ==rownumb) {
+    					if(rowCount <= 1) {
+    						break;
+    					}
+    					table.deleteRow(i);
+    					rowCount--;
+    					i--;
+    					console.log("i"+i);
+    				  regroup_table2(i,rowCount,"table2");
+    				  break;
+    				}
+    			}
+    			}catch(e) {
+    				alert(e);
+    			}
+    	}
+
+	</script>
+	<script>
+    
+    	function addRow_table3() {
+    		var table = document.getElementById("table3");
+    		var rowC = table.rows.length;
+    		var rowCount = rowC;
+    		var row = table.insertRow(rowCount);
+    		var colCount = table.rows[0].cells.length;
+    
+    		for(var i=0; i<colCount; i++) {
+    			var newcell = row.insertCell(i);
+    			if(i==0){
+    				newcell.className = "form-control border-none rpt_txtinput_width inph";
+    				newcell.innerHTML = (rowCount+1)
+    			 }
+    			else if(i==1){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("textarea")[0].id = ("task_"+(rowCount+1));
+    				newcell.getElementsByTagName("textarea")[0].innerHTML = "";
+    			}
+    			else if(i==2){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("textarea")[0].id = ("description_"+(rowCount+1));
+    				newcell.getElementsByTagName("textarea")[0].innerHTML = "";
+    			}
+    			else if(i==3){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("a")[0].id = ("del_"+(rowCount+1));
+    			}
+    			else{
+    			newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    			   }
+    		}
+    	}
+    	function regroup_table3(i,rc,ti)
+    	{
+    	  for(j = (i+1);j<rc;j++)
+    		{ var count = i+1;
+    		  document.getElementById(ti).rows[j].cells[0].innerHTML = j+1;
+    		  document.getElementById(ti).rows[j].cells[3].getElementsByTagName("a")[0].id = "del_"+count;
+    		  }
+    	}
+    
+    	function deleteRow_table3(rownumb) {
+    		try {
+    			var table = document.getElementById("table3");
+    			var rowC = table.rows.length;
+    			var rowCount = rowC;
+    			var current = '';
+    
+    			for(var i=0; i<rowCount; i++) {
+    				var row = table.rows[i];
+    				var chkbox = row.cells[3].getElementsByTagName("a")[0].id;
+    
+    				console.log(chkbox);
+    				if(chkbox ==rownumb) {
+    					if(rowCount <= 1) {
+    						break;
+    					}
+    					table.deleteRow(i);
+    					rowCount--;
+    					i--;
+    					console.log("i"+i);
+    				  regroup_table1(i,rowCount,"table3");
+    				  break;
+    				}
+    			}
+    			}catch(e) {
+    				alert(e);
+    			}
+    	}
+
+	</script>
+	<script>
+
+    	function addRow_table4() {
+    		var table = document.getElementById("table4");
+    		var rowC = table.rows.length;
+    		var rowCount = rowC;
+    		var row = table.insertRow(rowCount);
+    		var colCount = table.rows[0].cells.length;
+    
+    		for(var i=0; i<colCount; i++) {
+    			var newcell = row.insertCell(i);
+    			if(i==0){
+    				newcell.className = "form-control border-none rpt_txtinput_width inph";
+    				newcell.innerHTML = (rowCount+1)
+    			 }
+    			else if(i==1){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("textarea")[0].id = ("task_"+(rowCount+1));
+    				newcell.getElementsByTagName("textarea")[0].innerHTML = "";
+    			}
+    			else if(i==2){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("textarea")[0].id = ("description_"+(rowCount+1));
+    				newcell.getElementsByTagName("textarea")[0].innerHTML = "";
+    			}
+    			else if(i==3){
+    				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    				newcell.getElementsByTagName("a")[0].id = ("del_"+(rowCount+1));
+    			}
+    			else{
+    			newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+    			   }
+    		}
+    	}
+    	function regroup_table4(i,rc,ti)
+    	{
+    	  for(j = (i+1);j<rc;j++)
+    		{ var count = i+1;
+    		  document.getElementById(ti).rows[j].cells[0].innerHTML = j+1;
+    		  document.getElementById(ti).rows[j].cells[3].getElementsByTagName("a")[0].id = "del_"+count;
+    		  }
+    	}
+    
+    	function deleteRow_table4(rownumb) {
+    		try {
+    			var table = document.getElementById("table4");
+    			var rowC = table.rows.length;
+    			var rowCount = rowC;
+    			var current = '';
+    
+    			for(var i=0; i<rowCount; i++) {
+    				var row = table.rows[i];
+    				var chkbox = row.cells[3].getElementsByTagName("a")[0].id;
+    
+    				console.log(chkbox);
+    				if(chkbox ==rownumb) {
+    					if(rowCount <= 1) {
+    						break;
+    					}
+    					table.deleteRow(i);
+    					rowCount--;
+    					i--;
+    					console.log("i"+i);
+    				    regroup_table1(i,rowCount,"table4");
+    				    break;
+    				}
+    			}
+    			}catch(e) {
+    				alert(e);
+    			}
+    	}
+	</script>
+	<script type="text/javascript">
+		jQuery.curCSS = function(element, prop, val) {
+		    return jQuery(element).css(prop, val);
+		};
+	</script>
+
+
+{% endblock %}

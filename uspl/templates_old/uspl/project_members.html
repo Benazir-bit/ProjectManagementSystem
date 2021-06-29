@@ -1,0 +1,51 @@
+{% extends "uspl/base.html" %}
+{% block title %}Members in Project: {{project.name}}{% endblock %}
+{% block pagetitle %}Members in Project: {{project.name}}{% endblock %}
+
+
+{% block content %} 
+	<table class="table">
+		<thead style="font-size:16px">
+			<tr>
+				<th>Employee ID</th>
+				<th>Full Name</th>
+				<th>Designation</th>
+			</tr>
+		</thead>
+		<tbody>
+		    <tr>
+				<td>{{project.supervisor.username}}</a></td>
+				<td>
+			         {{project.supervisor.first_name}} {{project.supervisor.last_name}}
+					</td>
+					<td>
+						{% if project.supervisor.profile.teamleader %}
+							Team Leader, 
+						{% endif %}
+						{{project.supervisor.profile.designation}}
+					</td>
+					<td>
+						<a href="{% url 'uspl:employee_profile' project.supervisor.id %}"; style = "align:center"; class="btn btn-info" role="button">View Profile</a>
+					</td>
+			</tr>
+			{% for member in members %}
+			<tr>
+			    <td>{{member.username}}</a></td>
+				<td>
+			       	{{member.first_name}} {{member.last_name}}
+				</td>
+				<td>
+					{% if member.profile.teamleader %}
+						Team Leader, 
+					{% endif %}
+					{{member.profile.designation}}
+				</td>
+				<td>
+					<a href="{% url 'uspl:employee_profile' member.id %}"; style = "align:center"; class="btn btn-info" role="button">View Profile</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

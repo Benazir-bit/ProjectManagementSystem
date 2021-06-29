@@ -1,0 +1,68 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Delete Project{% endblock %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body">
+  {% if user.is_staff or user.profile.teamleader %}
+    <h1>Delete entire project: {{ project.name }}?</h1>
+    {% if task_count_total != 0 %}
+      <p>Category tally:</p>
+      <ul>
+        <li>Incomplete: {{ task_count_undone }} </li>
+        <li>Complete: {{ task_count_done }} </li>
+        <li>
+          <strong>Total: {{ task_count_total }}</strong>
+        </li>
+      </ul>
+      <p> ... all of which will be irretrievably <strong>deleted</strong>.
+        Are you sure you want to do that?
+      </p>
+    {% else %}
+      <p>Project is empty and safe to delete.</p>
+    {% endif %}
+      
+    <form action="" method="post" accept-charset="utf-8">
+      {% csrf_token %}
+      <input type="hidden" name="project" value="{{ project.id }}">
+      <p>
+        <a href="{% url 'uspl:project_detail' project.id %}" class="btn btn-success">Return to Project: {{ project.title }}</a>
+        <input type="submit" name="delete-confirm" value="Do it! &rarr;" class="btn btn-danger">
+      </p>
+    </form>
+  {% else %}
+    <p>Sorry, you don't have permission to delete lists. Please contact your group administrator.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block news %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Project Activities</b></p><br>
+		<div class="scrollbar">
+			{% if project_newses %}
+				{% for news in project_newses %}
+					<div class="row event">
+						<div class="col-xs-4 col-md-4 col-lg-3" >
+							<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+						</div>
+						<div class="col-xs-8 col-md-8 col-lg-9" id="news_msg">
+							<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+							<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+						</div>
+					</div>
+					<hr>
+				{% endfor %}
+				</div>
+					<p id="news_header"><b><a href="#">View All</a></b></p>
+				</div>
+			{% else %}
+				<h3 id="not-available-msg">No Recent Activities.</h3>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}

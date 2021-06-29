@@ -1,0 +1,177 @@
+{% extends "uspl/base.html" %}
+{% block title %} Update Profile {% endblock %}
+{% block pagetitle %} Update Profile {% endblock %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body"> 
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div">
+				<div id="main_body_header" class="row">
+					<p><b>Update Profile</b></p>
+				</div>
+				<br>	
+        <form method="post">
+          {% csrf_token %}
+          <table class="table table-striped">
+            <tr>
+							<td colspan="1" id = "table-form">
+								<label for="name">Name</label>
+							</td>
+							<td>
+								<input class="form-control" name="name" value="{{employee.get_full_name}}" onkeydown="validate()" readonly>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="username">Employee ID</label>
+							</td>
+							<td>
+								<input class="form-control" name="username" value="{{employee.username}}" onkeydown="validate()" readonly>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="designation">Designation</label>
+							</td>
+							<td>
+								<input class="form-control" name="designation" value="{{employee.profile.dsg.title}}" onkeydown="validate()" readonly>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label>Date of Birth:</label>
+							</td>
+							<td>
+								<input  class="form-control" value="{{employee_profile.date_of_birth}}" onkeydown="validate()" readonly>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label>Date of Joining</label>
+							</td>
+							<td>
+								<input class="form-control" value="{{employee_profile.date_of_joining}}" onkeydown="validate()" readonly>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="phone_number">Phone Number</label>
+							</td>
+							<td>
+								{{form.phone_number}}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="present_address">Present Address</label>
+							</td>
+							<td>
+								{{form.present_address}}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="highest_degree">Highest Degree</label>
+							</td>
+							<td>
+								{{form.highest_degree}}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="bg">Blood Group</label>
+							</td>
+							<td>
+								<input class="form-control" name="bg" value="{{employee_profile.blood_group}}" onkeydown="validate()" readonly>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id = "table-form">
+								<label for="emergency_contact">Emergency Contact</label>
+							</td>
+							<td>
+								{{form.emergency_contact}}
+							</td>
+						</tr>
+					</table>
+					<div style="text-align:center">
+            <button class="btn btn-primary" type="submit">Update Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block news %}
+{% if not employee.is_staff %}
+	{% if not request.user.profile.is_hr %}
+	<!-- News -->
+	<div class="col-sm-2">
+		<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+			<p id="news_header"><b>{% if request.user == employee %}My{% else %}Employee{% endif %} Activities</b></p><br>
+			<div class="scrollbar">
+				{% for news in profile_news %}
+					<div class="row event">
+						<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+							<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+						</div>
+						<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+							<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+							<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+						</div>
+					</div>
+					<hr>
+				{% endfor %}
+				</div>
+					<p id="news_header"><b><a href="{% url 'uspl:employee_news_all' employee.id %}">View All</a></b></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% else %}
+	{% if not request.user.profile.is_hr %}
+	<!-- News -->
+	<div class="col-sm-2">
+		<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+			<p id="news_header"><b>Recent Activities</b></p><br>
+			<div class="scrollbar">
+				{% for news in newses %}
+					<div class="row event">
+						<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+							<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+						</div>
+						<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+							<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+							<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+						</div>
+					</div>
+					<hr>
+				{% endfor %}
+				</div>
+					<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% endif %}
+{% endblock %}
+
+
+
+{% block external_js %}
+<script>
+
+function validate()
+{
+alert("You cannot change this value. Please contact with the administrator.");
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+{% block title %}{{status}}{% endblock %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body">
+	<div class="row">
+		<div class="col-sm-12">
+			<br>
+			<div id="main-body-div">
+				<div class="row" id="main_body_header">
+					<p><b>Weekly Status Report</b></p>
+				</div>
+				<div>
+					<br>
+					<div class="row">
+						<div>
+							<div class=" panel panel-bd lobidrag ext_panel">
+								<div class="table-responsive">
+									<div id="printDiv">
+										<form action="#" class="form-vertical" method="post" accept-charset="utf-8">
+											<div id="report">
+												<div class="report overflow-auto">
+													<div style="min-width: 600px">
+														<header>
+															<div class="col-xs-12" id="details-report-temp1">
+																<div class="col-sm-6 col-xs-12">
+																	<div class="row">
+																		<a href="{% url 'uspl:employee_profile' status.sender.id %}" style="text-decoration:none">
+                    														<img class="img-circle" id="news_pic" src="{{status.sender.profile.image.url}}">
+                    													</a>
+                    													<a href="{% url 'uspl:employee_profile' status.sender.id %}" style="font-size:14px">{{status.sender.get_full_name}}</a>
+																	</div>
+																	<div class="row">
+																		<i style="font-size:11px">{{status.sender.profile.dsg.title}}, {{status.group}}</i>
+																	</div>
+																	<div class="row">
+																		<i style="font-size:11px">Date: {{status.timestamp}}</i>
+																	</div>
+																</div>
+																<div class="col-sm-6 col-xs-12" id="details-report-temp">
+																	<div class="row">
+																		<h6 id="h6-reprt-temp"><b>Group:</b> <a href="{% url 'uspl:group_details' status.group.id %}">{{status.group}}</a></h6>
+																	</div>
+																	<div class="row">
+																		<h6 id="h6-reprt-temp"><b>Week:</b> {{status.week}}</h6>
+																	</div>
+																	<div class="row">
+																		<h6 id="h6-reprt-temp"><b>Duration:</b> {{status.from_date}} - {{status.to_date}}</h6>
+																	</div>
+																</div>
+															</div>
+														</header>
+														
+														<table class="responsive-table-report">
+															<caption id="top-row-header">ACTIVITIES COMPLETED THIS WEEK</caption>
+															<thead class="thead-report-temp">
+																<tr>
+																	<th scope="col" style="width: 3%;">SL</th>
+																	<th scope="col">Task</th>
+																	<th scope="col">Description of effort</th>
+																</tr>
+															</thead>
+															<tbody>
+																{% for task in completed_tasks %}
+																<tr>
+																	<td data-title="SL">{{forloop.counter}}</td>
+																	<td data-title="Task">{{task.task}}</td>
+																	<td data-title="Description of effort">{{task.description}}</td>
+																</tr>
+																{% endfor %}
+															</tbody>
+														</table>
+														<table class="responsive-table-report">
+															<caption id="top-row-header">ACTIVITIES IN PROGRESS</caption>
+															<thead class="thead-report-temp">
+																<tr>
+																	<th scope="col" style="width: 3%;">SL</th>
+																	<th scope="col" style="width: 26%;">Activities in Progress</th>
+																	<th scope="col" style="width: 58%;">Next Action</th>
+																	<th scope="col" style="width: 13%;">Due Date</th>
+																</tr>
+															</thead>
+															<tbody>
+																{% for progress in progresses %}
+																<tr>
+																	<td data-title="SL">{{forloop.counter}}</td>
+																	<td data-title="Activities in Progress">{{progress.current}}</td>
+																	<td data-title="Next Action">{{progress.next}}</td>
+																	<td data-title="Due Date">{{progress.due_date}}</td>
+																</tr>
+																{% endfor %}
+															</tbody>
+														</table>
+    													<table class="responsive-table-report">
+															<caption id="top-row-header">ACTIVITIES TO BE STARTED NEXT WEEK</caption>
+															<thead class="thead-report-temp">
+																<tr>
+																	<th scope="col" style="width: 3%;">SL</th>
+																	<th scope="col" style="width: 47%;">Task</th>
+																	<th scope="col" style="width: 50%;">Description of effort</th>
+																</tr>
+															</thead>
+															<tbody>
+																{% for progress in next_progresses %}
+																<tr>
+																	<td data-title="SL">{{forloop.counter}}</td>
+																	<td data-title="Task">{{progress.task}}</td>
+																	<td data-title="Description of effort">{{progress.description}}</td>
+																</tr>
+																{% endfor %}
+															</tbody>
+														</table>
+														<table class="responsive-table-report">
+															<caption id="top-row-header">ISSUES FOR IMMEDIATE ATTENTION</caption>
+															<thead class="thead-report-temp">
+																<tr>
+																	<th scope="col" style="width: 3%;">SL</th>
+																	<th scope="col" style="width: 48%;">Issue Name</th>
+																	<th scope="col" style="width: 50%;">Description of issue</th>
+																</tr>
+															</thead>
+															<tbody>
+																{% for issue in issues %}
+																<tr>
+																	<td data-title="SL">{{forloop.counter}}</td>
+																	<td data-title="Issue Name">{{issue.name}}</td>
+																	<td data-title="Description of issue">{{issue.description}}</td>
+																</tr>
+																{% endfor %}
+															</tbody>
+														</table>
+													</div>
+													
+													<div></div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "uspl/base.html" %}
+{% block title %}{{notice.title|truncatewords:8}} {% endblock %}
+
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body">
+    <div class="row">
+    	<br>
+	   	<div class="col-sm-12">
+			<div id="main-body-div">
+				<div class="row" id="main_body_header">
+					<p><b>Notice</b></p>
+				</div>
+				<div class="row">
+    				<article>
+    				    <h3>{{notice.title}} {% if notice.important %}<span class="badge" id="imp_badge">Important</span>{% endif %}</h3>
+    				    <h5><i>Posted On: {{notice.created_on|time}}</i></h5>
+    				    <p>{{notice.body|linebreaks}}</p>
+    				</article>
+    			</div>
+    			<br>
+    			<br>
+			
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

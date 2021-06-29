@@ -1,0 +1,15 @@
+{% autoescape off %}
+<p>Hi {{ task.assigned_to.first_name }},</p>
+<p>Your submitted task "<a href="{{domain}}{% url 'uspl:task_detail' task.id %}"><b>{{task.name}}</b></a>" has been reviewed by your project supervisor. Based on {{author.get_full_name}}'s review, your task is not ready to deliver.</p>
+<br>
+<p><b>Feedback From Supervisor</b></p>
+<div>
+    <div>
+        {{feedback_body|linebreaks}}
+    </div>
+</div>
+<br>
+<p>Please update your task based on the above feedback and resubmit it for another review.</p>
+<p>Sincerely,</p>
+<p>The Ulkasemi EMS Team</p>
+{% endautoescape %}

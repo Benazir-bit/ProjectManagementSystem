@@ -1,0 +1,167 @@
+{% extends "uspl/base.html" %}
+{% load staticfiles %}
+{% block title %}Issue: {{issue.name }}{% endblock %}
+
+{% block content %}
+<div class="col-sm-8" id="base-main-body"> 
+    <div class="row">
+	   	<div class="col-sm-12">
+	   		<br>
+			<div id="main-body-div">
+				<div class="row" id="main_body_header">				
+					<p><b>{{issue.name}}</b></p>
+				</div>
+				<br>	
+				<div class="row">
+					<div class="col-sm-7">
+						<div class="card" id="card_details">
+							<div class="card-body table-responsive">
+								<h4><b>Details :</b></h4>		
+								<p id="task-paragraph">{{issue.details|linebreaks}}</p>
+								<hr>
+								<h4><b>Solution :</b></h4>
+								{% if issue.solved %}
+									<p id="task-paragraph">{{issue.solution|linebreaks}}</p>
+									<hr>
+								{% else %}
+									<p id="task-paragraph">No Solution To Show!</p>
+									<hr>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-5">
+						<div class="card" id="card_side_col">
+							<div class="card-body table-responsive" style="border:none">
+								<ul id="side_col">
+									<li class="list-group-item">
+										<strong>Raised By: </strong>
+										<a href="{% url 'uspl:employee_profile' issue.raised_by.id %}">
+											<img src="{{ issue.raised_by.profile.image.url }}" class="img-circle" id="member_pic" alt={{issue.raised_by.first_name}}>
+										</a>
+										<a href="{% url 'uspl:employee_profile' issue.raised_by.id %}">{{ issue.raised_by.get_full_name }}</a>
+									</li>
+									<li class="list-group-item">
+										<strong>Supervised by: </strong>
+										<a href="{% url 'uspl:employee_profile' issue.task.project.supervisor.id %}">
+											<img src="{{ issue.task.project.supervisor.profile.image.url }}" class="img-circle" id="member_pic" alt={{issue.task.project.supervisor.first_name}}>
+										</a>
+										<a href="{% url 'uspl:employee_profile' issue.task.project.supervisor.id %}">{{ issue.task.project.supervisor.get_full_name }}</a>
+									</li>
+									<li class="list-group-item"><strong>Raised On:</strong> {{issue.raised_date}}</li>
+									{% if issue.solved %}
+										<li class="list-group-item">
+											<strong>Status: </strong> Solved
+										</li>
+										<li class="list-group-item">
+											<strong>Solved On: </strong> {{issue.solved_date}}
+										</li>
+										<li class="list-group-item">
+											<strong>Solved By: </strong>
+											<a href="{% url 'uspl:employee_profile' issue.solved_by.id %}">
+											<img src="{{ issue.solved_by.profile.image.url }}" class="img-circle" id="member_pic" alt={{issue.solved_by.first_name}}>
+										</a>
+											<a href="{% url 'uspl:employee_profile' issue.solved_by.id %}">{{ issue.solved_by.get_full_name }}</a>
+										</li>
+									{% else %}
+										<li class="list-group-item">
+											<strong>Status: </strong> Not Solved!!
+										</li>
+									{% endif %}
+									<li class="list-group-item"><strong>Task:</strong> <a href="{% url 'uspl:task_detail' issue.task.id %}">{{issue.task.name}}</a></li>
+									<li class="list-group-item"><strong>Project:</strong> <a href="{% url 'uspl:project_detail' issue.task.project.id %}">{{issue.task.project.name}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class = "row">
+					<div class = "col-sm-12">
+						<div id="issue_comment">
+							<form action="" method="post">
+								{% csrf_token %}
+								<div class="form-group">
+									<textarea class="form-control" name="comment-body" rows="3" placeholder="Write your comments here.." required></textarea>
+								</div>
+								<input class="btn btn-sm btn-primary" type="submit" name="add_comment" value="Add Comment">
+							</form>
+						</div>
+						<div class = "col-sm-10">
+							{% if comments %}
+								<ul id="comments">
+									{% for each_comment in comments %}
+										<li class="cmmnt">
+											<div class="avatar">
+												<a href="{% url 'uspl:employee_profile' each_comment.author.id %}">
+													<img src="{{ each_comment.author.profile.image.url }}" class="img-circle" width="50" height="50" alt={{each_comment.author.first_name}}>
+												</a>
+											</div>
+											<div class="cmmnt-content">
+												<header id="name_feedback">
+													<a href="{% url 'uspl:employee_profile' each_comment.author.id %}" class="userlink">
+														{{each_comment.author.get_full_name}}
+													</a> - <span class="pubdate">posted on {{each_comment.posted_date}}</span>
+													{% if each_comment.marked_as_solution %}
+														<span class="badge" id="no_issue_badge">Solution &#x2714;</span>
+													{% endif %}
+												</header>
+												<p>{{each_comment.body|linebreaks}}</p>
+												{% if request.user == issue.raised_by %}
+													{% if not issue.solved %}
+														<a type="button" href="{% url 'uspl:issue_toggle_solved' issue.id each_comment.id %}" class="btn btn-primary btn-sm"><b>Mark As Solution<b></a>
+													{% endif %}
+												{% endif %}
+												
+											</div>
+										</li>
+									{% endfor %}
+								</ul>
+								<br>
+							{% else %}
+								<blockquote>
+									<p id="not_available_project_text"><span id="not_available_project_icon" class="glyphicon glyphicon-exclamation-sign"></span>No Comments Yet!</p>   
+								</blockquote>
+								<br>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				<br>
+				<br>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+{% block news %}
+{% if not request.user.profile.is_hr %}
+<!-- News -->
+<div class="col-sm-2">
+	<div class="fixed col-xs-2 sidebar-outer" id="news_col">
+		<p id="news_header"><b>Recent Activities</b></p><br>
+		<div class="scrollbar">
+			{% for news in newses %}
+				<div class="row event">
+					<div class="col-xs-2 col-md-4 col-lg-3" id="news-pic">
+						<a href="{% url 'uspl:employee_profile' news.owner.id %}"><img class="img-circle" id="news_pic" src="{{news.owner.profile.image.url}}"></a>
+					</div>
+					<div class="col-xs-9 col-md-8 col-lg-9" id="news_msg">
+						<p><strong><b><a href="{% url 'uspl:employee_profile' news.owner.id %}">{{news.owner.get_full_name}}</a></b></strong> {{news.message}}<br></p>
+						<p><span class="glyphicon glyphicon-time"></span> {{news.created_date}}</p>
+					</div>
+				</div>
+				<hr>
+			{% endfor %}
+			</div>
+				<p id="news_header"><b><a href="{% url 'uspl:news_list' 1 %}">View All</a></b></p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
