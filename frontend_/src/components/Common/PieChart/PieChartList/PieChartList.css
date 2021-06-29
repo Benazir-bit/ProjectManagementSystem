@@ -1,0 +1,30 @@
+.pieID .ant-skeleton .ant-skeleton-content .ant-skeleton-title {
+	border-radius: 100px;
+	height: 10px;
+	margin-top: 0.5em;
+	margin-bottom: 0.1em;
+	width: 70% !important;
+}
+
+.skeletonRoundbadge {
+	display: inline-block;
+	position: absolute;
+	margin-left: 12px;
+}
+.skeletonRoundbadge .ant-skeleton-header .ant-skeleton-avatar {
+	width: 20px;
+	height: 20px;
+}
+/* .skeletonRoundbadgeList .ant-skeleton-header {
+	padding-right: 103px !important;
+} */
+.skeletonRoundbadgeList .ant-skeleton-header .ant-skeleton-avatar {
+	height: 20px;
+	width: 20px;
+	margin-top: 5px;
+}
+
+.skeletonRoundbadgeList .ant-skeleton-content {
+	display: table-caption !important;
+	height: 0;
+}

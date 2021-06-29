@@ -1,0 +1,28 @@
+.TitleColor {
+	background: linear-gradient(60deg, #4c6d8a, #dbd3d3);
+	padding: 9px 15px;
+}
+.btnSearch {
+	margin: 0 20px !important;
+	color: white;
+	background: #337ab7;
+	height: 36px !important;
+}
+.btnAdd {
+	margin: 0 20px !important;
+	color: white;
+	background: #5bc0de;
+	height: 36px !important;
+	float: right;
+}
+.Inboxtab th {
+	background-color: #234561;
+	color: #ffffff;
+}
+.Inboxtab th,
+.Inboxtab td {
+	border: 1px solid #ddd;
+}
+.Inboxtab tr:hover {
+	background-color: #e4e4e494;
+}

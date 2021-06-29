@@ -1,0 +1,29 @@
+.Companylogo {
+	margin-left: 9px;
+	padding: 29px 0;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+	float: left;
+}
+#company {
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 5px;
+	color: #9d9d9d !important;
+	padding-bottom: 2px !important;
+	font-size: 28px;
+	margin-bottom: -9px;
+}
+.tagline {
+	margin-top: -13px;
+	font-size: 9px;
+	line-height: 1.5em;
+	text-transform: uppercase;
+	color: #a3a3a3;
+	position: relative;
+	z-index: 2;
+	margin-left: 16px;
+}
+#company strong {
+	color: #ffa500;
+}

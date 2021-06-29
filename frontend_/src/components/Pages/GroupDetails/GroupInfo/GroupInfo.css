@@ -1,0 +1,24 @@
+#dashboard_grp_table {
+    max-height: 350px;
+    min-height: 200px;
+    width: auto;
+    overflow-y: auto;
+    margin-top: 20px;
+    border: none;
+}
+
+#dash_table_height_grp {
+    height: auto;
+}
+
+#grp_info_table{
+    /* max-height: 350px; */
+    min-height: 200px;
+    width: auto;
+    /* overflow-y: auto; */
+    margin-top: 20px;
+    border: none;
+}
+#cardHeadTitle{
+    padding-top: 0.5em;
+}

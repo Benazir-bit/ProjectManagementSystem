@@ -1,0 +1,33 @@
+#project_member_table {
+  /* height: 318px;
+  max-height: 533px;
+  min-height: 200px; */
+  width: auto;
+  overflow-y: auto;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  border: none;
+}
+
+@media only screen and (min-width: 1200px) {
+  #memberTableHight {
+    height: 336px;
+    max-height: 336px;
+    min-height: 526px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  #project_member_table {
+    height: 336px;
+    max-height: 336px;
+    min-height: 200px;
+  }
+}
+
+@media only screen and (min-width: 768px) and(max-width: 991px) {
+  #project_member_table {
+    max-height: 300px;
+    min-height: 150px;
+    height: 280px;
+  }
+}

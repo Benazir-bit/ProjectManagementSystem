@@ -1,0 +1,21 @@
+.marginRight {
+	margin-right: 7px;
+}
+.borderedtab td,
+.borderedtab th {
+	border: 1px solid #ddd;
+}
+.borderedtab th {
+	background: #ddd;
+}
+.TableHeaderblue {
+	background-color: #337ab733;
+	margin: 0;
+	padding: 7px;
+	text-align: center;
+	font-weight: 500;
+	color: #337ab7;
+}
+.borderedtab tr:hover {
+	background-color: #e4e4e494;
+}

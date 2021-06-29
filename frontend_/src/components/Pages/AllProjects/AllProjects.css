@@ -1,0 +1,19 @@
+#my_proj_table {
+  min-height: 200px;
+  width: auto;
+  overflow-y: auto;
+  margin-top: 20px;
+  border: none;
+}
+#ProjectCard {
+  margin-top: 0px;
+}
+.allprojtab {
+  margin: 10px;
+}
+/* #AllProjectTable {
+	font-size: 13px;
+	white-space: nowrap;
+	overflow: auto;
+	margin-top: 3em;
+} */

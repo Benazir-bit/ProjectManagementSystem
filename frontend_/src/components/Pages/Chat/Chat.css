@@ -1,0 +1,119 @@
+.contactList::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.contactList::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.contactList::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 8px;
+}
+
+.contactList::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+.contactList .ant-spin-nested-loading {
+  margin-top: 1em;
+}
+
+.chatList {
+  min-height: 750px;
+  overflow-y: auto;
+  height: 750px;
+  max-height: 750px;
+  border-bottom: 1px solid #ffffff;
+}
+
+#chatMain {
+  background-color: aliceblue;
+  border: 1px solid #ece7e7;
+}
+
+.chatList::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.chatList::-webkit-scrollbar-track {
+  background: #f9f9f9;
+}
+
+.chatList::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 8px;
+}
+
+.chatList::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+/* .chatList .ant-spin-nested-loading {
+    margin-top: 1em;
+  } */
+
+#UserMsgList {
+  padding: 0em 2em 1em 2em;
+}
+#OtherMsgList {
+  padding: 0em 2em 1em 2em;
+}
+
+#otherMsgInfo {
+  height: auto;
+  min-height: 20px;
+}
+
+#otherMsgInfo .ant-list-item-meta-title {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
+
+#otherMsgInfo .ant-list-item-meta-description {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  font-size: 13px;
+  color: #3c3a3a;
+}
+
+#otherMsgInfo .ant-list-item-meta-content {
+  background-color: #bceaff;
+  min-height: 60px;
+  border-radius: 10px;
+}
+
+#userMsgInfo .ant-list-item-meta-content {
+  background-color: #b4e2b8;
+  min-height: 60px;
+  border-radius: 10px;
+}
+
+#userMsgInfo .ant-list-item-meta-title {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
+
+#userMsgInfo .ant-list-item-meta-description {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  font-size: 13px;
+  color: #3c3a3a;
+}
+
+#userMsgInfo {
+  height: auto;
+  min-height: 20px;
+}
+
+.messageSend {
+  margin-bottom: 1em;
+}
+
+#chatIcon {
+  background-color: aliceblue;
+  border: 1px solid #ece7e7;
+  text-align: center;
+}

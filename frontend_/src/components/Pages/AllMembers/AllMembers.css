@@ -1,0 +1,50 @@
+#memberpic {
+  border: 1px;
+  display: inline;
+  margin-right: 10;
+  margin-left: auto;
+  border-radius: 50%;
+}
+
+/* 
+.MemberTable > thead:first-child > tr:first-child > th:nth-of-type(5),
+th:nth-of-type(6),
+th:nth-of-type(7) {
+	color: transparent;
+	width: 12% !important;
+} */
+
+.MemberTable tr th:nth-of-type(5),
+.MemberTable tr th:nth-of-type(6),
+.MemberTable tr th:nth-of-type(7) {
+  color: transparent;
+  width: 12% !important;
+}
+
+.MemberTable {
+  font-size: 13px;
+}
+
+.switch_mem {
+  min-width: 58px !important;
+  height: 30px !important;
+}
+.switch_mem.ant-switch-checked {
+  background-color: #337ab7 !important;
+}
+.switch_mem.ant-switch::after {
+  top: 3px !important;
+  width: 23px !important;
+  height: 23px !important;
+}
+
+#allMem_table {
+  min-height: 200px;
+  width: auto;
+  overflow-y: auto;
+  margin-top: 20px;
+  border: none;
+}
+#AllMemCard {
+  margin-top: 0px;
+}

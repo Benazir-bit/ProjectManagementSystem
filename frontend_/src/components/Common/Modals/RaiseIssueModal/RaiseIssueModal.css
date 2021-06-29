@@ -1,0 +1,27 @@
+#RaiseIssueButton {
+  padding: 6px 14px;
+  margin-bottom: 1em;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #d9534f;
+}
+
+#IssueModalForm .quill {
+  margin-left: 0em !important;
+  margin-right: 0em !important;
+}
+
+.raiseIssueModal .ant-modal-footer {
+  display: none;
+}
+
+.raiseIssueModal .ant-modal-body {
+  height: 60%;
+}

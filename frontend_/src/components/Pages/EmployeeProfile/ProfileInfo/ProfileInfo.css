@@ -1,0 +1,43 @@
+#profile_pic_row{
+	padding-left: 3em;
+	padding-right: 4em;
+	background-color: #c1d7e9;
+}
+#employee_pic {
+	border:1px;
+	display:block;
+	position: relative;
+	margin-top: 20px;
+    margin-right: auto;
+	margin-left: auto;
+    border-radius: 50%;
+	opacity: 1;
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+#employee_pic:hover {
+  opacity: 0.6;
+}
+#change_img{
+	background-color: #cecece;
+	color: black;
+	padding: 6px 10px;
+}
+#change_img:hover{
+	color: black;
+	text-decoration: none;
+	background-color: #cecece;
+}
+.img-reg {
+	max-width: 100%;
+	height: auto;
+	max-height: 200px;
+	min-height: 180px;
+}
+#cont{
+	position: relative;
+}
+
+#cont:hover .middle {
+	opacity: 1;
+  }

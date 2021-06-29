@@ -1,0 +1,27 @@
+.ProjectTaskTable {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: auto;
+  margin-top: -1em;
+  min-height: 0px;
+  max-height: 0px;
+  width: auto;
+  border: none;
+}
+.ProjectTaskTable::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.ProjectTaskTable::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.ProjectTaskTable::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 8px;
+}
+
+.ProjectTaskTable::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}

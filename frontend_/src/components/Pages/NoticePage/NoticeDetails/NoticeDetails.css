@@ -1,0 +1,67 @@
+.NoticeDetail .ant-descriptions-item-label {
+  font-weight: bolder;
+}
+
+#project_link a {
+  color: #337ab7;
+}
+
+.NoticeDetails .ant-list-item {
+  padding-left: 1em !important;
+  padding-right: 1em !important;
+  background-color: #ffffff;
+  margin-bottom: 1em;
+  display: list-item;
+  border-radius: 10px;
+  border: 1px solid #777777;
+  box-shadow: 4px 4px #d6d6d6;
+}
+/* .NoticeDetails .ant-progress-line {
+  position: relative;
+  width: 100%;
+  font-size: 14px;
+} */
+.NoticeDetails .ant-list-item-meta-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.NoticeDetails .ant-descriptions-item-label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.NoticeDetails .ant-spin-container {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.NoticeDetails .ant-descriptions-title {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.NoticeDetails .ant-descriptions-row td {
+  padding-bottom: 4px;
+}
+
+/* .NoticeDetails #ProjectDetailBtn {
+  background-color: #337ab7;
+  border: #337ab7;
+  color: #ffffff;
+} */
+#NoticeCard {
+  margin-top: 0px;
+}
+#my_notice {
+  min-height: 200px;
+  width: auto;
+  overflow-y: auto;
+  margin-top: 20px;
+  border: none;
+}
+
+#NotiDetails .important {
+  font-weight: 600 !important;
+  color: crimson !important;
+}

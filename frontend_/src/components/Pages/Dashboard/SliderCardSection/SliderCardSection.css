@@ -1,0 +1,46 @@
+/* .slider .slick-slide {
+	width: auto !important;
+} */
+.ArrowDiv {
+  width: 2%;
+  float: left;
+  position: relative;
+  margin-top: 48px;
+}
+.CarouselDiv {
+  width: 96%;
+  float: left;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.CarouselDiv .ant-carousel .slick-slide {
+  height: auto !important;
+}
+.sliderCard li {
+  margin: 8px 0 !important;
+}
+.cnttask {
+  border: 1px solid rgb(92, 184, 92) !important;
+}
+.cnttask .ant-card-actions {
+  background: rgb(92, 184, 92) !important;
+}
+.NearingDeadline {
+  border: 1px solid #f0ad4e !important;
+}
+.NearingDeadline .ant-card-actions {
+  background: #f0ad4e !important;
+}
+.Overdue {
+  border: 1px solid #d9534f !important;
+}
+.Overdue .ant-card-actions {
+  background: #d9534f !important;
+}
+.Unresolved {
+  border: 1px solid #5b3312 !important;
+}
+.Unresolved .ant-card-actions {
+  background: #5b3312 !important;
+}

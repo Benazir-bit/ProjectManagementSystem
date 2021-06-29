@@ -1,0 +1,48 @@
+#EditNoticeBtn {
+  padding: 6px 14px;
+  margin-bottom: 1em;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+#EditNoticeBtn:hover {
+  background-color: #3d823d;
+  border-color: #3d823d;
+}
+
+#DeleteNoticeBtn {
+  padding: 6px 14px;
+  margin-bottom: 1em;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #d9534f;
+}
+#DeleteNoticeBtn:hover {
+  background-color: #b73632;
+  border-color: #b73632;
+}
+
+.OnBoardTable tr th:nth-of-type(3),
+.OnBoardTable tr th:nth-of-type(4) {
+  color: transparent;
+  width: 18% !important;
+}
+.OnBoardTable {
+  font-size: 13px;
+}

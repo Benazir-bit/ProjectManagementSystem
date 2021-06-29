@@ -1,0 +1,70 @@
+#GroupIssueTable {
+  min-height: 200px;
+  width: auto;
+  overflow: auto;
+  margin-top: 9px;
+  border: none;
+}
+#GroupIssueCard {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+.issueTable thead {
+  background: #ededed;
+}
+.issueTable {
+  font-size: 13px;
+}
+.issueTable tr:hover {
+  background-color: #f6f6f6;
+}
+
+.issuetab tbody tr td {
+  padding: 8px 30px !important;
+}
+.issuetab thead tr th {
+  padding: 17px 30px !important;
+}
+
+#RaisedIssueTable {
+  min-height: 200px;
+  width: auto;
+  overflow: auto;
+  margin-top: 9px;
+  border: none;
+}
+#RaisedIssueCard {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+#SolvedIssueTable {
+  min-height: 200px;
+  width: auto;
+  overflow: auto;
+  margin-top: 9px;
+  border: none;
+}
+#SolvedIssueCard {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.issueTable .ant-skeleton-content .ant-skeleton-title {
+  border-radius: 100px;
+  height: 10px;
+  margin-top: 0.5em;
+  margin-bottom: 0.1em;
+}
+.issueTable tr th:nth-of-type(1) {
+  width: 21% !important;
+}
+.issueTable tr th:nth-of-type(2) {
+  width: 18% !important;
+}
+.issueTable tr th:nth-of-type(3) {
+  width: 28% !important;
+}
+.issueTable tr th:nth-of-type(4) {
+  width: 22% !important;
+}

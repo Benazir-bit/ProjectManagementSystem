@@ -1,0 +1,9 @@
+#paddingleft {
+  padding-left: 6% !important;
+}
+.dashboad-cardDiv {
+  min-height: 400px;
+}
+.overflow {
+  overflow: auto;
+}

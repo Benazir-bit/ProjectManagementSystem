@@ -1,0 +1,58 @@
+/* #reset_password {
+  border: none;
+  color: white;
+  padding: 10px 0px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 13px;
+  width: 125px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#reset_password:hover {
+  color: white;
+  text-decoration: none;
+}
+#profile_update {
+  border: none;
+  color: white;
+  padding: 10px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  width: 125px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#profile_update:hover {
+  color: white;
+  text-decoration: none;
+} */
+
+#profile_cont {
+  margin-top: 30px;
+}
+#employee_name {
+  text-align: left;
+  font-weight: bold;
+  display: inline;
+}
+#profile_info span {
+  font-size: 14px;
+  color: #252525;
+  line-height: 24px;
+  font-style: italic;
+}
+#profile_pic_row {
+  padding-left: 3em;
+  padding-right: 4em;
+  background-color: #c1d7e9;
+}

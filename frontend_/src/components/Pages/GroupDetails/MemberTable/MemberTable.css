@@ -1,0 +1,9 @@
+.text-muted {
+  font-style: italic;
+  padding-left: 4em;
+  margin-left: 0 !important;
+}
+
+#membersTable {
+  font-size: 13px;
+}

@@ -1,0 +1,56 @@
+.AllMemInfo tr th:nth-of-type(1),
+.AllMemInfo tr th:nth-of-type(2) {
+  color: transparent;
+  width: 12% !important;
+  border-bottom: none;
+}
+
+.AllMemInfo {
+  font-size: 13px;
+}
+
+.avgKpi {
+  text-align: center;
+
+  margin-bottom: 3em;
+  padding-top: 20em;
+}
+
+#allMemDetailBtn {
+  padding: 6px 14px;
+  margin-bottom: 1em;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #46b8da;
+  border-radius: 4px;
+  background-color: #5bc0de;
+}
+
+#allMemDetailBtn:hover {
+  background-color: #71cbe6;
+}
+
+#EditInfoBtn {
+  padding: 6px 27px;
+  margin-bottom: 1em;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #eea236;
+  border-radius: 4px;
+  background-color: #f0ad4e;
+}
+
+#EditInfoBtn:hover {
+  border: 1px solid #eea236;
+  background-color: #f5b965;
+}

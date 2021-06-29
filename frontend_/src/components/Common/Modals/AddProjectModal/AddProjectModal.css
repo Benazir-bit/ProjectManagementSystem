@@ -1,0 +1,71 @@
+.ant-modal-close {
+  position: absolute;
+  top: 15px !important;
+  right: 0;
+  z-index: 10;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: 700;
+  cursor: pointer;
+}
+#form_in_modal_projMembers {
+  height: auto !important;
+}
+.ant-modal-close-x {
+  height: 20px !important;
+}
+
+.modal-title {
+  text-align: center;
+}
+.ant-modal-body {
+  padding-top: 1em;
+}
+
+#ProjectModalForm .ant-calendar-picker {
+  width: 100%;
+}
+
+#ProjectModalForm .ant-select-dropdown {
+  border: 1px solid #afafaf;
+  top: 629px !important;
+  z-index: 1 !important;
+}
+
+#addProjectBtn {
+  padding: 6px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+#ProjectModalForm .ant-form-item {
+  margin-bottom: 10px;
+  padding-bottom: 0em;
+}
+
+#ProjectModalForm .ant-select-selection--single {
+  position: relative;
+  height: 36px;
+  cursor: pointer;
+}
+
+#ProjectModalForm input[readonly] {
+  background: #ffffff;
+}
+
+#form_in_modal_projMembers
+  .ant-select-selection--multiple
+  .ant-select-selection__rendered
+  > ul
+  > li {
+  height: 32px;
+}

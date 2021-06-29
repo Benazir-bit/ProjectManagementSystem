@@ -1,0 +1,32 @@
+.ant-card-cover img {
+  border-radius: 50% !important;
+  height: 120px !important;
+  width: 120px !important;
+  margin-top: 30px !important;
+}
+
+#kpiCategory {
+  font-size: 13px;
+}
+@media only screen and (min-width: 1285px) and (max-width: 1490px) {
+  #kpiCategory {
+    font-size: 13px;
+  }
+}
+#kpi_profile_card::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+#kpi_profile_card::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+#kpi_profile_card::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 8px;
+}
+
+#kpi_profile_card::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}

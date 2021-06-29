@@ -1,0 +1,71 @@
+.card {
+    box-shadow: 0 1px 4px 0 #130f08c2;
+}
+
+.card .card-header .card-title {
+    padding-bottom: 3px;
+    margin-top: 0.7em;
+}
+#Manager_project_dashboard_table {
+	background: linear-gradient(60deg,#337ab7,#dbd3d3);
+}
+#issueCardHeader {
+	background: linear-gradient(60deg,#b31919,#c7c6c6);
+}
+.card .card-header .cardHeader {
+    padding-bottom: 3px;
+}
+.card {
+    border: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 6px;
+    color: #333;
+    background: #fff;
+    width: 100%;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+}
+.card [class*=card-header-]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
+	border-radius: 5px;
+	margin-top: -20px;
+	padding: 0px 14px;
+	height: 42px;
+}
+.card .card-header-warning:not(.card-header-icon):not(.card-header-text) {
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(25, 22, 18, 0.4);
+}
+.card [class*=card-header-] {
+    margin: 0 15px;
+    position: relative;
+}
+.card [class*=card-header-]{
+    color: #fff;
+}
+.card .card-header {
+    border-bottom: none;
+}
+
+#dashboard_viewproject{
+	float:right; 
+	font-size:12px; 
+	color:#5a5656; 
+	font-weight:bolder;
+	text-decoration:none;
+}
+
+.card-title{
+    color: #ffffff;
+}
+
+@media only screen and (max-width: 1344px) and (min-width: 768px) {
+    .card .card-header .cardHeader {
+        padding-bottom: 3px;
+        font-size: 12.7px;
+    }
+}

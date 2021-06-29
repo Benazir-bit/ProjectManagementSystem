@@ -1,0 +1,97 @@
+.dash_member {
+  list-style-type: none;
+  padding-top: 1em;
+  margin: 0;
+  background: #fff;
+  font-size: 13px;
+  margin-top: 16px;
+  padding-left: 2em;
+}
+
+.dash_member li {
+  width: 180px;
+  height: 1.25em;
+  margin-bottom: 0.7em;
+  padding-left: 0.5em;
+  border-left: 1.25em solid black;
+}
+.dash_member span {
+  float: right;
+}
+
+text.highcharts-credits {
+  fill: transparent !important;
+}
+.le li {
+  width: 110px;
+  height: 1.25em;
+  margin-bottom: 0.7em;
+  padding-left: 0.5em;
+  border-left: 1.25em solid black;
+}
+.le {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  padding: 15px;
+  font-size: 13px;
+}
+.le li {
+  width: 180px;
+  height: 1.25em;
+  margin-bottom: 0.7em;
+  padding-left: 0.5em;
+  border-left: 1.25em solid black;
+}
+.le span {
+  float: right;
+}
+
+.highcharts-background {
+  background: transparent !important;
+  fill: transparent;
+}
+
+#pie_cont_group {
+  margin: auto !important;
+}
+
+#pieTaskList {
+  margin-left: -2em;
+}
+/* @media only screen and (min-width: 1441px) {
+    #pieChart{
+        padding-left: 65px !important;
+    }
+} */
+
+/* @media only screen and (max-width: 1440px) {
+  #pieChart {
+    padding-left: 60px !important;
+  }
+} */
+
+/* #pieChart {
+  margin-top: -10px;
+} */
+
+@media only screen and (max-width: 1284px) {
+  #pieList {
+    width: 100% !important;
+  }
+  /* #pieChart {
+    width: 100% !important;
+  } */
+}
+
+#pieTaskChart {
+  margin-top: -10px;
+  padding-left: 4em;
+}
+
+@media only screen and (max-width: 1024px) {
+  #pieTaskChart {
+    padding-left: 0em;
+    margin-left: 0em;
+  }
+}

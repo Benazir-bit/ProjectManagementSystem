@@ -1,0 +1,22 @@
+.cardGrid {
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+.cardGrid .ant-card-meta-description {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.cardGridNo {
+	padding-left: 6px;
+	padding-right: 6px;
+	text-align: center;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	border-left: 1px solid #e4e4e4;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	min-height: 92px;
+}

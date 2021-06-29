@@ -1,0 +1,12 @@
+.ant-list-item-meta-title {
+    color: rgba(0, 0, 0, 1);
+}
+
+.ant-list-item-meta-description {
+    color: rgba(0, 0, 0, 1);
+}
+
+.ant-list-item-meta-content> div:not(:last-child) {
+    margin-bottom: -4px;
+}
+

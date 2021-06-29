@@ -1,0 +1,356 @@
+/* #base-main-body{
+	
+	margin-top: 50px;
+	padding: 0 12em;
+
+} */
+#top-nav-icon {
+  margin-left: 11px;
+  font-size: 16px;
+  color: #959595;
+  transform: scale(1.2, 1);
+}
+
+/*Navbar*/
+#navbar-lnk {
+  font-weight: bold;
+}
+.navbar-brand {
+  font-family: "Anton", sans-serif;
+  font-size: 25px;
+}
+/** top logo **/
+#logo_top {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 5px;
+  color: #9d9d9d;
+}
+#logo_top:hover {
+  color: white;
+}
+#logo_top strong {
+  color: #ffa500;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  z-index: 1030;
+}
+/* Side Navbar */
+#side_toggle {
+  position: relative;
+  float: left;
+  padding: 9px 10px;
+  background-color: transparent;
+  background-image: none;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+#side_icon {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  margin-top: 4px;
+  background-color: #fff;
+}
+
+#home_icon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: "Glyphicons Halflings";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  color: white;
+}
+
+#base_logo {
+  height: 120px;
+  width: 120px;
+  margin-bottom: 30px;
+  margin-left: 50px;
+}
+/*side nav*/
+/* add this to sidenav srtyle till dropdown-item:hover */
+.nav {
+  margin-top: 10px;
+}
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 7px 15px;
+}
+.nav > li > a:hover {
+  color: #eee !important;
+  cursor: pointer;
+}
+
+#top-nav-bell-icon {
+  margin-left: 11px;
+  font-size: 16px;
+  color: #959595;
+}
+
+#notify_drop_down {
+  top: 37px;
+  box-shadow: 2px 0px 15px 0px #2b2b2b;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  background-color: #edf4fa;
+}
+.fixedpos {
+  /* overflow-y: auto;
+	min-height: 100px;
+	position: fixed !important; */
+}
+#noti_span {
+  background-color: #150c0c;
+  color: #ffff;
+  width: 100%;
+  margin-left: 0px;
+  padding-top: 5px;
+  height: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+#noti_span a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+#noti_scroll {
+  height: 357px;
+  overflow-y: auto;
+  /* padding-left: 1em;
+	padding-right: 1em; */
+  padding: 0.5em 1em;
+  overflow-x: hidden;
+}
+.notificationScroll {
+  left: 0 !important;
+}
+.notificationScroll .ant-menu::-webkit-scrollbar {
+  width: 5px;
+}
+/* Track */
+.notificationScroll .ant-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* Handle */
+.notificationScroll .ant-menu::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+}
+.notificationScroll .ant-menu::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+.list-group-item {
+  background-color: transparent;
+}
+#notifications_pic {
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
+  border-radius: 50%;
+  margin-left: 9px;
+}
+.text-info {
+  color: #484848;
+  font-size: 13px;
+  padding-left: 0.4em;
+}
+#topnav_dropdown {
+  padding-top: 3px;
+}
+#drpdown_toggle_menu {
+  padding-top: 15px;
+  padding-bottom: 30px;
+  margin-top: -10px;
+}
+.nav {
+  margin-top: 10px;
+}
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 7px 15px;
+}
+
+#mail_drop_down {
+  right: 0px;
+  left: -1px;
+  top: 39px;
+  width: 200px;
+  box-shadow: 2px 0px 15px 0px #2b2b2b;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  background-color: #edf4fa;
+}
+#mail_span {
+  background-color: #150c0c;
+  color: #ffffff;
+  width: 100%;
+  margin-left: 0px;
+  padding-top: 5px;
+  height: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+#mail_span a {
+  color: #9d9d9d;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#mail_span a:hover {
+  color: #9d9d9d;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#mail_msg_div {
+  padding-left: 34px;
+}
+#mail_drop_down {
+  right: 0px;
+  left: -1px;
+  top: 39px;
+  width: 200px;
+  box-shadow: 2px 0px 15px 0px #2b2b2b;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  background-color: #edf4fa;
+}
+.prolog_dropdown {
+  border-bottom: 1px solid #d0c9c9;
+  margin-left: 0px;
+}
+
+.prolog_dropdown a {
+  color: #290f0f;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  padding-left: 29px;
+}
+
+.prolog_dropdown a:hover {
+  text-decoration: none;
+  color: #959595;
+}
+
+.prolog_dropdown a span {
+  background-color: #d9534f;
+  color: #ffffff;
+  margin-top: -8px;
+}
+
+#mail_scroll {
+  height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* .mail-notification-box {
+	border-bottom: 1px solid #d0c9c9;
+	padding-top: 1.5em;
+	margin-left: 0px;
+} */
+
+.notificationScroll .ant-menu {
+  overflow-y: scroll;
+  min-height: 100px;
+  height: 300px;
+}
+.notificationScroll .ant-menu-item {
+  height: auto;
+  margin: 0;
+}
+.notificationScroll .ant-menu .ant-menu-item {
+  margin: 0;
+}
+.notificationScroll .ant-menu .ant-menu-item-selected {
+  background-color: #3fc4de17 !important;
+}
+
+/* .notificationScroll .ant-dropdown-menu #noti_span{
+	position: fixed;
+} */
+.mail-notification-box a {
+  color: #290f0f;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 40px;
+}
+
+.mail-notification-box a:hover {
+  text-decoration: none;
+  color: #959595;
+}
+
+.mail-notification-box a span {
+  background-color: #d9534f;
+  color: #ffffff;
+  margin-top: -8px;
+}
+/* NEw */
+
+.header {
+  padding: 0 289px !important;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 1052;
+  height: 52px !important;
+  padding-left: 60px !important;
+}
+#profile_logo_header {
+  border: 1px;
+  display: inline;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50%;
+}
+
+.header_anchor {
+  background-color: transparent !important;
+  margin-top: 19px;
+}
+.header_li {
+  height: 100%;
+  padding: 0 10px !important;
+}
+.header_icon {
+  font-size: 18px !important;
+}
+.header_icon_link {
+  color: #9d9d9d !important;
+}
+
+.ant-anchor-ink::before {
+  background-color: transparent !important;
+}
+li.ant-menu-item.header_li.ant-menu-item-selected {
+  background-color: #080808 !important;
+}
+.notify_drop_down {
+  width: 250px;
+  left: -209px;
+  top: -3px;
+  padding-top: 1px !important;
+  padding-bottom: 0px !important;
+}
+.header_menu_items {
+  white-space: normal !important;
+  margin: 6px 0px;
+}
+.msg_drop_down {
+  width: 200px;
+  left: -11px;
+  padding-top: 1px !important;
+  padding-bottom: 0px !important;
+}

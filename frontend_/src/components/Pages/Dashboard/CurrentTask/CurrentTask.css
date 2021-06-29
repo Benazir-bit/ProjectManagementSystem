@@ -1,0 +1,28 @@
+.dashTaskTable tr th:nth-of-type(1) {
+  width: 21% !important;
+}
+.dashTaskTable tr th:nth-of-type(2) {
+  width: 18% !important;
+}
+.dashTaskTable tr th:nth-of-type(3) {
+  width: 20% !important;
+}
+.dashTaskTable tr th:nth-of-type(4) {
+  width: 22% !important;
+}
+.dashTaskTable tr th:nth-of-type(5) {
+  width: 20% !important;
+}
+.dashTaskTable tr th:nth-of-type(6) {
+  width: 18% !important;
+}
+
+/* .dashTaskTable thead {
+  background: #ededed;
+} */
+.dashTaskTable {
+  font-size: 13px;
+}
+.dashTaskTable tr:hover {
+  background-color: #f6f6f6;
+}

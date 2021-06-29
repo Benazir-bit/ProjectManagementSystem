@@ -1,0 +1,67 @@
+#EditNoticeBtn {
+  padding: 6px 14px;
+  margin-bottom: 1em;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+#EditNoticeBtn:hover {
+  background-color: #3d823d;
+  border-color: #3d823d;
+}
+
+#NoticeUpdateForm .ant-modal-close {
+  position: absolute;
+  top: 15px !important;
+  right: 0;
+  z-index: 10;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#NoticeUpdateForm .ant-modal-close-x {
+  height: 20px !important;
+}
+
+#NoticeUpdateForm .modal-title {
+  text-align: center;
+}
+#NoticeUpdateForm .ant-modal-body {
+  padding-top: 1em;
+}
+
+#NoticeUpdateForm .ant-calendar-picker {
+  width: 60%;
+}
+
+#NoticeUpdateForm .ant-select-dropdown {
+  border: 1px solid #afafaf;
+  top: 629px !important;
+  z-index: 1 !important;
+}
+
+#NoticeUpdateForm .ant-form-item {
+  margin-bottom: 10px;
+  padding-bottom: 0em;
+}
+
+#NoticeUpdateForm .ant-select-selection--single {
+  position: relative;
+  height: 36px;
+  cursor: pointer;
+}
+
+#NoticeUpdateForm input[readonly] {
+  background: #ffffff;
+}

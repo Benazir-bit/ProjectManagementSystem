@@ -1,0 +1,123 @@
+.list-group-item {
+  border-bottom: 1px solid #ddd !important;
+  margin-bottom: 0px;
+  border: none;
+}
+
+#taskDetailCard {
+  max-height: 300px;
+  min-height: 100px;
+  height: auto;
+  margin-bottom: 1em;
+}
+
+#taskDetailCard::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+#taskDetailCard::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+#taskDetailCard::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 8px;
+}
+
+#taskDetailCard::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+#taskNotesCard {
+  max-height: 300px;
+  min-height: 100px;
+  height: auto;
+}
+
+@media only screen and (max-width: 425px) and (min-width: 320px) {
+  #card_details {
+    margin: 0;
+    font-size: 11px;
+    min-height: 150px;
+    height: auto;
+    overflow: auto;
+    padding: 10px 15px;
+    max-height: inherit;
+    margin-bottom: 1em;
+  }
+  #task_assign_details {
+    margin: 0;
+    min-height: 150px;
+    height: auto;
+    font-size: 12px;
+    padding: 10px 15px;
+    max-height: inherit;
+    margin-bottom: 1.5em;
+  }
+  #task-paragraph {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+  #taskBtn {
+    display: inline;
+  }
+}
+
+@media only screen and (max-width: 1260px) and (min-width: 992px) {
+  #card_details {
+    margin: 0;
+    font-size: 12px;
+    min-height: 150px;
+    height: 445px;
+    overflow: auto;
+    padding: 10px 15px;
+    max-height: inherit;
+    margin-bottom: 1em;
+  }
+  #task_assign_details {
+    margin: 0;
+    min-height: 150px;
+    height: 445px;
+    font-size: 12px;
+    padding: 10px 15px;
+
+    max-height: inherit;
+  }
+  #task-paragraph {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+  #taskBtn {
+    display: inline;
+  }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 426px) {
+  #card_details {
+    margin: 0;
+    font-size: 12px;
+    min-height: 150px;
+    height: auto;
+    overflow: auto;
+    padding: 10px 15px;
+    max-height: inherit;
+    margin-bottom: 1em;
+  }
+  #task_assign_details {
+    margin: 0;
+    min-height: 150px;
+    height: auto;
+    font-size: 12px;
+    padding: 10px 15px;
+    max-height: inherit;
+    margin-bottom: 1.5em;
+  }
+  #task-paragraph {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+  #taskBtn {
+    display: inline;
+  }
+}

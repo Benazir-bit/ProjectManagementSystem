@@ -1,0 +1,31 @@
+#ManageGrpTable {
+  min-height: 200px;
+  width: auto;
+  overflow: auto;
+  margin-top: 20px;
+  border: none;
+}
+#ManageGroupCard {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.managegrptab tr th:first-child + th + th + th {
+  display: table-column;
+}
+
+.managegrptab tr th:nth-of-type(1) {
+  width: 25% !important;
+}
+.managegrptab tr th:nth-of-type(2) {
+  width: 25% !important;
+}
+.managegrptab tr th:nth-of-type(3) {
+  width: 25% !important;
+}
+.managegrptab tr th:nth-of-type(4) {
+  width: 8% !important;
+}
+.managegrptab tr th:nth-of-type(4) {
+  width: 8% !important;
+}

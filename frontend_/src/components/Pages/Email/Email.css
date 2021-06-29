@@ -1,0 +1,46 @@
+.marginRight {
+  margin-right: 7px;
+}
+.borderedtab td,
+.borderedtab th {
+  border: 1px solid #ddd;
+}
+.borderedtab th {
+  background: #ddd;
+}
+.TableHeaderblue {
+  background-color: #337ab733;
+  margin: 0;
+  padding: 7px;
+  text-align: center;
+  font-weight: 500;
+  color: #337ab7;
+}
+.borderedtab tr:hover {
+  background-color: #e4e4e494;
+}
+
+.email
+  .ant-spin-nested-loading
+  .ant-spin-container
+  .ant-pagination
+  .ant-pagination-item {
+  display: none !important;
+}
+
+.email .ant-table-title {
+  padding: 0 !important;
+}
+
+#email th {
+  background: #0a4375;
+  color: white;
+}
+.email-col {
+  color: "black";
+  padding: "0px";
+  max-width: 250px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

@@ -1,0 +1,111 @@
+@media only screen and (max-width: 1344px) and (min-width: 767px) {
+  #kpi_page_col1 {
+    width: 100%;
+  }
+  #kpi_page_col2 {
+    width: 100%;
+  }
+  #kpi_page_col3 {
+    width: 100%;
+  }
+  #bar_kpi_position {
+    margin-left: 25%;
+  }
+}
+.ProjectTable tr:hover {
+  background-color: #f6f6f6;
+}
+#dashboard_mytask_table {
+  max-height: 500px;
+  min-height: 244px;
+  width: auto;
+  overflow-y: auto;
+  margin-top: 20px;
+  padding: 15px;
+}
+
+#dashboard_mytask_table td {
+  text-align: left;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+#TaskInfoCard {
+  margin-bottom: 0px;
+  height: 328px;
+}
+
+#TaskStatusCard {
+  margin-bottom: 0px;
+  height: 328px;
+}
+
+#userTaskTable {
+  min-height: 200px;
+  width: auto;
+  /* height: 500px;
+	max-height: 500px; */
+  margin-top: 20px;
+  border: none;
+}
+
+#userTaskTable::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+#userTaskTable::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+#userTaskTable::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 8px;
+}
+
+#userTaskTable::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+#mytask_status_table {
+  /* max-height: 300px; */
+  min-height: 266px;
+  /* height: 266px; */
+  width: auto;
+  overflow-y: auto;
+  margin-top: 20px;
+  padding: 15px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  #TaskStatusCard {
+    margin-bottom: 0px;
+    height: auto;
+  }
+
+  #mytask_status_table {
+    min-height: 150px;
+    height: 446px;
+    max-height: 446px;
+  }
+}
+
+.ant-select-dropdown {
+  border: 1px solid #afafaf !important;
+}
+.taskinfotable .ant-skeleton-content .ant-skeleton-title {
+  border-radius: 100px;
+  height: 10px;
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+@media only screen and (max-width: 425px) and (min-width: 320px) {
+  #mytask_status_table {
+    min-height: 150px;
+    height: auto;
+    width: auto;
+    overflow-y: auto;
+    margin-top: 20px;
+    padding: 15px;
+  }
+}

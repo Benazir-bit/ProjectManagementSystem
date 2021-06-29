@@ -1,0 +1,11 @@
+#complete_task_table{
+    min-height: 200px;
+    width: auto;
+    overflow: auto;
+    margin-top: 20px;
+    border: none;
+}
+#TaskCard {
+    margin-top:0px;
+
+}

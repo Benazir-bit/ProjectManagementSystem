@@ -1,0 +1,13 @@
+/* .requisitionTable .ant-table-tbody {
+	text-align: center;
+} */
+#tab_logic {
+	text-align: center;
+}
+.deletebtn {
+	font-size: 21px;
+	color: red !important;
+}
+.deletebtn i {
+	margin-top: 6px;
+}

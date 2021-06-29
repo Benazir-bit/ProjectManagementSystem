@@ -1,0 +1,49 @@
+#job_table {
+  min-height: auto;
+  width: auto;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+#JobCatergory td {
+  padding-right: 2px !important;
+  padding-left: 2px !important;
+  font-size: 13px;
+}
+
+#hr_td {
+  padding-top: 13px;
+  width: 50%;
+}
+
+#editBtn {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  font-size: 12px;
+  width: 65px;
+  padding-left: 0.8em;
+}
+
+#deleteBtn {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  font-size: 12px;
+  width: 70px;
+  padding-left: 0.8em;
+}
+
+#detailBtn {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  font-size: 12px;
+  width: 70px;
+  padding-left: 0.8em;
+}
+
+.ant-btn > .anticon + span,
+.ant-btn > span + .anticon {
+  margin-left: 4px !important;
+}

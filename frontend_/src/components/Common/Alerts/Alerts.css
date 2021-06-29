@@ -1,0 +1,60 @@
+alertstyling: AMZ .ant-alert {
+  width: 350px !important;
+}
+.ant-alert-close-icon {
+  margin-top: 5px !important;
+}
+.anticon .anticon-close {
+  color: "snow !important";
+}
+.emsAlertContainer:after,
+.emsAlertContainer:before {
+  content: "";
+  display: table !important;
+  clear: both !important;
+}
+.emsAlertContainer {
+  padding: 0.01em 16px !important;
+}
+.emsAlertCenter {
+  text-align: center !important;
+}
+.emsAlertCenter {
+  display: inline-block !important;
+  width: auto !important;
+}
+.emsAlertCenter {
+  text-align: center !important;
+}
+.emsAlertAnimateTop {
+  position: relative;
+  animation: animatetop 0.4s;
+}
+
+.emsAlertAnimate {
+  position: relative !important;
+  animation: animateright 0.4s !important;
+}
+@keyframes animateright {
+  from {
+    right: -300px;
+    opacity: 0;
+  }
+  to {
+    right: 0;
+    opacity: 1;
+  }
+}
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+.emsAlertRight {
+  float: right !important;
+}

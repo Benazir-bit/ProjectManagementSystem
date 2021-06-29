@@ -1,0 +1,84 @@
+#userKPICard {
+  max-height: 400px;
+  min-height: 200px;
+  height: 400px;
+  width: auto;
+  overflow-y: auto;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  border: none;
+}
+
+@media only screen and (max-width: 822px) and (min-width: 768px) {
+  #userKPICard {
+    min-height: 200px;
+    max-height: 400px;
+  }
+}
+
+@media only screen and (max-width: 1284px) and (min-width: 823px) {
+  #userKPICard {
+    max-height: 400px;
+    min-height: 200px;
+  }
+}
+
+@media only screen and (min-width: 1285px) {
+  #userKPICard {
+    max-height: 400px;
+    min-height: 200px;
+  }
+}
+
+#kpi_profile_card {
+  max-height: 400px;
+  min-height: 200px;
+  height: 396px;
+  width: auto;
+  overflow-y: auto;
+  /* margin-top: 20px; */
+  margin-bottom: 0px;
+  border: none;
+}
+
+@media only screen and (max-width: 822px) and (min-width: 768px) {
+  #kpi_profile_card {
+    max-height: 400px;
+    min-height: 200px;
+    height: 396px;
+  }
+}
+
+@media only screen and (max-width: 1284px) and (min-width: 823px) {
+  #kpi_profile_card {
+    height: 396px;
+    max-height: 400px;
+    min-height: 200px;
+  }
+}
+
+@media only screen and (min-width: 1285px) {
+  #kpi_profile_card {
+    height: 396px;
+    max-height: 400px;
+    min-height: 200px;
+  }
+}
+
+#userKPICard::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+#userKPICard::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+#userKPICard::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 8px;
+}
+
+#userKPICard::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}

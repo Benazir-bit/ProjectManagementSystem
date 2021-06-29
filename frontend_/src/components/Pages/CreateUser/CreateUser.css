@@ -1,0 +1,11 @@
+#table_modal_size {
+    padding-left: 4em;
+    padding-right: 4em;
+    background-color: #d2d2d2;
+    background-image: url(%PUBLIC_URL%/static/uspl/img/b10.jpg);
+    background-repeat: no-repeat;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,0 +1,68 @@
+.prog {
+
+  position: relative;
+  font-size: 222px;
+}
+
+#prog-contain {
+  width: 220px;
+  height: 220px;
+  border-radius: 200px;
+  background: #dddddd;
+  box-shadow: 3px 3px 5px 6px #bbb;
+  margin: 0px auto;
+  margin-bottom: 4em;
+}
+
+.prog > .percent {
+  position: absolute;
+  font-size: 30px;
+  color: #959595;
+  text-align: center;
+  top: 11px;
+  right: 9px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #222222;
+  border-radius: 200px;
+  background: #222222;
+  padding: 40px;
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+.prog > .percent > p{
+  margin: 30px 0 0 15px;
+}
+.prog > #slice {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  clip: rect(0px,1em,1em,0.5em);
+}
+.prog > #slice.gt50 {
+	clip:rect(auto, auto, auto, auto);
+}
+.prog > #slice > .pie {
+	border: .05em solid #049dff;
+	position:absolute;
+	width:1em; /* 1 - (2 * border width) */
+	height:1em; /* 1 - (2 * border width) */
+	clip:rect(0em,0.5em,1em,0em);
+	-moz-border-radius:0.5em;
+	-webkit-border-radius:0.5em; 
+	border-radius:0.5em;
+}
+.prog > #slice > .pie.fill {
+	-moz-transform:rotate(180deg) !important;
+	-webkit-transform:rotate(180deg) !important;
+	-o-transform:rotate(180deg) !important;
+	transform:rotate(180deg) !important;
+}
+.prog.fill > .percent {
+	display: none;
+}
+.prog.fill > #slice > .pie {
+	border: transparent;
+ 	width:1em;
+	height:1em;
+}

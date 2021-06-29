@@ -1,0 +1,24 @@
+#kpiProgressBar{
+    margin-left: 25px;
+}
+
+#KpiBar{
+    margin-left: 20px;
+}
+.myKPIAvgLabel #progress_fix{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+
+.myKPIAvgLabel #profile_kpi_progress{
+    margin-top: 14px;
+}
+
+@media only screen and (min-width: 1285px) and (max-width: 1490px){
+    .myKPIAvgLabel #emp_profile_kpi{
+        font-size: 13px;
+    }
+   
+    
+}

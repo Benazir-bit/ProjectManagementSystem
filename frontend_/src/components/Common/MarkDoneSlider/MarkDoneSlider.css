@@ -1,0 +1,83 @@
+#categoryHead {
+  text-align: center;
+}
+
+#SliderInput .ant-input-number {
+  position: absolute;
+  height: 32px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  background-color: #fff;
+  display: inline-block;
+  width: 100px;
+  border: 2px solid #7b7575;
+  box-shadow: 5px 5px 23px 0px #797777;
+  outline: none;
+  border-radius: 20px;
+}
+
+#SliderInput {
+  right: -5em;
+}
+
+#SliderInput .ant-input-number-input {
+  text-align: center;
+  font-weight: bold;
+}
+
+#SliderInput .ant-input-number-handler-wrap {
+  top: 3px;
+  right: 4px;
+  height: 75%;
+}
+
+#SliderSlide .ant-slider-rail {
+  height: 30px;
+  background-color: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 10px;
+}
+
+#SliderSlide .ant-slider-handle {
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  margin-top: 0px;
+  margin-left: -8px;
+  background-color: #fff;
+  border: solid 2px #000000;
+  border-radius: 40%;
+}
+
+#SliderSlide .ant-slider-step {
+  height: 30px;
+}
+
+#SliderSlide .ant-slider-track {
+  position: absolute;
+  height: 30px;
+  background-color: #62b2ff;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+#SliderSlide .ant-slider-mark {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  font-size: 14px;
+  height: 30px;
+}
+#SliderSlide .ant-slider {
+  margin: 0em;
+  padding: 0em;
+  padding-bottom: 3.2em;
+}
+
+#SliderSlide {
+  left: 2em;
+}

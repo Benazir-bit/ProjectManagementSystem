@@ -1,0 +1,12 @@
+.modal-popover .ant-popover-inner {
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+/* .modal-popover .ant-popover-arrow {
+  display: none;
+} */
+
+.modal-table .ant-table-tbody {
+  vertical-align: baseline;
+}

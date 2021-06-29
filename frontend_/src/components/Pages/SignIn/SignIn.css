@@ -1,0 +1,20 @@
+.login-form-forgot {
+  float: right;
+}
+.login-form-button {
+  width: 100%;
+}
+input{
+  min-height: auto !important;
+}
+#signup {
+	/* margin-top: -57px; */
+	font-weight: 400;
+	color: #757575;
+	text-align: center;
+	/* margin-bottom: -23px; */
+}
+
+#Sup {
+    font-size: 20px;
+}

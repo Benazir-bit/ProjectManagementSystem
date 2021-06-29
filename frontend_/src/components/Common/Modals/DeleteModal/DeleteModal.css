@@ -1,0 +1,25 @@
+#DeleteModalBtn {
+  padding: 6px 14px;
+  margin-bottom: 1em;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #d9534f;
+}
+
+#DeleteModalBtn:hover {
+  color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #f54b46;
+}
+
+#DeleteProjInput {
+  width: 75%;
+}

@@ -1,0 +1,24 @@
+#profile_category {
+  text-align: left;
+  width: 40%;
+}
+#profile_description {
+  text-align: left;
+  width: 60%;
+}
+
+#profile_table_div {
+  background-color: #e5e5e5;
+  padding-top: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+.table {
+  max-width: 100%;
+  margin-bottom: 0px;
+}
+#profile_table {
+  width: 100%;
+  margin-top: 15px;
+  font-size: 14px;
+}

@@ -1,0 +1,15 @@
+.formLabel label {
+  font-weight: bold !important;
+}
+#date-picker {
+  width: 100%;
+}
+.ant-calendar-header {
+  margin-top: 5px;
+}
+.formLabel .ant-col {
+  text-align: left;
+}
+/* input[readonly] {
+  background: #eee;
+} */

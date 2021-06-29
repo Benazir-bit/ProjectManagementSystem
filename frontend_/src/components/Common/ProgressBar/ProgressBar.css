@@ -1,0 +1,37 @@
+#emp_profile_kpi{
+    font-size: 13px;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 10px;
+    width: 100%;
+}
+#profile_kpi_progress{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    height: 20px;
+}
+
+.progress {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: #aaa !important;
+}
+@media only screen and (max-width: 1344px) and (min-width: 768px){
+    #progress_fix {
+        margin-top: 10px;
+        width: 100%;
+        margin-left: 0em;
+        margin-bottom: 0;
+    }
+}
+
+#progress_fix {
+    margin-left: 0em;
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1200px){
+	#progress_fix{
+		height:21px;
+	}
+}

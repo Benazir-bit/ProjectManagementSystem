@@ -1,0 +1,83 @@
+.ant-card {
+  border: 1px solid rgb(214, 214, 214, 0.5) !important;
+}
+.ant-card-head {
+  border-bottom: 1px solid rgb(214, 214, 214, 0.5) !important;
+}
+
+#ProjectDetailCard {
+  min-height: 200px;
+  max-height: 500px;
+  width: auto;
+  margin-top: 4em;
+  border: none;
+}
+#ProjectDetailCard::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+#ProjectDetailCard::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+#ProjectDetailCard::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 8px;
+}
+
+#ProjectDetailCard::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+#AllProjectBtn {
+  padding: 6px 12px;
+  margin-bottom: 1em;
+  font-size: 13px;
+  font-weight: 300;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+#ProjDetailAllBtn {
+  padding-top: 1em;
+}
+
+.ProjectDetails {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: auto;
+  margin-top: 0em;
+}
+
+.ProjectDetails tr th:nth-of-type(1) {
+  width: 30% !important;
+}
+.ProjectDetails tr th:nth-of-type(2) {
+  width: 20% !important;
+}
+.ProjectDetails tr th:nth-of-type(3) {
+  width: 20% !important;
+}
+.ProjectDetails tr th:nth-of-type(4) {
+  width: 25% !important;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .ProjectDetails {
+    width: 200%;
+    max-width: 200%;
+    min-width: 100%;
+    font-size: 12px;
+  }
+}
+.ProjectDetails .ant-skeleton-content .ant-skeleton-title {
+  border-radius: 100px;
+  height: 10px;
+  margin-top: 0.5em;
+  margin-bottom: 0.1em;
+}

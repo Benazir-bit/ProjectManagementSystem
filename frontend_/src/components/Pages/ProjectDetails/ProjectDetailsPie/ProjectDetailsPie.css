@@ -1,0 +1,71 @@
+.dash_member {
+	list-style-type: none;
+	padding-top: 1em;
+    margin: 0;
+    background: #FFF;
+    font-size: 13px;
+    margin-top: 16px;
+	padding-left: 2em;
+}
+
+.dash_member li {
+    width: 180px;
+    height: 1.25em;
+    margin-bottom: 0.7em;
+    padding-left: 0.5em;
+    border-left: 1.25em solid black;
+}
+.dash_member span {
+    float: right;
+}
+
+
+text.highcharts-credits {
+    fill: transparent !important;
+}
+.le li {
+    width: 110px;
+    height: 1.25em;
+    margin-bottom: 0.7em;
+    padding-left: 0.5em;
+    border-left: 1.25em solid black;
+}
+.le {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    padding: 15px;
+    font-size: 13px;
+}
+.le li {
+    width: 180px;
+    height: 1.25em;
+    margin-bottom: 0.7em;
+    padding-left: 0.5em;
+    border-left: 1.25em solid black;
+}
+.le span {
+    float: right;
+}
+
+.highcharts-background{
+    background: transparent !important;
+    fill: transparent;
+}
+
+#pie_cont_group{
+    margin: auto !important;
+
+}
+#pieList{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+@media only screen and (max-width: 1284px) {
+	#pieList{
+        width: 100% !important;
+    }
+    #pieChart{
+        width: 100% !important;
+    }
+}
