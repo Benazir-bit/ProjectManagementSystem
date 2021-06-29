@@ -13,13 +13,15 @@ import {
   Descriptions,
   Modal
 } from "antd";
-const { Panel } = Collapse;
+
 import { getAllDesignations, DeleteDesignation } from "../../../actions/HR";
-const { Content } = Layout;
 import AddDesignationModal from "./AddDesignationModal";
 //import AllCardBody from '../../Common/AllCard/AllCardBody';
 // import JobDetailCard from "../../Common/JobDetailCard/JobDetailCard";
 //import TaskIssueTable from "../../Common/AllTables/TaskIssueTable";
+
+const { Panel } = Collapse;
+const { Content } = Layout;
 
 class JobTitle extends Component {
   state = {

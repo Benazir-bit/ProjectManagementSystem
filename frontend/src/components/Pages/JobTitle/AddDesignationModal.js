@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { Modal, Form, Input, Select, Button } from "antd";
 import { connect } from "react-redux";
-const { Option } = Select;
 // import { getGroupDetails, UpdateGroup } from '../../../actions/group'
 import { getGroupListAll } from "../../../actions/group";
 import { AddDesignation, UpdateDesignation } from "../../../actions/HR";
+
+const { Option } = Select;
+
 class AddDesignationModal extends Component {
   state = {
     group: [],

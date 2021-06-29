@@ -90,9 +90,9 @@ class EmployeeKPI extends Component {
     };
 
     const yearList = this.props.kpis.year_list.map((year, i) => (
-      <Option key={i} value={year}>
+      <Select.Option key={i} value={year}>
         {year}
-      </Option>
+      </Select.Option>
     ));
     const yearFilter = (
       <Select defaultValue={year} onChange={this.selectOption}>

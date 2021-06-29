@@ -7,10 +7,11 @@ import CardBodyOnly from "../../Common/AllCard/CardBodyOnly";
 import { Icon, Input, AutoComplete, Skeleton, Badge } from "antd";
 import CommonTable from "../../Common/AllTables/CommonTable";
 import { Layout } from "antd";
-const { Content } = Layout;
 import ActivityList from "../../Layout/ActivityList/ActivityList";
-const { Search } = Input;
 import axios from "axios";
+
+const { Content } = Layout;
+const { Search } = Input;
 
 class CompletedTasks extends Component {
   constructor(props) {
@@ -44,13 +45,13 @@ class CompletedTasks extends Component {
           Math.ceil(
             document.documentElement.scrollHeight - window.pageYOffset
           ) +
-            1 ===
-            document.documentElement.clientHeight ||
+          1 ===
+          document.documentElement.clientHeight ||
           Math.ceil(
             document.documentElement.scrollHeight - window.pageYOffset
           ) -
-            1 ===
-            document.documentElement.clientHeight ||
+          1 ===
+          document.documentElement.clientHeight ||
           Math.round(
             document.documentElement.scrollHeight - window.pageYOffset
           ) === document.documentElement.clientHeight

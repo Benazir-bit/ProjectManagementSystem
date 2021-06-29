@@ -21,7 +21,7 @@ class TextEditor extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
 
-    (this.modules = {
+    this.modules = {
       // ImageResize: {
       //   displaySize: true
       // },
@@ -38,23 +38,23 @@ class TextEditor extends Component {
         [{ color: [] }, { background: [] }],
         [{ align: [] }]
       ]
-    }),
-      (this.formats = [
-        "size",
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-        "blockquote",
-        "list",
-        "bullet",
-        "indent",
-        "link",
-        "image",
-        "color",
-        "background",
-        "align"
-      ]);
+    };
+    this.formats = [
+      "size",
+      "bold",
+      "italic",
+      "underline",
+      "strike",
+      "blockquote",
+      "list",
+      "bullet",
+      "indent",
+      "link",
+      "image",
+      "color",
+      "background",
+      "align"
+    ];
   }
   handleChange(value) {
     this.setState({ text: value });

@@ -40,7 +40,8 @@ class GroupDetails extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.setState({ update: true });
-      (update = true), this.props.getGroupDetails(this.props.match.params.id);
+      // (update = true), 
+      this.props.getGroupDetails(this.props.match.params.id);
       this.props.getTypeProjects(
         "group",
         "ongoing",
@@ -86,9 +87,10 @@ class GroupDetails extends Component {
 
     let inGroup = false;
     if (!this.props.user.is_staff) {
-      this.props.user.groups.map(userGrp => {
-        userGrp.id == parseInt(this.props.match.params.id, 10)
-          ? (inGroup = true)
+
+      let inGroup = this.props.user.groups.map(userGrp => {
+        return userGrp.id == parseInt(this.props.match.params.id, 10)
+          ? true
           : null;
       });
     } else {
@@ -115,7 +117,7 @@ class GroupDetails extends Component {
                         <GroupInfo
                           group={this.props.group}
                           id={this.props.match.params.id}
-                          // fetchingData={fetchingData}
+                        // fetchingData={fetchingData}
                         />
                       </div>
 
@@ -124,7 +126,7 @@ class GroupDetails extends Component {
                           <Fragment>
                             <center>
                               {this.props.user.is_teamleader ||
-                              this.props.user.is_staff ? (
+                                this.props.user.is_staff ? (
                                 this.props.group ? (
                                   <List
                                     className="list-group-item detailBtn"

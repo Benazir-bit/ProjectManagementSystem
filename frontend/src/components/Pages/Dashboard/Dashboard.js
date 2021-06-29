@@ -79,16 +79,7 @@ class Dashboard extends Component {
         ))
         : null;
     } else {
-      if (this.props.user.is_fna) {
-        dash_content = (
-          // <DashboardFNA />
-          <Fragment>
-            <div className="col-sm-12" style={{ marginTop: 15 }}>
-              <DashboardFNA />
-            </div>
-          </Fragment>
-        );
-      } else if (this.props.user.is_hr) {
+      if (this.props.user.is_hr) {
         dash_content = (
           <Fragment>
             <HRSliderCardSection />
