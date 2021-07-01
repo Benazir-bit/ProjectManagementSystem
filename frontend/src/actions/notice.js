@@ -92,7 +92,7 @@ export const addNewNotice = (title, body, expires_on, important) => (
           createMessage("Network Error. Something went wrong!", "error")
         );
       } else {
-        dispatch(createMessage(error.response.data.message, "error"));
+        dispatch(createMessage(err.response.data.message, "error"));
       }
     });
 };
@@ -150,7 +150,7 @@ export const deleteNotice = id => (dispatch, getState) => {
           createMessage("Network Error. Something went wrong!", "error")
         );
       } else {
-        dispatch(createMessage(error.response.status, "error"));
+        dispatch(createMessage(err.response.status, "error"));
       }
     });
 };
