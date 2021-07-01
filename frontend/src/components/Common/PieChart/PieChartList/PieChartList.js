@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Skeleton } from "antd";
 import "./PieChartList.css";
+
 class PieChartList extends Component {
   static defaultProps = {
     type: "group",
@@ -48,7 +49,7 @@ class PieChartList extends Component {
     if (!data) {
       for (let i = 0; i < 3; i++) {
         listItems.push(
-          <li key={index} style={{ borderColor: data.borderColor }}>
+          <li key={i} style={{ borderColor: data.borderColor }}>
             <Skeleton avatar loading={true} paragraph={false} />
           </li>
         );
@@ -67,7 +68,7 @@ class PieChartList extends Component {
       <Fragment>
         <ul
           className="pieID dash_member"
-          //style={!data ? { filter: "blur(0px)" } : {}}
+        //style={!data ? { filter: "blur(0px)" } : {}}
         >
           {listItems}
         </ul>
