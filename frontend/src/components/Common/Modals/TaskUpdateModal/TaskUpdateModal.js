@@ -29,62 +29,50 @@ const CollectionCreateForm = (
             maskClosable={false}
             destroyOnClose={true}
           >
-            <Form layout="vertical" id="TaskUpdateForm">
-              <Form.Item label="Task Name">
-                {getFieldDecorator("name", {
-                  initialValue: task.name,
-
-                  rules: [{ required: true, message: "Enter Task Name!" }]
-                })(<Input />)}
+            <Form layout="vertical" id="TaskUpdateForm"
+              initialValues={{
+                name: task.name,
+                details: task.details,
+                deadline: moment(task.deadline, "YYYY-MM-DD"),
+                assigned_to: task.owner.id,
+                note: task.note
+              }}>
+              <Form.Item label="Task Name" name="name" rules={[{ required: true, message: "Enter Task Name!" }]}>
+                <Input />
               </Form.Item>
-              <Form.Item label="Details">
-                {getFieldDecorator("details", {
-                  initialValue: task.details
-                })(
-                  <TextArea
-                    placeholder="Details About the Task"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
-              </Form.Item>
-
-              <Form.Item label="Due Date">
-                {getFieldDecorator("deadline", {
-                  initialValue: moment(task.deadline, "YYYY-MM-DD"),
-                  rules: [{ required: true, message: "Enter Due Date!" }]
-                })(<DatePicker disabledDate={d => !d || d.isBefore(today)} />)}
+              <Form.Item label="Details" name="details">
+                <TextArea
+                  placeholder="Details About the Task"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
               </Form.Item>
 
-              <Form.Item label="Task Owner">
-                {getFieldDecorator("assigned_to", {
-                  initialValue: task.owner.id,
-                  rules: [{ required: true, message: "Select Task Owner!" }]
-                })(
-                  <Select
-                    style={{ width: "100%", height: "36px" }}
-                    placeholder="Select Owner"
-                  >
-                    {this.props.members.map(owner => (
-                      <Option key={owner.id} value={owner.id}>
-                        <ImageSmall
-                          clsattr={"img-circle"}
-                          altname={owner.full_name}
-                          srcfile={owner.image}
-                        />
-                        &emsp;{owner.full_name}
-                      </Option>
-                    ))}
-                  </Select>
-                )}
-              </Form.Item>
+              <Form.Item label="Due Date" name="deadline" rules={[{ required: true, message: "Enter Due Date!" }]}>
 
-              <Form.Item label="Notes">
-                {getFieldDecorator("note", { initialValue: task.note })(
-                  <TextArea
-                    placeholder="Notes"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
+                <DatePicker disabledDate={d => !d || d.isBefore(today)} />
+              </Form.Item>
+              <Form.Item label="Task Owner" name="assigned_to" rules={[{ required: true, message: "Select Task Owner!" }]}>
+                <Select
+                  style={{ width: "100%", height: "36px" }}
+                  placeholder="Select Owner"
+                >
+                  {this.props.members.map(owner => (
+                    <Option key={owner.id} value={owner.id}>
+                      <ImageSmall
+                        clsattr={"img-circle"}
+                        altname={owner.full_name}
+                        srcfile={owner.image}
+                      />
+                      &emsp;{owner.full_name}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              <Form.Item label="Notes" name="note">
+                <TextArea
+                  placeholder="Notes"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
               </Form.Item>
             </Form>
           </Modal>
@@ -113,7 +101,6 @@ class TaskUpdateModal extends React.Component {
       if (err) {
         return;
       }
-      console.log(form.getFieldsValue());
       const {
         name,
         details,

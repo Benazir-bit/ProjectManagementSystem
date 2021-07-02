@@ -23,7 +23,6 @@ const CollectionCreateForm = (
         user_id,
         project_id
       } = this.props;
-      const { getFieldDecorator } = form;
 
       return (
         <Fragment>
@@ -42,72 +41,58 @@ const CollectionCreateForm = (
               Project Name: <b>{this.props.project_id.name}</b>
             </h5>
 
-            <Form layout="vertical" id="AddTaskModalForm">
-              <Form.Item label="Task Name">
-                {getFieldDecorator("name", {
-                  rules: [{ required: true, message: "Enter Task Name!" }]
-                })(<Input placeholder="Enter Task Name" />)}
+            <Form layout="vertical" id="AddTaskModalForm" form={form}>
+              <Form.Item label="Task Name" name="name" rules={[{ required: true, message: "Enter Task Name!" }]}>
+                <Input placeholder="Enter Task Name" />)
               </Form.Item>
 
-              <Form.Item label="Details">
-                {getFieldDecorator("details")(
-                  <TextArea
-                    placeholder="Details About the Task"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
+              <Form.Item label="Details" name="details">
+                <TextArea
+                  placeholder="Details About the Task"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
               </Form.Item>
 
-              <Form.Item label="Due Date">
-                {getFieldDecorator("due_date", {
-                  rules: [{ required: true, message: "Enter Due Date!" }]
-                })(
-                  <DatePicker
-                    disabledDate={d =>
-                      !d ||
-                      d.isBefore(today) ||
-                      d.isAfter(
-                        moment(
-                          this.props.project_id.due_date,
-                          "YYYY-MM-DD"
-                        ).add(1, "days")
-                      )
-                    }
-                  />
-                )}
+              <Form.Item label="Due Date" name="due_date" rules={[{ required: true, message: "Enter Due Date!" }]}>
+                <DatePicker
+                  disabledDate={d =>
+                    !d ||
+                    d.isBefore(today) ||
+                    d.isAfter(
+                      moment(
+                        this.props.project_id.due_date,
+                        "YYYY-MM-DD"
+                      ).add(1, "days")
+                    )
+                  }
+                />
               </Form.Item>
 
-              <Form.Item label="Assigned To">
-                {getFieldDecorator("assigned_to", {
-                  rules: [
-                    { required: true, message: "Select Owner of the Task" }
-                  ]
-                })(
-                  <Select
-                    style={{ width: "100%", height: "36px" }}
-                    placeholder="Select Task Owner"
-                  >
-                    {project_id.project_members.map(member => (
-                      <Option key={member.id} value={member.id}>
-                        <ImageSmall
-                          clsattr={"img-circle"}
-                          altname={member.full_name}
-                          srcfile={member.image}
-                        />
-                        &emsp;{member.full_name}
-                      </Option>
-                    ))}
-                  </Select>
-                )}
+              <Form.Item label="Assigned To" name="assigned_to" rules={[
+                { required: true, message: "Select Owner of the Task" }
+              ]}>
+                <Select
+                  style={{ width: "100%", height: "36px" }}
+                  placeholder="Select Task Owner"
+                >
+                  {project_id.project_members.map(member => (
+                    <Option key={member.id} value={member.id}>
+                      <ImageSmall
+                        clsattr={"img-circle"}
+                        altname={member.full_name}
+                        srcfile={member.image}
+                      />
+                      &emsp;{member.full_name}
+                    </Option>
+                  ))}
+                </Select>
               </Form.Item>
 
-              <Form.Item label="Notes">
-                {getFieldDecorator("notes")(
-                  <TextArea
-                    placeholder="Notes"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
+              <Form.Item label="Notes" name="notes">
+                <TextArea
+                  placeholder="Notes"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
               </Form.Item>
             </Form>
           </Modal>
@@ -130,33 +115,28 @@ class AddTaskModal extends React.Component {
   handleCancel = () => {
     this.setState({ visible: false });
   };
-
+  formRef = React.createRef();
   handleCreate = () => {
-    const { form } = this.formRef.props;
-    form.validateFields(err => {
-      if (err) {
-        return;
-      }
 
-      const {
-        name,
-        details,
-        due_date,
-        assigned_to,
-        notes
-      } = form.getFieldsValue();
+    const {
+      name,
+      details,
+      due_date,
+      assigned_to,
+      notes
+    } = this.formRef.current.getFieldValues();
 
-      this.props.addNewTask(
-        this.props.project.id,
-        name,
-        details,
-        due_date.format("YYYY-MM-DD"),
-        assigned_to,
-        notes
-      );
-      form.resetFields();
-      this.setState({ visible: false });
-    });
+    this.props.addNewTask(
+      this.props.project.id,
+      name,
+      details,
+      due_date.format("YYYY-MM-DD"),
+      assigned_to,
+      notes
+    );
+    this.formRef.current.resetFields();
+    this.setState({ visible: false });
+
   };
 
   saveFormRef = formRef => {

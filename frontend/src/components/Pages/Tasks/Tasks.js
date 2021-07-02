@@ -134,7 +134,7 @@ class Tasks extends Component {
                     <AllCardBody
                       BodyId="mytask_status_table"
                       cardTitle={"Overview"}
-                      // id="TaskStatusCard"
+                    // id="TaskStatusCard"
                     >
                       <TaskPieChart />
                     </AllCardBody>
@@ -180,7 +180,7 @@ class Tasks extends Component {
             </div>
           </div>
         </Content>
-        <ActivityList id={this.props.match.params.id} type={"all"} />
+        {/* <ActivityList id={this.props.match.params.id} type={"all"} /> */}
       </Fragment>
     );
   }

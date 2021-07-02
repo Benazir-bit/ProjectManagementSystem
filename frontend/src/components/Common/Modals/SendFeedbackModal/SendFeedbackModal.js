@@ -61,8 +61,6 @@ class SendFeedbackModal extends Component {
   };
 
   render() {
-    const { form } = this.props;
-    // const { getFieldDecorator } = form;
     return (
       <Fragment>
         <Button onClick={this.showModal} id="FeedBackBtn">
@@ -88,7 +86,7 @@ class SendFeedbackModal extends Component {
           <br />
 
           <Form
-            onSubmit={this.handleSubmit}
+            onFinish={this.handleSubmit}
             layout="vertical"
             id="FeedBackModalForm"
           >

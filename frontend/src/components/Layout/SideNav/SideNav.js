@@ -297,11 +297,11 @@ class SideNav extends Component {
             {this.props.user.photo ? (
               <Avatar
                 size={60}
-                style={{ margin: 10 }}
+                style={{ margin: "58px 0px 6px 65px" }}
                 src={this.props.user.photo}
               />
             ) : (
-              <Avatar size={60} style={{ margin: 10 }} />
+              <Avatar size={60} style={{ margin: "58px 0px 6px 65px" }} />
             )}
             {/* </Link> */}
           </div>

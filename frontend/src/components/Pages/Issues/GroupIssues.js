@@ -342,7 +342,7 @@ class GroupIssues extends Component {
             </div>
           </div>
         </Content>
-        <ActivityList id={this.props.match.params.id} type={"all"} />
+        {/* <ActivityList id={this.props.match.params.id} type={"all"} /> */}
       </Fragment>
     );
   }

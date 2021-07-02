@@ -244,9 +244,9 @@ class GroupDetails extends Component {
             </div>
           </div>
         </Content>
-        {this.props.group ? (
+        {/* {this.props.group ? (
           <ActivityList id={this.props.group.id} type={"group"} />
-        ) : null}
+        ) : null} */}
       </Fragment>
     );
   }

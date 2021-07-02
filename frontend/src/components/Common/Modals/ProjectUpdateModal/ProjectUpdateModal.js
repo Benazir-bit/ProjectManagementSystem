@@ -17,7 +17,7 @@ const CollectionCreateForm = (
       const { project } = this.props;
       let today = new Date();
       const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
+
 
       return (
         <Fragment>
@@ -30,92 +30,78 @@ const CollectionCreateForm = (
             maskClosable={false}
             destroyOnClose={true}
           >
-            <Form layout="vertical" id="ProjectModalForm">
-              <Form.Item label="Project Name">
-                {getFieldDecorator("name", {
-                  initialValue: project.name,
-                  rules: [{ required: true, message: "Enter Project Name!" }]
-                })(<Input />)}
+            <Form layout="vertical" id="ProjectModalForm"
+              initialValues={{
+                name: project.name,
+                details: project.details,
+                due_date: moment(project.due_date, "YYYY-MM-DD"),
+                supervisor: project.supervisor,
+                projMembers: project.members,
+                notes: project.note
+              }}>
+              <Form.Item label="Project Name" name="name" rules={[{ required: true, message: "Enter Project Name!" }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="Details" name="details">
+                <TextArea
+                  placeholder="Details About the Project"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
+              </Form.Item>
+              <Form.Item label="Due Date" name="due_date" rules={[{ required: true, message: "Enter Due Date!" }]}>
+                <DatePicker disabledDate={d => !d || d.isBefore(today)} />
               </Form.Item>
 
-              <Form.Item label="Details">
-                {getFieldDecorator("details", {
-                  initialValue: project.details
-                })(
-                  <TextArea
-                    placeholder="Details About the Project"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
+              <Form.Item label="Supervisor" name="supervisor" rules={[
+                { required: true, message: "Select Project Supervisor!" }
+              ]}>
+                <Select
+                  style={{ width: "100%", height: "36px" }}
+                  placeholder="Select Supervisor"
+                >
+                  {this.props.members.map(member => (
+                    <Option key={member.id} value={member.id}>
+                      <ImageSmall
+                        clsattr={"img-circle"}
+                        altname={member.full_name}
+                        srcfile={member.image}
+                      />
+                      &emsp;{member.full_name}
+                    </Option>
+                  ))}
+                </Select>
+
               </Form.Item>
 
-              <Form.Item label="Due Date">
-                {getFieldDecorator("due_date", {
-                  initialValue: moment(project.due_date, "YYYY-MM-DD"),
-                  rules: [{ required: true, message: "Enter Due Date!" }]
-                })(<DatePicker disabledDate={d => !d || d.isBefore(today)} />)}
+
+              <Form.Item label="Members" name="projMembers" rules={[
+                { required: true, message: "Select Project Members!" }
+              ]}>
+                <Select
+                  style={{ width: "100%", height: "36px" }}
+                  mode="multiple"
+                  size="default"
+                  placeholder="Select Supervisor"
+                // removeIcon
+                >
+                  {this.props.members.map(member => (
+                    <Option key={member.id} value={member.id}>
+                      <ImageSmall
+                        clsattr={"img-circle"}
+                        altname={member.full_name}
+                        srcfile={member.image}
+                      />
+                      &emsp;{member.full_name}
+                    </Option>
+                  ))}
+                </Select>
               </Form.Item>
 
-              <Form.Item label="Supervisor">
-                {getFieldDecorator("supervisor", {
-                  initialValue: project.supervisor,
-                  rules: [
-                    { required: true, message: "Select Project Supervisor!" }
-                  ]
-                })(
-                  <Select
-                    style={{ width: "100%", height: "36px" }}
-                    placeholder="Select Supervisor"
-                  >
-                    {this.props.members.map(member => (
-                      <Option key={member.id} value={member.id}>
-                        <ImageSmall
-                          clsattr={"img-circle"}
-                          altname={member.full_name}
-                          srcfile={member.image}
-                        />
-                        &emsp;{member.full_name}
-                      </Option>
-                    ))}
-                  </Select>
-                )}
-              </Form.Item>
-
-              <Form.Item label="Members">
-                {getFieldDecorator("projMembers", {
-                  initialValue: project.members,
-                  rules: [
-                    { required: true, message: "Select Project Members!" }
-                  ]
-                })(
-                  <Select
-                    style={{ width: "100%", height: "36px" }}
-                    mode="multiple"
-                    size="default"
-                    placeholder="Select Supervisor"
-                  // removeIcon
-                  >
-                    {this.props.members.map(member => (
-                      <Option key={member.id} value={member.id}>
-                        <ImageSmall
-                          clsattr={"img-circle"}
-                          altname={member.full_name}
-                          srcfile={member.image}
-                        />
-                        &emsp;{member.full_name}
-                      </Option>
-                    ))}
-                  </Select>
-                )}
-              </Form.Item>
-
-              <Form.Item label="Notes">
-                {getFieldDecorator("notes", { initialValue: project.note })(
-                  <TextArea
-                    placeholder="Notes"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
+              <Form.Item label="Notes" name="notes">
+                <TextArea
+                  placeholder="Notes"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
               </Form.Item>
             </Form>
           </Modal>

@@ -86,7 +86,6 @@ class CreateUserForm extends Component {
     }
 
     const { form, designations } = this.props;
-    const { getFieldDecorator } = form;
 
     const group = [];
     this.props.groups.map((grp, i) => {
@@ -162,169 +161,132 @@ class CreateUserForm extends Component {
     return (
       <Fragment>
         <br />
-        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-          <Form.Item label="Employee ID:" className={"formLabel"}>
-            {getFieldDecorator("EmployeeID", {
-              rules: [{ required: true, message: "Please input Employee ID!" }]
-            })(<Input placeholder="Employee ID" />)}
+        <Form
+          initialValues={{
+
+          }}
+          {...formItemLayout} onSubmit={this.handleSubmit}>
+          <Form.Item name="EmployeeID" label="Employee ID:" className={"formLabel"} rules={[{ required: true, message: "Please input Employee ID!" }]}>
+            <Input placeholder="Employee ID" />
           </Form.Item>
 
-          <Form.Item label="Full Name:" className={"formLabel"}>
-            <Row gutter={8}>
-              <Col span={12}>
-                {getFieldDecorator("FirstName", {
-                  rules: [
-                    { required: true, message: "Please input the First Name!" }
-                  ]
-                })(<Input placeholder="First Name" />)}
-              </Col>
-              <Col span={12}>
-                {getFieldDecorator("LastName", {
-                  rules: [
-                    { required: true, message: "Please input the Last Name!" }
-                  ]
-                })(<Input placeholder="Last Name" />)}
-              </Col>
-            </Row>
+          <Form.Item name="FirstName" label="First Name" className={"formLabel"} rules={[
+            { required: true, message: "Please input the First Name!" }
+          ]}>
+            <Input placeholder="First Name" />
+          </Form.Item>
+          <Form.Item name="LastName" label="Full Name:" className={"formLabel"} rules={[
+            { required: true, message: "Please input the Last Name!" }
+          ]}>
+            <Input placeholder="Last Name" />
           </Form.Item>
 
-          <Form.Item label="Email:" className={"formLabel"}>
-            {getFieldDecorator("Email", {
-              rules: [
-                {
-                  type: "email",
-                  message: "The input is not valid Email!"
-                },
-                {
-                  required: true,
-                  message: "Please input your Email!"
-                }
-              ]
-            })(<Input placeholder="Email" />)}
+          <Form.Item name="Email" label="Email:" className={"formLabel"} rules={[
+            {
+              type: "email",
+              message: "The input is not valid Email!"
+            },
+            {
+              required: true,
+              message: "Please input your Email!"
+            }
+          ]}>
+            <Input placeholder="Email" />
           </Form.Item>
-          <Form.Item label="Group" className={"formLabel"}>
-            {getFieldDecorator("Group", {
-              rules: [{ required: true, message: "Please select your Group!" }]
-            })(
-              <Select onChange={this.selectChange} placeholder="Select Group">
-                {group}
-              </Select>
-            )}
+          <Form.Item label="Group" name="Group" className={"formLabel"} rules={[{ required: true, message: "Please select your Group!" }]}>
+
+            <Select onChange={this.selectChange} placeholder="Select Group">
+              {group}
+            </Select>
+
           </Form.Item>
-          <Form.Item label="Reports To" className={"formLabel"}>
-            {getFieldDecorator("reportsto", {
-              rules: [
-                {
-                  required:
-                    !this.props.members || this.props.members.length == 0
-                      ? false
-                      : true,
-                  message: "Please select your Reports To!"
-                }
-              ]
-            })(
-              <Select
-                disabled={this.state.disabled}
-                onChange={this.selectChangeReportsTo}
-                placeholder="Select Reports to"
-              >
-                {reports_to}
-              </Select>
-            )}
+          <Form.Item label="Reports To" name="reportsto" className={"formLabel"} rules={[
+            {
+              required:
+                !this.props.members || this.props.members.length == 0
+                  ? false
+                  : true,
+              message: "Please select your Reports To!"
+            }
+          ]}>
+            <Select
+              disabled={this.state.disabled}
+              onChange={this.selectChangeReportsTo}
+              placeholder="Select Reports to"
+            >
+              {reports_to}
+            </Select>
           </Form.Item>
 
-          <Form.Item label="Designation:" className={"formLabel"}>
-            {getFieldDecorator("Designation", {
-              rules: [
-                {
-                  required: designation.length == 0 ? false : true,
-                  message: "Please input Designation!"
-                }
-              ]
-            })(
-              <Select
-                disabled={this.state.disabled}
-                placeholder="Select Designation"
-              >
-                {designation}
-              </Select>
-            )}
+          <Form.Item name="Designation" label="Designation:" className={"formLabel"} rules={[
+            {
+              required: designation.length == 0 ? false : true,
+              message: "Please input Designation!"
+            }
+          ]}>
+            <Select
+              disabled={this.state.disabled}
+              placeholder="Select Designation"
+            >
+              {designation}
+            </Select>
           </Form.Item>
 
-          <Form.Item label="Phone Number" className={"formLabel"}>
-            {getFieldDecorator("phone", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input your phone number!"
-                },
-                {
-                  max: 11,
-                  min: 11,
-                  message: "Enter 11 Digit Number!"
-                }
-              ]
-            })(
-              <Input
-                type="number"
-                style={{ width: "100%" }}
-                placeholder="Phone Number"
-              />
-            )}
+          <Form.Item name="phone" label="Phone Number" className={"formLabel"} rules={[
+            {
+              required: true,
+              message: "Please input your phone number!"
+            },
+            {
+              max: 11,
+              min: 11,
+              message: "Enter 11 Digit Number!"
+            }
+          ]}>
+
+            <Input
+              type="number"
+              style={{ width: "100%" }}
+              placeholder="Phone Number"
+            />
           </Form.Item>
-          <Form.Item label="Present Address:" className={"formLabel"}>
-            {getFieldDecorator("PresentAddress", {
-              rules: [
-                { required: true, message: "Please input Present Address!" }
-              ]
-            })(<Input placeholder="Present Address" />)}
+          <Form.Item label="Present Address:" name="PresentAddress" className={"formLabel"} rules={[
+            { required: true, message: "Please input Present Address!" }
+          ]}>
+            <Input placeholder="Present Address" />
           </Form.Item>
-          <Form.Item label="Date of Birth:" className={"formLabel"}>
-            {getFieldDecorator(
-              "DateofBirth",
-              config
-            )(<DatePicker style={{ width: "100%" }} />)}
+          <Form.Item label="Date of Birth:" name="DateofBirth" className={"formLabel"}>
+            <DatePicker style={{ width: "100%" }} />
           </Form.Item>
-          <Form.Item label="Date of Joining:" className={"formLabel"}>
-            {getFieldDecorator(
-              "DateofJoining",
-              config
-            )(<DatePicker style={{ width: "100%" }} />)}
+          <Form.Item name="DateofJoining" label="Date of Joining:" className={"formLabel"}>
+            <DatePicker style={{ width: "100%" }} />
+          </Form.Item>
+          <Form.Item name="HighestDegree" label="Highest Degree:" className={"formLabel"} rules={[
+            { required: true, message: "Please input Highest Degree!" }
+          ]}>
+            <Input placeholder="Highest Degree" />
+          </Form.Item>
+          <Form.Item name="BloodGroup" label="Blood Group:" className={"formLabel"} rules={[{ required: true, message: "Please input Blood Group!" }]}>
+            <Input placeholder="Blood Group" />
           </Form.Item>
 
-          <Form.Item label="Highest Degree:" className={"formLabel"}>
-            {getFieldDecorator("HighestDegree", {
-              rules: [
-                { required: true, message: "Please input Highest Degree!" }
-              ]
-            })(<Input placeholder="Highest Degree" />)}
-          </Form.Item>
-          <Form.Item label="Blood Group:" className={"formLabel"}>
-            {getFieldDecorator("BloodGroup", {
-              rules: [{ required: true, message: "Please input Blood Group!" }]
-            })(<Input placeholder="Blood Group" />)}
-          </Form.Item>
+          <Form.Item name="EmergencyContact" label="Emergency Contact:" className={"formLabel"} rules={[
+            {
+              required: true,
+              message: "Please input your Emergency Contact!"
+            },
+            {
+              max: 11,
+              min: 11,
+              message: "Enter 11 Digit Number!"
+            }
+          ]}>
 
-          <Form.Item label="Emergency Contact:" className={"formLabel"}>
-            {getFieldDecorator("EmergencyContact", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please input your Emergency Contact!"
-                },
-                {
-                  max: 11,
-                  min: 11,
-                  message: "Enter 11 Digit Number!"
-                }
-              ]
-            })(
-              <Input
-                type="number"
-                placeholder={"Emergency Contact"}
-                style={{ width: "100%" }}
-              />
-            )}
+            <Input
+              type="number"
+              placeholder={"Emergency Contact"}
+              style={{ width: "100%" }}
+            />
             {/* addonBefore={prefixSelector}  */}
           </Form.Item>
 

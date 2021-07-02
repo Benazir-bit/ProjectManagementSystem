@@ -379,57 +379,59 @@ class MemberEditInfoModal extends React.Component {
             {...formItemLayout}
             // onSubmit={this.handleSubmit}
             className={"formEdit"}
-          >
-            <Form.Item label="Employee ID:" className={"formLabel"}>
-              {getFieldDecorator("EmployeeID", {
-                initialValue: this.props.profile.username,
-                rules: [
-                  { required: true, message: "Please input Employee ID!" }
-                ]
-              })(<Input />)}
-            </Form.Item>
+            initialValues={{
+              EmployeeID: this.props.profile.username,
+              firstname: this.props.profile.firstname,
+              lastname: this.props.profile.lastname,
+              email: this.props.profile.email,
+              phone_number: this.props.profile.phone_number,
+              present_address: this.props.profile.present_address,
+              highest_degree: this.props.profile.highest_degree,
+              BloodGroup: this.props.profile.blood_group,
+              emergency_contact: this.props.profile.emergency_contact,
 
+            }}
+          >
+            <Form.Item label="Employee ID:" name="EmployeeID" className={"formLabel"} rules={[
+              { required: true, message: "Please input Employee ID!" }
+            ]}>
+              <Input />
+            </Form.Item>
             <Form.Item label="Full Name:" className={"formLabel"}>
               <Row gutter={8}>
                 <Col span={12}>
-                  {getFieldDecorator("firstname", {
-                    initialValue: this.props.profile.firstname,
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please input the First Name!"
-                      }
-                    ]
-                  })(<Input />)}
+                  <Form.Item name="firstname" className={"formLabel"} rules={[
+                    {
+                      required: true,
+                      message: "Please input the First Name!"
+                    }
+                  ]}>
+                    <Input />
+                  </Form.Item>
                 </Col>
                 <Col span={12}>
-                  {getFieldDecorator("lastname", {
-                    initialValue: this.props.profile.lastname,
-                    rules: [
-                      {
-                        required: false,
-                        message: "Please input the Last Name!"
-                      }
-                    ]
-                  })(<Input />)}
+                  <Form.Item name="lastname" className={"formLabel"} rules={[
+                    {
+                      required: false,
+                      message: "Please input the Last Name!"
+                    }
+                  ]}>
+                    <Input />
+                  </Form.Item>
                 </Col>
               </Row>
             </Form.Item>
-
-            <Form.Item label="Email:" className={"formLabel"}>
-              {getFieldDecorator("email", {
-                initialValue: this.props.profile.email,
-                rules: [
-                  {
-                    type: "email",
-                    message: "The input is not valid Email!"
-                  },
-                  {
-                    required: true,
-                    message: "Enter Email Address"
-                  }
-                ]
-              })(<Input />)}
+            <Form.Item label="Email:" name="email" className={"formLabel"} rules={[
+              {
+                type: "email",
+                message: "The input is not valid Email!"
+              },
+              {
+                required: true,
+                message: "Enter Email Address"
+              }
+            ]}>
+              <Input />
             </Form.Item>
             <Form.Item label="Group" className={"formLabel groupSelect"}>
               <Select
@@ -488,26 +490,20 @@ class MemberEditInfoModal extends React.Component {
               </Select>
             </Form.Item>
 
-            <Form.Item label="Phone Number" className={"formLabel"}>
-              {getFieldDecorator("phone_number", {
-                initialValue: this.props.profile.phone_number,
-                rules: [
-                  {
-                    required: true,
-                    max: 11,
-                    min: 11,
-                    message: "Enter 11 Digit Number!"
-                  }
-                ]
-              })(<Input type="number" style={{ width: "100%" }} />)}
+            <Form.Item label="Phone Number" name="phone_number" className={"formLabel"} rules={[
+              {
+                required: true,
+                max: 11,
+                min: 11,
+                message: "Enter 11 Digit Number!"
+              }
+            ]}>
+              <Input type="number" style={{ width: "100%" }} />
             </Form.Item>
-            <Form.Item label="Present Address:" className={"formLabel"}>
-              {getFieldDecorator("present_address", {
-                initialValue: this.props.profile.present_address,
-                rules: [
-                  { required: true, message: "Please input Present Address!" }
-                ]
-              })(<Input />)}
+            <Form.Item label="Present Address:" name="present_address" className={"formLabel"} rules={[
+              { required: true, message: "Please input Present Address!" }
+            ]}>
+              <Input />
             </Form.Item>
             <Form.Item
               label="Date of Birth:"
@@ -551,36 +547,26 @@ class MemberEditInfoModal extends React.Component {
               })(<DatePicker style={{ width: "100%" }} />)} */}
             </Form.Item>
 
-            <Form.Item label="Highest Degree:" className={"formLabel"}>
-              {getFieldDecorator("highest_degree", {
-                initialValue: this.props.profile.highest_degree,
-                rules: [
-                  { required: true, message: "Please input Highest Degree!" }
-                ]
-              })(<Input />)}
+            <Form.Item label="Highest Degree:" name="highest_degree" className={"formLabel"} rules={[
+              { required: true, message: "Please input Highest Degree!" }
+            ]}>
+              <Input />
+            </Form.Item>
+            <Form.Item label="Blood Group:" name="BloodGroup" className={"formLabel"} rules={[
+              { required: true, message: "Please input Blood Group!" }
+            ]}>
+              <Input />
             </Form.Item>
 
-            <Form.Item label="Blood Group:" className={"formLabel"}>
-              {getFieldDecorator("BloodGroup", {
-                initialValue: this.props.profile.blood_group,
-                rules: [
-                  { required: true, message: "Please input Blood Group!" }
-                ]
-              })(<Input />)}
-            </Form.Item>
-
-            <Form.Item label="Emergency Contact:" className={"formLabel"}>
-              {getFieldDecorator("emergency_contact", {
-                initialValue: this.props.profile.emergency_contact,
-                rules: [
-                  {
-                    required: true,
-                    max: 11,
-                    min: 11,
-                    message: "Enter 11 Digit Number!"
-                  }
-                ]
-              })(<Input type="number" style={{ width: "100%" }} />)}
+            <Form.Item label="Emergency Contact:" name="emergency_contact" className={"formLabel"} rules={[
+              {
+                required: true,
+                max: 11,
+                min: 11,
+                message: "Enter 11 Digit Number!"
+              }
+            ]}>
+              <Input type="number" style={{ width: "100%" }} />
             </Form.Item>
           </Form>
         </Modal>

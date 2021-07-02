@@ -77,74 +77,53 @@ class ProfileUpdateForm extends Component {
 		return (
 			<Fragment>
 				<br />
-				<Form {...formItemLayout} onSubmit={this.handleSubmit}>
-					<Form.Item label="Name:" className={"formLabel"}>
-						{getFieldDecorator('Name', {
-							initialValue: this.props.profile.full_name,
-						})(
-							<Input readOnly />
-						)}
-					</Form.Item>
-					<Form.Item label="Employee ID:" className={"formLabel"}>
-						{getFieldDecorator('EmployeeID', {
-							initialValue: 'this.props.profile.username',
+				<Form
+					initialValues={{
+						Name: this.props.profile.full_name,
+						EmployeeID: this.props.profile.username,
+						Designation: this.props.profile.dsg,
+						DateofBirth: this.props.profile.date_of_birth,
+						DateofJoiming: this.props.profile.date_of_joining,
+						phone: this.props.profile.phone_number,
+						PresentAddress: this.props.profile.present_address,
+						HighestDegree: this.props.profile.highest_degree,
+						BloodGroup: this.props.profile.blood_group,
+						EmergencyContact: this.props.profile.emergency_contact,
 
-						})(
-							<Input readOnly />
-						)}
+					}}
+					{...formItemLayout} onFinish={this.handleSubmit}>
+					<Form.Item label="Name:" name="Name" className={"formLabel"}>
+						<Input readOnly />
 					</Form.Item>
-					<Form.Item label="Designation:" className={"formLabel"}>
-						{getFieldDecorator('Designation', {
-							initialValue: this.props.profile.dsg,
-						})(
-							<Input readOnly />
-						)}
+					<Form.Item label="Employee ID:" name="EmployeeID" className={"formLabel"}>
+
+						<Input readOnly />
+
 					</Form.Item>
-					<Form.Item label="Date of Birth:" className={"formLabel"}>
-						{getFieldDecorator('DateofBirth', {
-							initialValue: this.props.profile.date_of_birth,
-						})(
-							<Input readOnly />
-						)}
+					<Form.Item label="Designation:" name="Designation" className={"formLabel"}>
+						<Input readOnly />
 					</Form.Item>
-					<Form.Item label="Date of Joiming:" className={"formLabel"}>
-						{getFieldDecorator('DateofJoiming', {
-							initialValue: this.props.profile.date_of_joining,
-						})(
-							<Input readOnly />
-						)}
+					<Form.Item label="Date of Birth:" name="DateofBirth" className={"formLabel"}>
+						<Input readOnly />
 					</Form.Item>
-					<Form.Item label="Phone Number" className={"formLabel"}>
-						{getFieldDecorator('phone', {
-							initialValue: this.props.profile.phone_number,
-						})(<Input addonBefore={prefixSelector} style={{ width: '100%' }} placeholder="Phone Number" />)}
+					<Form.Item label="Date of Joiming:" name="DateofJoiming" className={"formLabel"}>
+						<Input readOnly />
 					</Form.Item>
-					<Form.Item label="Present Address:" className={"formLabel"}>
-						{getFieldDecorator('Present Address', {
-							initialValue: this.props.profile.present_address,
-						})(
-							<Input placeholder="Present Address" />
-						)}
+					<Form.Item label="Phone Number" name="phone" className={"formLabel"}>
+						<Input addonBefore={prefixSelector} style={{ width: '100%' }} placeholder="Phone Number" />
 					</Form.Item>
-					<Form.Item label="Highest Degree:" className={"formLabel"}>
-						{getFieldDecorator('HighestDegree', {
-							initialValue: this.props.profile.highest_degree,
-						})(
-							<Input placeholder="Highest Degree" />
-						)}
+					<Form.Item label="Present Address:" name="PresentAddress" className={"formLabel"}>
+						<Input placeholder="Present Address" />
 					</Form.Item>
-					<Form.Item label="Blood Group:" className={"formLabel"}>
-						{getFieldDecorator('BloodGroup', {
-							initialValue: this.props.profile.blood_group,
-						})(
-							<Input readOnly />
-						)}
+					<Form.Item label="Highest Degree:" name="HighestDegree" className={"formLabel"}>
+						<Input placeholder="Highest Degree" />
+					</Form.Item>
+					<Form.Item label="Blood Group:" name="BloodGroup" className={"formLabel"}>
+						<Input readOnly />
 					</Form.Item>
 
-					<Form.Item label="Emergency Contact:" className={"formLabel"}>
-						{getFieldDecorator('EmergencyContact', {
-							initialValue: this.props.profile.emergency_contact,
-						})(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
+					<Form.Item label="Emergency Contact:" name="EmergencyContact" className={"formLabel"}>
+						<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)
 					</Form.Item>
 
 					<Form.Item {...tailFormItemLayout}>

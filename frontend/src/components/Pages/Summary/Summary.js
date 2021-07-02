@@ -3,14 +3,12 @@ import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import { Input, Select, DatePicker, Button, Layout, Form, Spin } from "antd";
 import ImageSmall from "../../Common/ImageSmall/ImageSmall";
 import "./Summary.css";
-import AttendentTable from "../../Common//AttendanceTable/AttendentTable";
 import CommonTable from "../../Common/AllTables/CommonTable";
 import { getGroupListAll } from "../../../actions/groupSelect";
 import { getUserName } from "../../../actions/attendance";
 import { Link } from "react-router-dom";
 import { getSummaryList } from "../../../actions/projectSummary";
 import { connect } from "react-redux";
-const InputGroup = Input.Group;
 const { Option } = Select;
 const { Content } = Layout;
 
@@ -325,19 +323,7 @@ class Summary extends Component {
                         </Button>
                       </Form.Item>
                       <br></br>
-                      <div className="start-table">
-                        <Fragment>
-                          <Content>
-                            {this.props.user_attendance ? (
-                              <AttendentTable
-                                attendance={this.props.user_attendance}
-                                selectionType="user"
-                                loading={this.props.isLoading}
-                              />
-                            ) : null}
-                          </Content>
-                        </Fragment>
-                      </div>
+
                     </Fragment>
                   </Form>
                   {/* <div className="row TitleColor">
