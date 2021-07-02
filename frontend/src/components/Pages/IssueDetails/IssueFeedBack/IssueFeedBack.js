@@ -30,7 +30,7 @@ class IssueFeedback extends Component {
     this.getTextEditor.current.getValues();
   };
   handleSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     var textVal = this.state.value;
     this.props.commnentIssue(this.props.issue.id, this.props.user.id, textVal);
   };
@@ -130,7 +130,7 @@ class IssueFeedback extends Component {
           </div>
           <Collapse accordion>
             <Panel header="Add Your Comment Here...">
-              <Form onSubmit={this.handleSubmit}>
+              <Form onFinish={this.handleSubmit}>
                 <TextEditor
                   style={{ backgroundColor: "#ffffff" }}
                   ref={this.getTextEditor}
