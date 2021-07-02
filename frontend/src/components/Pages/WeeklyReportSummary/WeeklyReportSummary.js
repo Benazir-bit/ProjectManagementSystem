@@ -62,7 +62,7 @@ class WeeklyReportSummary extends Component {
                     className="descriptionTablework"
                     // title=""
                     layout={formLayout}
-                    // onSubmit={this.handleSubmit}
+                  // onSubmit={this.handleSubmit}
                   >
                     <div className="col-sm">
                       <div className="col-sm-6" style={{ float: "left" }}>
@@ -71,7 +71,7 @@ class WeeklyReportSummary extends Component {
                           altname={
                             this.state.draftToVal
                               ? this.state.draftToVal.workreport.sender
-                                  .full_name
+                                .full_name
                               : undefined
                           }
                           srcfile={
@@ -98,8 +98,8 @@ class WeeklyReportSummary extends Component {
                             <i>
                               {this.state.draftToVal
                                 ? this.state.draftToVal.workreport.sender.groups
-                                    .map(item => item.name)
-                                    .join(", ")
+                                  .map(item => item.name)
+                                  .join(", ")
                                 : undefined}
                             </i>
                           </span>
@@ -111,60 +111,60 @@ class WeeklyReportSummary extends Component {
                           >
                             {this.state.draftToVal
                               ? this.state.draftToVal.workreport.recipent
-                                  .length > 0
+                                .length > 0
                                 ? "To: " +
-                                  this.state.draftToVal.workreport.recipent
-                                    .map(item => item.full_name)
-                                    .join(", ")
+                                this.state.draftToVal.workreport.recipent
+                                  .map(item => item.full_name)
+                                  .join(", ")
                                 : null
                               : null}
 
                             {this.state.draftToVal
                               ? this.state.draftToVal.workreport.cc_list
-                                  .length > 0
+                                .length > 0
                                 ? this.state.draftToVal.workreport.recipent !==
-                                    null &&
+                                  null &&
                                   this.state.draftToVal.workreport.recipent !==
-                                    undefined
+                                  undefined
                                   ? this.state.draftToVal.workreport.recipent
-                                      .length > 0
+                                    .length > 0
                                     ? ", " +
-                                      this.state.draftToVal.workreport.cc_list
-                                        .map(item => item.full_name)
-                                        .join(", ")
-                                    : "To: " +
-                                      this.state.draftToVal.workreport.cc_list
-                                        .map(item => item.full_name)
-                                        .join(", ")
-                                  : "To: " +
                                     this.state.draftToVal.workreport.cc_list
                                       .map(item => item.full_name)
                                       .join(", ")
+                                    : "To: " +
+                                    this.state.draftToVal.workreport.cc_list
+                                      .map(item => item.full_name)
+                                      .join(", ")
+                                  : "To: " +
+                                  this.state.draftToVal.workreport.cc_list
+                                    .map(item => item.full_name)
+                                    .join(", ")
                                 : null
                               : null}
                           </div>
                           <div
                             id={"btnDetails"}
-                            // style={{ float: "left", marginLeft: 10 }}
-                            // style={{ paddingLeft: "5px" }}
+                          // style={{ float: "left", marginLeft: 10 }}
+                          // style={{ paddingLeft: "5px" }}
                           >
                             <DetailsModal
                               data={{
                                 from: this.state.draftToVal
                                   ? [
-                                      this.state.draftToVal.workreport.sender
-                                        .full_name
-                                    ]
+                                    this.state.draftToVal.workreport.sender
+                                      .full_name
+                                  ]
                                   : undefined,
                                 to: this.state.draftToVal
                                   ? this.state.draftToVal.workreport.recipent.map(
-                                      item => item.full_name
-                                    )
+                                    item => item.full_name
+                                  )
                                   : undefined,
                                 cc: this.state.draftToVal
                                   ? this.state.draftToVal.workreport.cc_list.map(
-                                      item => item.full_name
-                                    )
+                                    item => item.full_name
+                                  )
                                   : undefined
                               }}
                             />
@@ -179,8 +179,8 @@ class WeeklyReportSummary extends Component {
                           <span style={{ color: "black" }}>
                             {this.state.draftToVal
                               ? this.state.draftToVal.workreport.sender.groups
-                                  .map(item => item.name)
-                                  .join(", ")
+                                .map(item => item.name)
+                                .join(", ")
                               : undefined}
                           </span>
                         </div>
@@ -191,9 +191,9 @@ class WeeklyReportSummary extends Component {
                                 "weekly"
                                 ? "Week : "
                                 : this.state.draftToVal.workreport
-                                    .report_type === "monthly"
-                                ? "Month : "
-                                : "Date : "
+                                  .report_type === "monthly"
+                                  ? "Month : "
+                                  : "Date : "
                               : undefined}
                           </span>
                           <span style={{ color: "black" }}>
@@ -202,14 +202,14 @@ class WeeklyReportSummary extends Component {
                                 "weekly"
                                 ? this.state.draftToVal.workreport.week
                                 : this.state.draftToVal.workreport
-                                    .report_type === "monthly"
-                                ? this.state.draftToVal.workreport.month
-                                : this.state.draftToVal.workreport
+                                  .report_type === "monthly"
+                                  ? this.state.draftToVal.workreport.month
+                                  : this.state.draftToVal.workreport
                                     .report_type === "range"
-                                ? this.state.draftToVal.workreport.from_date +
-                                  " to " +
-                                  this.state.draftToVal.workreport.to_date
-                                : undefined
+                                    ? this.state.draftToVal.workreport.from_date +
+                                    " to " +
+                                    this.state.draftToVal.workreport.to_date
+                                    : undefined
                               : undefined}
                           </span>
                         </div>
@@ -220,8 +220,8 @@ class WeeklyReportSummary extends Component {
                           <span style={{ color: "black" }}>
                             {this.state.draftToVal
                               ? moment(
-                                  this.state.draftToVal.workreport.timestamp
-                                ).format("MMM DD, YYYY")
+                                this.state.draftToVal.workreport.timestamp
+                              ).format("MMM DD, YYYY")
                               : undefined}
                           </span>
                         </div>
@@ -244,7 +244,7 @@ class WeeklyReportSummary extends Component {
                             this.state.data_completed.length > 0
                               ? this.state.data_completed
                               : this.props.weekly_report
-                              ? this.props.weekly_report.activity_completed.map(
+                                ? this.props.weekly_report.activity_completed.map(
                                   (item, i) => ({
                                     key: i,
                                     sl: i + 1,
@@ -252,7 +252,7 @@ class WeeklyReportSummary extends Component {
                                     description_of_effort: item.description
                                   })
                                 )
-                              : []
+                                : []
                           }
                         />
                       </Form.Item>
@@ -268,7 +268,7 @@ class WeeklyReportSummary extends Component {
                             this.state.data_progress.length > 0
                               ? this.state.data_progress
                               : this.props.weekly_report
-                              ? this.props.weekly_report.activity_progress.map(
+                                ? this.props.weekly_report.activity_progress.map(
                                   (item, i) => ({
                                     key: i,
                                     sl: i + 1,
@@ -279,7 +279,7 @@ class WeeklyReportSummary extends Component {
                                     )
                                   })
                                 )
-                              : []
+                                : []
                           }
                         />
                       </Form.Item>
@@ -297,7 +297,7 @@ class WeeklyReportSummary extends Component {
                             this.state.data_next_week.length > 0
                               ? this.state.data_next_week
                               : this.props.weekly_report
-                              ? this.props.weekly_report.activity_nextWeek.map(
+                                ? this.props.weekly_report.activity_nextWeek.map(
                                   (item, i) => ({
                                     key: i,
                                     sl: i + 1,
@@ -305,7 +305,7 @@ class WeeklyReportSummary extends Component {
                                     description_of_effort3: item.description
                                   })
                                 )
-                              : []
+                                : []
                           }
                         />
                       </Form.Item>
@@ -323,7 +323,7 @@ class WeeklyReportSummary extends Component {
                             this.state.data_issue.length > 0
                               ? this.state.data_issue
                               : this.props.weekly_report
-                              ? this.props.weekly_report.issue.map(
+                                ? this.props.weekly_report.issue.map(
                                   (item, i) => ({
                                     key: i,
                                     sl: i + 1,
@@ -331,7 +331,7 @@ class WeeklyReportSummary extends Component {
                                     description_of_issue: item.description
                                   })
                                 )
-                              : []
+                                : []
                           }
                         />
                       </Form.Item>
@@ -348,11 +348,11 @@ class WeeklyReportSummary extends Component {
     );
   }
 }
-const WeeklyReportSummaryCheckForm = Form.create()(WeeklyReportSummary);
+// const WeeklyReportSummaryCheckForm = Form.create()(WeeklyReportSummary);
 
 const mapStateToProps = state => ({
   weekly_report: state.weeklyReport.weekly_report
 });
 export default connect(mapStateToProps, {
   report
-})(WeeklyReportSummaryCheckForm);
+})(WeeklyReportSummary);

@@ -213,7 +213,7 @@ const mapStateToProps = state => ({
   notice: state.notice.notice
 });
 
-const WrappedBoardNotice = Form.create()(NoticeEditModal);
+// const WrappedBoardNotice = Form.create()(NoticeEditModal);
 export default connect(mapStateToProps, { updateNotice, getNoticeDetails })(
-  WrappedBoardNotice
+  NoticeEditModal
 );

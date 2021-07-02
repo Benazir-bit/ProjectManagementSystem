@@ -10,14 +10,14 @@ const CollectionCreateForm = (
     render() {
       //   const { profile } = this.props.profile;
       const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
-      const prefixSelector = getFieldDecorator("prefix", {
-        initialValue: "88"
-      })(
-        <Select style={{ width: 70 }}>
-          <Select.Option value="88">+88</Select.Option>
-        </Select>
-      );
+      // const { getFieldDecorator } = form;
+      // const prefixSelector = getFieldDecorator("prefix", {
+      //   initialValue: "88"
+      // })(
+      //   <Select style={{ width: 70 }}>
+      //     <Select.Option value="88">+88</Select.Option>
+      //   </Select>
+      // );
       return (
         <Fragment>
           <Modal
@@ -63,19 +63,17 @@ const CollectionCreateForm = (
                   initialValue: this.props.profile.phone_number
                 })(
                   <Input
-                    addonBefore={prefixSelector}
+                    // addonBefore={prefixSelector}
                     style={{ width: "100%" }}
                     placeholder="Phone Number"
                     maxLength={11}
                   />
                 )}
               </Form.Item>
-              <Form.Item label="Present Address:" className={"formLabel"}>
-                {getFieldDecorator("present_address", {
-                  initialValue: this.props.profile.present_address
-                })(<Input placeholder="Present Address" />)}
+              <Form.Item label="Present Address:" name="present_address" className={"formLabel"}>
+                <Input placeholder="Present Address" />
               </Form.Item>
-              <Form.Item label="Highest Degree:" className={"formLabel"}>
+              <Form.Item label="Highest Degree:" name="highest_degree" className={"formLabel"}>
                 {getFieldDecorator("highest_degree", {
                   initialValue: this.props.profile.highest_degree
                 })(<Input placeholder="Highest Degree" />)}

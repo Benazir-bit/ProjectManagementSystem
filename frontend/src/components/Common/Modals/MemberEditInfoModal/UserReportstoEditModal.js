@@ -212,10 +212,10 @@ const mapStateToProps = state => ({
   // members: state.member.members
 });
 
-const WrappedUserReportstoEditModal = Form.create()(UserReportstoEditModal);
+// const WrappedUserReportstoEditModal = Form.create()(UserReportstoEditModal);
 export default connect(mapStateToProps, {
   searchData,
   updateProfile,
   getUserProfile
   // getTypeMembers
-})(WrappedUserReportstoEditModal);
+})(UserReportstoEditModal);

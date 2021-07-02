@@ -464,7 +464,7 @@ class Summary extends Component {
     );
   }
 }
-const SummaryForm = Form.create()(Summary);
+// const SummaryForm = Form.create()(Summary);
 const mapStateToProps = state => ({
   auth_user: state.auth.user,
   users: state.attendance.users,
@@ -475,4 +475,4 @@ export default connect(mapStateToProps, {
   getSummaryList,
   getUserName,
   getGroupListAll
-})(SummaryForm);
+})(Summary);

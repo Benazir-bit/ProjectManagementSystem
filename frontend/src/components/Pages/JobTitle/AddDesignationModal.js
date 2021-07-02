@@ -189,10 +189,10 @@ const mapStateToProps = state => ({
   groups: state.group.allgroup
 });
 
-const WrappedGroupForm = Form.create()(AddDesignationModal);
+// const WrappedGroupForm = Form.create()(AddDesignationModal);
 //export default WrappedGroupForm
 export default connect(mapStateToProps, {
   getGroupListAll,
   AddDesignation,
   UpdateDesignation
-})(WrappedGroupForm);
+})(AddDesignationModal);

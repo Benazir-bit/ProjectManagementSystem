@@ -22,7 +22,7 @@ const EditableRow = ({ form, index, ...props }) => (
   </EditableContext.Provider>
 );
 
-const EditableFormRow = Form.create()(EditableRow);
+const EditableFormRow = EditableRow;
 const { TextArea } = Input;
 
 let form_;

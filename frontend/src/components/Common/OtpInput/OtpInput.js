@@ -236,10 +236,10 @@ const mapStateToProps = state => ({
   payrollNotFound: state.accounts.payrollNotFound
 });
 
-const WrappedCode = Form.create()(OtpInput);
+// const WrappedCode = Form.create()(OtpInput);
 export default connect(mapStateToProps, {
   genOtpCode,
   validateOtpCode,
   loadUser,
   validateOtpCheck
-})(WrappedCode);
+})(OtpInput);

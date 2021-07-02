@@ -120,7 +120,7 @@ class SendFeedbackModal extends Component {
   }
 }
 
-const WrappedRaiseIssueModal = Form.create()(SendFeedbackModal);
+// const WrappedRaiseIssueModal = Form.create()(SendFeedbackModal);
 const mapStateToProps = state => ({
   user: state.auth.user
 });
@@ -128,4 +128,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { sendfeedback, submitCancelTask }
-)(WrappedRaiseIssueModal);
+)(SendFeedbackModal);

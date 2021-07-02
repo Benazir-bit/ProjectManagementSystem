@@ -152,7 +152,7 @@ class RaiseIssueModal extends Component {
 }
 
 //export default RaiseIssueModal;
-const WrappedRaiseIssueModal = Form.create()(RaiseIssueModal);
+// const WrappedRaiseIssueModal = Form.create()(RaiseIssueModal);
 // export default WrappedRaiseIssueModal;
 
 const mapStateToProps = state => ({
@@ -164,4 +164,4 @@ export default connect(
   mapStateToProps,
 
   { raiseIssue, updateTaskNew }
-)(WrappedRaiseIssueModal);
+)(RaiseIssueModal);

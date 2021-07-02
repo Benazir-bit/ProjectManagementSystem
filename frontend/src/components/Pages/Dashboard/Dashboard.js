@@ -140,7 +140,7 @@ class Dashboard extends Component {
           </div>
         </Content>
 
-        <ActivityList id={this.props.user.id} type={"all"} />
+        {/* <ActivityList id={this.props.user.id} type={"all"} /> */}
       </Fragment>
     );
   }
