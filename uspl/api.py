@@ -581,8 +581,8 @@ def ProjectTableAPI(request, type, filter, id):
         #     group__in=user.groups.all()).filter(supervisor=user)
         # tasks = Task.objects.filter(assigned_to=request.user)
         # tasks = Task.objects.filter(assigned_to=user)
-        #task_projects = Project.objects.filter(task__in=tasks)
-        #projects = supervised_projects | task_projects
+        # task_projects = Project.objects.filter(task__in=tasks)
+        # projects = supervised_projects | task_projects
         req_user = User.objects.get(id=id)
         mem_projects = Project.objects.filter(
             group__in=user.groups.all()).filter(members=req_user)
@@ -591,13 +591,13 @@ def ProjectTableAPI(request, type, filter, id):
 
     if filter == "all":
         projects = projects.order_by('-id', '-completed')
+  
     elif filter == "completed":
         projects = projects.filter(
             completed=True).order_by('-id')
     elif filter == "ongoing":
         projects = projects.filter(
             completed=False).order_by('-id')
-
     if request.GET.get('offset'):
         paginator = LimitOffsetPagination()
         result_page = paginator.paginate_queryset(projects, request)
@@ -1313,6 +1313,7 @@ class ProfileAPI(APIView):
     ]
 
     def get(self, request, user_id):
+        print("aaaaaaaa")
         user = get_object_or_404(User, id=user_id)
         profile = user.profile
         serializer = ProfileSerializer(profile)

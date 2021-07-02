@@ -9,7 +9,7 @@ const { TextArea } = Input;
 const InputGroup = Input.Group;
 const { Option } = Select;
 
-const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
+const CollectionCreateForm = (
   class extends Component {
     render() {
       const SelectOption = Select.Option;
@@ -79,15 +79,15 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   >
                     {this.props.group && this.props.group.user_set
                       ? this.props.group.user_set.map(member => (
-                          <Option key={member.id} value={member.id}>
-                            <ImageSmall
-                              clsattr={"img-circle"}
-                              altname={member.full_name}
-                              srcfile={member.image}
-                            />
-                            &emsp;{member.full_name}
-                          </Option>
-                        ))
+                        <Option key={member.id} value={member.id}>
+                          <ImageSmall
+                            clsattr={"img-circle"}
+                            altname={member.full_name}
+                            srcfile={member.image}
+                          />
+                          &emsp;{member.full_name}
+                        </Option>
+                      ))
                       : null}
                   </Select>
                 )}
@@ -108,17 +108,17 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   >
                     {supervisor && this.props.group && this.props.group.user_set
                       ? this.props.group.user_set.map(member =>
-                          member.id == supervisor ? null : (
-                            <Option key={member.id} value={member.id}>
-                              <ImageSmall
-                                clsattr={"img-circle"}
-                                altname={member.full_name}
-                                srcfile={member.image}
-                              />
-                              &emsp;{member.full_name}
-                            </Option>
-                          )
+                        member.id == supervisor ? null : (
+                          <Option key={member.id} value={member.id}>
+                            <ImageSmall
+                              clsattr={"img-circle"}
+                              altname={member.full_name}
+                              srcfile={member.image}
+                            />
+                            &emsp;{member.full_name}
+                          </Option>
                         )
+                      )
                       : null}
                   </Select>
                 )}

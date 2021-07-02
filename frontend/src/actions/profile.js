@@ -36,7 +36,7 @@ export const getRoles = () => (dispatch, getState) => {
 };
 export const getUserProfile = id => (dispatch, getState) => {
   axios
-    .get(`/uspl/api/${id}/profile`, tokenConfig(getState))
+    .get(`/uspl/api/${id}/profile/`, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_USER_PROFILE,

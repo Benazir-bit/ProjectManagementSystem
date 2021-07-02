@@ -346,10 +346,10 @@ const mapStateToProps = state => ({
   members: state.member.members
 });
 
-const WrappedLogin = Form.create()(CreateUserForm);
+// const WrappedLogin = Form.create()(CreateUserForm);
 export default connect(mapStateToProps, {
   createUser,
   getAllDesignations,
   getGroupListAll,
   getTypeMembers
-})(WrappedLogin);
+})(CreateUserForm);

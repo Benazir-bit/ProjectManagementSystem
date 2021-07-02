@@ -121,7 +121,7 @@ const mapStateToProps = state => ({
   group: state.group.group
 });
 
-const WrappedGroupForm = Form.create()(UpdateGroupModal);
+// const WrappedGroupForm = Form.create()(UpdateGroupModal);
 export default connect(mapStateToProps, { getGroupDetails, UpdateGroup })(
-  WrappedGroupForm
+  UpdateGroupModal
 );

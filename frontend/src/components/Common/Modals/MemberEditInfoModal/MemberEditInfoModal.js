@@ -440,7 +440,7 @@ class MemberEditInfoModal extends React.Component {
                 //defaultValue={this.state.value}
                 value={this.state.value}
                 onChange={this.SelectGroup}
-                //value={groups}
+              //value={groups}
               >
                 {children}
               </Select>
@@ -598,7 +598,7 @@ const mapStateToProps = state => ({
   // members: state.member.members
 });
 
-const WrappedLogin = Form.create()(MemberEditInfoModal);
+// const WrappedLogin = Form.create()(MemberEditInfoModal);
 export default connect(mapStateToProps, {
   getUserProfile,
   getAllDesignations,
@@ -607,4 +607,4 @@ export default connect(mapStateToProps, {
   updateUser,
   getGroupListAll
   // getTypeMembers
-})(WrappedLogin);
+})(MemberEditInfoModal);

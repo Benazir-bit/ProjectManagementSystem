@@ -6,9 +6,9 @@ import { connect } from "react-redux";
 import { validateOtpCheck } from "../../../actions/otp";
 
 class Invalid extends Component {
-  componentWillMount() {
-    this.props.validateOtpCheck();
-  }
+  // componentWillMount() {
+  //   this.props.validateOtpCheck();
+  // }
   render() {
     return (
       <div className="container-fluid">
@@ -23,7 +23,7 @@ class Invalid extends Component {
             //subTitle={this.props.location.state.error == 'OTP INCORRECT' ? 'You have given incorrect OTP. Please check and Try again!' : 'You Session has been expired. Please regenerate your code!'}
             extra={[
               <Button>
-                <Link to="/otpinput">Try Again</Link>
+                {/* <Link to="/otpinput">Try Again</Link> */}
               </Button>
             ]}
           ></Result>

@@ -7,6 +7,12 @@ import Image from "../../Common/ImageSmall/ImageSmall";
 import { Anchor } from "antd";
 import { logout } from "../../../actions/auth";
 import Notification from "./Notification/Notification";
+import {
+  LogoutOutlined,
+  EditOutlined,
+  UploadOutlined,
+  HomeOutlined,
+} from "@ant-design/icons";
 const { Header } = Layout;
 
 class TopNav extends Component {
@@ -44,7 +50,7 @@ class TopNav extends Component {
         <Menu.Item {...props} key="1" className="mail-notification-box">
           <div className="row">
             <Link to="/weekly_status/new_status/">
-              {/* <Icon className={"header_icon"} type="edit" /> */}
+              <HomeOutlined className={"header_icon"} type="edit" />
               <strong>New Status Report</strong>
             </Link>
           </div>
@@ -53,7 +59,7 @@ class TopNav extends Component {
         <Menu.Item {...props} key="2" className="mail-notification-box">
           <div className="row">
             <Link to="/weekly_status/inbox/" id="inbox_link">
-              {/* <Icon className={"header_icon"} type="inbox" /> */}
+              <HomeOutlined className={"header_icon"} type="inbox" />
 
               <strong>
                 Inbox
@@ -66,7 +72,7 @@ class TopNav extends Component {
         <Menu.Item {...props} key="3" className="mail-notification-box">
           <div className="row">
             <Link to="/weekly_status/inbox/" id="inbox_link">
-              {/* <Icon className={"header_icon"} type="inbox" /> */}
+              <HomeOutlined className={"header_icon"} type="inbox" />
 
               <strong>
                 Sent <span className="badge" id="unread_mail_body" />
@@ -88,13 +94,13 @@ class TopNav extends Component {
           onClick={this.onClickHandle}
         >
           <Link to={`/profile/${this.props.user.id}`}>
-            {/* <Icon className={"header_icon"} type="user" /> */}
+            <HomeOutlined className={"header_icon"} type="user" />
             <strong>Profile</strong>
           </Link>
         </Menu.Item>
         <Menu.Item key="2" className="prolog_dropdown" onClick={this.onClick}>
           <span style={{ paddingLeft: "17px" }}>
-            {/* <Icon className={"header_icon"} type="logout" id="inbox_link" /> */}
+            <HomeOutlined className={"header_icon"} type="logout" id="inbox_link" />
             <strong>Logout </strong>
           </span>
         </Menu.Item>
@@ -112,19 +118,7 @@ class TopNav extends Component {
           defaultSelectedKeys={["0"]}
           style={{ lineHeight: "52px", float: "right" }}
         >
-          {/*  Off For Appraisal <Menu.Item key="1" align="right" className="header_li">
-            <Link className="ant-dropdown-link " to="/chat">
-              <Anchor className={"header_anchor"}>
-                <p className={"header_icon_link"}>
-                  <Icon
-                    className={"header_icon"}
-                    type="message"
-                    theme="filled"
-                  />
-                </p>
-              </Anchor>
-            </Link>
-          </Menu.Item> */}
+
           <Menu.Item key="2" align="right" className="header_li">
             <Notification />
           </Menu.Item>
@@ -138,7 +132,7 @@ class TopNav extends Component {
               <Link className="ant-dropdown-link " to="/">
                 <Anchor className={"header_anchor"}>
                   <p className={"header_icon_link"}>
-                    <Icon
+                    <HomeOutlined
                       className={"header_icon"}
                       type="mail"
                       theme="filled"
@@ -171,7 +165,7 @@ class TopNav extends Component {
                       : "https://www.sackettwaconia.com/wp-content/uploads/default-profile.png"
                   }
                 />{" "}
-                {/* <Icon type="down" /> */}
+                <HomeOutlined type="down" />
               </Link>
             </Dropdown>
           </Menu.Item>

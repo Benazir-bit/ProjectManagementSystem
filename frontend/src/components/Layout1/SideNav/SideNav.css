@@ -1,0 +1,26 @@
+#sidenavpic {
+  text-align: center;
+}
+.sidescroll .ant-layout-sider-children{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+#sidescrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+#sidescrollbar::-webkit-scrollbar-track {
+  background: #001529; 
+}
+ 
+/* Handle */
+#sidescrollbar::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+#sidescrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

@@ -184,8 +184,8 @@ class ProjectDetails extends Component {
                     {this.props.project ? (
                       project.details.completed == false ? (
                         this.props.user.is_teamleader ||
-                        this.props.user.is_staff ||
-                        this.props.user.id ==
+                          this.props.user.is_staff ||
+                          this.props.user.id ==
                           this.props.project.details.supervisor ? (
                           <CardBodyOnly id="ProjDetailAllBtn">
                             <center className="wrapper">
@@ -302,7 +302,7 @@ class ProjectDetails extends Component {
             </div>
           </div>
         </Content>
-        <ActivityList id={this.props.match.params.id} type={"project"} />
+        {/* <ActivityList id={this.props.match.params.id} type={"project"} /> */}
       </Fragment>
     );
   }

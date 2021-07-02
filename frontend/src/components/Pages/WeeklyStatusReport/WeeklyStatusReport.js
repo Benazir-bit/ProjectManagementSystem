@@ -77,8 +77,8 @@ class WeeklyStatusReport extends Component {
             ? this.props.weekly_report.workreport.report_type === "weekly"
               ? "1"
               : this.props.weekly_report.workreport.report_type === "monthly"
-              ? "2"
-              : "3"
+                ? "2"
+                : "3"
             : "1"
         });
       }
@@ -271,9 +271,9 @@ class WeeklyStatusReport extends Component {
     const formItemLayout =
       formLayout === "horizontal"
         ? {
-            labelCol: { span: 3 },
-            wrapperCol: { span: 14 }
-          }
+          labelCol: { span: 3 },
+          wrapperCol: { span: 14 }
+        }
         : null;
 
     const { RangePicker } = DatePicker;
@@ -323,8 +323,8 @@ class WeeklyStatusReport extends Component {
         ? this.props.weekly_report.workreport.report_type === "weekly"
           ? "1"
           : this.props.weekly_report.workreport.report_type === "monthly"
-          ? "2"
-          : "3"
+            ? "2"
+            : "3"
         : "1",
       rules: [
         {
@@ -338,12 +338,12 @@ class WeeklyStatusReport extends Component {
       initialValue: this.props.weekly_report
         ? this.props.weekly_report.workreport.week
           ? moment()
-              .year(this.props.weekly_report.workreport.week.split("-")[0])
-              .week(
-                this.props.weekly_report.workreport.week
-                  .split("-")[1]
-                  .match(/[a-z]+|[^a-z]+/gi)[0]
-              )
+            .year(this.props.weekly_report.workreport.week.split("-")[0])
+            .week(
+              this.props.weekly_report.workreport.week
+                .split("-")[1]
+                .match(/[a-z]+|[^a-z]+/gi)[0]
+            )
           : undefined
         : undefined,
 
@@ -375,9 +375,9 @@ class WeeklyStatusReport extends Component {
         ? this.props.weekly_report.workreport.from_date &&
           this.props.weekly_report.workreport.to_date
           ? [
-              moment(this.props.weekly_report.workreport.from_date),
-              moment(this.props.weekly_report.workreport.to_date)
-            ]
+            moment(this.props.weekly_report.workreport.from_date),
+            moment(this.props.weekly_report.workreport.to_date)
+          ]
           : undefined
         : undefined,
 
@@ -466,7 +466,7 @@ class WeeklyStatusReport extends Component {
                     className="descriptionTablework"
                     // title=""
                     layout={formLayout}
-                    // onSubmit={this.handleSubmit}
+                  // onSubmit={this.handleSubmit}
                   >
                     <Form.Item label="To">
                       {getFieldDecorator(
@@ -502,7 +502,7 @@ class WeeklyStatusReport extends Component {
                       )}
 
                       {this.state.selectedUsersCc.length < 1 &&
-                      this.state.showCc == false ? (
+                        this.state.showCc == false ? (
                         <Link
                           style={{ paddingLeft: 10 }}
                           onClick={this.handleCc}
@@ -557,7 +557,7 @@ class WeeklyStatusReport extends Component {
                           allowClear
                           placeholder="Slecet Date Type"
                           onChange={this.handleChangeType}
-                          // disabled={modifyData ? true : false}
+                        // disabled={modifyData ? true : false}
                         >
                           <Option value="1">Weekly Report</Option>
                           <Option value="2">Monthly Report</Option>
@@ -580,21 +580,21 @@ class WeeklyStatusReport extends Component {
                           this.state.data_completed.length > 0
                             ? this.state.data_completed
                             : this.props.weekly_report
-                            ? this.props.weekly_report.activity_completed.map(
+                              ? this.props.weekly_report.activity_completed.map(
                                 (item, i) =>
-                                  // console.log(
-                                  //   item.task,
-                                  //   item.description,
-                                  //   "item check test"
-                                  // ),
-                                  ({
-                                    key: i,
-                                    sl: i + 1,
-                                    task: item.task,
-                                    description_of_effort: item.description
-                                  })
+                                // console.log(
+                                //   item.task,
+                                //   item.description,
+                                //   "item check test"
+                                // ),
+                                ({
+                                  key: i,
+                                  sl: i + 1,
+                                  task: item.task,
+                                  description_of_effort: item.description
+                                })
                               )
-                            : []
+                              : []
                         }
                       />
                     </Form.Item>
@@ -610,7 +610,7 @@ class WeeklyStatusReport extends Component {
                           this.state.data_progress.length > 0
                             ? this.state.data_progress
                             : this.props.weekly_report
-                            ? this.props.weekly_report.activity_progress.map(
+                              ? this.props.weekly_report.activity_progress.map(
                                 (item, i) => ({
                                   key: i,
                                   sl: i + 1,
@@ -619,7 +619,7 @@ class WeeklyStatusReport extends Component {
                                   due_date: item.due_date
                                 })
                               )
-                            : []
+                              : []
                         }
                       />
                     </Form.Item>
@@ -637,7 +637,7 @@ class WeeklyStatusReport extends Component {
                           this.state.data_next_week.length > 0
                             ? this.state.data_next_week
                             : this.props.weekly_report
-                            ? this.props.weekly_report.activity_nextWeek.map(
+                              ? this.props.weekly_report.activity_nextWeek.map(
                                 (item, i) => ({
                                   key: i,
                                   sl: i + 1,
@@ -645,7 +645,7 @@ class WeeklyStatusReport extends Component {
                                   description_of_effort3: item.description
                                 })
                               )
-                            : []
+                              : []
                         }
                       />
                     </Form.Item>
@@ -663,13 +663,13 @@ class WeeklyStatusReport extends Component {
                           this.state.data_issue.length > 0
                             ? this.state.data_issue
                             : this.props.weekly_report
-                            ? this.props.weekly_report.issue.map((item, i) => ({
+                              ? this.props.weekly_report.issue.map((item, i) => ({
                                 key: i,
                                 sl: i + 1,
                                 issue_name: item.name,
                                 description_of_issue: item.description
                               }))
-                            : []
+                              : []
                         }
                       />
                     </Form.Item>
@@ -746,7 +746,7 @@ class WeeklyStatusReport extends Component {
     );
   }
 }
-const WeeklyStatusReportCheckForm = Form.create()(WeeklyStatusReport);
+// const WeeklyStatusReportCheckForm = Form.create()(WeeklyStatusReport);
 
 const mapStateToProps = state => ({
   users: state.attendance.users,
@@ -758,4 +758,4 @@ export default connect(mapStateToProps, {
   sendReport,
   draftReport,
   searchDraft
-})(WeeklyStatusReportCheckForm);
+})(WeeklyStatusReport);

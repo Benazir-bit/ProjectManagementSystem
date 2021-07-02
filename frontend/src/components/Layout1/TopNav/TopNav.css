@@ -1,0 +1,44 @@
+.topHeader {
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+}
+.notispan {
+  margin-top: -6px;
+  margin-right: -6px;
+}
+
+.antd-pro-components-global-header-index-right {
+  display: flex;
+  float: right;
+  margin-left: auto;
+  overflow: hidden;
+}
+.antd-pro-components-global-header-index-right
+  .antd-pro-components-global-header-index-action {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.antd-pro-components-global-header-index-right
+  .antd-pro-components-global-header-index-search {
+  padding: 0 12px;
+}
+.ant-pro-global-header {
+  display: flex;
+  height: 100%;
+}
+
+.ant-pro-global-header {
+  float: right;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .ant-layout-header {
+    padding: 0 20px;
+  }
+  .ant-pro-global-header {
+    float: none;
+  }
+}

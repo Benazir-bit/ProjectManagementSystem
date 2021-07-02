@@ -11,7 +11,7 @@ const { TextArea } = Input;
 const InputGroup = Input.Group;
 const { Option } = Select;
 
-const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
+const CollectionCreateForm = (
   class extends Component {
     render() {
       const { project } = this.props;
@@ -93,7 +93,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                     mode="multiple"
                     size="default"
                     placeholder="Select Supervisor"
-                    // removeIcon
+                  // removeIcon
                   >
                     {this.props.members.map(member => (
                       <Option key={member.id} value={member.id}>

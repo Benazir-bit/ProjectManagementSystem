@@ -10,7 +10,7 @@ import "./TaskUpdateModal.css";
 const { TextArea } = Input;
 const { Option } = Select;
 
-const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
+const CollectionCreateForm = (
   class extends Component {
     render() {
       const { task } = this.props;

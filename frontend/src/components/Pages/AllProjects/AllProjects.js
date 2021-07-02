@@ -47,13 +47,13 @@ class AllProjects extends Component {
           Math.ceil(
             document.documentElement.scrollHeight - window.pageYOffset
           ) +
-            1 ===
-            document.documentElement.clientHeight ||
+          1 ===
+          document.documentElement.clientHeight ||
           Math.ceil(
             document.documentElement.scrollHeight - window.pageYOffset
           ) -
-            1 ===
-            document.documentElement.clientHeight ||
+          1 ===
+          document.documentElement.clientHeight ||
           Math.round(
             document.documentElement.scrollHeight - window.pageYOffset
           ) === document.documentElement.clientHeight
@@ -65,6 +65,7 @@ class AllProjects extends Component {
   }
 
   loadData = () => {
+    console.log("projectsssssss")
     //GET TOKEN FROM STATE
     const token = localStorage.getItem("token");
 
@@ -81,6 +82,7 @@ class AllProjects extends Component {
     }
     this.setState({ loading: true, fetchingData: true });
     const { offset, limit } = this.state;
+    console.log("projectsssssss inside", this.props.match.params.type, this.props.match.params.filter)
     axios
       .get(
         `/uspl/api/${this.props.match.params.type}/projects/${this.props.match.params.filter}/${this.props.match.params.id}?offset=${offset}&limit=${limit}`,
@@ -198,8 +200,8 @@ class AllProjects extends Component {
                       this.props.match.params.type == "group"
                         ? "Group Projects"
                         : this.props.match.params.type == "user"
-                        ? "User Projects"
-                        : null
+                          ? "User Projects"
+                          : null
                     }
                     title_color={"#337ab7"}
                   />
@@ -225,7 +227,7 @@ class AllProjects extends Component {
             </div>
           </div>
         </Content>
-        <ActivityList id={this.props.match.params.id} type={"all"} />
+        {/* <ActivityList id={this.props.match.params.id} type={"all"} /> */}
       </Fragment>
     );
   }

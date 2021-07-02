@@ -31,12 +31,8 @@ class SignIn extends Component {
   };
 
   onSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        this.props.login(values.userid, values.password);
-      }
-    });
+    console.log("ooo")
+    this.props.login(e.userid, e.password);
   };
 
   render() {
@@ -77,7 +73,11 @@ class SignIn extends Component {
                 padding: "15px"
               }}
             >
-              <Form onSubmit={this.onSubmit} className="login-form">
+              <Form
+                // initialValues={{
+                //   name:
+                // }}
+                onFinish={this.onSubmit} className="login-form">
                 <Form.Item name="userid" rules={[
                   { required: true, message: "Please input your username!" }
                 ]}>
