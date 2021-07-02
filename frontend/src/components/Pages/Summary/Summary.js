@@ -79,43 +79,43 @@ class Summary extends Component {
   //   // this.props.getSummaryList("1", "2020-01-01", "2020-05-02");
 
   // };
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = fieldsValue => {
+    // e.preventDefault();
     // error handling on submit
-    this.props.form.validateFields((err, fieldsValue) => {
-      console.log(
-        "jjjjjjjj",
-        this.state.groupId,
-        fieldsValue["select-user"],
-        this.state.dateRange
-      );
-      if (!err) {
-        console.log(
-          this.state.groupId,
-          fieldsValue["select-user"],
-          this.state.dateRange
-        );
-        this.props.getSummaryList(
-          this.state.groupId,
-          this.state.dateRange[0],
-          this.state.dateRange[1],
-          fieldsValue["select-user"]
-        );
-        // const values = {
-        //   username: fieldsValue["select-user"],
-        //   monthPicker: fieldsValue["month-picker"].format("YYYY-MM")
-        // };
-        // if (this.props.self) {
-        //   this.props.getSelfAttendance(values.monthPicker);
-        // } else {
-        //   this.props.getUserAttendance(
-        //     "user",
-        //     values.username,
-        //     values.monthPicker
-        //   );
-        // }
-      }
-    });
+    // this.props.form.validateFields((err, fieldsValue) => {
+    console.log(
+      "jjjjjjjj",
+      this.state.groupId,
+      fieldsValue["select-user"],
+      this.state.dateRange
+    );
+    // if (!err) {
+    console.log(
+      this.state.groupId,
+      fieldsValue["select-user"],
+      this.state.dateRange
+    );
+    this.props.getSummaryList(
+      this.state.groupId,
+      this.state.dateRange[0],
+      this.state.dateRange[1],
+      fieldsValue["select-user"]
+    );
+    // const values = {
+    //   username: fieldsValue["select-user"],
+    //   monthPicker: fieldsValue["month-picker"].format("YYYY-MM")
+    // };
+    // if (this.props.self) {
+    //   this.props.getSelfAttendance(values.monthPicker);
+    // } else {
+    //   this.props.getUserAttendance(
+    //     "user",
+    //     values.username,
+    //     values.monthPicker
+    //   );
+    // }
+    // }
+    // });
   };
   handleChange = value => {
     this.setState({
@@ -134,7 +134,7 @@ class Summary extends Component {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    // const { getFieldDecorator } = this.props.form;
     let options = this.state.data.map(d => (
       <Option key={d.value} value={d.value}>
         <ImageSmall
@@ -148,14 +148,14 @@ class Summary extends Component {
     ));
     console.log("options", options);
 
-    const config_search = {
-      setFieldsValue: this.state.userID ? this.state.userID : undefined,
-      rules: [
-        {
-          required: false
-        }
-      ]
-    };
+    // const config_search = {
+    //   setFieldsValue: this.state.userID ? this.state.userID : undefined,
+    //   rules: [
+    //     {
+    //       required: false
+    //     }
+    //   ]
+    // };
     let groups = [];
     if (this.state.isAdmin) {
       if (this.props.groups) {
@@ -262,7 +262,11 @@ class Summary extends Component {
                   <br />
                   <TitleHeader title={"Summary"} title_color={"#337ab7"} />
                   <br />
-                  <Form layout="inline" onSubmit={this.handleSubmit}>
+                  <Form layout="inline" onFinish={this.handleSubmit}
+                    setFieldsValue={{
+                      'select-user': this.state.userID ? this.state.userID : undefined,
+                    }}
+                  >
                     <Fragment>
                       <Fragment>
                         <Form.Item>
@@ -283,31 +287,26 @@ class Summary extends Component {
                             {groups}
                           </Select>
                         </Form.Item>
-                        <Form.Item>
-                          {getFieldDecorator(
-                            "select-user",
-                            config_search
-                          )(
-                            <Select
-                              showSearch
-                              allowClear
-                              placeholder="Search User"
-                              style={{ width: 200 }}
-                              defaultActiveFirstOption={true}
-                              showArrow={true}
-                              filterOption={true}
-                              notFoundContent={
-                                this.state.fetching ? (
-                                  <Spin size="small" />
-                                ) : null
-                              }
-                              onSearch={this.handleSearch}
-                              onChange={this.handleChange}
-                            // onSelect={this.handleChange}
-                            >
-                              {options}
-                            </Select>
-                          )}
+                        <Form.Item name="select-user" rules={[{ required: false }]}>
+                          <Select
+                            showSearch
+                            allowClear
+                            placeholder="Search User"
+                            style={{ width: 200 }}
+                            defaultActiveFirstOption={true}
+                            showArrow={true}
+                            filterOption={true}
+                            notFoundContent={
+                              this.state.fetching ? (
+                                <Spin size="small" />
+                              ) : null
+                            }
+                            onSearch={this.handleSearch}
+                            onChange={this.handleChange}
+                          // onSelect={this.handleChange}
+                          >
+                            {options}
+                          </Select>
                         </Form.Item>
                         <Form.Item>
                           <span style={{ left: "39%", position: "absolute" }}>

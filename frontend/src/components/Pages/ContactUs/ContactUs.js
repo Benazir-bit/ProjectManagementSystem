@@ -62,7 +62,7 @@ class ContactUs extends Component {
                   <Col span={24}>
                     <Form
                       style={{ marginTop: "10px" }}
-                      onSubmit={this.handleSubmit}
+                      onFinish={this.handleSubmit}
                     >
                       <Col span={14}>
                         <ContactUsForm
