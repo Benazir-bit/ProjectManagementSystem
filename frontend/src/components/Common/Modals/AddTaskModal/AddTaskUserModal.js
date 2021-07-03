@@ -43,38 +43,30 @@ const CollectionCreateForm = (
             </h5>
 
             <Form layout="vertical" id="AddTaskModalForm">
-              <Form.Item label="Task Name">
-                {getFieldDecorator("name", {
-                  rules: [{ required: true, message: "Enter Task Name!" }]
-                })(<Input placeholder="Enter Task Name" />)}
+              <Form.Item label="Task Name" name="name" rules={[{ required: true, message: "Enter Task Name!" }]}>
+                <Input placeholder="Enter Task Name" />
               </Form.Item>
 
-              <Form.Item label="Details">
-                {getFieldDecorator("details")(
-                  <TextArea
-                    placeholder="Details About the Task"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
+              <Form.Item label="Details" name="details">
+                <TextArea
+                  placeholder="Details About the Task"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
               </Form.Item>
 
-              <Form.Item label="Due Date">
-                {getFieldDecorator("due_date", {
-                  rules: [{ required: true, message: "Enter Due Date!" }]
-                })(
-                  <DatePicker
-                    disabledDate={d =>
-                      !d ||
-                      d.isBefore(today) ||
-                      d.isAfter(
-                        moment(
-                          this.props.project_id.due_date,
-                          "YYYY-MM-DD"
-                        ).add(1, "days")
-                      )
-                    }
-                  />
-                )}
+              <Form.Item label="Due Date" name="due_date" rules={[{ required: true, message: "Enter Due Date!" }]}>
+                <DatePicker
+                  disabledDate={d =>
+                    !d ||
+                    d.isBefore(today) ||
+                    d.isAfter(
+                      moment(
+                        this.props.project_id.due_date,
+                        "YYYY-MM-DD"
+                      ).add(1, "days")
+                    )
+                  }
+                />
               </Form.Item>
 
               <Form.Item label="Assigned To">
@@ -88,13 +80,11 @@ const CollectionCreateForm = (
                 })(<Input value={this.props.user_id.full_name} readOnly />)}
               </Form.Item> */}
 
-              <Form.Item label="Notes">
-                {getFieldDecorator("notes")(
-                  <TextArea
-                    placeholder="Notes"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
+              <Form.Item label="Notes" name="notes">
+                <TextArea
+                  placeholder="Notes"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
               </Form.Item>
             </Form>
           </Modal>

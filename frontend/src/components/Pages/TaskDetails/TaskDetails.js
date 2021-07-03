@@ -179,7 +179,7 @@ class TaskDetails extends Component {
             </div>
           </div>
         </Content>
-        <ActivityList id={this.props.match.params.id} type={"task"} />
+        {/* <ActivityList id={this.props.match.params.id} type={"task"} /> */}
       </Fragment>
     );
   }

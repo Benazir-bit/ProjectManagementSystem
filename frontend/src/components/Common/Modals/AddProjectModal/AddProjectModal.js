@@ -40,45 +40,58 @@ const CollectionCreateForm = (
             </h5> */}
 
             <Form layout="vertical" id="ProjectModalForm">
-              <Form.Item label="Project Name">
-                {getFieldDecorator("projectName", {
-                  rules: [{ required: true, message: "Enter Project Name!" }]
-                })(<Input placeholder="Enter Project Name" />)}
+              <Form.Item label="Project Name" name="projectName" rules={[{ required: true, message: "Enter Project Name!" }]}>
+                <Input placeholder="Enter Project Name" />
               </Form.Item>
 
-              <Form.Item label="Details">
-                {getFieldDecorator("details", {
-                  rules: [{ required: true, message: "Enter Project Detail!" }]
-                })(
-                  <TextArea
-                    placeholder="Details About the Project"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
+              <Form.Item label="Details" name="details" rules={[{ required: true, message: "Enter Project Detail!" }]}>
+                <TextArea
+                  placeholder="Details About the Project"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
+              </Form.Item>
+              <Form.Item label="Due Date" name="date_picker" rules={[{ required: true, message: "Enter Due Date!" }]}>
+                <DatePicker disabledDate={d => !d || d.isBefore(today)} />
+              </Form.Item>
+              <Form.Item label="Supervisor" name="supervisor" rules={[
+                { required: true, message: "Select Project Supervisor!" }
+              ]}>
+                <Select
+                  style={{ width: "100%", height: "36px" }}
+                  placeholder="Select Supervisor"
+                  onChange={supervisorChange}
+                  notFoundContent={
+                    !this.props.group ? <Spin size="small" /> : null
+                  }
+                >
+                  {this.props.group && this.props.group.user_set
+                    ? this.props.group.user_set.map(member => (
+                      <Option key={member.id} value={member.id}>
+                        <ImageSmall
+                          clsattr={"img-circle"}
+                          altname={member.full_name}
+                          srcfile={member.image}
+                        />
+                        &emsp;{member.full_name}
+                      </Option>
+                    ))
+                    : null}
+                </Select>
               </Form.Item>
 
-              <Form.Item label="Due Date">
-                {getFieldDecorator("date_picker", {
-                  rules: [{ required: true, message: "Enter Due Date!" }]
-                })(<DatePicker disabledDate={d => !d || d.isBefore(today)} />)}
-              </Form.Item>
-
-              <Form.Item label="Supervisor">
-                {getFieldDecorator("supervisor", {
-                  rules: [
-                    { required: true, message: "Select Project Supervisor!" }
-                  ]
-                })(
-                  <Select
-                    style={{ width: "100%", height: "36px" }}
-                    placeholder="Select Supervisor"
-                    onChange={supervisorChange}
-                    notFoundContent={
-                      !this.props.group ? <Spin size="small" /> : null
-                    }
-                  >
-                    {this.props.group && this.props.group.user_set
-                      ? this.props.group.user_set.map(member => (
+              <Form.Item label="Add Members" name="projMembers" rules={[
+                { required: true, message: "Select Project Members!" }
+              ]}>
+                <Select
+                  mode="multiple"
+                  size="default"
+                  style={{ width: "100%", height: "36px" }}
+                  placeholder="Select Members"
+                  id="multiSelect"
+                >
+                  {supervisor && this.props.group && this.props.group.user_set
+                    ? this.props.group.user_set.map(member =>
+                      member.id == supervisor ? null : (
                         <Option key={member.id} value={member.id}>
                           <ImageSmall
                             clsattr={"img-circle"}
@@ -87,49 +100,16 @@ const CollectionCreateForm = (
                           />
                           &emsp;{member.full_name}
                         </Option>
-                      ))
-                      : null}
-                  </Select>
-                )}
-              </Form.Item>
-
-              <Form.Item label="Add Members">
-                {getFieldDecorator("projMembers", {
-                  rules: [
-                    { required: true, message: "Select Project Members!" }
-                  ]
-                })(
-                  <Select
-                    mode="multiple"
-                    size="default"
-                    style={{ width: "100%", height: "36px" }}
-                    placeholder="Select Members"
-                    id="multiSelect"
-                  >
-                    {supervisor && this.props.group && this.props.group.user_set
-                      ? this.props.group.user_set.map(member =>
-                        member.id == supervisor ? null : (
-                          <Option key={member.id} value={member.id}>
-                            <ImageSmall
-                              clsattr={"img-circle"}
-                              altname={member.full_name}
-                              srcfile={member.image}
-                            />
-                            &emsp;{member.full_name}
-                          </Option>
-                        )
                       )
-                      : null}
-                  </Select>
-                )}
+                    )
+                    : null}
+                </Select>
               </Form.Item>
-              <Form.Item label="Notes">
-                {getFieldDecorator("notes")(
-                  <TextArea
-                    placeholder="Notes"
-                    autosize={{ minRows: 2, maxRows: 6 }}
-                  />
-                )}
+              <Form.Item label="Notes" name="notes">
+                <TextArea
+                  placeholder="Notes"
+                  autosize={{ minRows: 2, maxRows: 6 }}
+                />
               </Form.Item>
             </Form>
           </Modal>

@@ -52,7 +52,7 @@ class EditableCell extends Component {
   };
 
   renderCell = form => {
-    this.form = form_;
+    // this.form = form_;
     const { children, dataIndex, record, title } = this.props;
     const { editing } = this.state;
     return editing ? (

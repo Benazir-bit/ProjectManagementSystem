@@ -42,42 +42,36 @@ const CollectionCreateForm = (
             validateToNextPassword={this.validateToNextPassword}
           >
             <Form layout="vertical" id="ProjectModalForm">
-              <Form.Item label="Enter Old Password">
-                {getFieldDecorator("old_password", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please input your old password!"
-                    }
-                  ]
-                })(<Input.Password />)}
+              <Form.Item label="Enter Old Password" name="old_password" rules={[
+                {
+                  required: true,
+                  message: "Please input your old password!"
+                }
+              ]}>
+                <Input.Password />
               </Form.Item>
 
-              <Form.Item label="Password">
-                {getFieldDecorator("new_password", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please input your new password!"
-                    },
-                    {
-                      validator: this.validatePassword
-                    }
-                  ]
-                })(<Input.Password />)}
+              <Form.Item label="Password" name="new_password" rules={[
+                {
+                  required: true,
+                  message: "Please input your new password!"
+                },
+                {
+                  validator: this.validatePassword
+                }
+              ]}>
+                <Input.Password />
               </Form.Item>
-              <Form.Item label="Confirm Password">
-                {getFieldDecorator("new_password1", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please confirm your new password!"
-                    },
-                    {
-                      validator: this.compareToFirstPassword
-                    }
-                  ]
-                })(<Input.Password />)}
+              <Form.Item label="Confirm Password" name="new_password1" rules={[
+                {
+                  required: true,
+                  message: "Please confirm your new password!"
+                },
+                {
+                  validator: this.compareToFirstPassword
+                }
+              ]}>
+                <Input.Password />
               </Form.Item>
             </Form>
           </Modal>

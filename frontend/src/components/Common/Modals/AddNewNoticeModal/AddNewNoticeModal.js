@@ -32,43 +32,29 @@ const CollectionCreateForm = (
             maskClosable={false}
           >
             <Form layout="vertical" id="ProjectModalForm">
-              <Form.Item label="Notice Title">
-                {getFieldDecorator("title", {
-                  rules: [{ required: true, message: "Enter Notice Title!" }]
-                })(<Input />)}
+              <Form.Item name="title" label="Notice Title" rules={[{ required: true, message: "Enter Notice Title!" }]}>
+                <Input />
               </Form.Item>
 
-              <Form.Item label="Details">
-                {getFieldDecorator("body", {
-                  rules: [{ required: true, message: "Enter Details!" }]
-                })(
-                  <TextArea
-                    placeholder="Details About the Notice"
-                    autosize={{ minRows: 4, maxRows: 8 }}
-                  />
-                )}
+              <Form.Item label="Details" name="body" rules={[{ required: true, message: "Enter Details!" }]}>
+                <TextArea
+                  placeholder="Details About the Notice"
+                  autosize={{ minRows: 4, maxRows: 8 }}
+                />
               </Form.Item>
 
-              <Form.Item label="Expires On">
-                {getFieldDecorator("expires_on", {
-                  rules: [{ required: true, message: "Enter Expiry Date!" }]
-                })(
-                  <DatePicker
-                    disabledDate={d => !d || d.isBefore(today)}
-                    format="DD MMM, YYYY, hh:mm a"
-                    showTime={{ defaultValue: moment("11:59 PM", "hh:mm A") }}
-                  />
-                )}
+              <Form.Item label="Expires On" name="expires_on" rules={[{ required: true, message: "Enter Expiry Date!" }]}>
+                <DatePicker
+                  disabledDate={d => !d || d.isBefore(today)}
+                  format="DD MMM, YYYY, hh:mm a"
+                  showTime={{ defaultValue: moment("11:59 PM", "hh:mm A") }}
+                />
               </Form.Item>
 
-              <Form.Item>
-                {getFieldDecorator("important", {
-                  rules: [{ required: false }]
-                })(
-                  <center>
-                    <Checkbox onChange={this.onChange}>Important</Checkbox>
-                  </center>
-                )}
+              <Form.Item name="important" rules={[{ required: false }]}>
+                <center>
+                  <Checkbox onChange={this.onChange}>Important</Checkbox>
+                </center>
               </Form.Item>
             </Form>
           </Modal>

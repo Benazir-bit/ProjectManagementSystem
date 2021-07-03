@@ -135,71 +135,57 @@ class NoticeEditModal extends React.Component {
           destroyOnClose={true}
         >
           <br />
-          <Form {...formItemLayout} className={"formEdit"}>
-            <Form.Item label="Notice Title:" className={"formLabel"}>
-              {getFieldDecorator("title", {
-                initialValue: this.props.notice.title,
-                rules: [
-                  { required: true, message: "Please Enter Notice Title!" }
-                ]
-              })(<Input />)}
-            </Form.Item>
 
-            <Form.Item label="Details:" className={"formLabel"}>
-              {getFieldDecorator("body", {
-                initialValue: this.props.notice.body,
-                rules: [
-                  { required: true, message: "Please Enter Notice Detail!" }
-                ]
-              })(<Input />)}
-            </Form.Item>
+          <Form {...formItemLayout} className={"formEdit"}
+            initialValues={{
+              title: this.props.notice.title,
+              body: this.props.notice.body,
+              created_on: moment(this.state.created_date),
+              expires_on: moment(this.state.expired_date),
 
-            <Form.Item label="Created On" className={"formLabel"}>
-              {getFieldDecorator("created_on", {
-                initialValue: moment(this.state.created_date)
-              })(
-                <DatePicker
-                  format="DD MMM, YYYY, hh:mm a"
-                  initialValue={moment(this.state.created_date)}
-                  disabled
-                  showTime={{
-                    user12hours: true
-                  }}
-                />
-              )}
+            }}>
+            <Form.Item label="Notice Title:" name="title" className={"formLabel"} rules={[
+              { required: true, message: "Please Enter Notice Title!" }
+            ]}>
+              <Input />
             </Form.Item>
-
-            <Form.Item label="Expires On" className={"formLabel"}>
-              {getFieldDecorator("expires_on", {
-                initialValue: moment(this.state.expired_date),
-                rules: [
-                  { required: true, message: "Please Enter Expired Date!" }
-                ]
-              })(
-                <DatePicker
-                  disabledDate={d => !d || d.isBefore(today)}
-                  format="DD MMM, YYYY, hh:mm a"
-                  // initialValue={moment(this.state.expired_date)}
-                  showTime={{
-                    user12hours: true
-                  }}
-                />
-              )}
+            <Form.Item label="Details:" name="body" className={"formLabel"} rules={[
+              { required: true, message: "Please Enter Notice Detail!" }
+            ]}><Input />
             </Form.Item>
+            <Form.Item label="Created On" name="created_on" className={"formLabel"}>
+              <DatePicker
+                format="DD MMM, YYYY, hh:mm a"
+                initialValue={moment(this.state.created_date)}
+                disabled
+                showTime={{
+                  user12hours: true
+                }}
+              />
+            </Form.Item>
+            <Form.Item label="Expires On" name="expires_on" className={"formLabel"} rules={[
+              { required: true, message: "Please Enter Expired Date!" }
+            ]}>
+              <DatePicker
+                disabledDate={d => !d || d.isBefore(today)}
+                format="DD MMM, YYYY, hh:mm a"
+                // initialValue={moment(this.state.expired_date)}
+                showTime={{
+                  user12hours: true
+                }}
+              />
 
-            <Form.Item>
-              {getFieldDecorator("important", {
-                rules: [{ required: false }]
-              })(
-                <center>
-                  <Checkbox
-                    checked={this.state.important}
-                    onChange={this.onChange}
-                  >
-                    Important
-                  </Checkbox>
-                </center>
-              )}
+            </Form.Item>
+            <Form.Item name="important" rules={[{ required: false }]}>
+
+              <center>
+                <Checkbox
+                  checked={this.state.important}
+                  onChange={this.onChange}
+                >
+                  Important
+                </Checkbox>
+              </center>
             </Form.Item>
           </Form>
         </Modal>

@@ -102,32 +102,25 @@ class RaiseIssueModal extends Component {
           <br />
 
           <Form
-            onSubmit={this.handleSubmit}
+            onFinish={this.handleSubmit}
             layout="vertical"
             id="IssueModalForm"
           >
-            <Form.Item label="Issue Name (Max Length : 50)">
-              {getFieldDecorator("name", {
-                rules: [{ required: true, message: "Enter Issue Name!" }]
-              })(<Input type="text" name="name" />)}
+            <Form.Item label="Issue Name (Max Length : 50)" name="name" rules={[{ required: true, message: "Enter Issue Name!" }]}>
+              <Input type="text" name="name" />
             </Form.Item>
-            <Form.Item label="Details">
-              {getFieldDecorator("details")(
-                <TextEditor
-                  style={{ backgroundColor: "#ffffff" }}
-                  ref={this.getTextEditor}
-                  setParentState={this.setValue}
-                />
-              )}
+            <Form.Item label="Details" name="details">
+              <TextEditor
+                style={{ backgroundColor: "#ffffff" }}
+                ref={this.getTextEditor}
+                setParentState={this.setValue}
+              />
             </Form.Item>
-            <Form.Item>
-              {getFieldDecorator("paused", {
-                rules: [{ required: false }]
-              })(
-                <center>
-                  <Checkbox onChange={this.onChange}>Task Paused</Checkbox>
-                </center>
-              )}
+            <Form.Item name="paused"
+              rules={[{ required: false }]}>
+              <center>
+                <Checkbox onChange={this.onChange}>Task Paused</Checkbox>
+              </center>
             </Form.Item>
             <Divider />
             <Form.Item style={{ float: "right" }}>

@@ -132,7 +132,7 @@ class UserReportstoEditModal extends React.Component {
     }
     const { data, fetching } = this.state;
     const { form } = this.props;
-    const { getFieldDecorator } = form;
+
 
     const formItemLayout = {
       labelCol: {

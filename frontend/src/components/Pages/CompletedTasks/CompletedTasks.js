@@ -266,7 +266,7 @@ class CompletedTasks extends Component {
             </div>
           </div>
         </Content>
-        <ActivityList id={this.props.user.id} type={"all"} />
+        {/* <ActivityList id={this.props.user.id} type={"all"} /> */}
       </Fragment>
     );
   }
