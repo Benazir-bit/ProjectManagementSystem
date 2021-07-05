@@ -110,11 +110,12 @@ class RaiseIssueModal extends Component {
               <Input type="text" name="name" />
             </Form.Item>
             <Form.Item label="Details" name="details">
-              <TextEditor
+              <textarea />
+              {/* <TextEditor
                 style={{ backgroundColor: "#ffffff" }}
                 ref={this.getTextEditor}
                 setParentState={this.setValue}
-              />
+              /> */}
             </Form.Item>
             <Form.Item name="paused"
               rules={[{ required: false }]}>
