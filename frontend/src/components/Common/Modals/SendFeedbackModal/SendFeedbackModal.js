@@ -37,10 +37,8 @@ class SendFeedbackModal extends Component {
   onCancel = () => {
     this.setState({ visible: false });
   };
-
+  formRef = React.createRef();
   handleSubmit = e => {
-    // const { form } = this.props;
-    e.preventDefault();
     this.props.sendfeedback(
       this.props.task.id,
       this.state.value,
@@ -52,13 +50,11 @@ class SendFeedbackModal extends Component {
       paused: true
     };
     this.props.submitCancelTask(body);
-    this.props.form.resetFields();
+    this.formRef.current.resetFields();
     this.setState({ visible: false });
   };
 
-  saveFormRef = formRef => {
-    this.formRef = formRef;
-  };
+
 
   render() {
     return (
@@ -89,6 +85,7 @@ class SendFeedbackModal extends Component {
             onFinish={this.handleSubmit}
             layout="vertical"
             id="FeedBackModalForm"
+            ref={this.formRef}
           >
             <Title level={4}>Give Feedback (Max Length : 150)</Title>
             <TextEditor

@@ -37,34 +37,30 @@ class RaiseIssueModal extends Component {
       loading: true
     });
   }
+  formRef = React.createRef();
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        var currentDate = new Date();
-        this.props.raiseIssue(
-          this.props.task.id,
-          values.name,
-          this.state.value,
-          this.props.task.owner.id,
-          this.state.check
-        );
-        console.log("IMPORTANT", this.state.check);
-        if (this.state.check) {
-          const body = {
-            id: this.props.task.id,
-            paused: this.state.check,
-            resumed: false,
-            paused_date: moment(currentDate).format("YYYY-MM-DD")
-          };
+  handleSubmit = values => {
+    var currentDate = new Date();
+    this.props.raiseIssue(
+      this.props.task.id,
+      values.name,
+      this.state.value,
+      this.props.task.owner.id,
+      this.state.check
+    );
+    if (this.state.check) {
+      const body = {
+        id: this.props.task.id,
+        paused: this.state.check,
+        resumed: false,
+        paused_date: moment(currentDate).format("YYYY-MM-DD")
+      };
 
-          this.props.updateTaskNew(body);
-        }
-        this.props.form.resetFields();
-        this.setState({ visible: false, check: false });
-      }
-    });
+      this.props.updateTaskNew(body);
+    }
+    this.formRef.current.resetFields();
+    this.setState({ visible: false, check: false });
+
   };
 
   showModal = () => {
@@ -105,17 +101,18 @@ class RaiseIssueModal extends Component {
             onFinish={this.handleSubmit}
             layout="vertical"
             id="IssueModalForm"
+            ref={this.formRef}
           >
             <Form.Item label="Issue Name (Max Length : 50)" name="name" rules={[{ required: true, message: "Enter Issue Name!" }]}>
               <Input type="text" name="name" />
             </Form.Item>
             <Form.Item label="Details" name="details">
-              <textarea />
-              {/* <TextEditor
+              {/* <textarea /> */}
+              <TextEditor
                 style={{ backgroundColor: "#ffffff" }}
                 ref={this.getTextEditor}
                 setParentState={this.setValue}
-              /> */}
+              />
             </Form.Item>
             <Form.Item name="paused"
               rules={[{ required: false }]}>

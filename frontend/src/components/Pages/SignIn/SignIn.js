@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { login } from "../../../actions/auth";
-import { Alert } from "antd";
 import "./Fonts.css";
 import "./SignIn.css";
 import "antd/dist/antd.css";
 import WelcomeSplash from "../../Common/Spinner/WelcomeSplash";
 import { Form, Input, Button, Checkbox } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
-
+import logoUlka from './ulkasemi_logo.png'
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +56,7 @@ class SignIn extends Component {
                   height: "300px",
                   marginTop: "70px"
                 }}
-                src="/static/uspl/img/ulkasemi_logo.png"
+                src={logoUlka}
               />
             </div>
             <div id="signup">
