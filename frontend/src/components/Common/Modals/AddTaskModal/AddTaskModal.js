@@ -42,7 +42,7 @@ const CollectionCreateForm = (
               Project Name: <b>{this.props.project_id.name}</b>
             </h5>
 
-            <Form layout="vertical" id="AddTaskModalForm" form={form}>
+            <Form layout="vertical" id="AddTaskModalForm" ref={this.props.formRef}>
               <Form.Item label="Task Name" name="name" rules={[{ required: true, message: "Enter Task Name!" }]}>
                 <Input placeholder="Enter Task Name" />
               </Form.Item>
@@ -117,22 +117,21 @@ class AddTaskModal extends React.Component {
     this.setState({ visible: false });
   };
   formRef = React.createRef();
-  handleCreate = (values) => {
-    console.log(this.formRef.current)
+  handleCreate = () => {
     const {
       name,
       details,
       due_date,
       assigned_to,
       notes
-    } = this.formRef.current.getFieldValues();
+    } = this.formRef.current.getFieldsValue();
 
     this.props.addNewTask(
       this.props.project.id,
-      values.name,
-      values.details,
-      values.due_date.format("YYYY-MM-DD"),
-      values.assigned_to,
+      name,
+      details,
+      due_date.format("YYYY-MM-DD"),
+      assigned_to,
       notes
     );
     this.formRef.current.resetFields();
@@ -140,9 +139,9 @@ class AddTaskModal extends React.Component {
 
   };
 
-  saveFormRef = formRef => {
-    this.formRef = formRef;
-  };
+  // saveFormRef = formRef => {
+  //   this.formRef = formRef;
+  // };
   render() {
     return (
       <Fragment>
@@ -150,7 +149,7 @@ class AddTaskModal extends React.Component {
           Add New Task
         </Button>
         <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef}
+          formRef={this.formRef}
           visible={this.state.visible}
           onOk={this.handleCreate}
           confirmLoading={this.state.confirmLoading}

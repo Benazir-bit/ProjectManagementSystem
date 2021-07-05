@@ -39,6 +39,7 @@ import SolvedIssues from "./Pages/Issues/SolvedIssues";
 // import ActivityList from "./Layout/ActivityList/ActivityList";
 // import { Provider as AlertProvider } from "react-alert";
 // import Alerts from "./Common/Alerts/Alerts";
+import Alert from "./Common/Alerts/Alerts";
 // import Invalid from "./Common/Errorlid";
 // import AuthFail from "./Layout/AuthFail/AuthFail";
 import MainLayout from "./Layout/MainLayout";
@@ -260,7 +261,7 @@ class App extends Component {
             <SideNav />
             {appRoutes}
           </Layout> */}
-
+          <Alert />
           {appRoutes}
 
         </Fragment>

@@ -1,9 +1,0 @@
-<p>Hi {{ task.assigned_to.first_name }},</p>
-<p>A new task has been assigned to you.</b></p>
-<p><b>Details:</b></p>
-
-    <p><b>Project:</b> <a href="{{domain}}{% url 'uspl:project_detail' project.id %}">{{project.name}}</a></p>
-    <p><b>Project Supervisor:</b> {{project.supervisor.get_full_name}}</p>
-
-<p>Sincerely,</p>
-<p>The Ulkasemi EMS Team</p>
