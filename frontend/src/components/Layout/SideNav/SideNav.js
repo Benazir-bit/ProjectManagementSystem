@@ -322,7 +322,7 @@ class SideNav extends React.PureComponent {
                                 id="menuSide"
                                 openKeys={this.state.openKeys}
                                 onOpenChange={this.onOpenChange}
-                                defaultSelectedKeys={this.state.selectedKey}
+                                SelectedKeys={this.state.selectedKey}
                                 style={{ height: "100%" }}
                             >
                                 {SideNavProfile}

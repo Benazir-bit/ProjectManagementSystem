@@ -16,7 +16,6 @@ const CollectionCreateForm = (
       const { task } = this.props;
       let today = new Date();
       const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
 
       return (
         <Fragment>
@@ -29,7 +28,7 @@ const CollectionCreateForm = (
             maskClosable={false}
             destroyOnClose={true}
           >
-            <Form layout="vertical" id="TaskUpdateForm"
+            <Form layout="vertical" id="TaskUpdateForm" ref={this.props.formRef}
               initialValues={{
                 name: task.name,
                 details: task.details,
@@ -94,36 +93,28 @@ class TaskUpdateModal extends React.Component {
   handleCancel = () => {
     this.setState({ visible: false });
   };
-
+  formRef = React.createRef();
   handleCreate = () => {
-    const { form } = this.formRef.props;
-    form.validateFields(err => {
-      if (err) {
-        return;
-      }
-      const {
-        name,
-        details,
-        deadline,
-        assigned_to,
-        note
-      } = form.getFieldsValue();
-      this.props.updateTask(
-        this.props.task.id,
-        name,
-        details,
-        deadline.format("YYYY-MM-DD"),
-        assigned_to,
-        note
-      );
-      form.resetFields();
-      this.setState({ visible: false });
-    });
+
+    const {
+      name,
+      details,
+      deadline,
+      assigned_to,
+      note
+    } = this.formRef.current.getFieldsValue();
+    this.props.updateTask(
+      this.props.task.id,
+      name,
+      details,
+      deadline.format("YYYY-MM-DD"),
+      assigned_to,
+      note
+    );
+    this.formRef.current.resetFields();
+    this.setState({ visible: false });
   };
 
-  saveFormRef = formRef => {
-    this.formRef = formRef;
-  };
 
   render() {
     if (!this.props.members) {
@@ -135,7 +126,7 @@ class TaskUpdateModal extends React.Component {
           Update Task
         </Button>
         <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef}
+          formRef={this.formRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}

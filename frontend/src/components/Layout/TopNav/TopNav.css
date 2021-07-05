@@ -113,18 +113,6 @@
 }
 /*side nav*/
 /* add this to sidenav srtyle till dropdown-item:hover */
-.nav {
-  margin-top: 10px;
-}
-.nav > li > a {
-  position: relative;
-  display: block;
-  padding: 7px 15px;
-}
-.nav > li > a:hover {
-  color: #eee !important;
-  cursor: pointer;
-}
 
 #top-nav-bell-icon {
   margin-left: 11px;
@@ -138,11 +126,6 @@
   padding-bottom: 0px;
   padding-top: 0px;
   background-color: #edf4fa;
-}
-.fixedpos {
-  /* overflow-y: auto;
-	min-height: 100px;
-	position: fixed !important; */
 }
 #noti_span {
   background-color: #150c0c;
@@ -168,7 +151,8 @@
   overflow-x: hidden;
 }
 .notificationScroll {
-  left: 0 !important;
+  left: -79 !important;
+  top: 61 !important;
 }
 .notificationScroll .ant-menu::-webkit-scrollbar {
   width: 5px;
@@ -207,14 +191,14 @@
   padding-bottom: 30px;
   margin-top: -10px;
 }
-.nav {
+/* .nav {
   margin-top: 10px;
 }
 .nav > li > a {
   position: relative;
   display: block;
   padding: 7px 15px;
-}
+} */
 
 #mail_drop_down {
   right: 0px;
@@ -334,7 +318,7 @@
   margin-top: -8px;
 }
 /* NEw */
-
+/* 
 .header {
   padding: 0 289px !important;
   position: fixed;
@@ -345,7 +329,7 @@
   z-index: 1052;
   height: 52px !important;
   padding-left: 60px !important;
-}
+} */
 #profile_logo_header {
   border: 1px;
   display: inline;
@@ -354,17 +338,18 @@
   border-radius: 50%;
 }
 
-.header_anchor {
+/* .header_anchor {
   background-color: transparent !important;
   margin-top: 23px;
   margin-right: 6px;
-}
+} */
 .header_li {
   height: 100%;
   padding: 0 10px !important;
 }
 .header_icon {
-  font-size: 18px !important;
+  font-size: 22px !important;
+  margin-top: 20px;
 }
 .header_icon_link {
   color: #9d9d9d !important;

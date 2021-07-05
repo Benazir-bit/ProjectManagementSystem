@@ -172,19 +172,19 @@ class Notification extends Component {
           getPopupContainer={trigger => trigger.parentNode}
           trigger={["click"]}
           overlayClassName={"notificationScroll"}
-          sty={{ left: "-8px" }}
+        // style={{ left: "-8px" }}
         >
           <Link
             onClick={this.state.connected ? this.notiBoxClick : null}
             className="ant-dropdown-link"
             to="/"
           >
-            <Anchor className={"header_anchor"}>
-              <p className={"header_icon_link"}>
-                <BellOutlined className={"header_icon"} />
-                {/* <Icon className={"header_icon"} type="bell" theme="filled" /> */}
-              </p>
-            </Anchor>
+            {/* <Anchor className={"header_anchor"}> */}
+            <p className={"header_icon_link"}>
+              <BellOutlined className={"header_icon"} />
+              {/* <Icon className={"header_icon"} type="bell" theme="filled" /> */}
+            </p>
+            {/* </Anchor> */}
           </Link>
         </Dropdown>
         {/* style={{display: 'none'}} */}

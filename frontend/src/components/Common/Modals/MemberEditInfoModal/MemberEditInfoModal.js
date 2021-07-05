@@ -325,7 +325,6 @@ class MemberEditInfoModal extends React.Component {
     }
     const { data, fetching } = this.state;
     const { form, member } = this.props;
-    const { getFieldDecorator } = form;
 
     const formItemLayout = {
       labelCol: {
