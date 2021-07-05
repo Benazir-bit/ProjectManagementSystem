@@ -70,7 +70,7 @@ class SendFeedbackModal extends Component {
         <Modal
           visible={this.state.visible}
           maskClosable={false}
-          width={647}
+          width={650}
           title="Feedback"
           onCancel={this.onCancel}
           destroyOnClose={true}
@@ -103,6 +103,7 @@ class SendFeedbackModal extends Component {
               </Button>
               &emsp;
               <Button
+                style={{ marginBottom: 10 }}
                 key="submit"
                 htmlType="submit"
                 type="primary"

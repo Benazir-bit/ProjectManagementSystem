@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { render } from "react-dom";
 import ReactQuill, { Quill } from "react-quill";
+import "react-quill/dist/quill.snow.css";
 // import { ImageResize } from "quill-image-resize-module";
 import "./TextEditor.css";
 // Quill.register("modules/ImageResize", ImageResize);

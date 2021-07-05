@@ -16,7 +16,7 @@ const CollectionCreateForm = (
       const { task } = this.props;
       let today = new Date();
       const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
+      // const { getFieldDecorator } = form;
 
       return (
         <Fragment>
