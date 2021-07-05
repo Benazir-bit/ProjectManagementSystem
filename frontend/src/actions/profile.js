@@ -155,7 +155,7 @@ export const updatePassword = body => (dispatch, getState) => {
 
 export const getUserAvgKPI = (id, year) => (dispatch, getState) => {
   axios
-    .get(`/uspl/api/${id}/kpi_avg/${year}`, tokenConfig(getState))
+    .get(`/uspl/api/${id}/kpi_avg/${year}/`, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_USER_AVG_KPI,

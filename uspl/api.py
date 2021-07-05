@@ -383,7 +383,6 @@ def AvgKPIAPI(request, user_id, year):
     if year == None:
         year = timezone.now().year
     profile = Profile.objects.get(user__id=user_id)
-
     overall_kpi = profile.get_employee_overall_kpi(year)
     avg_kpi_dict = profile.get_employee_kpi_average(year)
     return Response({"overall_kpi": overall_kpi,

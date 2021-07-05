@@ -22,7 +22,6 @@ const CollectionCreateForm = (
         supervisorChange,
         supervisor
       } = this.props;
-      const { getFieldDecorator } = form;
 
       return (
         <Fragment>

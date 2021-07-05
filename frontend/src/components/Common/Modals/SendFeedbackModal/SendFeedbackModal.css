@@ -26,9 +26,9 @@
   display: none;
 }
 
-.sendFeedbackModal .ant-modal-body {
+/* .sendFeedbackModal .ant-modal-body {
   height: 44%;
-}
+} */
 
 #FeedBackModalForm .ant-typography {
   font-size: 14px;

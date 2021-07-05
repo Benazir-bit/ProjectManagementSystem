@@ -308,115 +308,142 @@ class SideNav extends React.PureComponent {
 
         return (
             <Fragment>
-                <div>
-                    <Sider
-                        collapsible
-                        collapsed={this.state.collapsed}
-                        width={255}
-                        onCollapse={this.onCollapse}
-                    >
-                        <div style={{ position: "fixed", height: "100%", width: "255px" }}>
-                            <Menu
-                                theme="dark"
-                                mode="inline"
-                                id="menuSide"
-                                openKeys={this.state.openKeys}
-                                onOpenChange={this.onOpenChange}
-                                defaultSelectedKeys={this.state.selectedKey}
-                                style={{ height: "100%" }}
-                            >
-                                {SideNavProfile}
-                                <Menu.Item key="home" onClick={this.onClick("home")}>
-                                    <Link to="/">
-                                        <MacCommandOutlined type="home" theme="filled" />
-                                        <span>Dashboard</span>
+                <div
+                    className={
+                        this.state.collapsedWidth === 80
+                            ? this.state.collapsed
+                                ? "small"
+                                : "big"
+                            : null
+                    }
+                />
+                <Sider
+                    collapsible
+                    breakpoint="xs"
+                    collapsedWidth={this.state.collapsedWidth}
+                    onBreakpoint={(broken) => {
+                        if (broken) {
+                            this.setState({
+                                collapsedWidth: 0,
+                            });
+                        } else {
+                            this.setState({
+                                collapsedWidth: 80,
+                            });
+                        }
+                    }}
+                    collapsed={this.state.collapsed}
+                    onCollapse={this.onCollapse}
+                    style={{
+                        zIndex: 4,
+                        position: "fixed",
+                        height: "100%",
+                    }}
+                    className={"sidescroll"}
+                >
+                    <div id="sidescrollbar" style={{ overflow: "hidden auto" }}>
+
+                        <Menu
+                            theme="dark"
+                            mode="inline"
+                            id="menuSide"
+                            openKeys={this.state.openKeys}
+                            onOpenChange={this.onOpenChange}
+                            SelectedKeys={this.state.selectedKey}
+                            style={{ height: "100%" }}
+                        >
+                            {SideNavProfile}
+                            <Menu.Item key="home" onClick={this.onClick("home")}>
+                                <Link to="/">
+                                    <MacCommandOutlined type="home" theme="filled" />
+                                    <span>Dashboard</span>
+                                </Link>
+                            </Menu.Item>
+                            {/* {groups} */}
+
+                            {this.props.user.is_hr ? (
+                                <Menu.Item
+                                    key="manageMem"
+                                    onClick={this.onClick("manageMem")}
+                                >
+                                    <Link to={`/allmembers/all`}>
+                                        <MacCommandOutlined type="usergroup-add" />
+                                        <span>Manage Members</span>
                                     </Link>
                                 </Menu.Item>
-                                {/* {groups} */}
+                            ) : null}
 
-                                {this.props.user.is_hr ? (
-                                    <Menu.Item
-                                        key="manageMem"
-                                        onClick={this.onClick("manageMem")}
-                                    >
-                                        <Link to={`/allmembers/all`}>
-                                            <MacCommandOutlined type="usergroup-add" />
-                                            <span>Manage Members</span>
-                                        </Link>
-                                    </Menu.Item>
-                                ) : null}
+                            {this.props.user.is_hr ? (
+                                <Menu.Item
+                                    key="createUser"
+                                    onClick={this.onClick("createUser")}
+                                >
+                                    <Link to="/createuser">
+                                        <MacCommandOutlined type="user-add" />
+                                        <span>Create User</span>
+                                    </Link>
+                                </Menu.Item>
+                            ) : null}
 
-                                {this.props.user.is_hr ? (
-                                    <Menu.Item
-                                        key="createUser"
-                                        onClick={this.onClick("createUser")}
-                                    >
-                                        <Link to="/createuser">
-                                            <MacCommandOutlined type="user-add" />
-                                            <span>Create User</span>
-                                        </Link>
-                                    </Menu.Item>
-                                ) : null}
+                            {this.props.user.is_hr ? (
+                                <Menu.Item
+                                    key="manageGrp"
+                                    onClick={this.onClick("manageGrp")}
+                                >
+                                    <Link to="/managegrp">
+                                        <MacCommandOutlined type="user-add" />
+                                        <span>Manage groups</span>
+                                    </Link>
+                                </Menu.Item>
+                            ) : null}
 
-                                {this.props.user.is_hr ? (
-                                    <Menu.Item
-                                        key="manageGrp"
-                                        onClick={this.onClick("manageGrp")}
-                                    >
-                                        <Link to="/managegrp">
-                                            <MacCommandOutlined type="user-add" />
-                                            <span>Manage groups</span>
-                                        </Link>
-                                    </Menu.Item>
-                                ) : null}
+                            {this.props.user.is_hr ? (
+                                <Menu.Item key="hrDesig" onClick={this.onClick("hrDesig")}>
+                                    <Link to="/jobtitle">
+                                        <MacCommandOutlined type="cluster" />
+                                        <span>Designations</span>
+                                    </Link>
+                                </Menu.Item>
+                            ) : null}
 
-                                {this.props.user.is_hr ? (
-                                    <Menu.Item key="hrDesig" onClick={this.onClick("hrDesig")}>
-                                        <Link to="/jobtitle">
-                                            <MacCommandOutlined type="cluster" />
-                                            <span>Designations</span>
-                                        </Link>
-                                    </Menu.Item>
-                                ) : null}
+                            {!this.props.user.is_staff &&
+                                !this.props.user.is_fna &&
+                                !this.props.user.is_hr ? (
+                                <Menu.Item key="project" onClick={this.onClick("project")}>
+                                    <Link to={`/user/projects/all/${this.props.user.id}`}>
+                                        <MacCommandOutlined type="project" />
+                                        <span>My Projects</span>
+                                    </Link>
+                                </Menu.Item>
+                            ) : null}
 
-                                {!this.props.user.is_staff &&
-                                    !this.props.user.is_fna &&
-                                    !this.props.user.is_hr ? (
-                                    <Menu.Item key="project" onClick={this.onClick("project")}>
-                                        <Link to={`/user/projects/all/${this.props.user.id}`}>
-                                            <MacCommandOutlined type="project" />
-                                            <span>My Projects</span>
-                                        </Link>
-                                    </Menu.Item>
-                                ) : null}
+                            {!this.props.user.is_staff &&
+                                !this.props.user.is_fna &&
+                                !this.props.user.is_hr ? (
+                                <Menu.Item key="myTask" onClick={this.onClick("myTask")}>
+                                    <Link to={`/user/tasks/current/${this.props.user.id}`}>
+                                        <MacCommandOutlined type="file-protect" />
+                                        <span>My Tasks</span>
+                                    </Link>
+                                </Menu.Item>
+                            ) : null}
 
-                                {!this.props.user.is_staff &&
-                                    !this.props.user.is_fna &&
-                                    !this.props.user.is_hr ? (
-                                    <Menu.Item key="myTask" onClick={this.onClick("myTask")}>
-                                        <Link to={`/user/tasks/current/${this.props.user.id}`}>
-                                            <MacCommandOutlined type="file-protect" />
-                                            <span>My Tasks</span>
-                                        </Link>
-                                    </Menu.Item>
-                                ) : null}
+                            {!this.props.user.is_staff &&
+                                !this.props.user.is_fna &&
+                                !this.props.user.is_hr ? (
+                                <Menu.Item
+                                    key="kpiDetails"
+                                    onClick={this.onClick("kpiDetails")}
+                                >
+                                    <Link to={`/kpi-details/${this.props.auth.user.id}`}>
+                                        <MacCommandOutlined type="area-chart" />
+                                        <span>KPI</span>
+                                    </Link>
+                                </Menu.Item>
+                            ) : null}
 
-                                {!this.props.user.is_staff &&
-                                    !this.props.user.is_fna &&
-                                    !this.props.user.is_hr ? (
-                                    <Menu.Item
-                                        key="kpiDetails"
-                                        onClick={this.onClick("kpiDetails")}
-                                    >
-                                        <Link to={`/kpi-details/${this.props.auth.user.id}`}>
-                                            <MacCommandOutlined type="area-chart" />
-                                            <span>KPI</span>
-                                        </Link>
-                                    </Menu.Item>
-                                ) : null}
-
-                                {issue_menu}
-                                {/* {!this.props.user.is_staff &&
+                            {issue_menu}
+                            {/* {!this.props.user.is_staff &&
                                     !this.props.user.is_fna &&
                                     !this.props.user.is_hr ? (
                                     <SubMenu
@@ -442,7 +469,7 @@ class SideNav extends React.PureComponent {
                                         </Menu.Item>
                                     </SubMenu>
                                 ) : null} */}
-                                {/* 
+                            {/* 
                                 {this.props.user.is_hr ? (
                                     <SubMenu
                                         key="hrNotice"
@@ -477,7 +504,7 @@ class SideNav extends React.PureComponent {
                                         </Link>
                                     </Menu.Item>
                                 )} */}
-                                {/*                                        
+                            {/*                                        
                                 <Menu.Item key="ContactUs" onClick={this.onClick("ContactUs")}>
                                     <Link to={`/contactus/${this.props.user.id}`}>
                                         <MacCommandOutlined type="project" />
@@ -485,16 +512,15 @@ class SideNav extends React.PureComponent {
                                     </Link>
                                 </Menu.Item> */}
 
-                                {/* <Menu.Item key="ContactUs" onClick={this.onClick("ContactUs")}>
+                            {/* <Menu.Item key="ContactUs" onClick={this.onClick("ContactUs")}>
                   <Link to={`/contactus/${this.props.user.id}`}>
                     <MacCommandOutlined type="project" />
                     <span>Contact Us</span>
                   </Link>
                 </Menu.Item> */}
-                            </Menu>
-                        </div>
-                    </Sider>
-                </div>
+                        </Menu>
+                    </div>
+                </Sider>
             </Fragment>
         );
     }

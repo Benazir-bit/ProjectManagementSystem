@@ -23,7 +23,6 @@ const CollectionCreateForm = (
         user_id,
         project_id
       } = this.props;
-      const { getFieldDecorator } = form;
 
       return (
         <Fragment>

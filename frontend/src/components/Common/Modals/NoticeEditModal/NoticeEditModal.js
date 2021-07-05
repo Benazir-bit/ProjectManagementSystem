@@ -108,7 +108,6 @@ class NoticeEditModal extends React.Component {
     // const { data, fetching } = this.state;
     let today = new Date();
     const { form, notice } = this.props;
-    const { getFieldDecorator } = form;
 
     const formItemLayout = {
       labelCol: {

@@ -38,8 +38,6 @@ class ProfileUpdateForm extends Component {
 	};
 
 	render() {
-		const { getFieldDecorator } = this.props.form;
-		const { autoCompleteResult } = this.state;
 
 		const formItemLayout = {
 			labelCol: {
@@ -63,13 +61,13 @@ class ProfileUpdateForm extends Component {
 				},
 			},
 		};
-		const prefixSelector = getFieldDecorator('prefix', {
-			initialValue: '88',
-		})(
-			<Select style={{ width: 70 }}>
-				<Option value="88">+88</Option>
-			</Select>,
-		);
+		// const prefixSelector = getFieldDecorator('prefix', {
+		// 	initialValue: '88',
+		// })(
+		<Select style={{ width: 70 }}>
+			<Option value="88">+88</Option>
+		</Select>,
+		// );
 
 		if (!this.props.profile) {
 			return null;

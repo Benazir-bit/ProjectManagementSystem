@@ -25,7 +25,7 @@ export const getEmployeeYearlyKPI = (id, year) => (dispatch, getState) => {
 
 export const getKPIDetails = id => (dispatch, getState) => {
   axios
-    .get(`/uspl/api/kpi/${id}`, tokenConfig(getState))
+    .get(`/uspl/api/kpi/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_KPI_DETAILS,

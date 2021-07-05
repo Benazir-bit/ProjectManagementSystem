@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Carousel, Icon, Skeleton } from "antd";
 import SliderCard from "../../../Common/AllCard/SliderCard";
 import "./SliderCardSection.css";
-
+import { AreaChartOutlined, RightCircleOutlined, LeftCircleOutlined } from "@ant-design/icons";
 class SliderCardSection extends Component {
   constructor(props) {
     super(props);
@@ -30,11 +30,11 @@ class SliderCardSection extends Component {
       <Fragment>
         <div className="col-sm-12">
           <div className="ArrowDiv">
-            {/* <Icon
+            <LeftCircleOutlined
               type="left-circle"
               style={{ fontSize: 22 }}
               onClick={this.previous}
-            /> */}
+            />
           </div>
           <div className="CarouselDiv">
             <Carousel
@@ -48,15 +48,15 @@ class SliderCardSection extends Component {
                 // 	"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                 // }
                 link={`/user/tasks/current/${this.props.user.id}`}
-                // IconTag={
-                //   <Icon
-                //     style={{
-                //       fontSize: "32px",
-                //       color: "rgb(92, 184, 92)"
-                //     }}
-                //     type="area-chart"
-                //   />
-                // }
+                IconTag={
+                  <AreaChartOutlined
+                    style={{
+                      fontSize: "32px",
+                      color: "rgb(92, 184, 92)"
+                    }}
+                    type="area-chart"
+                  />
+                }
                 slidertaskbtn={"sliderCard cnttask"}
                 title={"Current Tasks"}
                 description={"Completed Task 20%"}
@@ -191,11 +191,11 @@ class SliderCardSection extends Component {
             </Carousel>
           </div>
           <div className="ArrowDiv">
-            {/* <Icon
+            <RightCircleOutlined
               style={{ fontSize: 22 }}
               type="right-circle"
               onClick={this.next}
-            /> */}
+            />
           </div>
         </div>
       </Fragment>

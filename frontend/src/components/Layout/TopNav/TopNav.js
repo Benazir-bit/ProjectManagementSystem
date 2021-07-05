@@ -94,16 +94,18 @@ class TopNav extends Component {
         className="topHeader"
         style={{
           // position: "fixed",
-          zIndex: 3,
+          // zIndex: 3,
           width: "100%",
           background: "white",
         }}
       >
 
         <div className="ant-pro-global-header ant-pro-global-header-layout-side">
-          <div>
-            <Notification />
-          </div>
+          <Menu theme="light" mode="horizontal" selectable={false} >
+            <Menu.Item>
+              <Notification />
+            </Menu.Item>
+          </Menu>
           <div className="antd-pro-components-global-header-index-right">
 
             <Dropdown overlay={menu} trigger={["click"]}>

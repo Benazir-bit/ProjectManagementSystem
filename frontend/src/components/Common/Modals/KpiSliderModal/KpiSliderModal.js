@@ -32,7 +32,6 @@ class KpiSliderModal extends React.Component {
 
   render() {
     const { visible, loading } = this.state;
-    console.log(this.props.kpis, "test");
     return (
       <Fragment>
         <div>

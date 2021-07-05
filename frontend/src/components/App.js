@@ -78,12 +78,7 @@ class App extends Component {
 
   render() {
 
-    let appRoutes = (
-      <Switch>
-        <Route exact path="/login" component={SignIn} />
-        {/* <PrivateRoute component={Page404} /> */}
-      </Switch>
-    );
+    let appRoutes;
 
     if (this.props.user) {
 
@@ -122,6 +117,7 @@ class App extends Component {
                 path="/notices/onboard/"
                 component={OnBoardNotice}
               />
+
             </MainLayout>
 
           </Switch>
@@ -239,9 +235,116 @@ class App extends Component {
         );
       }
     } else {
+      console.log("oooooooooooo")
       appRoutes = (
         <Switch>
           <Route exact path="/login" component={SignIn} />
+          <PrivateRoute exact path="/allmembers" component={AllMembers} />
+          <PrivateRoute exact path="/allmembers/:id" component={AllMembers} />
+          <PrivateRoute exact path="/managegrp" component={ManageGroups} />
+          <PrivateRoute exact path="/jobtitle" component={JobTitle} />
+          <PrivateRoute exact path="/createuser" component={CreateUser} />
+          <PrivateRoute
+            exact
+            path="/notices/allnotice/"
+            component={AllNoticeList}
+          />
+          <PrivateRoute
+            path="/notice-details/:id"
+            component={NoticeDetails}
+          />
+          <PrivateRoute
+            exact
+            path="/notices/onboard/"
+            component={OnBoardNotice}
+          />
+          <PrivateRoute
+            exact
+            path="/:type/projects/:filter/:id"
+            component={AllProjects}
+          />
+          <PrivateRoute
+            path="/project-details/:id"
+            component={ProjectDetails}
+          />
+
+          <PrivateRoute
+            exact
+            path="/user/tasks/current/:id"
+            component={Tasks}
+          />
+
+          <PrivateRoute
+            exact
+            path="/task-details/:id"
+            component={TaskDetails}
+          />
+          <PrivateRoute
+            exact
+            path="/profile/:id"
+            component={EmployeeProfile}
+          />
+          <PrivateRoute exact
+            path="/kpi-details/:id"
+            component={EmployeeKPI}
+          />
+
+          <PrivateRoute
+            exact
+            path="/completedtasks/:id"
+            component={CompletedTasks}
+          />
+          <PrivateRoute
+            exact
+            path="/all-issues/:id"
+            component={IssueDetails}
+          />
+          <PrivateRoute
+            exact
+            path="/group-issues/:type/:id"
+            component={GroupIssues}
+          />
+          <PrivateRoute
+            exact
+            path="/raised-issues/:id"
+            component={RaisedIssues}
+          />
+          <PrivateRoute
+            exact
+            path="/solved-issues/:id"
+            component={SolvedIssues}
+          />
+          <PrivateRoute
+            exact
+            path="/issue-details/:id"
+            component={IssueDetails}
+          />
+          {/* <PrivateRoute exact path="/summary" component={Summary} /> */}
+          {/* <PrivateRoute
+                exact
+                path="/weeklyreportsummary/:id"
+                component={WeeklyReportSummary}
+              /> */}
+          {/* <PrivateRoute
+                exact
+                path="/weeklyreportlist/:type"
+                component={WeeklyReportList}
+              /> */}
+          <PrivateRoute
+            exact
+            path="/all_news/:type/:id"
+            component={ViewAll}
+          />
+          <PrivateRoute exact path="/group/:id" component={GroupDetails} />
+
+
+          {/* <PrivateRoute
+                exact
+                path="/weeklystatusreport"
+                component={WeeklyStatusReport}
+              /> */}
+          {/* <PrivateRoute exact path="/contactus/:id" component={ContactUs} /> */}
+
           <PrivateRoute exact path="/" component={Dashboard} />
         </Switch>
       );
