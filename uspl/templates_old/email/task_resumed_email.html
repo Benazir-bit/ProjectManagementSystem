@@ -1,7 +1,0 @@
-{% autoescape off %}
-<p>Hi {{ supervisor.first_name }},</p>
-<p>{{user.get_full_name}} ({{user.username}}) has restarted the task "<a href="{{domain}}{% url 'uspl:task_detail' task.id %}"><b>{{task.name}}</b></a>" task of the project "<a href="{{domain}}{% url 'uspl:project_detail' task.project.id %}"><b>{{task.project.name}}</b></a>".</p>
-<p>The task has {% if unsolved_issues.count > 0 %}{{unsolved_issues.count}} unsolved issues.{% else %}no unsolved issue.{% endif %}</p>
-<p>Sincerely,</p>
-<p>The Ulkasemi EMS Team</p>
-{% endautoescape %}

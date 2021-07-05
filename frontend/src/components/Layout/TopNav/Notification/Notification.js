@@ -5,7 +5,9 @@ import { createHashHistory } from "history";
 import { getNotifications } from "../../../../actions/notifications";
 import { connect } from "react-redux";
 import TimeAgo from "react-timeago";
-
+import {
+  BellOutlined
+} from "@ant-design/icons";
 var wsStart = "ws://";
 if (window.location.protocol == "https:") {
   wsStart = "wss://";
@@ -145,6 +147,7 @@ class Notification extends Component {
                         style={{ textAlign: "left", fontSize: "12px" }}
                       >
                         {/* <Icon type="clock-circle" /> */}
+                        {/* <BellOutlined /> */}
                         <TimeAgo date={notification.created} />
                       </div>
                     </div>
@@ -178,6 +181,7 @@ class Notification extends Component {
           >
             <Anchor className={"header_anchor"}>
               <p className={"header_icon_link"}>
+                <BellOutlined className={"header_icon"} />
                 {/* <Icon className={"header_icon"} type="bell" theme="filled" /> */}
               </p>
             </Anchor>

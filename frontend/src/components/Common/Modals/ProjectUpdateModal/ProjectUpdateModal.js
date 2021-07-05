@@ -18,7 +18,11 @@ const CollectionCreateForm = (
       let today = new Date();
       const { visible, onCancel, onCreate, form } = this.props;
 
-
+      // const projMembers = this.props.members.map(member => {
+      //   if (project.members.includes(member.id)) {
+      //     return member
+      //   }
+      // });
       return (
         <Fragment>
           <Modal
@@ -30,7 +34,7 @@ const CollectionCreateForm = (
             maskClosable={false}
             destroyOnClose={true}
           >
-            <Form layout="vertical" id="ProjectModalForm"
+            <Form layout="vertical" id="ProjectModalForm" ref={this.props.formRef}
               initialValues={{
                 name: project.name,
                 details: project.details,
@@ -123,41 +127,30 @@ class ProjectUpdateModal extends React.Component {
   handleCancel = () => {
     this.setState({ visible: false });
   };
-
+  formRef = React.createRef();
   handleCreate = () => {
-    const { form } = this.formRef.props;
-    form.validateFields(err => {
-      if (err) {
-        return;
-      }
-      console.log(form.getFieldsValue());
-      const {
-        name,
-        details,
-        due_date,
-        supervisor,
-        projMembers,
-        notes
-      } = form.getFieldsValue();
-      let projMem = [];
-      projMem.push(supervisor);
-      projMem.push(...projMembers);
-      this.props.updateProject(
-        this.props.project.id,
-        name,
-        details,
-        due_date.format("YYYY-MM-DD"),
-        supervisor,
-        projMem,
-        notes
-      );
-      form.resetFields();
-      this.setState({ visible: false });
-    });
-  };
-
-  saveFormRef = formRef => {
-    this.formRef = formRef;
+    const {
+      name,
+      details,
+      due_date,
+      supervisor,
+      projMembers,
+      notes
+    } = this.formRef.current.getFieldsValue();
+    let projMem = [];
+    projMem.push(supervisor);
+    projMem.push(...projMembers);
+    this.props.updateProject(
+      this.props.project.id,
+      name,
+      details,
+      due_date.format("YYYY-MM-DD"),
+      supervisor,
+      projMem,
+      notes
+    );
+    this.formRef.current.resetFields();
+    this.setState({ visible: false });
   };
 
   render() {
@@ -170,7 +163,7 @@ class ProjectUpdateModal extends React.Component {
           Update Project
         </Button>
         <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef}
+          formRef={this.formRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}

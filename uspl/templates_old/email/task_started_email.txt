@@ -1,8 +1,0 @@
-{% autoescape off %}
-Hi {{ supervisor.first_name }},
-
-{% if request.user == supervisor %}You have{% else %}{{user.get_full_name}}{{user.username}} has{% endif %} started the {{task.name}} task of project {{task.project.name}}.
-
-Sincerely,
-The Ulkasemi EMS Team
-{% endautoescape %}
