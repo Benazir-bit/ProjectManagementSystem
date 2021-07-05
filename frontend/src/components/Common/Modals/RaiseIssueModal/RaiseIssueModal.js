@@ -76,7 +76,7 @@ class RaiseIssueModal extends Component {
   };
   render() {
     //    const { form } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    // const { getFieldDecorator } = this.props.form;
 
     return (
       <Fragment>
