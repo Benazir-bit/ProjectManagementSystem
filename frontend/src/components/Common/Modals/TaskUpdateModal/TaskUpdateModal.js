@@ -17,6 +17,7 @@ const CollectionCreateForm = (
       let today = new Date();
       const { visible, onCancel, onCreate, form } = this.props;
 
+
       return (
         <Fragment>
           <Modal
