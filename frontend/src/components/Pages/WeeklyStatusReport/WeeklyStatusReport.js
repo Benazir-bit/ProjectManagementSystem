@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import ImageSmall from "../../Common/ImageSmall/ImageSmall";
 import "./WeeklyStatusReport.css";
-import { getUserName } from "../../../actions/attendance";
+// import { getUserName } from "../../../actions/attendance";
 import {
   sendReport,
   draftReport,
@@ -113,7 +113,7 @@ class WeeklyStatusReport extends Component {
   handleSearch = (value, Option) => {
     if (value.length > 1) {
       this.setState({ fetchingCc: true, fetchingTo: true });
-      this.props.getUserName(value, "user", "all");
+      // this.props.getUserName(value, "user", "all");
       this.setState({ fetchingCc: false, fetchingTo: false });
     }
   };
@@ -787,7 +787,7 @@ const mapStateToProps = state => ({
   weekly_report: state.weeklyReport.weekly_report
 });
 export default connect(mapStateToProps, {
-  getUserName,
+  // getUserName,
   sendReport,
   draftReport,
   searchDraft

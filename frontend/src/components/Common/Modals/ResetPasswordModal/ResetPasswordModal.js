@@ -25,7 +25,7 @@ const CollectionCreateForm = (
 
     render() {
       const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
+      // const { getFieldDecorator } = form;
 
       return (
         <Fragment>

@@ -3,7 +3,7 @@ import { withAlert } from "react-alert";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // import "./Alerts.css";
-import { InIt } from "../../../actions/accounts";
+// import { InIt } from "../../../actions/accounts";
 import { message, Alert } from "antd";
 import loading from "../../../reducers/loading";
 import { Prompt } from "react-router-dom";
@@ -30,15 +30,15 @@ class Alerts extends Component {
     // else {
     //   message.destroy();
     // }
-    if (error !== prevProps.error) {
-      if (error) {
-        if (error.type == "success") {
-          message.success(error.msg).then(this.props.InIt());
-        } else if (error.type == "error") {
-          message.error(error.msg).then(this.props.InIt());
-        }
-      }
-    }
+    // if (error !== prevProps.error) {
+    //   if (error) {
+    //     if (error.type == "success") {
+    //       message.success(error.msg).then(this.props.InIt());
+    //     } else if (error.type == "error") {
+    //       message.error(error.msg).then(this.props.InIt());
+    //     }
+    //   }
+    // }
   }
   render() {
     return (
@@ -58,4 +58,4 @@ const mapStateToProps = state => ({
   loading: state.loading.loading
 });
 
-export default connect(mapStateToProps, { InIt })(withAlert()(Alerts));
+export default connect(mapStateToProps)(withAlert()(Alerts));

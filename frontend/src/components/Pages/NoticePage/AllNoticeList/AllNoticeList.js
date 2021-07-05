@@ -160,7 +160,7 @@ class AllNoticeList extends Component {
     }
     return (
       <Fragment>
-        <div className="col-sm-8" id="base-main-body">
+        <div className="col-sm-12" id="base-main-body">
           <div className="row">
             <div className="col-sm-12">
               <div id="main-body-div">

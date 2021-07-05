@@ -5,6 +5,7 @@ import ImageSmall from "../../ImageSmall/ImageSmall";
 import { addNewTask } from "../../../../actions/task";
 import moment from "moment";
 import "./AddTaskModal.css";
+import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -43,7 +44,7 @@ const CollectionCreateForm = (
 
             <Form layout="vertical" id="AddTaskModalForm" form={form}>
               <Form.Item label="Task Name" name="name" rules={[{ required: true, message: "Enter Task Name!" }]}>
-                <Input placeholder="Enter Task Name" />)
+                <Input placeholder="Enter Task Name" />
               </Form.Item>
 
               <Form.Item label="Details" name="details">
@@ -116,8 +117,8 @@ class AddTaskModal extends React.Component {
     this.setState({ visible: false });
   };
   formRef = React.createRef();
-  handleCreate = () => {
-
+  handleCreate = (values) => {
+    console.log(this.formRef.current)
     const {
       name,
       details,
@@ -128,10 +129,10 @@ class AddTaskModal extends React.Component {
 
     this.props.addNewTask(
       this.props.project.id,
-      name,
-      details,
-      due_date.format("YYYY-MM-DD"),
-      assigned_to,
+      values.name,
+      values.details,
+      values.due_date.format("YYYY-MM-DD"),
+      values.assigned_to,
       notes
     );
     this.formRef.current.resetFields();

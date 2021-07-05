@@ -3,7 +3,7 @@ import { Result, Button } from "antd";
 import { Link } from "react-router-dom";
 import { Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { validateOtpCheck } from "../../../actions/otp";
+// import { validateOtpCheck } from "../../../actions/otp";
 
 class Invalid extends Component {
   // componentWillMount() {
@@ -36,4 +36,4 @@ class Invalid extends Component {
 const mapStateToProps = state => ({
   otp: state.otp
 });
-export default connect(mapStateToProps, { validateOtpCheck })(Invalid);
+export default connect(mapStateToProps)(Invalid);

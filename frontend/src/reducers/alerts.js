@@ -1,4 +1,4 @@
-import { ALERT_MESSAGE, ERROR_MESSAGE } from "../actions/types";
+import { ALERT_MESSAGE, ERROR_MESSAGE, L } from "../actions/types";
 
 const initialState = {
   message: {},
@@ -7,7 +7,7 @@ const initialState = {
   position: null
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case ERROR_MESSAGE:
       return {
@@ -20,6 +20,7 @@ export default function(state = initialState, action) {
         error: action.payload,
         type: action.payload.type
       };
+
     default:
       return state;
   }

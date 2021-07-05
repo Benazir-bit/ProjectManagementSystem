@@ -5,7 +5,7 @@ import ImageSmall from "../../Common/ImageSmall/ImageSmall";
 import "./Summary.css";
 import CommonTable from "../../Common/AllTables/CommonTable";
 import { getGroupListAll } from "../../../actions/groupSelect";
-import { getUserName } from "../../../actions/attendance";
+// import { getUserName } from "../../../actions/attendance";
 import { Link } from "react-router-dom";
 import { getSummaryList } from "../../../actions/projectSummary";
 import { connect } from "react-redux";
@@ -126,7 +126,7 @@ class Summary extends Component {
   handleSearch = value => {
     if (value.length > 1) {
       this.setState({ fetching: true });
-      this.props.getUserName(value, "user", "all");
+      // this.props.getUserName(value, "user", "all");
       this.setState({ fetching: false });
     }
   };
@@ -458,6 +458,5 @@ const mapStateToProps = state => ({
 });
 export default connect(mapStateToProps, {
   getSummaryList,
-  getUserName,
   getGroupListAll
 })(Summary);

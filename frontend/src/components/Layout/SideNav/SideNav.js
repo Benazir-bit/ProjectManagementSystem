@@ -397,39 +397,39 @@ class SideNav extends Component {
                 </Menu.Item>
               ) : null} */}
               {issue_menu}
-              {!this.props.user.is_staff &&
+              {/* {!this.props.user.is_staff &&
                 !this.props.user.is_fna &&
                 !this.props.user.is_hr ? (
                 <SubMenu
                   key="reportsub"
                   title={
                     <span>
-                      {/* <Icon type="container" /> */}
-                      <span>Reports</span>
+                      <Icon type="container" />
+              <span>Reports</span>
                     </span>
                   }
                 >
-                  <Menu.Item
-                    key="reportsub1"
-                    onClick={this.onClick("reportsub1")}
-                  >
-                    <Link to={"/weeklystatusreport/"}>Work Report</Link>
-                  </Menu.Item>
-                  <Menu.Item key="inbox" onClick={this.onClick("inboxsub")}>
-                    <Link to={"/weeklyreportlist/inbox"}>Inbox</Link>
-                  </Menu.Item>
-                  <Menu.Item key="sent" onClick={this.onClick("sentsub")}>
-                    <Link to={"/weeklyreportlist/sent"}>Sent</Link>
-                  </Menu.Item>
+            <Menu.Item
+              key="reportsub1"
+              onClick={this.onClick("reportsub1")}
+            >
+              <Link to={"/weeklystatusreport/"}>Work Report</Link>
+            </Menu.Item>
+            <Menu.Item key="inbox" onClick={this.onClick("inboxsub")}>
+              <Link to={"/weeklyreportlist/inbox"}>Inbox</Link>
+            </Menu.Item>
+            <Menu.Item key="sent" onClick={this.onClick("sentsub")}>
+              <Link to={"/weeklyreportlist/sent"}>Sent</Link>
+            </Menu.Item>
                 </SubMenu>
-              ) : null}
+              ) : null} */}
 
-              {this.props.user.is_hr ? (
+              {/* {this.props.user.is_hr ? (
                 <SubMenu
                   key="hrNotice"
                   title={
                     <span>
-                      {/* <Icon type="fund" /> */}
+                      <Icon type="fund" />
                       <span>Notice</span>
                     </span>
                   }
@@ -453,11 +453,11 @@ class SideNav extends Component {
                   onClick={this.onClick("UserNotice")}
                 >
                   <Link to="/notices/allnotice">
-                    {/* <Icon type="notification" /> */}
+                    <Icon type="notification" />
                     <span>Notice Board</span>
                   </Link>
                 </Menu.Item>
-              )}
+              )} */}
               {/* <Menu.Item key="ContactUs" onClick={this.onClick("ContactUs")}>
                   <Link to={`/contactus/${this.props.user.id}`}>
                     <Icon type="project" />
@@ -466,8 +466,8 @@ class SideNav extends Component {
                 </Menu.Item> */}
             </Menu>
           </div>
-        </Sider>
-      </Fragment>
+        </Sider >
+      </Fragment >
     );
   }
 }

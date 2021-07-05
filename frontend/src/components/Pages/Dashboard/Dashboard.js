@@ -9,7 +9,6 @@ import { getTypeIssues } from "../../../actions/issues";
 import { getTypeNotices } from "../../../actions/notice";
 import { getDashPanelData } from "../../../actions/profile";
 import { getGroupList } from "../../../actions/group";
-import { getRequests } from "../../../actions/accounts";
 import NoData from "../../Common/NoData/NoData";
 
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
@@ -44,8 +43,6 @@ class Dashboard extends Component {
     } else if (this.props.user.is_hr) {
       this.props.getDashPanelData();
       this.props.getGroupList();
-    } else if (this.props.user.is_fna) {
-      this.props.getRequests();
     } else if (this.props.user.is_staff) {
       this.props.getAdminDashboardProjects();
     }
@@ -161,6 +158,5 @@ export default connect(mapStateToProps, {
   getTypeTasks,
   getDashPanelData,
   getTypeIssues,
-  getGroupList,
-  getRequests
+  getGroupList
 })(Dashboard);

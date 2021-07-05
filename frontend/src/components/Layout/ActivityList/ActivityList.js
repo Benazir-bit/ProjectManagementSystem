@@ -5,7 +5,6 @@ import "./ActivityList.css";
 import { Link } from "react-router-dom";
 //import { getTypeNews } from '../../../actions/news'
 import moment from "moment";
-import axios from "axios";
 import { Drawer, Button, Icon, Layout, Spin, Skeleton } from "antd";
 import { getTypeNews } from "../../../actions/news";
 import { resetNewsInfinityScroll } from "../../../actions/news";
