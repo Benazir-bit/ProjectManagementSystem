@@ -143,11 +143,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'frontend', "build",
+                 "static"),  # update the STATICFILES_DIRS
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uspl/media')
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 LOGIN_REDIRECT_URL = '/uspl/'
@@ -161,3 +164,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+

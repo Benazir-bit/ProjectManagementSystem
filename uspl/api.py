@@ -504,8 +504,9 @@ def IssueTableAPI(request, type, id, filter=None):
     return Response(serializer.data)
 
 
+@permission_classes((permissions.IsAuthenticated, ))
 class IssueInfiniteView(APIView):
-    serializer_class = IssueListSerializer
+    # serializer_class = IssueListSerializer
     # pagination_class = LimitOffsetPagination
 
     def get(self, request,  type, id, filter=None, format=None):
@@ -1312,7 +1313,6 @@ class ProfileAPI(APIView):
     ]
 
     def get(self, request, user_id):
-        print("aaaaaaaa")
         user = get_object_or_404(User, id=user_id)
         profile = user.profile
         serializer = ProfileSerializer(profile)
