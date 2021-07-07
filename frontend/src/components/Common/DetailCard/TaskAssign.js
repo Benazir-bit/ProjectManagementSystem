@@ -2,14 +2,14 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import ImageSmall from "../../Common/ImageSmall/ImageSmall";
-import {
-  getTaskDetails,
-  startTask,
-  sendfeedback,
-  submitTask
-} from "../../../actions/task";
+// import {
+//   getTaskDetails,
+//   startTask,
+//   sendfeedback,
+//   submitTask
+// } from "../../../actions/task";
 
-import { Button, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import "./TaskAssign.css";
 import RaiseIssueModal from "../Modals/RaiseIssueModal/RaiseIssueModal";
 import SubmitTaskModal from "../Modals/SubmitTaskModal/SubmitTaskModal";
@@ -75,7 +75,7 @@ class TaskAssign extends Component {
     let taskModify;
     if (!this.props.task.completed) {
       if (
-        this.props.user.id == this.props.task.supervisor.id ||
+        this.props.user.id === this.props.task.supervisor.id ||
         this.props.user.is_teamleader ||
         this.props.user.is_staff
       ) {
@@ -104,7 +104,7 @@ class TaskAssign extends Component {
     }
 
     let checktask;
-    if (this.props.user.id == this.props.task.supervisor.id) {
+    if (this.props.user.id === this.props.task.supervisor.id) {
       if (this.props.task.submitted && !this.props.task.completed) {
         checktask = (
           <Fragment>
@@ -117,7 +117,7 @@ class TaskAssign extends Component {
             </li>
           </Fragment>
         );
-      } else if (this.props.task.owner.id == this.props.task.supervisor.id) {
+      } else if (this.props.task.owner.id === this.props.task.supervisor.id) {
         if (!this.props.task.started) {
           checktask = (
             <li className="list-group-item" style={{ display: "flex" }}>
@@ -180,7 +180,7 @@ class TaskAssign extends Component {
           }
         }
       }
-    } else if (this.props.user.id == this.props.task.owner.id) {
+    } else if (this.props.user.id === this.props.task.owner.id) {
       if (!this.props.task.requested) {
         if (!this.props.task.started) {
           checktask = (

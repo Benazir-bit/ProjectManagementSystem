@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { updateTask } from "../../../../actions/task";
-import { getTypeMembers } from "../../../../actions/member";
+// import { getTypeMembers } from "../../../../actions/member";
 import moment from "moment";
 import { Form, Modal, Button, Input, Select, DatePicker } from "antd";
 import ImageSmall from "../../ImageSmall/ImageSmall";
@@ -15,7 +15,7 @@ const CollectionCreateForm = (
     render() {
       const { task } = this.props;
       let today = new Date();
-      const { visible, onCancel, onCreate, form } = this.props;
+      const { visible, onCancel, onCreate } = this.props;
 
 
       return (

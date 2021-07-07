@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import CreateUserForm from "../../Common/Form/CreateUserForm";
 import { Layout } from "antd";

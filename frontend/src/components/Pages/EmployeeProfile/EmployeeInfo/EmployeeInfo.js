@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import AllButton from "../../../Common/AllButton/AllButton";
+// import AllButton from "../../../Common/AllButton/AllButton";
 import { connect } from "react-redux";
-import { Icon } from "antd";
+// import { Icon } from "antd";
 import "./EmployeeInfo.css";
 import UpdateProfileModal from "../../../Common/Modals/UpdateProfileModal/UpdateProfileModal";
 import ResetPasswordModal from "../../../Common/Modals/ResetPasswordModal/ResetPasswordModal";
@@ -33,7 +33,7 @@ class EmployeeInfo extends Component {
           </span>
           <br />
           {this.props.profile.groups.map((grp, i) => (
-            <span key={i}>{grp.name} {i == (this.props.profile.groups.length - 1) ? null : ', '}</span>
+            <span key={i}>{grp.name} {i === (this.props.profile.groups.length - 1) ? null : ', '}</span>
           ))}
           <br />
           <span>
@@ -46,7 +46,7 @@ class EmployeeInfo extends Component {
             {this.props.profile.email}
           </span>
         </h4>
-        {this.props.profile.user == this.props.user.id ? (
+        {this.props.profile.user === this.props.user.id ? (
           <Fragment>
             <UpdateProfileModal /> &emsp;
             <ResetPasswordModal />

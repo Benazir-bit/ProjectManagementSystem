@@ -14,12 +14,12 @@ import "./GroupDetails.css";
 import AllButton from "../../Common/AllButton/AllButton";
 import AddProjectModal from "../../Common/Modals/AddProjectModal/AddProjectModal";
 import CardBodyOnly from "../../Common/AllCard/CardBodyOnly";
-import ActivityList from "../../Layout/ActivityList/ActivityList";
+// import ActivityList from "../../Layout/ActivityList/ActivityList";
 import { Layout } from "antd";
 import Page404 from "../../Common/404Page/404Page";
 import { getTypeTaskOverview } from "../../../actions/task";
 const { Content } = Layout;
-let update = false;
+// let update = false;
 class GroupDetails extends Component {
   constructor(props) {
     super(props);
@@ -89,7 +89,7 @@ class GroupDetails extends Component {
     if (!this.props.user.is_staff) {
 
       let inGroup = this.props.user.groups.map(userGrp => {
-        return userGrp.id == parseInt(this.props.match.params.id, 10)
+        return userGrp.id === parseInt(this.props.match.params.id, 10)
           ? true
           : null;
       });

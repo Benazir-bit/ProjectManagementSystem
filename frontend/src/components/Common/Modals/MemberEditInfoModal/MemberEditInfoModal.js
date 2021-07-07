@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import "./MemberEditInfoModal.css";
 import {
   Form,
   Modal,
-  Button,
+  // Button,
   Input,
   Select,
   Row,
@@ -95,7 +95,7 @@ class MemberEditInfoModal extends React.Component {
     const { form } = this.props;
 
     form.validateFields(err => {
-      if (this.state.value.length == 0) {
+      if (this.state.value.length === 0) {
         document
           .getElementsByClassName("groupSelect")[0]
           .getElementsByClassName("ant-form-item-control-wrapper")[0]
@@ -173,7 +173,7 @@ class MemberEditInfoModal extends React.Component {
       if (
         err ||
         !this.state.defdsg ||
-        this.state.value.length == 0 ||
+        this.state.value.length === 0 ||
         !this.state.DB ||
         !this.state.DJ
       ) {
@@ -218,7 +218,7 @@ class MemberEditInfoModal extends React.Component {
       this.props.updateProfile(this.props.profile.user, profile_body);
       this.props.updateUser(user_body);
       form.resetFields();
-      this.state.value = [];
+      // this.state.value = [];
       this.setState({
         visible: false,
         data: [],
@@ -234,7 +234,7 @@ class MemberEditInfoModal extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps.profile != this.props.profile) {
+    if (prevProps.profile !== this.props.profile) {
       let groupList = [];
       this.props.profile.groups.map((group, i) => {
         groupList.push(group.id);
@@ -308,7 +308,7 @@ class MemberEditInfoModal extends React.Component {
   };
   SelectGroup = value => {
     // this.props.getTypeMembers("group", value);
-    if (value.length != 0) {
+    if (value.length !== 0) {
       this.props.getAllDesignations(value);
     }
 
@@ -324,7 +324,7 @@ class MemberEditInfoModal extends React.Component {
       return null;
     }
     const { data, fetching } = this.state;
-    const { form, member } = this.props;
+    // const { form, member } = this.props;
 
     const formItemLayout = {
       labelCol: {

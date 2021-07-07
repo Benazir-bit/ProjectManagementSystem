@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./ProfileTable.css";
-import { Switch } from "antd";
+
 class ProfileTable extends Component {
   render() {
     return (

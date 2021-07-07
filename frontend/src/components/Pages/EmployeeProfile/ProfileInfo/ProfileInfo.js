@@ -3,7 +3,7 @@ import ImageBig from "../../../Common/ImageBig/ImageBig";
 import EmployeeInfo from "../EmployeeInfo/EmployeeInfo";
 import UploadButton from "../../../Common/UploadButton/UploadButton";
 import "./ProfileInfo.css";
-import { Avatar, Icon } from "antd";
+// import { Avatar, Icon } from "antd";
 class ProfileInfo extends Component {
   render() {
     // const DefaultImange = "../../../../../static/frontend/img/pic.png";
@@ -33,7 +33,7 @@ class ProfileInfo extends Component {
             )}
 
             <br />
-            {this.props.profile.user == this.props.user.id ? (
+            {this.props.profile.user === this.props.user.id ? (
               <UploadButton id={this.props.profile.user} />
             ) : null}
           </div>

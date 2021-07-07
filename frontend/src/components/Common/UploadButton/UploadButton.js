@@ -1,23 +1,28 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import "./UploadButton.css";
-import { Upload, message, Button, Icon } from "antd";
+import {
+  Upload,
+  // message, 
+  Button,
+  // Icon 
+} from "antd";
 import { uploadProfilePhoto } from "../../../actions/profile";
 //import { loadUser } from "../../../actions/auth";
 
-const props = {
-  onChange(info) {
-    console.log(info.file);
-    if (info.file.status !== "uploading") {
-      console.log(info.file);
-    }
-    if (info.file.status === "done") {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  }
-};
+// const props = {
+//   onChange(info) {
+//     console.log(info.file);
+//     if (info.file.status !== "uploading") {
+//       console.log(info.file);
+//     }
+//     if (info.file.status === "done") {
+//       message.success(`${info.file.name} file uploaded successfully`);
+//     } else if (info.file.status === "error") {
+//       message.error(`${info.file.name} file upload failed.`);
+//     }
+//   }
+// };
 
 class UploadButton extends Component {
   uploadPhoto = file => {

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 class CommonTable extends Component {
   render() {
     var dataColumns = this.props.data.columns;
@@ -8,7 +8,7 @@ class CommonTable extends Component {
     var tableHeaders = (
       <thead>
         <tr>
-          {dataColumns.map(function(column, index) {
+          {dataColumns.map(function (column, index) {
             return <th key={index}>{column}</th>;
           })}
         </tr>
@@ -20,10 +20,10 @@ class CommonTable extends Component {
     // 		return col == element;
     // 	});
 
-    var tableBody = dataRows.map(function(row, index) {
+    var tableBody = dataRows.map(function (row, index) {
       return (
         <tr key={index}>
-          {dataColumns.map(function(column, index) {
+          {dataColumns.map(function (column, index) {
             return (
               <td key={index}>
                 {row[column]}

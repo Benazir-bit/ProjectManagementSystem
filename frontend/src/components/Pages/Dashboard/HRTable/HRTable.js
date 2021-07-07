@@ -4,7 +4,7 @@ import CommonTable from "../../../Common/AllTables/CommonTable";
 import AllCardBody from "../../../Common/AllCard/AllCardBody";
 import ImageSmall from "../../../Common/ImageSmall/ImageSmall";
 import { Link } from "react-router-dom";
-import { Button, Skeleton } from "antd";
+import { Skeleton } from "antd";
 
 class HRTable extends Component {
   render() {
@@ -38,18 +38,18 @@ class HRTable extends Component {
           ),
           Teamleader: group.teamleader
             ? group.teamleader.teamleaders.map((teamleader, i) => (
-                <Fragment key={i}>
-                  <Link to={`/profile/${teamleader.profile.id}`}>
-                    <ImageSmall
-                      clsattr={"img-circle"}
-                      altname={teamleader.profile.full_name}
-                      srcfile={teamleader.profile.image}
-                    />
-                    {teamleader.profile.full_name}
-                  </Link>
-                  {i == group.teamleader.teamleaders.length - 1 ? null : ", "}
-                </Fragment>
-              ))
+              <Fragment key={i}>
+                <Link to={`/profile/${teamleader.profile.id}`}>
+                  <ImageSmall
+                    clsattr={"img-circle"}
+                    altname={teamleader.profile.full_name}
+                    srcfile={teamleader.profile.image}
+                  />
+                  {teamleader.profile.full_name}
+                </Link>
+                {i === group.teamleader.teamleaders.length - 1 ? null : ", "}
+              </Fragment>
+            ))
             : null,
           "Total Members": group.user_set.total_employees
         };

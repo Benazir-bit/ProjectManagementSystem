@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from "react";
+import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Form, Modal, Input, DatePicker, Checkbox } from "antd";
 import { updateNotice, getNoticeDetails } from "../../../../actions/notice";
 
 import moment from "moment";
 
-class NoticeEditModal extends React.Component {
+class NoticeEditModal extends Component {
   state = {
     visible: false,
     confirmLoading: false,
@@ -58,7 +58,7 @@ class NoticeEditModal extends React.Component {
           body,
           created_on,
           expires_on,
-          important
+          // important
         } = form.getFieldsValue();
 
         console.log(
@@ -89,7 +89,7 @@ class NoticeEditModal extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.notice) {
-      if (prevProps.notice != this.props.notice) {
+      if (prevProps.notice !== this.props.notice) {
         this.setState({
           created_date: this.props.notice.created_on,
           expired_date: this.props.notice.expires_on,
@@ -107,7 +107,7 @@ class NoticeEditModal extends React.Component {
 
     // const { data, fetching } = this.state;
     let today = new Date();
-    const { form, notice } = this.props;
+    // const { form, notice } = this.props;
 
     const formItemLayout = {
       labelCol: {

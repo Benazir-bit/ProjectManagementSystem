@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
-import { Form, Row, Col } from "antd";
+import { Form, Col } from "antd";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ContactUsForm from "../../Common/Form/ContactUsForm";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import ContactCard from "../../Common/AllCard/ContactCard/ContactCard";
 import { getUserProfile } from "../../../actions/profile";
-import ActivityList from "../../Layout/ActivityList/ActivityList";
+// import ActivityList from "../../Layout/ActivityList/ActivityList";
 import { Layout } from "antd";
 const { Content } = Layout;
 const data = [

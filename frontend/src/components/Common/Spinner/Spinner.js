@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Spin, Icon } from "antd";
-import ImageMedium from "../ImageMedium/ImageMedium";
+// import { Spin, Icon } from "antd";
+// import ImageMedium from "../ImageMedium/ImageMedium";
 import "./Spinner.css";
 // import DefaultImange from "../../../../static/frontend/img/pic.png";
 class Spinner extends Component {

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import "./NoticeDeleteModal.css";
 import { deleteNotice, getNoticeDetails } from "../../../../actions/notice";
 import { deleteComplete } from "../../../../actions/modal";
-import { Modal, Button, Input } from "antd";
+import { Modal } from "antd";
 
 class NoticeDeleteModal extends Component {
   state = { visible: false, confirmLoading: false, notice_id: "" };

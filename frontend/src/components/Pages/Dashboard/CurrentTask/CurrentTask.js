@@ -52,7 +52,7 @@ class CurrentTask extends Component {
                   marginLeft: "12px",
                   marginTop: "5px",
                   WebkitBoxShadow: "none",
-                  backgroundColor: task.issue_count == 0 ? "#52c41a" : "#d9534f"
+                  backgroundColor: task.issue_count === 0 ? "#52c41a" : "#d9534f"
                 }}
               />
             )

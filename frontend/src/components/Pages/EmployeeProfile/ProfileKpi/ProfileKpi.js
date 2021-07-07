@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { getUserAvgKPI } from "../../../../actions/profile";
 import TitleHeader from "../../../Common/TitleHeader/TitleHeader";
@@ -7,7 +7,7 @@ import CircleProgress from "../../../Common/CircleProgress/CircleProgress";
 import NoData from "../../../Common/NoData/NoData";
 import "./ProfileKpi.css";
 
-class ProfileKpi extends React.Component {
+class ProfileKpi extends Component {
   componentDidMount() {
     const today = new Date(),
       date = today.getFullYear();

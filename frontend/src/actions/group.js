@@ -5,7 +5,7 @@ import {
   GET_TYPE_TASKS_OVERVIEW
 } from "./types";
 import { tokenConfig } from "./auth";
-import { errorMessage } from "./alerts";
+// import { errorMessage } from "./alerts";
 import { createMessage } from "./alerts";
 
 export const getGroupDetails = id => (dispatch, getState) => {

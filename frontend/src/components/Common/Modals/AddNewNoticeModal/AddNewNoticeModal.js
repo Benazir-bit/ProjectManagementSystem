@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Form, Modal, Button, Input, Select, DatePicker, Checkbox } from "antd";
+import { Form, Modal, Button, Input, DatePicker, Checkbox } from "antd";
 import { addNewNotice } from "../../../../actions/notice";
 import moment from "moment";
 
@@ -13,10 +13,10 @@ const CollectionCreateForm = (
         visible,
         onCancel,
         onCreate,
-        form,
+        // form,
         wrappedComponentRef
       } = this.props;
-      const { getFieldDecorator } = form;
+      // const { getFieldDecorator } = form;
 
       return (
         <Fragment>

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { Modal, Button, Input } from "antd";
+import { Modal, Button } from "antd";
 import { approveTask } from "../../../../actions/task";
 
 class ApproveTaskModal extends Component {

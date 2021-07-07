@@ -6,12 +6,16 @@ import { commnentIssue, markasSolution } from "../../../../actions/issues";
 import { connect } from "react-redux";
 import "./IssueFeedBack.css";
 import TextEditor from "../../../Common/TextEditor/TextEditor";
-import { Button, Form, Icon, Collapse, Input } from "antd";
+import {
+  Button, Form,
+  // Icon, 
+  Collapse
+} from "antd";
 import NoData from "../../../Common/NoData/NoData";
-import moment from "moment";
+// import moment from "moment";
 
 const { Panel } = Collapse;
-const { TextArea } = Input;
+// const { TextArea } = Input;
 class IssueFeedback extends Component {
   constructor(props) {
     super(props);
@@ -37,8 +41,8 @@ class IssueFeedback extends Component {
 
   onChange = e => {
     this.setState({ loading: true });
-    var currentDate = new Date();
-    var start_date = moment(currentDate).format("YYYY-MM-DD");
+    // var currentDate = new Date();
+    // var start_date = moment(currentDate).format("YYYY-MM-DD");
     this.props.startTask(this.props.task.id, true);
     const onClick = this.props.onClick;
     if (onClick) {
@@ -87,7 +91,7 @@ class IssueFeedback extends Component {
                 style={{ marginLeft: "10px", color: "#7cae60" }}
               />
             ) : null} */}
-            {this.props.issue.solved ? null : this.props.user.id ==
+            {this.props.issue.solved ? null : this.props.user.id ===
               this.props.issue.raised_by ? (
               <Button
                 onClick={() =>

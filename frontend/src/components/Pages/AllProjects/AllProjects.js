@@ -7,13 +7,16 @@ import CommonTable from "../../Common/AllTables/CommonTable";
 import TableProgress from "../../Common/AllTables/TableProgress/TableProgress";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import CardBodyOnly from "../../Common/AllCard/CardBodyOnly";
-import { Icon, Input, AutoComplete, Skeleton } from "antd";
+import {
+  // Icon, Input, AutoComplete, 
+  Skeleton
+} from "antd";
 import "./AllProjects.css";
 import { getTypeNews } from "../../../actions/news";
-import ActivityList from "../../Layout/ActivityList/ActivityList";
+// import ActivityList from "../../Layout/ActivityList/ActivityList";
 import { Layout } from "antd";
 const { Content } = Layout;
-const { Search } = Input;
+// const { Search } = Input;
 
 class AllProjects extends Component {
   constructor(props) {
@@ -30,7 +33,9 @@ class AllProjects extends Component {
     };
     window.onscroll = () => {
       const {
-        state: { error, loading, hasMore, fetchingData }
+        state: { error, loading, hasMore,
+          // fetchingData 
+        }
       } = this;
 
       this.state.hasMore =
@@ -92,12 +97,15 @@ class AllProjects extends Component {
         const newJournals = res.data.results;
         // console.log("fetching...");
         // console.log(res.data.count);
-        this.state.count = res.data.count;
-        this.state.projects = [...this.state.projects, ...newJournals];
-        this.state.offset = offset + limit;
+        // this.state.count = res.data.count;
+        // this.state.projects = [...this.state.projects, ...newJournals];
+        // this.state.offset = offset + limit;
         this.setState({
           loading: false,
-          fetchingData: false
+          fetchingData: false,
+          count: res.data.count,
+          projects: [...this.state.projects, ...newJournals],
+          offset: offset + limit
         });
       })
       .catch(err => {
@@ -116,7 +124,7 @@ class AllProjects extends Component {
   }
   render() {
     let project_list = [];
-    if (this.state.projects.length == 0) {
+    if (this.state.projects.length === 0) {
       if (this.state.loading && this.state.hasMore) {
         for (let i = 0; i < 5; i++) {
           let loadData_skeleton = {
@@ -197,9 +205,9 @@ class AllProjects extends Component {
                   <br />
                   <TitleHeader
                     title={
-                      this.props.match.params.type == "group"
+                      this.props.match.params.type === "group"
                         ? "Group Projects"
-                        : this.props.match.params.type == "user"
+                        : this.props.match.params.type === "user"
                           ? "User Projects"
                           : null
                     }

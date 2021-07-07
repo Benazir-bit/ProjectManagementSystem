@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 import { getTypeTasks } from "../../../actions/task";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import CardBodyOnly from "../../Common/AllCard/CardBodyOnly";
-import { Icon, Input, AutoComplete, Skeleton, Badge } from "antd";
+import {
+  // Icon, Input, AutoComplete, 
+  Skeleton, Badge
+} from "antd";
 import CommonTable from "../../Common/AllTables/CommonTable";
 import { Layout } from "antd";
-import ActivityList from "../../Layout/ActivityList/ActivityList";
+// import ActivityList from "../../Layout/ActivityList/ActivityList";
 import axios from "axios";
 
 const { Content } = Layout;
-const { Search } = Input;
+// const { Search } = Input;
 
 class CompletedTasks extends Component {
   constructor(props) {
@@ -28,7 +31,9 @@ class CompletedTasks extends Component {
     };
     window.onscroll = () => {
       const {
-        state: { error, loading, hasMore, fetchingData }
+        state: { error, loading, hasMore,
+          // fetchingData 
+        }
       } = this;
 
       this.state.hasMore =
@@ -87,14 +92,17 @@ class CompletedTasks extends Component {
       )
       .then(res => {
         const newJournals = res.data.results;
-        console.log("fetching...");
-        console.log(res.data.count);
-        this.state.count = res.data.count;
-        this.state.ctasks = [...this.state.ctasks, ...newJournals];
-        this.state.offset = offset + limit;
+        // console.log("fetching...");
+        // console.log(res.data.count);
+        // this.state.count = res.data.count;
+        // this.state.ctasks = [...this.state.ctasks, ...newJournals];
+        // this.state.offset = offset + limit;
         this.setState({
           loading: false,
-          fetchingData: false
+          fetchingData: false,
+          count: res.data.count,
+          ctasks: [...this.state.ctasks, ...newJournals],
+          offset: offset + limit
         });
       })
       .catch(err => {
@@ -114,7 +122,7 @@ class CompletedTasks extends Component {
   render() {
     let completetask_list = [];
 
-    if (this.state.ctasks.length == 0) {
+    if (this.state.ctasks.length === 0) {
       if (this.state.loading && this.state.hasMore) {
         for (let i = 0; i < this.state.limit; i++) {
           let loadData_skeleton = {
@@ -170,7 +178,7 @@ class CompletedTasks extends Component {
                   marginLeft: "12px",
                   marginTop: "5px",
                   WebkitBoxShadow: "none",
-                  backgroundColor: task.issue_count == 0 ? "#52c41a" : "#d9534f"
+                  backgroundColor: task.issue_count === 0 ? "#52c41a" : "#d9534f"
                 }}
               />
             )
@@ -242,7 +250,7 @@ class CompletedTasks extends Component {
                 /> */}
                   <TitleHeader
                     title={
-                      this.props.match.params.id == this.props.user.id
+                      this.props.match.params.id === this.props.user.id
                         ? "My Tasks"
                         : "All Tasks"
                     }

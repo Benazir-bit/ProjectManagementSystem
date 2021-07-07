@@ -1,4 +1,7 @@
-import { MODAL_DELETE_COMPLETE, FORM_SUBMIT_COMPLETE } from "./types";
+import {
+  MODAL_DELETE_COMPLETE,
+  // FORM_SUBMIT_COMPLETE 
+} from "./types";
 
 export const deleteComplete = () => dispatch => {
   dispatch({

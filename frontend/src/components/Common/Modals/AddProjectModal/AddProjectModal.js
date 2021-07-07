@@ -6,19 +6,19 @@ import { addNewProject } from "../../../../actions/projects";
 import "./AddProjectModal.css";
 
 const { TextArea } = Input;
-const InputGroup = Input.Group;
+// const InputGroup = Input.Group;
 const { Option } = Select;
 
 const CollectionCreateForm = (
   class extends Component {
     render() {
-      const SelectOption = Select.Option;
+      // const SelectOption = Select.Option;
       let today = new Date();
       const {
         visible,
         onCancel,
         onCreate,
-        form,
+        // form,
         supervisorChange,
         supervisor
       } = this.props;
@@ -90,7 +90,7 @@ const CollectionCreateForm = (
                 >
                   {supervisor && this.props.group && this.props.group.user_set
                     ? this.props.group.user_set.map(member =>
-                      member.id == supervisor ? null : (
+                      member.id === supervisor ? null : (
                         <Option key={member.id} value={member.id}>
                           <ImageSmall
                             clsattr={"img-circle"}

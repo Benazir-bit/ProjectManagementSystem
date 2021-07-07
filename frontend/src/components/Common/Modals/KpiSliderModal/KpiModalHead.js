@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import "./KpiSliderModal.css";
 import moment from "moment";
 class KpiModalHead extends React.Component {
