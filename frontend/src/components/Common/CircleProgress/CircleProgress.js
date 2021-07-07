@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import "./CircleProgress.css";
 class CircleProgress extends React.PureComponent {
   componentDidMount() {

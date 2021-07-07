@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
+import { Component, Fragment } from "react";
+// import { connect } from "react-redux";
 import "./ProfileKpi.css";
 import AvgKPIGroup from "../AvgKPIGroup/AvgKPIGroup";
 import CircleProgress from "../../../Common/CircleProgress/CircleProgress";
 
-class ProfileKpi extends React.Component {
+class ProfileKpi extends Component {
   render() {
     if (!this.props.avg_kpi) {
       return null

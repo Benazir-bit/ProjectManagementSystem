@@ -29,10 +29,10 @@ export const searchData = (search, app, type, filter) => (
   axios
     .put(`${app}/api/${type}/search/${filter}/`, body, tokenConfig(getState))
     .then(res => {
-      const data = res.data.map(user => ({
-        value: user.username,
-        username: user.full_name
-      }));
+      // const data = res.data.map(user => ({
+      //   value: user.username,
+      //   username: user.full_name
+      // }));
       dispatch({
         type: GET_SEARCH_RESULT,
         payload: res.data

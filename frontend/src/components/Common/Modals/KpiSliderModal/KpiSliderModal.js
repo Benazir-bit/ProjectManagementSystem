@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import { Modal, Button, Input } from "antd";
 import SliderKPI from "../../SliderKPI/SliderKPI";
 import KpiModalHead from "./KpiModalHead";
@@ -31,7 +31,7 @@ class KpiSliderModal extends React.Component {
   };
 
   render() {
-    const { visible, loading } = this.state;
+    const { visible } = this.state;
     return (
       <Fragment>
         <div>

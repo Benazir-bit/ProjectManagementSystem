@@ -5,10 +5,16 @@ import "./ActivityList.css";
 import { Link } from "react-router-dom";
 //import { getTypeNews } from '../../../actions/news'
 import moment from "moment";
-import { Drawer, Button, Icon, Layout, Spin, Skeleton } from "antd";
+import {
+  // Drawer, 
+  Button,
+  // Icon,
+  Layout, Spin,
+  // Skeleton 
+} from "antd";
 import { getTypeNews } from "../../../actions/news";
 import { resetNewsInfinityScroll } from "../../../actions/news";
-const { Header, Sider, Content } = Layout;
+const { Sider } = Layout;
 
 
 let init = 0;
@@ -118,7 +124,7 @@ class ActivityList extends Component {
     this.props.resetNewsInfinityScroll();
     //this.loadData();
 
-    if (this.props.offset == 0) {
+    if (this.props.offset === 0) {
       this.loadData();
       init = 0;
     }
@@ -136,15 +142,15 @@ class ActivityList extends Component {
     //   this.props.data,
     //   "check"
     // );
-    if (prevProps.id != this.props.id && prevProps.type == this.props.type) {
+    if (prevProps.id !== this.props.id && prevProps.type === this.props.type) {
       this.props.resetNewsInfinityScroll();
       this.loadData();
     }
-    if (init == 1) {
+    if (init === 1) {
       this.loadData();
     }
     init = 0;
-    if (prevProps.data != this.props.data) {
+    if (prevProps.data !== this.props.data) {
       this.pageScrollCheck();
     }
     // window.addEventListener("resize", this.pageScrollCheck.bind(this));

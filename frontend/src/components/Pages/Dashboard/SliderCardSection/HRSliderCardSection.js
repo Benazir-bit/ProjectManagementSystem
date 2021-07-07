@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Carousel, Icon, Skeleton } from "antd";
+import {
+  Carousel,
+  // Icon, 
+  Skeleton
+} from "antd";
 import SliderCard from "../../../Common/AllCard/SliderCard";
 import "./SliderCardSection.css";
 

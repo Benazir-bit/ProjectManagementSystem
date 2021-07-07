@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import CommonTable from "../../../Common/AllTables/CommonTable";
 import AllCardBody from "../../../Common/AllCard/AllCardBody";
 import TableProgress from "../../../Common/AllTables/TableProgress/TableProgress";
 import { Link } from "react-router-dom";
 import "./MyProject.css";
-import { getTypeProjects } from "../../../../actions/projects";
+// import { getTypeProjects } from "../../../../actions/projects";
 import { Skeleton } from "antd";
 import NoData from "../../../Common/NoData/NoData";
 

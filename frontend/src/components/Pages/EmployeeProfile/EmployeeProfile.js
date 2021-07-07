@@ -6,12 +6,12 @@ import ProfileInfo from "../../Pages/EmployeeProfile/ProfileInfo/ProfileInfo";
 import EmployeeWorkInfo from "../../Pages/EmployeeProfile/EmployeeWorkInfo/EmployeeWorkInfo";
 import ProfileKpi from "../../Pages/EmployeeProfile/ProfileKpi/ProfileKpi";
 import "./EmployeeProfile.css";
-import { DatePicker } from "antd";
+// import { DatePicker } from "antd";
 import { getUserProfile } from "../../../actions/profile";
 import Spinner from "../../Common/Spinner/Spinner";
-import ActivityList from "../../Layout/ActivityList/ActivityList";
+// import ActivityList from "../../Layout/ActivityList/ActivityList";
 import { Layout } from "antd";
-import NoData from "../../Common/NoData/NoData";
+// import NoData from "../../Common/NoData/NoData";
 import Page404 from "../../Common/404Page/404Page";
 
 const { Content } = Layout;
@@ -45,7 +45,8 @@ class EmployeeProfile extends Component {
     let userGroup;
     this.props.auth_user.groups.map(
       userGrp => (
-        console.log(userGrp.id, "user groups"), (userGroup = userGrp.id)
+        // console.log(userGrp.id, "user groups"),
+        (userGroup = userGrp.id)
       )
     );
 
@@ -55,7 +56,7 @@ class EmployeeProfile extends Component {
     } else if (
       this.props.auth_user.is_teamleader ||
       this.props.auth_user.is_staff ||
-      this.props.auth_user.id == this.props.profile.id
+      this.props.auth_user.id === this.props.profile.id
     ) {
       ProfileKpiBottom = <ProfileKpi profile={this.props.profile} />;
     } else {
@@ -64,7 +65,7 @@ class EmployeeProfile extends Component {
 
     let ProfileKpiHR;
     if (this.props.auth_user.is_hr) {
-      if (this.props.profile.id != this.props.auth_user.id) {
+      if (this.props.profile.id !== this.props.auth_user.id) {
         ProfileKpiBottom = <ProfileKpi profile={this.props.profile} />;
       } else {
         ProfileKpiBottom = null;
@@ -94,7 +95,7 @@ class EmployeeProfile extends Component {
                       {ProfileKpiBottom}
                       {ProfileKpiHR}
                     </Fragment>
-                  ) : profileGroup != userGroup &&
+                  ) : profileGroup !== userGroup &&
                     !this.props.auth_user.is_staff ? (
                     <Page404 />
                   ) : (

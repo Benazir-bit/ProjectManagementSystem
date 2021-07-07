@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import { Slider, InputNumber, Row, Col } from "antd";
 import "./MarkDoneSlider.css";
 class MarkDoneSlider extends React.Component {

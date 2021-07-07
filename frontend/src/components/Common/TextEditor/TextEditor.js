@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
-import { render } from "react-dom";
-import ReactQuill, { Quill } from "react-quill";
+// import { render } from "react-dom";
+import ReactQuill from "react-quill";
 // import { ImageResize } from "quill-image-resize-module";
 import "./TextEditor.css";
 import "react-quill/dist/quill.snow.css";
 // Quill.register("modules/ImageResize", ImageResize);
-import { Button } from "antd";
+// import { Button } from "antd";
 
 // class TextEditor extends Component {
 //   constructor(props) {

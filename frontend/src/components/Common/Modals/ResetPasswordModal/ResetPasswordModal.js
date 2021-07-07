@@ -24,7 +24,7 @@ const CollectionCreateForm = (
     };
 
     render() {
-      const { visible, onCancel, onCreate, form } = this.props;
+      const { visible, onCancel, onCreate } = this.props;
       // const { getFieldDecorator } = form;
 
       return (

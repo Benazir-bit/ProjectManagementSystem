@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from "react";
+// import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import moment from "moment";
+// import moment from "moment";
 import { getTaskDetails, startTask } from "../../../../actions/task";
 import { Button } from "antd";
 
@@ -12,8 +12,8 @@ class StartTaskBtn extends Component {
 
   onClick = e => {
     this.setState({ loading: true });
-    var currentDate = new Date();
-    var start_date = moment(currentDate).format("YYYY-MM-DD");
+    // var currentDate = new Date();
+    // var start_date = moment(currentDate).format("YYYY-MM-DD");
     this.props.startTask(this.props.task.id, true);
     const onClick = this.props.onClick;
     if (onClick) {

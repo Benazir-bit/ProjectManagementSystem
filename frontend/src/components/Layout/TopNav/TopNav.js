@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Layout, Menu, Dropdown, Avatar, Anchor } from "antd";
+import { Layout, Menu, Dropdown, Avatar } from "antd";
 import "./TopNav.css";
 import {
   LogoutOutlined,
   EditOutlined,
   InboxOutlined,
-  HomeOutlined,
+  // HomeOutlined,
 } from "@ant-design/icons";
 import { logout } from "../../../actions/auth";
 import { Link } from "react-router-dom";

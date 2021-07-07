@@ -3,11 +3,11 @@ import {
   GET_TYPE_NEWS,
   LOADING_SCROLL,
   LOADING_COMPLETED,
-  INFINITY_SCROLL,
+  // INFINITY_SCROLL,
   RESET_NEWS
 } from "./types";
 import { tokenConfig } from "./auth";
-import { createMessage } from "./alerts";
+// import { createMessage } from "./alerts";
 
 export const resetNewsInfinityScroll = () => dispatch => {
   const body = {

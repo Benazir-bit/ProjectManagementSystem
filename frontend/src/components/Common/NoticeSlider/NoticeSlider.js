@@ -17,7 +17,7 @@ class NoticeSlider extends Component {
             <div id="myNotice" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner" role="listbox">
                 {this.props.notices.map((notice, i) => (
-                  <div key={i} className={i == 0 ? "item active" : "item"}>
+                  <div key={i} className={i === 0 ? "item active" : "item"}>
                     {notice.important ? (
                       <Fragment>
                         <Link

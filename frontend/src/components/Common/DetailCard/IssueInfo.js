@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import ImageSmall from "../../Common/ImageSmall/ImageSmall";
-import { Button, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import "./DetailCard.css";
 
 class IssueInfo extends Component {

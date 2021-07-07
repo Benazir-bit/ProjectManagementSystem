@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { Icon, Skeleton, Button, Badge } from "antd";
+// import { connect } from "react-redux";
+// import { Link } from "react-router-dom";
+// import { Icon, Skeleton, Button, Badge } from "antd";
 import "./MemberDetailModal.css";
 import CommonTable from "../../AllTables/CommonTable";
-import { ENGINE_METHOD_RAND } from "constants";
+// import { ENGINE_METHOD_RAND } from "constants";
 
 class MemberDetailInfo extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class MemberDetailInfo extends Component {
     this.setState({ fetchingData: false });
   }
   render() {
-    const { fetchingData } = this.state;
+    // const { fetchingData } = this.state;
 
     var tableData = {
       columns: ["Title", "Item"],
@@ -41,7 +41,7 @@ class MemberDetailInfo extends Component {
           Title: <b>Department</b>,
           Item:
             this.props.member_info.profile.groups.map((grp, i) => (
-              <span key={i}>{grp.name} {i == (this.props.member_info.profile.groups.length - 1) ? null : ', '}</span>
+              <span key={i}>{grp.name} {i === (this.props.member_info.profile.groups.length - 1) ? null : ', '}</span>
             ))
         },
         {

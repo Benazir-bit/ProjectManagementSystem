@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import AllButton from "../../../Common/AllButton/AllButton";
 
 class MemberDetailBtn extends Component {

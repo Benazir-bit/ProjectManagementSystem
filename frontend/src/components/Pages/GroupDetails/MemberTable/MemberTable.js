@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import ImageSmall from "../../../Common/ImageSmall/ImageSmall";
-import BadgeStatus from "../../../Common/Badge/BadgeStatus";
+// import BadgeStatus from "../../../Common/Badge/BadgeStatus";
 import "./MemberTable.css";
-import { Icon, Skeleton } from "antd";
+import {
+  // Icon, 
+  Skeleton
+} from "antd";
 
 class MemberTable extends Component {
   render() {

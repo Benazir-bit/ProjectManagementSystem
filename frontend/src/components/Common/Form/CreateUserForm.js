@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import "antd/dist/antd.css";
 import "./Form.css";
@@ -11,15 +11,15 @@ import ImageSmall from "../../Common/ImageSmall/ImageSmall";
 import {
   Form,
   Input,
-  Tooltip,
-  Icon,
-  Cascader,
+  // Tooltip,
+  // Icon,
+  // Cascader,
   Select,
-  Row,
-  Col,
-  Checkbox,
+  // Row,
+  // Col,
+  // Checkbox,
   Button,
-  AutoComplete,
+  // AutoComplete,
   DatePicker
 } from "antd";
 
@@ -85,7 +85,7 @@ class CreateUserForm extends Component {
       return null;
     }
 
-    const { form, designations } = this.props;
+    const { designations } = this.props;
 
     const group = [];
     this.props.groups.map((grp, i) => {
@@ -153,11 +153,11 @@ class CreateUserForm extends Component {
     //   </Select>,
     // );
 
-    const config = {
-      rules: [
-        { type: "object", required: true, message: "Please select Date!" }
-      ]
-    };
+    // const config = {
+    //   rules: [
+    //     { type: "object", required: true, message: "Please select Date!" }
+    //   ]
+    // };
     return (
       <Fragment>
         <br />
@@ -203,7 +203,7 @@ class CreateUserForm extends Component {
           <Form.Item label="Reports To" name="reportsto" className={"formLabel"} rules={[
             {
               required:
-                !this.props.members || this.props.members.length == 0
+                !this.props.members || this.props.members.length === 0
                   ? false
                   : true,
               message: "Please select your Reports To!"
@@ -220,7 +220,7 @@ class CreateUserForm extends Component {
 
           <Form.Item name="Designation" label="Designation:" className={"formLabel"} rules={[
             {
-              required: designation.length == 0 ? false : true,
+              required: designation.length === 0 ? false : true,
               message: "Please input Designation!"
             }
           ]}>

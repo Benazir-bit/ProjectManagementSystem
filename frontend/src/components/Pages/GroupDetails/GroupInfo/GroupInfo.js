@@ -4,7 +4,7 @@ import AllCardBody from "../../../Common/AllCard/AllCardBody";
 import GroupInfoTable from "../GroupInfoTable/GroupInfoTable";
 import "./GroupInfo.css";
 import GroupPieChart from "../GroupPieChart/GroupPieChart";
-import { Skeleton } from "antd";
+// import { Skeleton } from "antd";
 class GroupInfo extends Component {
   render() {
     return (
@@ -16,7 +16,7 @@ class GroupInfo extends Component {
         >
           <GroupInfoTable
             group={this.props.group}
-            // fetchingData={this.props.fetchingData}
+          // fetchingData={this.props.fetchingData}
           />
           <br />
           <AllCardHead

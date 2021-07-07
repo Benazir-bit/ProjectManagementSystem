@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./ProgressBar.css";
-import { stringify } from "querystring";
+// import { stringify } from "querystring";
 class ProgressBar extends Component {
   render() {
     const strwidth = (this.props.value * 10).toString().concat("%");
