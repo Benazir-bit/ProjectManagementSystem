@@ -91,7 +91,10 @@ class CompletedTasks extends Component {
         this.state.offset = offset + limit;
         this.setState({
           loading: false,
-          fetchingData: false
+          fetchingData: false,
+          count: res.data.count,
+          ctasks: [...this.state.ctasks, ...newJournals],
+          offset: offset + limit
         });
       })
       .catch(err => {

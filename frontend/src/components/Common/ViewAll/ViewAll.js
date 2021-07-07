@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { getTypeNews } from "../../../actions/news";
 import { resetNewsInfinityScroll } from "../../../actions/news";
 import moment from "moment-timezone";
-import _ from "lodash";
+// import _ from "lodash";
 let init = 0;
 class ViewAll extends Component {
   constructor(props) {
@@ -101,10 +101,10 @@ class ViewAll extends Component {
     if (!this.props.data) {
       news_list = <Skeleton active loading={true} paragraph={true}></Skeleton>;
     } else {
-      const Property = "date";
-      const newJournals = _.groupBy(this.props.data, Property);
-      console.log(newJournals, "newJournals");
-      console.log(this.props.data, "this.props.data");
+      // const Property = "date";
+      // const newJournals = _.groupBy(this.props.data, Property);
+      // console.log(newJournals, "newJournals");
+      // console.log(this.props.data, "this.props.data");
       let dt = "";
       this.props.data.map(news => {
         let list = (
@@ -167,6 +167,7 @@ class ViewAll extends Component {
           news_list.push(list);
         }
       }
+      // }
     }
 
     return (

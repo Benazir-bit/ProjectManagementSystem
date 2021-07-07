@@ -8,7 +8,7 @@ import "./IssueFeedBack.css";
 import TextEditor from "../../../Common/TextEditor/TextEditor";
 import { Button, Form, Collapse } from "antd";
 import NoData from "../../../Common/NoData/NoData";
-import moment from "moment";
+// import moment from "moment";
 
 const { Panel } = Collapse;
 class IssueFeedback extends Component {

@@ -49,10 +49,10 @@ class CurrentTasksPie extends Component {
         <AllCardBody
           // BodyId={"paddingleft"}
           childDiv={`card-body dashboad-cardDiv ${this.props.overview
-              ? this.props.overview.total_tasks > 0
-                ? null
-                : "overflow"
-              : null
+            ? this.props.overview.total_tasks > 0
+              ? null
+              : "overflow"
+            : null
             }`}
           cardTitle={this.props.cardTitle}
           id="CurrentTaskPieDiv"

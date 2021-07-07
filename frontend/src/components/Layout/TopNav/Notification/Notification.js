@@ -125,6 +125,7 @@ class Notification extends Component {
                           ? ""
                           : notification.actor.image
                       }
+                      alt=""
                     />
                   </span>
                 </div>

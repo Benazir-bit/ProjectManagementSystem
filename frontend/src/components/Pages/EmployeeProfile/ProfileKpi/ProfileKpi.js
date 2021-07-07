@@ -7,7 +7,7 @@ import CircleProgress from "../../../Common/CircleProgress/CircleProgress";
 import NoData from "../../../Common/NoData/NoData";
 import "./ProfileKpi.css";
 
-class ProfileKpi extends React.Component {
+class ProfileKpi extends Component {
   componentDidMount() {
     const today = new Date(),
       date = today.getFullYear();

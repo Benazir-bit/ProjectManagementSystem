@@ -90,12 +90,15 @@ class AllProjects extends Component {
         const newJournals = res.data.results;
         // console.log("fetching...");
         // console.log(res.data.count);
-        this.state.count = res.data.count;
-        this.state.projects = [...this.state.projects, ...newJournals];
-        this.state.offset = offset + limit;
+        // this.state.count = res.data.count;
+        // this.state.projects = [...this.state.projects, ...newJournals];
+        // this.state.offset = offset + limit;
         this.setState({
           loading: false,
-          fetchingData: false
+          fetchingData: false,
+          count: res.data.count,
+          projects: [...this.state.projects, ...newJournals],
+          offset: offset + limit
         });
       })
       .catch(err => {

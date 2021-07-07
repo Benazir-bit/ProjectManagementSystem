@@ -43,7 +43,8 @@ class EmployeeProfile extends Component {
     let userGroup;
     this.props.auth_user.groups.map(
       userGrp => (
-        console.log(userGrp.id, "user groups"), (userGroup = userGrp.id)
+        // console.log(userGrp.id, "user groups"),
+        (userGroup = userGrp.id)
       )
     );
 

@@ -5,7 +5,7 @@ import { updateNotice, getNoticeDetails } from "../../../../actions/notice";
 
 import moment from "moment";
 
-class NoticeEditModal extends React.Component {
+class NoticeEditModal extends Component {
   state = {
     visible: false,
     confirmLoading: false,
