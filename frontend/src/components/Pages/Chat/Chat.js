@@ -35,7 +35,7 @@ class Chat extends Component {
       return thread.other_user.id == other_user.id;
     });
 
-    if (index != -1) {
+    if (index !== -1) {
       this.setState({
         ...this.state,
         currentThread: this.state.threads[index],
@@ -54,7 +54,7 @@ class Chat extends Component {
     let index = _.findIndex(this.state.threads, function (thread) {
       return thread.id == newThread.id;
     });
-    if (index != -1) {
+    if (index !== -1) {
       const threads_copy = this.state.threads.slice();
       threads_copy[index].last_updated = newThread.last_updated;
       threads_copy[index].messages.push(newThread.messages[0]);

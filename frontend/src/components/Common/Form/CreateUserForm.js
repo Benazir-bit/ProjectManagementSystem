@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-// import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import "antd/dist/antd.css";
 import "./Form.css";
@@ -11,15 +10,8 @@ import ImageSmall from "../../Common/ImageSmall/ImageSmall";
 import {
   Form,
   Input,
-  // Tooltip,
-  // Icon,
-  // Cascader,
   Select,
-  // Row,
-  // Col,
-  // Checkbox,
   Button,
-  // AutoComplete,
   DatePicker
 } from "antd";
 
@@ -87,29 +79,39 @@ class CreateUserForm extends Component {
 
     const { designations } = this.props;
 
-    const group = [];
-    this.props.groups.map((grp, i) => {
-      group.push(
+    let group = [];
+    group = this.props.groups.map((grp, i) => {
+      return (
         <Option key={i} value={grp.id}>
           {grp.name}
         </Option>
-      );
+      )
+      // group.push(
+      //   <Option key={i} value={grp.id}>
+      //     {grp.name}
+      //   </Option>
+      // );
     });
     let designation = [];
 
     if (designations) {
-      designations.map((title, i) => {
-        designation.push(
+      designation = designations.map((title, i) => {
+        return (
           <Option key={i} value={title.id}>
             {title.title_name}
           </Option>
-        );
+        )
+        // designation.push(
+        //   <Option key={i} value={title.id}>
+        //     {title.title_name}
+        //   </Option>
+        // );
       });
     }
-    const reports_to = [];
+    let reports_to = [];
     if (this.props.members) {
-      this.props.members.map((mem, i) => {
-        reports_to.push(
+      reports_to = this.props.members.map((mem, i) => {
+        return (
           <Option key={i} value={mem.profile.user}>
             <ImageSmall
               clsattr={"img-circle"}
@@ -119,7 +121,17 @@ class CreateUserForm extends Component {
             &emsp;{mem.profile.full_name}
             {/* <Input value={d.id} hidden /> */}
           </Option>
-        );
+        )
+        // reports_to.push(
+        //   <Option key={i} value={mem.profile.user}>
+        //     <ImageSmall
+        //       clsattr={"img-circle"}
+        //       altname={mem.profile.full_name}
+        //       srcfile={mem.profile.image}
+        //     />
+        //     &emsp;{mem.profile.full_name}
+        //   </Option>
+        // );
       });
     }
 
@@ -153,11 +165,6 @@ class CreateUserForm extends Component {
     //   </Select>,
     // );
 
-    // const config = {
-    //   rules: [
-    //     { type: "object", required: true, message: "Please select Date!" }
-    //   ]
-    // };
     return (
       <Fragment>
         <br />

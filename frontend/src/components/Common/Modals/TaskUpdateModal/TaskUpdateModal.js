@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { updateTask } from "../../../../actions/task";
-// import { getTypeMembers } from "../../../../actions/member";
 import moment from "moment";
 import { Form, Modal, Button, Input, Select, DatePicker } from "antd";
 import ImageSmall from "../../ImageSmall/ImageSmall";

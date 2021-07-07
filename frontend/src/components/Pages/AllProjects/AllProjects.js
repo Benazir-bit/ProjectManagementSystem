@@ -7,16 +7,12 @@ import CommonTable from "../../Common/AllTables/CommonTable";
 import TableProgress from "../../Common/AllTables/TableProgress/TableProgress";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import CardBodyOnly from "../../Common/AllCard/CardBodyOnly";
-import {
-  // Icon, Input, AutoComplete, 
-  Skeleton
-} from "antd";
+import { Skeleton } from "antd";
 import "./AllProjects.css";
 import { getTypeNews } from "../../../actions/news";
 // import ActivityList from "../../Layout/ActivityList/ActivityList";
 import { Layout } from "antd";
 const { Content } = Layout;
-// const { Search } = Input;
 
 class AllProjects extends Component {
   constructor(props) {
@@ -33,9 +29,7 @@ class AllProjects extends Component {
     };
     window.onscroll = () => {
       const {
-        state: { error, loading, hasMore,
-          // fetchingData 
-        }
+        state: { error, loading, hasMore }
       } = this;
 
       this.state.hasMore =
@@ -70,7 +64,6 @@ class AllProjects extends Component {
   }
 
   loadData = () => {
-    console.log("projectsssssss")
     //GET TOKEN FROM STATE
     const token = localStorage.getItem("token");
 

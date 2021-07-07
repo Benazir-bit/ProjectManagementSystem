@@ -1,14 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-// import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import CardBodyOnly from "../../Common/AllCard/CardBodyOnly";
-import {
-  // Icon, 
-  // Input, Select, 
-  Skeleton, Button, Switch
-} from "antd";
+import { Skeleton, Button, Switch } from "antd";
 import "./AllMembers.css";
 import CommonTable from "../../Common/AllTables/CommonTable";
 import ImageSmall from "../../Common/ImageSmall/ImageSmall";
@@ -18,8 +13,6 @@ import MemberDetailModal from "../../Common/Modals/MemberDetailModal/MemberDetai
 import MemberEditInfoModal from "../../Common/Modals/MemberEditInfoModal/MemberEditInfoModal";
 import { Layout } from "antd";
 const { Content } = Layout;
-// const InputGroup = Input.Group;
-// const { Option } = Select;
 
 class AllMembers extends Component {
   constructor(props) {
@@ -67,7 +60,6 @@ class AllMembers extends Component {
   }
 
   render() {
-    // const { fetchingData } = this.state;
     let mem_list = [];
     if (!this.props.members) {
       for (let i = 0; i < 3; i++) {

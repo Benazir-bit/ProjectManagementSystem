@@ -402,7 +402,7 @@ def TaskTableAPI(request, type, filter, id):
         tasks = Task.objects.filter(assigned_to__id=id).order_by('-id')
 
     if (filter == "overview"):
-        if (type != "user"):
+        if (type !=  "user"):
             completed_tasks = tasks.filter(completed=True).count()
 
         else:
@@ -1058,11 +1058,11 @@ class NoticeAPI(APIView):
 # @permission_classes((permissions.IsAuthenticated, ))
 # def EmployeeProfilePhoto(request, user_id):
 #     profile = Profile.objects.get(user__id=user_id)
-#     if request.user != profile.user:
+#     if request.user !==  profile.user:
 #         raise PermissionDenied
 #     serializer = ProfilePhotoSerializer(data=request.data)
 #     if serializer.is_valid():
-#         if employee.profile.image != static('uspl/img/default_image.jpg'):
+#         if employee.profile.image !==  static('uspl/img/default_image.jpg'):
 #             employee.profile.image.delete()
 #         serializer.save()
 #     employee.profile.image = request.FILES['new_pic']
@@ -1157,7 +1157,6 @@ class UserProfileAllAPI(APIView):
                     user.save()
                     reports_to_user = user.id
             else:
-                print('hereeeeeeeeeeeeeee')
                 reports_to_user = None
 
             data = {

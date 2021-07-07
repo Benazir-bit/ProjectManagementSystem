@@ -6,19 +6,16 @@ import { addNewProject } from "../../../../actions/projects";
 import "./AddProjectModal.css";
 
 const { TextArea } = Input;
-// const InputGroup = Input.Group;
 const { Option } = Select;
 
 const CollectionCreateForm = (
   class extends Component {
     render() {
-      // const SelectOption = Select.Option;
       let today = new Date();
       const {
         visible,
         onCancel,
         onCreate,
-        // form,
         supervisorChange,
         supervisor
       } = this.props;
@@ -38,7 +35,7 @@ const CollectionCreateForm = (
               <b>Group Name:&nbsp;{this.props.group.name}</b>
             </h5> */}
 
-            <Form layout="vertical" id="ProjectModalForm">
+            <Form layout="vertical" id="ProjectModalForm" ref={this.props.formRef}>
               <Form.Item label="Project Name" name="projectName" rules={[{ required: true, message: "Enter Project Name!" }]}>
                 <Input placeholder="Enter Project Name" />
               </Form.Item>
@@ -123,13 +120,11 @@ class AddProjectModal extends React.Component {
     visible: false,
     supervisor: null
   };
-
+  formRef = React.createRef();
   supervisorChange = value => {
-    const { form } = this.formRef.props;
-
-    form.setFieldsValue({
+    this.formRef.current.setFieldsValue({
       projMembers: undefined
-    });
+    })
 
     this.setState({
       supervisor: value
@@ -145,36 +140,31 @@ class AddProjectModal extends React.Component {
   };
 
   handleCreate = () => {
-    const { form } = this.formRef.props;
-    form.validateFields(err => {
-      if (err) {
-        return;
-      }
 
-      const {
-        projectName,
-        details,
-        date_picker,
-        supervisor,
-        projMembers,
-        notes
-      } = form.getFieldsValue();
-      let projMem = [];
-      projMem.push(supervisor);
-      projMem.push(...projMembers);
-      this.props.addNewProject(
-        this.props.user,
-        this.props.group.id,
-        projectName,
-        details,
-        date_picker.format("YYYY-MM-DD"),
-        supervisor,
-        projMem,
-        notes
-      );
-      form.resetFields();
-      this.setState({ visible: false, supervisor: null });
-    });
+
+    const {
+      projectName,
+      details,
+      date_picker,
+      supervisor,
+      projMembers,
+      notes
+    } = this.formRef.current.getFieldsValue();
+    let projMem = [];
+    projMem.push(supervisor);
+    projMem.push(...projMembers);
+    this.props.addNewProject(
+      this.props.user,
+      this.props.group.id,
+      projectName,
+      details,
+      date_picker.format("YYYY-MM-DD"),
+      supervisor,
+      projMem,
+      notes
+    );
+    this.formRef.current.resetFields();
+    this.setState({ visible: false, supervisor: null });
   };
 
   saveFormRef = formRef => {
@@ -188,7 +178,7 @@ class AddProjectModal extends React.Component {
           Add New Project
         </Button>
         <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef}
+          wrappedComponentRef={this.formRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}

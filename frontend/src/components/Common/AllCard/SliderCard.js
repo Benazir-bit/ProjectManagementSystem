@@ -1,8 +1,5 @@
 import React, { Component, Fragment } from "react";
-import {
-  Card,
-  //  Icon, Avatar, Button 
-} from "antd";
+import { Card } from "antd";
 import "./SliderCard.css";
 import { Link } from "react-router-dom";
 class SliderCard extends Component {

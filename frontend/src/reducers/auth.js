@@ -21,7 +21,7 @@ const initialState = {
   user: null
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case USER_LOADING:
     case PAGE_LOAD:
@@ -41,7 +41,6 @@ export default function(state = initialState, action) {
         isSplash: false
       };
     case USER_LOADED:
-      console.log("Loaded");
       return {
         ...state,
         isLoading: false,

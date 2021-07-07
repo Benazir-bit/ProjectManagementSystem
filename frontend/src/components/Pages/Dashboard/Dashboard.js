@@ -9,7 +9,6 @@ import { getTypeIssues } from "../../../actions/issues";
 import { getTypeNotices } from "../../../actions/notice";
 import { getDashPanelData } from "../../../actions/profile";
 import { getGroupList } from "../../../actions/group";
-// import NoData from "../../Common/NoData/NoData";
 
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import SliderCardSection from "../Dashboard/SliderCardSection/SliderCardSection";
@@ -24,9 +23,6 @@ import HRTable from "./HRTable/HRTable";
 // import DashboardFNA from "../Accounts/AccountDashboard/DashboardFNA";
 const { Content } = Layout;
 class Dashboard extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
   componentDidMount() {
     this.props.getTypeNotices("onboard");

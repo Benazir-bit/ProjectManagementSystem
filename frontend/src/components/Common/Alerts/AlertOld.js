@@ -14,7 +14,7 @@ class Alerts extends Component {
     this.props.InIt();
   };
   close = () => {
-    console.log("hooooooooooooo");
+
   };
   componentDidUpdate(prevProps) {
     console.log("Alertttttttttttt");

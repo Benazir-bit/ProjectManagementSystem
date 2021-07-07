@@ -1,17 +1,16 @@
 import React, { Component, Fragment } from "react";
-// import { connect } from "react-redux";
 import CommonTable from "../../../Common/AllTables/CommonTable";
 import AllCardBody from "../../../Common/AllCard/AllCardBody";
 import TableProgress from "../../../Common/AllTables/TableProgress/TableProgress";
 import { Link } from "react-router-dom";
 import "./MyProject.css";
-// import { getTypeProjects } from "../../../../actions/projects";
 import { Skeleton } from "antd";
 import NoData from "../../../Common/NoData/NoData";
 
 class MyProject extends Component {
   render() {
     let project_list = [];
+    var tableData
     if (!this.props.projects) {
       for (let i = 0; i < 3; i++) {
         let proj_object = {
@@ -30,7 +29,7 @@ class MyProject extends Component {
         };
         project_list.push(proj_object);
       }
-      var tableData = {
+      tableData = {
         columns: ["Project Name", "Start Date", "Due Date", "Progress"],
         rows: project_list
       };
@@ -46,7 +45,7 @@ class MyProject extends Component {
         };
         project_list.push(proj_object);
       });
-      var tableData = {
+      tableData = {
         columns: ["Project Name", "Start Date", "Due Date", "Progress"],
         rows: project_list
       };

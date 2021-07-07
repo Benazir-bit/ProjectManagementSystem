@@ -165,7 +165,7 @@ def comment_activity(sender, instance, created, **kwargs):
         if related_users:
             notify.send(instance, recipient_list=related_users, actor=instance.author,
                         verb="commented on an issue you followed.", target=instance.issue, nf_type='issue')
-        if instance.author != issue.raised_by:
+        if instance.author !=  issue.raised_by:
             notify.send(instance, recipient_list=related_users, actor=instance.author,
                         verb="commented on your raised issue.", target=instance.issue, nf_type='issue')
 

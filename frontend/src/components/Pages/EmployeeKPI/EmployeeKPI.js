@@ -5,7 +5,6 @@ import KpiProfile from "./KpiProfile/KpiProfile";
 import NoData from "../../Common/NoData/NoData";
 import "./EmployeeKPI.css";
 import ProfileKpi from "./ProfileKpi/ProfileKpi";
-// import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getEmployeeYearlyKPI } from "../../../actions/kpi";
 import { getUserAvgKPI } from "../../../actions/profile";
@@ -14,11 +13,7 @@ import CommonTable from "../../Common/AllTables/CommonTable";
 import TableProgress from "../../Common/AllTables/TableProgress";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import {
-  Select,
-  // Button, 
-  Skeleton
-} from "antd";
+import { Select, Skeleton } from "antd";
 // import ActivityList from "../../Layout/ActivityList/ActivityList";
 import { Layout } from "antd";
 const { Content } = Layout;

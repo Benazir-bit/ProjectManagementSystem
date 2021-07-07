@@ -3,11 +3,9 @@ import ImageBig from "../../../Common/ImageBig/ImageBig";
 import EmployeeInfo from "../EmployeeInfo/EmployeeInfo";
 import UploadButton from "../../../Common/UploadButton/UploadButton";
 import "./ProfileInfo.css";
-// import { Avatar, Icon } from "antd";
 class ProfileInfo extends Component {
   render() {
     // const DefaultImange = "../../../../../static/frontend/img/pic.png";
-    console.log("llolololoo", this.props.profile);
     return (
       <div>
         <div className="row" id="profile_pic_row">

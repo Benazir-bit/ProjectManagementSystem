@@ -41,8 +41,7 @@ class Summary extends Component {
   }
   componentDidUpdate(prevProps) {
     console.log("componentDidUpdate", this.props.users);
-    if (prevProps.users != this.props.users) {
-      console.log(";hereeeeeeeee");
+    if (prevProps.users !== this.props.users) {
       const data = this.props.users.map(user => ({
         value: user.username,
         username: user.full_name,

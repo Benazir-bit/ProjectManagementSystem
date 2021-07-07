@@ -57,7 +57,7 @@ def sent(request):
 @login_required(login_url='/login/')
 def status_report(request, status_id):
     status = Status.objects.get(id=status_id)
-    if (request.user != status.recipent) and (request.user != status.sender) :
+    if (request.user !=  status.recipent) and (request.user !=  status.sender) :
         raise PermissionDenied
     
     completed_tasks = Acompleted.objects.filter(status=status) 
@@ -79,7 +79,7 @@ def status_report(request, status_id):
 @login_required(login_url='/login/')
 def feedback(request, feedback_id):
     feedback = Feedback.objects.get(id=feedback_id)
-    if (request.user != feedback.task.assigned_to) and (request.user != feedback.task.project.supervisor):
+    if (request.user !=  feedback.task.assigned_to) and (request.user !=  feedback.task.project.supervisor):
         raise PermissionDenied
     replies = feedback.reply_set.all()
     

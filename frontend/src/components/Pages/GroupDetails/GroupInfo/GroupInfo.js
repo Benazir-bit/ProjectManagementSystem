@@ -4,7 +4,6 @@ import AllCardBody from "../../../Common/AllCard/AllCardBody";
 import GroupInfoTable from "../GroupInfoTable/GroupInfoTable";
 import "./GroupInfo.css";
 import GroupPieChart from "../GroupPieChart/GroupPieChart";
-// import { Skeleton } from "antd";
 class GroupInfo extends Component {
   render() {
     return (

@@ -234,7 +234,7 @@ class Issue(models.Model):
 
     def get_related_users(self):
         users = []
-        if self.raised_by != self.task.project.supervisor:
+        if self.raised_by !=  self.task.project.supervisor:
             users.append(self.task.project.supervisor)
         for comment in self.comment_set.all():
             if not comment.marked_as_solution:
@@ -536,7 +536,7 @@ def delete_file_on_change_extension(sender, instance, **kwargs):
             return
         else:
             new_image = instance.image
-            if old_image and old_image.url != new_image.url:
+            if old_image and old_image.url !=  new_image.url:
                 old_image.delete(save=False)
 
 @receiver(post_save, sender=User)
@@ -607,7 +607,7 @@ def task_activity(sender, instance, created, **kwargs):
             message="assigned to a new task called "+str(instance.name),
             created_date=timezone.now()
         )
-        if (instance.assigned_to != instance.created_by):
+        if (instance.assigned_to !=  instance.created_by):
             notify.send(instance, recipient=instance.assigned_to, actor=instance.created_by,
                     verb="assigned you to a new task called " + str(instance.name), target=instance, nf_type='task')
     # Started
@@ -621,7 +621,7 @@ def task_activity(sender, instance, created, **kwargs):
             created_date=timezone.now()
         )
         supervisor = instance.project.supervisor
-        if supervisor != instance.assigned_to:
+        if supervisor !=  instance.assigned_to:
             notify.send(instance, recipient=supervisor, actor=instance.assigned_to,
                     verb="started a task called " + str(instance.name), target=instance, nf_type='task')
     # Paused
@@ -650,7 +650,7 @@ def task_activity(sender, instance, created, **kwargs):
             created_date=timezone.now()
         )
         supervisor = instance.project.supervisor
-        if supervisor != instance.assigned_to:
+        if supervisor !=  instance.assigned_to:
             notify.send(instance, recipient=supervisor, actor=instance.assigned_to,
                     verb="resumed a paused task called "+str(instance.name), target=instance, nf_type='task')
 
@@ -665,7 +665,7 @@ def task_activity(sender, instance, created, **kwargs):
             created_date=timezone.now()
         )
         supervisor = instance.project.supervisor
-        if supervisor != instance.assigned_to:
+        if supervisor !=  instance.assigned_to:
             notify.send(instance, recipient=supervisor, actor=instance.assigned_to,
                     verb="submitted a task called "+str(instance.name), target=instance, nf_type='task')
 
@@ -680,7 +680,7 @@ def task_activity(sender, instance, created, **kwargs):
             created_date=timezone.now()
         )
         supervisor = instance.project.supervisor
-        if supervisor != instance.assigned_to:
+        if supervisor !=  instance.assigned_to:
             notify.send(instance, recipient=instance.assigned_to, actor=supervisor,
                     verb="marked your submitted task " + str(instance.name) + " as completed.", target=instance, nf_type='task')
 
@@ -733,7 +733,7 @@ def comment_activity(sender, instance, created, **kwargs):
         if all_comments.exists():
             for comment in all_comments:
                 related_users.append(comment.author)
-        if (issue.task.project.supervisor != issue.raised_by):
+        if (issue.task.project.supervisor !=  issue.raised_by):
             if issue.task.project.supervisor not in related_users:
                 related_users.append(issue.task.project.supervisor)
         recipient_list = list(set(related_users))

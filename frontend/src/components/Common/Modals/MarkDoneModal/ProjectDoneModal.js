@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import "./MarkDoneModal.css";
 import { Modal, Button } from "antd";
-// import moment from "moment";
 import {
   getProjectDetails,
   markProjectAsDone

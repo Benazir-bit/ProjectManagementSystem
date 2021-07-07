@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-// import { getTypeMembers } from "../../../../actions/member";
 import { updateProject } from "../../../../actions/projects";
 import moment from "moment";
 import { Form, Modal, Button, Input, Select, DatePicker } from "antd";
@@ -8,7 +7,6 @@ import ImageSmall from "../../ImageSmall/ImageSmall";
 import "./ProjectUpdateModal.css";
 
 const { TextArea } = Input;
-// const InputGroup = Input.Group;
 const { Option } = Select;
 
 const CollectionCreateForm = (

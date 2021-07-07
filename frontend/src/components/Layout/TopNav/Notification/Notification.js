@@ -1,10 +1,5 @@
 import React, { Component, Fragment } from "react";
-import {
-  Menu,
-  // Icon, 
-  Dropdown,
-  // Anchor 
-} from "antd";
+import { Menu, Dropdown } from "antd";
 import { Link } from "react-router-dom";
 import { createHashHistory } from "history";
 import { getNotifications } from "../../../../actions/notifications";

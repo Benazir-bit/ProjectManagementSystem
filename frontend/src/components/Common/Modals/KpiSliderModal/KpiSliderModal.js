@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-// import ReactDOM from "react-dom";
 import { Modal, Button, Input } from "antd";
 import SliderKPI from "../../SliderKPI/SliderKPI";
 import KpiModalHead from "./KpiModalHead";

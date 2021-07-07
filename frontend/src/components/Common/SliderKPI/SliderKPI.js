@@ -16,7 +16,6 @@ class SliderKPI extends React.Component {
   };
 
   render() {
-    // const { inputValue } = this.state;
     return (
       <Fragment>
         <h5 id={"categoryHead"}>

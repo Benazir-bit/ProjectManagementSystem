@@ -7,10 +7,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { getGroupListAll } from "../../../actions/group";
 import {
-    // TeamOutlined,
-    // UserOutlined,
     MacCommandOutlined,
-    // CalendarOutlined,
 } from "@ant-design/icons";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -126,9 +123,10 @@ class SideNav extends React.PureComponent {
         let groups;
 
         let management;
-        this.props.user.groups.map(grp => {
+        management = this.props.user.groups.map(grp => {
             //console.log(grp.name, "pppppppp"),
-            management = grp.name === "Core Director" ? true : false;
+            return (grp.name === "Core Director" ? true : false);
+            // management = grp.name === "Core Director" ? true : false;
         });
         //console.log(management, "kkkkkkkkkk");
         if (this.props.user.is_hr) {
@@ -349,7 +347,7 @@ class SideNav extends React.PureComponent {
                             id="menuSide"
                             openKeys={this.state.openKeys}
                             onOpenChange={this.onOpenChange}
-                            SelectedKeys={this.state.selectedKey}
+                            defaultSelectedKeys={this.state.selectedKey}
                             style={{ height: "100%" }}
                         >
                             {SideNavProfile}

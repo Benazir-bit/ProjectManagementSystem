@@ -5,13 +5,7 @@ import "./ActivityList.css";
 import { Link } from "react-router-dom";
 //import { getTypeNews } from '../../../actions/news'
 import moment from "moment";
-import {
-  // Drawer, 
-  Button,
-  // Icon,
-  Layout, Spin,
-  // Skeleton 
-} from "antd";
+import { Button, Layout, Spin } from "antd";
 import { getTypeNews } from "../../../actions/news";
 import { resetNewsInfinityScroll } from "../../../actions/news";
 const { Sider } = Layout;

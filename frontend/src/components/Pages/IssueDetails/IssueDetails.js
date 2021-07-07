@@ -1,11 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { getIssueDetails } from "../../../actions/issues";
-// import { Link } from "react-router-dom";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
-// import IssueCardBody from "../../Common/AllCard/IssueCardBody";
 import IssueFeedBack from "./IssueFeedBack/IssueFeedBack";
-// import TextEditor from "../../Common/TextEditor/TextEditor";
 import IssueInfo from "../../Common/DetailCard/IssueInfo";
 import IssueDetailCard from "../../Common/DetailCard/IssueDetailCard";
 import "./IssueDetails.css";

@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import Highcharts from "highcharts";
-// import { Skeleton } from "antd";
 
 class PieChartChart extends Component {
   static defaultProps = {

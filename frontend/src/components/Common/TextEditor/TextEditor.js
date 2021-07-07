@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from "react";
-// import { render } from "react-dom";
 import ReactQuill from "react-quill";
 // import { ImageResize } from "quill-image-resize-module";
 import "./TextEditor.css";
 import "react-quill/dist/quill.snow.css";
 // Quill.register("modules/ImageResize", ImageResize);
-// import { Button } from "antd";
 
 // class TextEditor extends Component {
 //   constructor(props) {
@@ -112,10 +110,10 @@ class TextEditor extends Component {
     // Ensure React-Quill reference is available:
     if (typeof this.reactQuillRef.getEditor !== "function") return;
     // Skip if Quill reference is defined:
-    if (this.quillRef != null) return;
+    if (this.quillRef !== null) return;
 
     const quillRef = this.reactQuillRef.getEditor();
-    if (quillRef != null) this.quillRef = quillRef;
+    if (quillRef !== null) this.quillRef = quillRef;
   }
 
   render() {

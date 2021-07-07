@@ -28,7 +28,7 @@ class WeeklyReportSummary extends Component {
   }
   componentDidUpdate(prevProps) {
     console.log(prevProps.weekly_report, this.props.weekly_report);
-    if (prevProps.weekly_report != this.props.weekly_report) {
+    if (prevProps.weekly_report !== this.props.weekly_report) {
       if (this.props.weekly_report) {
         console.log(
           this.props.weekly_report.workreport.recipient,

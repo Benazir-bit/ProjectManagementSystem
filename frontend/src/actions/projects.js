@@ -4,12 +4,10 @@ import {
   GET_PROJECT_DETAIL,
   GET_ADMIN_PROJECTS,
   GET_GROUP_PROJECTS,
-  // ALERT_MESSAGE,
   DELETE_MODAL_SUBMIT_DONE
 } from "./types";
 import { tokenConfig } from "./auth";
 import { createMessage } from "./alerts";
-// import store from "../store";
 
 export const getTypeProjects = (type, filter, id) => (dispatch, getState) => {
   dispatch({

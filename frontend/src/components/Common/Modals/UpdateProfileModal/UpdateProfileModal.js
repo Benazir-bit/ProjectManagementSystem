@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-// import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateProfile } from "../../../../actions/profile";
 import { Form, Modal, Button, Input } from "antd";

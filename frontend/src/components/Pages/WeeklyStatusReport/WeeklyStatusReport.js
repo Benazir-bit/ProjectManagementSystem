@@ -54,7 +54,7 @@ class WeeklyStatusReport extends Component {
     this.props.searchDraft("draft");
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.users != this.props.users) {
+    if (prevProps.users !== this.props.users) {
       const allUser = this.props.users.map(user => ({
         value: user.username,
         username: user.full_name,
@@ -65,7 +65,7 @@ class WeeklyStatusReport extends Component {
       this.setState({ allUser });
     }
 
-    if (prevProps.weekly_report != this.props.weekly_report) {
+    if (prevProps.weekly_report !== this.props.weekly_report) {
       if (this.props.weekly_report) {
         this.setState({
           draftToVal: this.props.weekly_report,

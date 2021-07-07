@@ -13,10 +13,8 @@ const CollectionCreateForm = (
         visible,
         onCancel,
         onCreate,
-        // form,
         wrappedComponentRef
       } = this.props;
-      // const { getFieldDecorator } = form;
 
       return (
         <Fragment>
@@ -31,7 +29,7 @@ const CollectionCreateForm = (
             destroyOnClose={true}
             maskClosable={false}
           >
-            <Form layout="vertical" id="ProjectModalForm">
+            <Form layout="vertical" id="ProjectModalForm" ref={this.props.formRef}>
               <Form.Item name="title" label="Notice Title" rules={[{ required: true, message: "Enter Notice Title!" }]}>
                 <Input />
               </Form.Item>
@@ -90,27 +88,21 @@ class AddNewNoticeModal extends React.Component {
   handleCancel = () => {
     this.setState({ visible: false });
   };
-
+  formRef = React.createRef();
   handleCreate = () => {
-    const { form } = this.formRef.props;
-    form.validateFields(err => {
-      if (!err) {
-        const { title, body, expires_on } = form.getFieldsValue();
-        const { important } = (this.state.check = form.getFieldsValue());
 
-        this.props.addNewNotice(title, body, expires_on.format(), important);
-        form.resetFields();
-        this.setState({
-          visible: false,
-          check: false
-        });
-      }
+    const { title, body, expires_on, check } = this.formRef.current.getFieldsValue();
+    const { important } = (this.state.check === check);
+
+    this.props.addNewNotice(title, body, expires_on.format(), important);
+    this.formRef.current.resetFields();
+    this.setState({
+      visible: false,
+      check: false
     });
+
   };
 
-  saveFormRef = formRef => {
-    this.formRef = formRef;
-  };
 
   render() {
     return (
@@ -119,7 +111,7 @@ class AddNewNoticeModal extends React.Component {
           Add New Notice
         </Button>
         <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef}
+          wrappedComponentRef={this.formRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}

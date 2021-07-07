@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from "react";
-// import ReactDOM from "react-dom";
 import "./DetailCard.css";
-// import TaskAssign from "./TaskAssign";
 import { Skeleton } from "antd";
 
 class DetailCard extends Component {

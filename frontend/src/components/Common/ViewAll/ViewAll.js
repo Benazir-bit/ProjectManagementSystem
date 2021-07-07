@@ -1,9 +1,5 @@
 import React, { Component, Fragment } from "react";
-import {
-  List, Avatar,
-  // Icon, 
-  Skeleton
-} from "antd";
+import { List, Avatar, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 import TitleHeader from "../TitleHeader/TitleHeader";
 import { connect } from "react-redux";
@@ -110,7 +106,6 @@ class ViewAll extends Component {
       // console.log(newJournals, "newJournals");
       // console.log(this.props.data, "this.props.data");
       let dt = "";
-      // {
       this.props.data.map(news => {
         let list = (
           <List
@@ -174,6 +169,7 @@ class ViewAll extends Component {
       }
       // }
     }
+
     return (
       <Fragment>
         <div className="col-sm-10" id="base-main-body">

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./ProfileTable.css";
-
 class ProfileTable extends Component {
   render() {
     return (

@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-// import { Link } from "react-router-dom";
 class CommonTable extends Component {
   render() {
     var dataColumns = this.props.data.columns;

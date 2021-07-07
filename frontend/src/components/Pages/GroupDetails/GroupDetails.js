@@ -19,7 +19,6 @@ import { Layout } from "antd";
 import Page404 from "../../Common/404Page/404Page";
 import { getTypeTaskOverview } from "../../../actions/task";
 const { Content } = Layout;
-// let update = false;
 class GroupDetails extends Component {
   constructor(props) {
     super(props);
@@ -87,8 +86,7 @@ class GroupDetails extends Component {
 
     let inGroup = false;
     if (!this.props.user.is_staff) {
-
-      let inGroup = this.props.user.groups.map(userGrp => {
+      inGroup = this.props.user.groups.map(userGrp => {
         return userGrp.id === parseInt(this.props.match.params.id, 10)
           ? true
           : null;

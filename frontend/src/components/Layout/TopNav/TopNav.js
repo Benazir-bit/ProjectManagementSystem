@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { Layout, Menu, Dropdown, Avatar } from "antd";
 import "./TopNav.css";
 import {
-  LogoutOutlined,
-  EditOutlined,
-  InboxOutlined,
-  // HomeOutlined,
+  LogoutOutlined
 } from "@ant-design/icons";
 import { logout } from "../../../actions/auth";
 import { Link } from "react-router-dom";
@@ -32,55 +29,55 @@ class TopNav extends Component {
   };
 
   render() {
-    const msg = props => (
-      <Menu
-        defaultSelectedKeys={["0"]}
-        className="msg_drop_down"
-        multiple={true}
-      >
-        <div className="row" id="mail_span">
-          <span>intraMail</span>
-        </div>
-        {/* <div id="mail_scroll"> */}
-        <Menu.Item {...props} key="1" className="mail-notification-box">
-          <div className="row">
-            <Link to="/weekly_status/new_status/">
-              <EditOutlined className={"header_icon"} />
-              <strong>New Status Report</strong>
-            </Link>
-          </div>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item {...props} key="2" className="mail-notification-box">
-          <div className="row">
-            <Link to="/weekly_status/inbox/" id="inbox_link">
-              <InboxOutlined className={"header_icon"} />
+    // const msg = props => (
+    //   <Menu
+    //     defaultSelectedKeys={["0"]}
+    //     className="msg_drop_down"
+    //     multiple={true}
+    //   >
+    //     <div className="row" id="mail_span">
+    //       <span>intraMail</span>
+    //     </div>
+    //     {/* <div id="mail_scroll"> */}
+    //     <Menu.Item {...props} key="1" className="mail-notification-box">
+    //       <div className="row">
+    //         <Link to="/weekly_status/new_status/">
+    //           <EditOutlined className={"header_icon"} />
+    //           <strong>New Status Report</strong>
+    //         </Link>
+    //       </div>
+    //     </Menu.Item>
+    //     <Menu.Divider />
+    //     <Menu.Item {...props} key="2" className="mail-notification-box">
+    //       <div className="row">
+    //         <Link to="/weekly_status/inbox/" id="inbox_link">
+    //           <InboxOutlined className={"header_icon"} />
 
-              <strong>
-                Inbox
-                <span className="badge" id="unread_mail_body" />
-              </strong>
-            </Link>
-          </div>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item {...props} key="3" className="mail-notification-box">
-          <div className="row">
-            <Link to="/weekly_status/inbox/" id="inbox_link">
-              <InboxOutlined className={"header_icon"} type="inbox" />
+    //           <strong>
+    //             Inbox
+    //             <span className="badge" id="unread_mail_body" />
+    //           </strong>
+    //         </Link>
+    //       </div>
+    //     </Menu.Item>
+    //     <Menu.Divider />
+    //     <Menu.Item {...props} key="3" className="mail-notification-box">
+    //       <div className="row">
+    //         <Link to="/weekly_status/inbox/" id="inbox_link">
+    //           <InboxOutlined className={"header_icon"} type="inbox" />
 
-              <strong>
-                Sent <span className="badge" id="unread_mail_body" />
-              </strong>
-            </Link>
-          </div>
-        </Menu.Item>
-        {/* </div> */}
-        <div className="row" id="mail_span">
-          <span />
-        </div>
-      </Menu>
-    );
+    //           <strong>
+    //             Sent <span className="badge" id="unread_mail_body" />
+    //           </strong>
+    //         </Link>
+    //       </div>
+    //     </Menu.Item>
+    //     {/* </div> */}
+    //     <div className="row" id="mail_span">
+    //       <span />
+    //     </div>
+    //   </Menu>
+    // );
 
     const menu = (
       <Menu onClick={this.handleMenuClick}>
@@ -102,7 +99,7 @@ class TopNav extends Component {
 
         <div className="ant-pro-global-header ant-pro-global-header-layout-side">
           <Menu theme="light" mode="horizontal" selectable={false} >
-            <Menu.Item>
+            <Menu.Item key="notif">
               <Notification />
             </Menu.Item>
           </Menu>

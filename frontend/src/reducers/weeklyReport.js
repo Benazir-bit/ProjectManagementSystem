@@ -30,7 +30,7 @@ const initialState = {
   submit: false
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_WEEKLY_REPORT:
       return {
@@ -50,7 +50,7 @@ export default function(state = initialState, action) {
       };
     case GET_INBOX_DATA_NEXT:
       // console.log("Inside Reducers GET_INBOX_DATA_NEXT");
-      if (state.prevData != action.payload.results) {
+      if (state.prevData !== action.payload.results) {
         // console.log("REDUCERSSSSS", action.payload.results);
         return {
           ...state,
@@ -67,7 +67,7 @@ export default function(state = initialState, action) {
       }
     case GET_INBOX_DATA_PREV:
       // console.log("Inside Reducers GET_INBOX_DATA_PREV");
-      if (state.prevData != action.payload.results) {
+      if (state.prevData !== action.payload.results) {
         // console.log("REDUCERSSSSS", action.payload.results);
         return {
           ...state,
@@ -84,7 +84,7 @@ export default function(state = initialState, action) {
       }
     case GET_SENT_DATA_NEXT:
       // console.log("Inside Reducers GET_INBOX_DATA_NEXT");
-      if (state.prevData != action.payload.results) {
+      if (state.prevData !== action.payload.results) {
         // console.log("REDUCERSSSSS", action.payload.results);
         return {
           ...state,
@@ -101,7 +101,7 @@ export default function(state = initialState, action) {
       }
     case GET_SENT_DATA_PREV:
       // console.log("Inside Reducers GET_INBOX_DATA_PREV");
-      if (state.prevData != action.payload.results) {
+      if (state.prevData !== action.payload.results) {
         // console.log("REDUCERSSSSS", action.payload.results);
         return {
           ...state,

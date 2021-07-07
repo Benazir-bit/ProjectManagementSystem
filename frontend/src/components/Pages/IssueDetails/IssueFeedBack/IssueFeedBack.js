@@ -6,16 +6,11 @@ import { commnentIssue, markasSolution } from "../../../../actions/issues";
 import { connect } from "react-redux";
 import "./IssueFeedBack.css";
 import TextEditor from "../../../Common/TextEditor/TextEditor";
-import {
-  Button, Form,
-  // Icon, 
-  Collapse
-} from "antd";
+import { Button, Form, Collapse } from "antd";
 import NoData from "../../../Common/NoData/NoData";
 // import moment from "moment";
 
 const { Panel } = Collapse;
-// const { TextArea } = Input;
 class IssueFeedback extends Component {
   constructor(props) {
     super(props);

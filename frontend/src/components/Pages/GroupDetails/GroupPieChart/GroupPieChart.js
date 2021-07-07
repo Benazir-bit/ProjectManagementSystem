@@ -5,7 +5,6 @@ import PieChartList from "../../../Common/PieChart/PieChartList/PieChartList";
 import PieChartChart from "../../../Common/PieChart/PieChartChart/PieChatChart";
 import NoDataPie from "../../../Common/NoDataPie/NoDataPie";
 import "./GroupPieChart.css";
-// import { Skeleton } from "antd";
 
 class GroupPieChart extends Component {
   static defaultProps = { id: "pieList" };

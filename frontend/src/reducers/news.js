@@ -17,10 +17,10 @@ const initialState = {
   scrolllisLoading: null
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_TYPE_NEWS:
-      if (state.prevData != action.payload.results) {
+      if (state.prevData !== action.payload.results) {
         // console.log("REDUCERS", action.payload.results);
         return {
           ...state,

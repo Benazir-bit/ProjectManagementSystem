@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from "react";
-// import AllButton from "../../../Common/AllButton/AllButton";
 import { connect } from "react-redux";
-// import { Icon } from "antd";
 import "./EmployeeInfo.css";
 import UpdateProfileModal from "../../../Common/Modals/UpdateProfileModal/UpdateProfileModal";
 import ResetPasswordModal from "../../../Common/Modals/ResetPasswordModal/ResetPasswordModal";

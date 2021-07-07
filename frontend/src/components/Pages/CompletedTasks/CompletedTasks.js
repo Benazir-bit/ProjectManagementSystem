@@ -4,17 +4,13 @@ import { Link } from "react-router-dom";
 import { getTypeTasks } from "../../../actions/task";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import CardBodyOnly from "../../Common/AllCard/CardBodyOnly";
-import {
-  // Icon, Input, AutoComplete, 
-  Skeleton, Badge
-} from "antd";
+import { Skeleton, Badge } from "antd";
 import CommonTable from "../../Common/AllTables/CommonTable";
 import { Layout } from "antd";
 // import ActivityList from "../../Layout/ActivityList/ActivityList";
 import axios from "axios";
 
 const { Content } = Layout;
-// const { Search } = Input;
 
 class CompletedTasks extends Component {
   constructor(props) {
@@ -31,9 +27,7 @@ class CompletedTasks extends Component {
     };
     window.onscroll = () => {
       const {
-        state: { error, loading, hasMore,
-          // fetchingData 
-        }
+        state: { error, loading, hasMore }
       } = this;
 
       this.state.hasMore =
@@ -92,11 +86,9 @@ class CompletedTasks extends Component {
       )
       .then(res => {
         const newJournals = res.data.results;
-        // console.log("fetching...");
-        // console.log(res.data.count);
-        // this.state.count = res.data.count;
-        // this.state.ctasks = [...this.state.ctasks, ...newJournals];
-        // this.state.offset = offset + limit;
+        this.state.count = res.data.count;
+        this.state.ctasks = [...this.state.ctasks, ...newJournals];
+        this.state.offset = offset + limit;
         this.setState({
           loading: false,
           fetchingData: false,

@@ -1,13 +1,9 @@
 import React, { Component, Fragment } from "react";
 // import "babel-polyfill";
 import axios from "axios";
-// import { Provider } from "react-redux";
 import store from "../store";
 import "./App.css";
-// import Profile from "./Pages/Home/Home";
 import SignIn from "./Pages/SignIn/SignIn";
-// import TopNav from "./Layout/TopNav/TopNav";
-// import SideNav from "./Layout/SideNav/SideNav";
 import EmployeeProfile from "./Pages/EmployeeProfile/EmployeeProfile";
 import GroupDetails from "./Pages/GroupDetails/GroupDetails";
 import AllProjects from "./Pages/AllProjects/AllProjects";
@@ -24,7 +20,6 @@ import {
   HashRouter as Router,
   Route,
   Switch,
-  // Redirect
 } from "react-router-dom";
 import { connect } from "react-redux";
 import PrivateRoute from "./Common/PrivateRoute";
@@ -63,9 +58,6 @@ if (process.env.NODE_ENV === "development") {
   axios.defaults.baseURL = "http://localhost:8000";
 }
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   componentDidMount() {
     let token = localStorage.getItem("token");
     if (token) {

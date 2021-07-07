@@ -69,7 +69,7 @@ class Messages extends Component {
     // }
   };
   componentDidUpdate(prevProps) {
-    if (this.state.messages.length != 0) {
+    if (this.state.messages.length !== 0) {
       this.refs[this.state.messages.length - 1].scrollIntoView({
         block: "end"
       });
@@ -86,7 +86,7 @@ class Messages extends Component {
     }
 
     if (this.props.otherUser) {
-      if (this.props.otherUser.id != nextProps.otherUser.id) {
+      if (this.props.otherUser.id !== nextProps.otherUser.id) {
         if (nextProps.thread) {
           console.log("1");
           this.setState({

@@ -6,12 +6,10 @@ import ProfileInfo from "../../Pages/EmployeeProfile/ProfileInfo/ProfileInfo";
 import EmployeeWorkInfo from "../../Pages/EmployeeProfile/EmployeeWorkInfo/EmployeeWorkInfo";
 import ProfileKpi from "../../Pages/EmployeeProfile/ProfileKpi/ProfileKpi";
 import "./EmployeeProfile.css";
-// import { DatePicker } from "antd";
 import { getUserProfile } from "../../../actions/profile";
 import Spinner from "../../Common/Spinner/Spinner";
 // import ActivityList from "../../Layout/ActivityList/ActivityList";
 import { Layout } from "antd";
-// import NoData from "../../Common/NoData/NoData";
 import Page404 from "../../Common/404Page/404Page";
 
 const { Content } = Layout;

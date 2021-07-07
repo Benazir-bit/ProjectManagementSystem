@@ -1,12 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import "./UploadButton.css";
-import {
-  Upload,
-  // message, 
-  Button,
-  // Icon 
-} from "antd";
+import { Upload, Button } from "antd";
 import { uploadProfilePhoto } from "../../../actions/profile";
 //import { loadUser } from "../../../actions/auth";
 

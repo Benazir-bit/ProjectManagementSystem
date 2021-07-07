@@ -4,7 +4,6 @@ import "./MemberEditInfoModal.css";
 import {
   Form,
   Modal,
-  // Button,
   Input,
   Select,
   Row,
@@ -90,154 +89,153 @@ class MemberEditInfoModal extends React.Component {
       this.props.searchData(value, "accounts", "user", "all");
     }
   };
-
+  formRef = React.createRef();
   handleCreate = () => {
-    const { form } = this.props;
+    if (this.state.value.length === 0) {
+      document
+        .getElementsByClassName("groupSelect")[0]
+        .getElementsByClassName("ant-form-item-control-wrapper")[0]
+        .getElementsByClassName("ant-form-item-control")[0].className +=
+        " has-error";
+      // var node = document.createElement("div");
+      // node.classList.add("ant-form-explain");
+      // var textnode = document.createTextNode("Plese Intert Group!");
+      // node.appendChild(textnode);
+      // document
+      //   .getElementsByClassName("groupSelect")[0]
+      //   .getElementsByClassName("ant-form-item-control-wrapper")[0]
+      //   .getElementsByClassName("ant-form-item-control")[0]
+      //   .appendChild(node);
+    } else {
+      document
+        .getElementsByClassName("groupSelect")[0]
+        .getElementsByClassName("ant-form-item-control-wrapper")[0]
+        .getElementsByClassName("ant-form-item-control")[0].className =
+        "ant-form-item-control";
+    }
+    if (!this.state.defdsg) {
+      document
+        .getElementsByClassName("designationSelect")[0]
+        .getElementsByClassName("ant-form-item-control-wrapper")[0]
+        .getElementsByClassName("ant-form-item-control")[0].className +=
+        " has-error";
+    } else {
+      document
+        .getElementsByClassName("designationSelect")[0]
+        .getElementsByClassName("ant-form-item-control-wrapper")[0]
+        .getElementsByClassName("ant-form-item-control")[0].className =
+        "ant-form-item-control";
+    }
+    if (!this.state.DB) {
+      document
+        .getElementsByClassName("birthSelect")[0]
+        .getElementsByClassName("ant-form-item-control-wrapper")[0]
+        .getElementsByClassName("ant-form-item-control")[0].className +=
+        " has-error";
+    } else {
+      document
+        .getElementsByClassName("birthSelect")[0]
+        .getElementsByClassName("ant-form-item-control-wrapper")[0]
+        .getElementsByClassName("ant-form-item-control")[0].className =
+        "ant-form-item-control";
+    }
+    if (!this.state.DJ) {
+      document
+        .getElementsByClassName("joinSelect")[0]
+        .getElementsByClassName("ant-form-item-control-wrapper")[0]
+        .getElementsByClassName("ant-form-item-control")[0].className +=
+        " has-error";
+    } else {
+      document
+        .getElementsByClassName("joinSelect")[0]
+        .getElementsByClassName("ant-form-item-control-wrapper")[0]
+        .getElementsByClassName("ant-form-item-control")[0].className =
+        "ant-form-item-control";
+    }
 
-    form.validateFields(err => {
-      if (this.state.value.length === 0) {
-        document
-          .getElementsByClassName("groupSelect")[0]
-          .getElementsByClassName("ant-form-item-control-wrapper")[0]
-          .getElementsByClassName("ant-form-item-control")[0].className +=
-          " has-error";
-        // var node = document.createElement("div");
-        // node.classList.add("ant-form-explain");
-        // var textnode = document.createTextNode("Plese Intert Group!");
-        // node.appendChild(textnode);
-        // document
-        //   .getElementsByClassName("groupSelect")[0]
-        //   .getElementsByClassName("ant-form-item-control-wrapper")[0]
-        //   .getElementsByClassName("ant-form-item-control")[0]
-        //   .appendChild(node);
-      } else {
-        document
-          .getElementsByClassName("groupSelect")[0]
-          .getElementsByClassName("ant-form-item-control-wrapper")[0]
-          .getElementsByClassName("ant-form-item-control")[0].className =
-          "ant-form-item-control";
-      }
-      if (!this.state.defdsg) {
-        document
-          .getElementsByClassName("designationSelect")[0]
-          .getElementsByClassName("ant-form-item-control-wrapper")[0]
-          .getElementsByClassName("ant-form-item-control")[0].className +=
-          " has-error";
-      } else {
-        document
-          .getElementsByClassName("designationSelect")[0]
-          .getElementsByClassName("ant-form-item-control-wrapper")[0]
-          .getElementsByClassName("ant-form-item-control")[0].className =
-          "ant-form-item-control";
-      }
-      if (!this.state.DB) {
-        document
-          .getElementsByClassName("birthSelect")[0]
-          .getElementsByClassName("ant-form-item-control-wrapper")[0]
-          .getElementsByClassName("ant-form-item-control")[0].className +=
-          " has-error";
-      } else {
-        document
-          .getElementsByClassName("birthSelect")[0]
-          .getElementsByClassName("ant-form-item-control-wrapper")[0]
-          .getElementsByClassName("ant-form-item-control")[0].className =
-          "ant-form-item-control";
-      }
-      if (!this.state.DJ) {
-        document
-          .getElementsByClassName("joinSelect")[0]
-          .getElementsByClassName("ant-form-item-control-wrapper")[0]
-          .getElementsByClassName("ant-form-item-control")[0].className +=
-          " has-error";
-      } else {
-        document
-          .getElementsByClassName("joinSelect")[0]
-          .getElementsByClassName("ant-form-item-control-wrapper")[0]
-          .getElementsByClassName("ant-form-item-control")[0].className =
-          "ant-form-item-control";
-      }
+    // else  {
+    //   document
+    //     .getElementsByClassName("groupSelect")[0]
+    //     .getElementsByClassName("ant-form-item-control-wrapper")[0]
+    //     .getElementsByClassName("ant-form-item-control")[0].className =
+    //     "ant-form-item-control";
+    //   var list = document
+    //     .getElementsByClassName("groupSelect")[0]
+    //     .getElementsByClassName("ant-form-item-control-wrapper")[0]
+    //     .getElementsByClassName("ant-form-item-control")[0]
+    //     .getElementsByClassName("ant-form-explain")[0];
+    //   list.removeChild(list.childNodes[0]);
+    // }
+    if (
+      !this.state.defdsg ||
+      this.state.value.length === 0 ||
+      !this.state.DB ||
+      !this.state.DJ
+    ) {
+      return;
+    }
+    const {
+      EmployeeID,
+      firstname,
+      lastname,
+      email,
+      phone_number,
+      present_address,
+      // dateBirth,
+      // dateJoin,
+      highest_degree,
+      BloodGroup,
+      emergency_contact
+    } = this.formRef.current.getFieldsValue();
 
-      // else  {
-      //   document
-      //     .getElementsByClassName("groupSelect")[0]
-      //     .getElementsByClassName("ant-form-item-control-wrapper")[0]
-      //     .getElementsByClassName("ant-form-item-control")[0].className =
-      //     "ant-form-item-control";
-      //   var list = document
-      //     .getElementsByClassName("groupSelect")[0]
-      //     .getElementsByClassName("ant-form-item-control-wrapper")[0]
-      //     .getElementsByClassName("ant-form-item-control")[0]
-      //     .getElementsByClassName("ant-form-explain")[0];
-      //   list.removeChild(list.childNodes[0]);
-      // }
-      if (
-        err ||
-        !this.state.defdsg ||
-        this.state.value.length === 0 ||
-        !this.state.DB ||
-        !this.state.DJ
-      ) {
-        return;
-      }
-      const {
-        EmployeeID,
-        firstname,
-        lastname,
-        email,
-        phone_number,
-        present_address,
-        // dateBirth,
-        // dateJoin,
-        highest_degree,
-        BloodGroup,
-        emergency_contact
-      } = form.getFieldsValue();
+    const profile_body = {
+      dsg: this.state.dsg,
+      reports_to: this.state.reportsto,
+      phone_number,
+      present_address,
+      date_of_birth: this.state.DB,
+      date_of_joining: this.state.DJ,
+      highest_degree,
+      blood_group: BloodGroup,
+      emergency_contact
+    };
 
-      const profile_body = {
-        dsg: this.state.dsg,
-        reports_to: this.state.reportsto,
-        phone_number,
-        present_address,
-        date_of_birth: this.state.DB,
-        date_of_joining: this.state.DJ,
-        highest_degree,
-        blood_group: BloodGroup,
-        emergency_contact
-      };
+    const user_body = {
+      user_id: this.props.profile.user,
+      username: EmployeeID,
+      first_name: firstname,
+      last_name: lastname,
+      email,
+      groups: this.state.value,
+      group_id: this.props.group_id
+    };
 
-      const user_body = {
-        user_id: this.props.profile.user,
-        username: EmployeeID,
-        first_name: firstname,
-        last_name: lastname,
-        email,
-        groups: this.state.value,
-        group_id: this.props.group_id
-      };
-
-      this.props.updateProfile(this.props.profile.user, profile_body);
-      this.props.updateUser(user_body);
-      form.resetFields();
-      // this.state.value = [];
-      this.setState({
-        visible: false,
-        data: [],
-        dsg: "",
-        defdsg: "",
-        reportsto: "",
-        defreportsto: "",
-        value: [],
-        DB: "",
-        DJ: ""
-      });
+    this.props.updateProfile(this.props.profile.user, profile_body);
+    this.props.updateUser(user_body);
+    this.formRef.current.resetFields();
+    // this.state.value = [];
+    this.setState({
+      value: []
+    })
+    this.setState({
+      visible: false,
+      data: [],
+      dsg: "",
+      defdsg: "",
+      reportsto: "",
+      defreportsto: "",
+      value: [],
+      DB: "",
+      DJ: ""
     });
   };
 
   componentDidUpdate(prevProps) {
     if (prevProps.profile !== this.props.profile) {
       let groupList = [];
-      this.props.profile.groups.map((group, i) => {
-        groupList.push(group.id);
+      groupList = this.props.profile.groups.map((group, i) => {
+        // groupList.push(group.id);
+        return group.id
       });
       this.props.getAllDesignations(groupList);
       this.props.getGroupListAll();
@@ -272,7 +270,7 @@ class MemberEditInfoModal extends React.Component {
       });
     }
 
-    // if (prevProps.members !== this.props.members) {
+    // if (prevProps.members !=== this.props.members) {
     //   const data = this.props.members.map(user => ({
     //     value: user.username,
     //     username: user.full_name,
@@ -324,7 +322,6 @@ class MemberEditInfoModal extends React.Component {
       return null;
     }
     const { data, fetching } = this.state;
-    // const { form, member } = this.props;
 
     const formItemLayout = {
       labelCol: {
@@ -376,6 +373,7 @@ class MemberEditInfoModal extends React.Component {
           <br />
           <Form
             {...formItemLayout}
+            ref={this.formRef}
             // onSubmit={this.handleSubmit}
             className={"formEdit"}
             initialValues={{
