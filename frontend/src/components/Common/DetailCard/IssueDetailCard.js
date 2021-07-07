@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Divider, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import "./DetailCard.css";
 
 class IssueDetailCard extends Component {

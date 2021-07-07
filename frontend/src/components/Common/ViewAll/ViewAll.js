@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { List, Avatar, Icon, Skeleton } from "antd";
+import { List, Avatar, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 import TitleHeader from "../TitleHeader/TitleHeader";
 import { connect } from "react-redux";
@@ -56,12 +56,12 @@ class ViewAll extends Component {
   }
   componentDidUpdate(prevProps) {
     console.log("componentDidUpdate");
-    if (init == 1) {
+    if (init === 1) {
       this.loadData();
     }
     init = 0;
     console.log("componentDidUpdate ************");
-    if (prevProps.data != this.props.data) {
+    if (prevProps.data !== this.props.data) {
       this.pageScrollCheck();
     }
     window.addEventListener("resize", this.pageScrollCheck.bind(this));
@@ -106,70 +106,69 @@ class ViewAll extends Component {
       console.log(newJournals, "newJournals");
       console.log(this.props.data, "this.props.data");
       let dt = "";
-      {
-        this.props.data.map(news => {
-          let list = (
-            <List
-              key={news.id}
-              itemLayout="horizontal"
-              header={
-                dt != moment(news.created_date).format("DD-MMM-YYYY") ? (
-                  <p style={{ fontSize: "18px", color: "#123a5d" }}>
-                    {/* <Icon type="calendar" theme="filled" />{" "} */}
-                    <span style={{ marginLeft: 10 }}>
-                      {moment(news.created_date).format("DD-MMM-YYYY")}
+      this.props.data.map(news => {
+        let list = (
+          <List
+            key={news.id}
+            itemLayout="horizontal"
+            header={
+              dt !== moment(news.created_date).format("DD-MMM-YYYY") ? (
+                <p style={{ fontSize: "18px", color: "#123a5d" }}>
+                  {/* <Icon type="calendar" theme="filled" />{" "} */}
+                  <span style={{ marginLeft: 10 }}>
+                    {moment(news.created_date).format("DD-MMM-YYYY")}
+                  </span>
+                </p>
+              ) : null
+            }
+          >
+            <List.Item
+              actions={[
+                <p style={{ color: "#123a5d" }}>
+                  {/* <Icon type="clock-circle" style={{ marginRight: 10 }} /> */}
+                  {moment(news.created_date).format("h:mm a")}
+                </p>
+              ]}
+            >
+              <List.Item.Meta
+                description={
+                  <p>
+                    <Link to={`/profile/${this.props.user.id}`}>
+                      <Avatar src={news.owner.profile.image} />{" "}
+                      {news.owner.profile.full_name}
+                    </Link>{" "}
+                    <span
+                      style={{
+                        fontSize: "16px"
+                      }}
+                    >
+                      {news.message}
                     </span>
                   </p>
-                ) : null
-              }
-            >
-              <List.Item
-                actions={[
-                  <p style={{ color: "#123a5d" }}>
-                    {/* <Icon type="clock-circle" style={{ marginRight: 10 }} /> */}
-                    {moment(news.created_date).format("h:mm a")}
-                  </p>
-                ]}
-              >
-                <List.Item.Meta
-                  description={
-                    <p>
-                      <Link to={`/profile/${this.props.user.id}`}>
-                        <Avatar src={news.owner.profile.image} />{" "}
-                        {news.owner.profile.full_name}
-                      </Link>{" "}
-                      <span
-                        style={{
-                          fontSize: "16px"
-                        }}
-                      >
-                        {news.message}
-                      </span>
-                    </p>
-                  }
-                />
-              </List.Item>
-            </List>
-          );
-          dt = moment(news.created_date).format("DD-MMM-YYYY");
-          news_list.push(list);
-        });
+                }
+              />
+            </List.Item>
+          </List>
+        );
+        dt = moment(news.created_date).format("DD-MMM-YYYY");
+        news_list.push(list);
+      });
 
-        if (this.props.scrolllisLoading) {
-          for (let i = 0; i < 3; i++) {
-            let list = (
-              <Skeleton
-                key={`loading${i}`}
-                active
-                loading={true}
-                paragraph={false}
-              ></Skeleton>
-            );
-            news_list.push(list);
-          }
+      if (this.props.scrolllisLoading) {
+        for (let i = 0; i < 3; i++) {
+          let list = (
+            <Skeleton
+              key={`loading${i}`}
+              active
+              loading={true}
+              paragraph={false}
+            ></Skeleton>
+          );
+          news_list.push(list);
         }
       }
     }
+
     return (
       <Fragment>
         <div className="col-sm-10" id="base-main-body">

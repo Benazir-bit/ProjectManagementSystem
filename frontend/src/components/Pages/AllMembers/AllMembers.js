@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import CardBodyOnly from "../../Common/AllCard/CardBodyOnly";
-import { Icon, Input, Select, Skeleton, Button, Switch, Modal } from "antd";
+import { Skeleton, Button, Switch } from "antd";
 import "./AllMembers.css";
 import CommonTable from "../../Common/AllTables/CommonTable";
 import ImageSmall from "../../Common/ImageSmall/ImageSmall";
@@ -14,8 +13,6 @@ import MemberDetailModal from "../../Common/Modals/MemberDetailModal/MemberDetai
 import MemberEditInfoModal from "../../Common/Modals/MemberEditInfoModal/MemberEditInfoModal";
 import { Layout } from "antd";
 const { Content } = Layout;
-const InputGroup = Input.Group;
-const { Option } = Select;
 
 class AllMembers extends Component {
   constructor(props) {
@@ -27,7 +24,7 @@ class AllMembers extends Component {
   }
   componentWillMount() {
     this.setState({ fetchingData: false });
-    if (this.props.match.params.id == "all") {
+    if (this.props.match.params.id === "all") {
       this.props.getTypeMembers("all", 0);
     } else {
       this.props.getTypeMembers("group", this.props.match.params.id);
@@ -37,7 +34,7 @@ class AllMembers extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setState({ fetchingData: false });
-      if (this.props.match.params.id == "all") {
+      if (this.props.match.params.id === "all") {
         this.props.getTypeMembers("all", 0);
       } else {
         this.props.getTypeMembers("group", this.props.match.params.id);
@@ -63,7 +60,6 @@ class AllMembers extends Component {
   }
 
   render() {
-    const { fetchingData } = this.state;
     let mem_list = [];
     if (!this.props.members) {
       for (let i = 0; i < 3; i++) {
@@ -115,7 +111,7 @@ class AllMembers extends Component {
               {member.profile.groups.map((grp, i) => (
                 <span key={i}>
                   {grp.name}{" "}
-                  {i == member.profile.groups.length - 1 ? null : ", "}
+                  {i === member.profile.groups.length - 1 ? null : ", "}
                 </span>
               ))}
             </Fragment>

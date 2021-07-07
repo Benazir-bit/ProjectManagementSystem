@@ -275,7 +275,7 @@ class AntEditableTable extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.dataSource != this.state.dataSource) {
+    if (prevState.dataSource !== this.state.dataSource) {
       this.props.onChange(this.props.dataField, this.state.dataSource);
     }
   }

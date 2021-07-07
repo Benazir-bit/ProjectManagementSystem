@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import ReactDOM from "react-dom";
 import { Form, Modal, Button, Input, Divider, Checkbox } from "antd";
 import { connect } from "react-redux";
 import moment from "moment";

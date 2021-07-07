@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { sendfeedback, submitCancelTask } from "../../../../actions/task";
 import { Form, Modal, Button, Divider } from "antd";

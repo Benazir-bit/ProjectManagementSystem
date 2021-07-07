@@ -119,7 +119,7 @@ class GroupIssues extends Component {
     this.loadData();
   }
   componentDidUpdate(prevProps) {
-    if (this.props != prevProps) {
+    if (this.props !== prevProps) {
       this.state.offset = 0;
       this.setState({
         //offset: 0,

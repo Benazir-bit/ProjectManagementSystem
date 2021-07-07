@@ -1226,9 +1226,9 @@ def issue_detail(request, issue_id=None):
         all_comments = issue.comment_set.all()
         user_list = []
         for comment in all_comments:
-            if comment.author not in user_list and comment.author != issue.raised_by:
+            if comment.author not in user_list and comment.author !=  issue.raised_by:
                 user_list.append(comment.author)
-        if request.user != issue.raised_by:
+        if request.user !=  issue.raised_by:
             if request.user in user_list:
                 user_list.remove(request.user)
             notify.send(request.user, recipient=issue.raised_by, actor=request.user,
@@ -1357,7 +1357,7 @@ def issue_toggle_solved(request, issue_id, comment_id):
     all_comments = issue.comment_set.all()
     user_list = []
     for comment in all_comments:
-        if comment.author not in user_list and comment.author != issue.solved_by and comment.author != issue.raised_by:
+        if comment.author not in user_list and comment.author !=  issue.solved_by and comment.author !=  issue.raised_by:
             user_list.append(comment.author)
 
     if request.user != issue.solved_by:
@@ -1604,7 +1604,7 @@ def UpdateEmployeeProfile(request, employee_id):
     employee = User.objects.get(id=employee_id)
     profile_news = News.objects.filter(
         owner=employee).order_by('-created_date')[:20]
-    if request.user != employee:
+    if request.user !=  employee:
         raise PermissionDenied
     employee_profile = User.objects.get(id=employee_id).profile
     if request.method == 'POST':
@@ -1673,7 +1673,7 @@ def EmployeeProfileView(request, employee_id):
         employee_kpi = []
 
     if request.POST.get('upload_image') and request.user == employee:
-        if employee.profile.image != static('uspl/img/default_image.jpg'):
+        if employee.profile.image !=  static('uspl/img/default_image.jpg'):
             employee.profile.image.delete()
         employee.profile.image = request.FILES['new_pic']
         employee.profile.save()

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Form, Modal, Input, DatePicker, Checkbox } from "antd";
 import { updateNotice, getNoticeDetails } from "../../../../actions/notice";
@@ -45,51 +45,35 @@ class NoticeEditModal extends React.Component {
       value: []
     });
   };
-
+  formRef = React.createRef();
   handleCreate = () => {
-    const { form } = this.props;
+    const {
+      title,
+      body,
+      created_on,
+      expires_on,
+    } = this.formRef.current.getFieldsValue();
 
-    form.validateFields(err => {
-      if (err || !this.state.created_date || !this.state.expired_date) {
-        return null;
-      } else {
-        const {
-          title,
-          body,
-          created_on,
-          expires_on,
-          important
-        } = form.getFieldsValue();
 
-        console.log(
-          this.state.notice_id,
-          title,
-          body,
-          created_on.format(),
-          expires_on.format(),
-          this.state.important
-        );
+    this.props.updateNotice(
+      this.state.notice_id,
+      title,
+      body,
+      created_on.format(),
+      expires_on.format(),
+      this.state.important
+    );
+    //this.state.value = [];
 
-        this.props.updateNotice(
-          this.state.notice_id,
-          title,
-          body,
-          created_on.format(),
-          expires_on.format(),
-          this.state.important
-        );
-        //this.state.value = [];
-        form.resetFields();
-        this.setState({
-          visible: false
-        });
-      }
+    this.formRef.current.resetFields();
+    this.setState({
+      visible: false
     });
-  };
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.notice) {
-      if (prevProps.notice != this.props.notice) {
+      if (prevProps.notice !== this.props.notice) {
         this.setState({
           created_date: this.props.notice.created_on,
           expired_date: this.props.notice.expires_on,
@@ -107,7 +91,6 @@ class NoticeEditModal extends React.Component {
 
     // const { data, fetching } = this.state;
     let today = new Date();
-    const { form, notice } = this.props;
 
     const formItemLayout = {
       labelCol: {
@@ -136,6 +119,7 @@ class NoticeEditModal extends React.Component {
           <br />
 
           <Form {...formItemLayout} className={"formEdit"}
+            ref={this.formRef}
             initialValues={{
               title: this.props.notice.title,
               body: this.props.notice.body,

@@ -90,7 +90,7 @@ class UserReportstoEditModal extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps.profile != this.props.profile) {
+    if (prevProps.profile !== this.props.profile) {
       if (this.props.profile.reports_to) {
         this.setState({
           reportsto: this.props.profile.reports_to.id,

@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { getTypeTaskOverview } from "../../../../actions/task";
 import PieChartList from "../../../Common/PieChart/PieChartList/PieChartList";
 import AllCardBody from "../../../Common/AllCard/AllCardBody";
 import PieChartChart from "../../../Common/PieChart/PieChartChart/PieChatChart";
@@ -50,13 +48,12 @@ class CurrentTasksPie extends Component {
       <Fragment>
         <AllCardBody
           // BodyId={"paddingleft"}
-          childDiv={`card-body dashboad-cardDiv ${
-            this.props.overview
+          childDiv={`card-body dashboad-cardDiv ${this.props.overview
               ? this.props.overview.total_tasks > 0
                 ? null
                 : "overflow"
               : null
-          }`}
+            }`}
           cardTitle={this.props.cardTitle}
           id="CurrentTaskPieDiv"
           addextra={
@@ -88,7 +85,7 @@ class CurrentTasksPie extends Component {
                 // overview={this.props.overview}
                 type="user"
                 data={data}
-                // fetchingData={this.props.fetchingData}
+              // fetchingData={this.props.fetchingData}
               />
             </div>
           </div>

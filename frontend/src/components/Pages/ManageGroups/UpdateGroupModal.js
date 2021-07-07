@@ -44,7 +44,7 @@ class UpdateGroupModal extends Component {
 
   handleSubmit = () => {
     //e.preventDefault();
-    if (this.state.group && this.state.value.length != 0) {
+    if (this.state.group && this.state.value.length !== 0) {
       //console.log("Received values of form: ", this.props.group_id, this.state.group, this.state.value);
       const body = {
         id: this.props.group_id,

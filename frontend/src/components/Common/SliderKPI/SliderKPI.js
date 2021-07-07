@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
 import { Slider, InputNumber, Row, Col } from "antd";
 import "./SliderKPI.css";
 class SliderKPI extends React.Component {
@@ -17,7 +16,6 @@ class SliderKPI extends React.Component {
   };
 
   render() {
-    const { inputValue } = this.state;
     return (
       <Fragment>
         <h5 id={"categoryHead"}>

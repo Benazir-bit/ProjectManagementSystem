@@ -1,13 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Form, Modal, Button, Input, Select, DatePicker } from "antd";
-import ImageSmall from "../../ImageSmall/ImageSmall";
+import { Form, Modal, Button, Input, DatePicker } from "antd";
 import { addNewUserTask } from "../../../../actions/task";
 import moment from "moment";
 import "./AddTaskModal.css";
 
 const { TextArea } = Input;
-const { Option } = Select;
 
 const CollectionCreateForm = (
   class extends Component {
@@ -17,11 +15,9 @@ const CollectionCreateForm = (
         visible,
         onCancel,
         onOk,
-        form,
         confirmLoading,
         wrappedComponentRef,
-        user_id,
-        project_id
+
       } = this.props;
 
       return (

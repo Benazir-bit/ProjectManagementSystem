@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import "./MarkDoneModal.css";
 import { Modal, Button } from "antd";
-import moment from "moment";
 import {
   getProjectDetails,
   markProjectAsDone
@@ -22,8 +21,8 @@ class ProjectDoneModal extends Component {
       confirmLoading: true
     });
 
-    var currentDate = new Date();
-    var completed_date = moment(currentDate).format("YYYY-MM-DD");
+    // var currentDate = new Date();
+    // var completed_date = moment(currentDate).format("YYYY-MM-DD");
 
     this.props.markProjectAsDone(this.props.project.id, true);
 

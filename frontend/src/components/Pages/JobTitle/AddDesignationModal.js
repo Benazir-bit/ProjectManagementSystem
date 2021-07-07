@@ -69,7 +69,7 @@ class AddDesignationModal extends Component {
   };
 
   handleSubmit = () => {
-    if (this.state.title && this.state.group.length != 0) {
+    if (this.state.title && this.state.group.length !== 0) {
       //console.log("Received values of form: ", this.props.group_id, this.state.group, this.state.value);
       const body = {
         title_name: this.state.title,

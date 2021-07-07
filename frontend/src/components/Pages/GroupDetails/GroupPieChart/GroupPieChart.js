@@ -5,7 +5,6 @@ import PieChartList from "../../../Common/PieChart/PieChartList/PieChartList";
 import PieChartChart from "../../../Common/PieChart/PieChartChart/PieChatChart";
 import NoDataPie from "../../../Common/NoDataPie/NoDataPie";
 import "./GroupPieChart.css";
-import { Skeleton } from "antd";
 
 class GroupPieChart extends Component {
   static defaultProps = { id: "pieList" };
@@ -58,7 +57,7 @@ class GroupPieChart extends Component {
             <PieChartList
               data={data}
               overview={this.props.overview}
-              // fetchingData={this.state.fetchingData}
+            // fetchingData={this.state.fetchingData}
             />
           </div>
           <div
@@ -70,19 +69,19 @@ class GroupPieChart extends Component {
               this.props.overview.total_tasks > 0 ? (
                 <PieChartChart
                   overview={this.props.overview}
-                  // fetchingData={this.state.fetchingData}
+                // fetchingData={this.state.fetchingData}
                 />
               ) : (
                 <NoDataPie />
               )
             ) : null
-            // <Skeleton
-            //   loading={true}
-            //   active
-            //   avatar={{ size: 180, shape: "circle" }}
-            //   paragraph={false}
-            //   title={{ width: 0 }}
-            // />
+              // <Skeleton
+              //   loading={true}
+              //   active
+              //   avatar={{ size: 180, shape: "circle" }}
+              //   paragraph={false}
+              //   title={{ width: 0 }}
+              // />
             }
           </div>
         </div>

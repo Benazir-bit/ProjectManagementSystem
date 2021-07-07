@@ -9,7 +9,6 @@ import { getTypeIssues } from "../../../actions/issues";
 import { getTypeNotices } from "../../../actions/notice";
 import { getDashPanelData } from "../../../actions/profile";
 import { getGroupList } from "../../../actions/group";
-import NoData from "../../Common/NoData/NoData";
 
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import SliderCardSection from "../Dashboard/SliderCardSection/SliderCardSection";
@@ -19,14 +18,11 @@ import NoticeSlider from "../../Common/NoticeSlider/NoticeSlider";
 import MyProject from "./MyProject/MyProject";
 import CurrentTask from "./CurrentTask/CurrentTask";
 import MyIssues from "./MyIssues/MyIssues";
-import ActivityList from "../../Layout/ActivityList/ActivityList";
+// import ActivityList from "../../Layout/ActivityList/ActivityList";
 import HRTable from "./HRTable/HRTable";
 // import DashboardFNA from "../Accounts/AccountDashboard/DashboardFNA";
 const { Content } = Layout;
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.getTypeNotices("onboard");
@@ -125,7 +121,7 @@ class Dashboard extends Component {
                   <br />
                   <TitleHeader title={"Dashboard"} title_color={"#337ab7"} />
                   {this.props.notices ? (
-                    this.props.notices.length != 0 ? (
+                    this.props.notices.length !== 0 ? (
                       <NoticeSlider notices={this.props.notices} />
                     ) : null
                   ) : null}

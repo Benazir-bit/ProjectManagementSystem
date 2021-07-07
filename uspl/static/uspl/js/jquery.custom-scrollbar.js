@@ -45,7 +45,7 @@
       },
 
       addSkinClass: function () {
-        if (typeof(this.options.skin) == "string" && !this.$element.hasClass(this.options.skin)) {
+        if (typeof (this.options.skin) == "string" && !this.$element.hasClass(this.options.skin)) {
           this.skinClassAdded = true;
           this.$element.addClass(this.options.skin);
         }
@@ -329,7 +329,7 @@
       },
 
       isKeyScrolling: function (key) {
-        return this.keyScrollDelta(key) != null;
+        return this.keyScrollDelta(key) !== null;
       },
 
       keyScrollDelta: function (key) {
@@ -353,7 +353,7 @@
       },
 
       setUnselectable: function (element, value) {
-        if (element.attr("unselectable") != value) {
+        if (element.attr("unselectable") !== value) {
           element.attr("unselectable", value);
           element.find(':not(input)').attr('unselectable', value);
         }
@@ -394,14 +394,14 @@
 
       mouseWheelScroll: function (deltaX, deltaY) {
         var delta = -this.sizing.wheelDelta(deltaX, deltaY) * this.scrollable.options.wheelSpeed;
-        if (delta != 0)
+        if (delta !== 0)
           return this.scrollOverviewBy(delta);
       },
 
       mouseClickScroll: function (event) {
         var delta = this.viewPortSize - 20;
         if (event["page" + this.sizing.scrollAxis()] < this.$thumb.offset()[this.sizing.offsetComponent()])
-        // mouse click over thumb
+          // mouse click over thumb
           delta = -delta;
         this.scrollOverviewBy(delta);
       },
@@ -422,7 +422,7 @@
         this.scrollPercent = thumbPosition / this.maxThumbPosition;
         var overviewPosition = (thumbPosition * this.maxOverviewPosition) / this.maxThumbPosition;
         this.setScrollPosition(overviewPosition, thumbPosition);
-        if (oldScrollPercent != this.scrollPercent) {
+        if (oldScrollPercent !== this.scrollPercent) {
           this.triggerCustomScroll(oldScrollPercent);
           return true
         }
@@ -452,7 +452,7 @@
           this.setScrollPositionWithAnimation(overviewPosition, thumbPosition);
         else
           this.setScrollPosition(overviewPosition, thumbPosition);
-        if (oldScrollPercent != this.scrollPercent) {
+        if (oldScrollPercent !== this.scrollPercent) {
           this.triggerCustomScroll(oldScrollPercent);
           return true;
         }
@@ -471,10 +471,10 @@
 
       triggerCustomScroll: function (oldScrollPercent) {
         this.scrollable.$element.trigger("customScroll", {
-            scrollAxis: this.sizing.scrollAxis(),
-            direction: this.sizing.scrollDirection(oldScrollPercent, this.scrollPercent),
-            scrollPercent: this.scrollPercent * 100
-          }
+          scrollAxis: this.sizing.scrollAxis(),
+          direction: this.sizing.scrollDirection(oldScrollPercent, this.scrollPercent),
+          scrollPercent: this.scrollPercent * 100
+        }
         );
       },
 
@@ -516,8 +516,8 @@
 
       setScrollEvent: function (event) {
         var attr = "page" + this.sizing.scrollAxis();
-        if (!this.scrollEvent || this.scrollEvent[attr] != event[attr])
-          this.scrollEvent = {pageX: event.pageX, pageY: event.pageY};
+        if (!this.scrollEvent || this.scrollEvent[attr] !== event[attr])
+          this.scrollEvent = { pageX: event.pageX, pageY: event.pageY };
       },
 
       scrollToElement: function (element) {
@@ -676,12 +676,12 @@
     return this.each(function () {
       if (options == undefined)
         options = defaultOptions;
-      if (typeof(options) == "string") {
+      if (typeof (options) == "string") {
         var scrollable = $(this).data("scrollable");
         if (scrollable)
           scrollable[options](args);
       }
-      else if (typeof(options) == "object") {
+      else if (typeof (options) == "object") {
         options = $.extend(defaultOptions, options);
         new Scrollable($(this), options);
       }
@@ -690,7 +690,7 @@
     });
 
   }
-  ;
+    ;
 
 })
   (jQuery);
@@ -701,7 +701,7 @@
 
   if ($.event.fixHooks) {
     for (var i = types.length; i;) {
-      $.event.fixHooks[ types[--i] ] = $.event.mouseHooks;
+      $.event.fixHooks[types[--i]] = $.event.mouseHooks;
     }
   }
 

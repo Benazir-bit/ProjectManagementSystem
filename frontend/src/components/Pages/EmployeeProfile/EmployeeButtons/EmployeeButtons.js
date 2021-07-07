@@ -6,7 +6,7 @@ class EmployeeButtons extends Component {
   render() {
     let KPIButton;
     if (
-      this.props.profile.user == this.props.user.id ||
+      this.props.profile.user === this.props.user.id ||
       this.props.user.is_teamleader
     ) {
       KPIButton = (

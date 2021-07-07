@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { loadUser } from "../../../actions/auth";
 
 export class Home extends Component {
   render() {

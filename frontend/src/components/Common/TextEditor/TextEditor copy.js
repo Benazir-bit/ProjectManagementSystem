@@ -72,10 +72,10 @@ class TextEditor extends Component {
     // Ensure React-Quill reference is available:
     if (typeof this.reactQuillRef.getEditor !== "function") return;
     // Skip if Quill reference is defined:
-    if (this.quillRef != null) return;
+    if (this.quillRef !== null) return;
 
     const quillRef = this.reactQuillRef.getEditor();
-    if (quillRef != null) this.quillRef = quillRef;
+    if (quillRef !== null) this.quillRef = quillRef;
   }
 
   render() {

@@ -24,7 +24,7 @@ const initialState = {
   scrolllisLoading: false
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOADING_ATTENDANCE:
       return {
@@ -37,7 +37,7 @@ export default function(state = initialState, action) {
         scrolllisLoading: true
       };
     case INFINITY_SCROLL:
-      if (state.prevData != action.payload.results) {
+      if (state.prevData !== action.payload.results) {
         // console.log("REDUCERS", action.payload.results);
         return {
           ...state,

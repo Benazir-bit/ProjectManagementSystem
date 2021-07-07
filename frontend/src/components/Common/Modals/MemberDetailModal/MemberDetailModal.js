@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { Modal, Button } from "antd";
 import MemberDetailInfo from "./MemberDetailInfo";
@@ -81,7 +80,7 @@ class MemberDetailModal extends React.Component {
                     <div className="col-sm-5 avgKpi">
                       <h4 style={{ textAlign: "center", fontStyle: "italic" }}>
                         Average KPI
-                       </h4>
+                      </h4>
                       <CircleProgress />
                     </div>
                   </div>

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Card } from "antd";
 import ImageBig from "../../../Common/ImageBig/ImageBig";
 import "./KpiProfile.css";
-import { runInThisContext } from "vm";
-const { Meta } = Card;
 
 export class KpiProfile extends Component {
   render() {

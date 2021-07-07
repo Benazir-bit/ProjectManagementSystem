@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import "./SubmitTaskModal.css";
 import { Modal, Button } from "antd";
@@ -23,7 +22,7 @@ class SubmitTaskModal extends Component {
     var currentDate = new Date();
     var submit_date = moment(currentDate).format("YYYY-MM-DD");
     console.log(this.props.task, true, submit_date);
-    if (this.props.task.owner.id == this.props.task.supervisor.id) {
+    if (this.props.task.owner.id === this.props.task.supervisor.id) {
       const body = JSON.stringify({
         id: this.props.task.id,
         submitted: true,

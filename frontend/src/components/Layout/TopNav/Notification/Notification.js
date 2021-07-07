@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Layout, Menu, Icon, Dropdown, Anchor } from "antd";
+import { Menu, Dropdown } from "antd";
 import { Link } from "react-router-dom";
 import { createHashHistory } from "history";
 import { getNotifications } from "../../../../actions/notifications";
@@ -9,7 +9,7 @@ import {
   BellOutlined
 } from "@ant-design/icons";
 var wsStart = "ws://";
-if (window.location.protocol == "https:") {
+if (window.location.protocol === "https:") {
   wsStart = "wss://";
 }
 var endpoint = wsStart + window.location.host;
@@ -74,7 +74,7 @@ class Notification extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props != prevProps) {
+    if (this.props !== prevProps) {
       this.setState({
         count: this.props.unread_count,
         notifications: this.props.notifications
@@ -86,11 +86,11 @@ class Notification extends Component {
     // //console.log("get notification url", e.key);
     //console.log(type, id);
     let path = "/";
-    if (type == "task") {
+    if (type === "task") {
       path = `/task-details/${id}`;
-    } else if (type == "project") {
+    } else if (type === "project") {
       path = `/project-details/${id}`;
-    } else if (type == "issue") {
+    } else if (type === "issue") {
       path = `/issue-details/${id}`;
     }
     history.push(path);
@@ -121,7 +121,7 @@ class Notification extends Component {
                   <span className="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image">
                     <img
                       src={
-                        notification.actor == "System Admin"
+                        notification.actor === "System Admin"
                           ? ""
                           : notification.actor.image
                       }
@@ -196,7 +196,7 @@ class Notification extends Component {
             style={{ fontSize: "11px", marginLeft: "3px", marginTop: "-22px" }}
           >
             <span className="label label-danger label-indicator animation-floating notification-counter">
-              {this.state.count == 0 ? null : this.state.count}
+              {this.state.count === 0 ? null : this.state.count}
             </span>
           </div>
         </div>

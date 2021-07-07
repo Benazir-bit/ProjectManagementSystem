@@ -5,7 +5,6 @@ import ImageSmall from "../../ImageSmall/ImageSmall";
 import { addNewTask } from "../../../../actions/task";
 import moment from "moment";
 import "./AddTaskModal.css";
-import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -18,10 +17,8 @@ const CollectionCreateForm = (
         visible,
         onCancel,
         onOk,
-        form,
         confirmLoading,
         wrappedComponentRef,
-        user_id,
         project_id
       } = this.props;
 

@@ -7,13 +7,12 @@ import CommonTable from "../../Common/AllTables/CommonTable";
 import TableProgress from "../../Common/AllTables/TableProgress/TableProgress";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
 import CardBodyOnly from "../../Common/AllCard/CardBodyOnly";
-import { Icon, Input, AutoComplete, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import "./AllProjects.css";
 import { getTypeNews } from "../../../actions/news";
-import ActivityList from "../../Layout/ActivityList/ActivityList";
+// import ActivityList from "../../Layout/ActivityList/ActivityList";
 import { Layout } from "antd";
 const { Content } = Layout;
-const { Search } = Input;
 
 class AllProjects extends Component {
   constructor(props) {
@@ -30,7 +29,7 @@ class AllProjects extends Component {
     };
     window.onscroll = () => {
       const {
-        state: { error, loading, hasMore, fetchingData }
+        state: { error, loading, hasMore }
       } = this;
 
       this.state.hasMore =
@@ -65,7 +64,6 @@ class AllProjects extends Component {
   }
 
   loadData = () => {
-    console.log("projectsssssss")
     //GET TOKEN FROM STATE
     const token = localStorage.getItem("token");
 
@@ -116,7 +114,7 @@ class AllProjects extends Component {
   }
   render() {
     let project_list = [];
-    if (this.state.projects.length == 0) {
+    if (this.state.projects.length === 0) {
       if (this.state.loading && this.state.hasMore) {
         for (let i = 0; i < 5; i++) {
           let loadData_skeleton = {
@@ -197,9 +195,9 @@ class AllProjects extends Component {
                   <br />
                   <TitleHeader
                     title={
-                      this.props.match.params.type == "group"
+                      this.props.match.params.type === "group"
                         ? "Group Projects"
-                        : this.props.match.params.type == "user"
+                        : this.props.match.params.type === "user"
                           ? "User Projects"
                           : null
                     }

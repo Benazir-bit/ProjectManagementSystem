@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import CommonTable from "../../../Common/AllTables/CommonTable";
 import AllCardBody from "../../../Common/AllCard/AllCardBody";
-import ImageSmall from "../../../Common/ImageSmall/ImageSmall";
 import { Link } from "react-router-dom";
 import { Badge, Skeleton } from "antd";
 import "./MyIssues.css";

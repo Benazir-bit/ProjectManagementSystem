@@ -37,7 +37,7 @@ class DetailsModal extends Component {
     if (this.props.data) {
       let k = 0;
       for (const property in this.props.data) {
-        if (property !== null && property != undefined) {
+        if (property !== null && property !== undefined) {
           if (property.length > 0) {
             data_.push({
               key: k,

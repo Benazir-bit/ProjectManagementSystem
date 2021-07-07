@@ -6,14 +6,10 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
-  PAGE_LOAD,
   SPLASH_LOAD,
   PAGE_LOADED,
-  ERROR_MESSAGE,
   PASSWORD_VALIDATION
 } from "./types";
-import { errorMessage } from "./alerts";
-import ActionButton from "antd/lib/modal/ActionButton";
 import { createMessage } from "./alerts";
 // Login
 export const login = (username, password) => dispatch => {

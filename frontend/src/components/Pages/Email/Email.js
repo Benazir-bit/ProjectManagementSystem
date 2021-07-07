@@ -54,7 +54,6 @@ class Email extends Component {
       });
     }
     if (prevData.match.params.type != this.props.match.params.type) {
-      console.log("jooooooooooooooooooooooooooo", this.props.match.params.type);
       // this.props.resetInboxData();
       let total = this.props.count;
       this.setState({
@@ -184,20 +183,20 @@ class Email extends Component {
               item.gtype == "status"
                 ? item.timestamp
                 : item.gtype == "feedback"
-                ? item.created_date
-                : item.gtype == "fdreply"
-                ? item.timestamp
-                : null
+                  ? item.created_date
+                  : item.gtype == "fdreply"
+                    ? item.timestamp
+                    : null
             ],
             status: [status],
             sender:
               item.gtype == "status"
                 ? item.sender
                 : item.gtype == "feedback"
-                ? item.supervisor
-                : item.gtype == "fdreply"
-                ? item.target_user
-                : null
+                  ? item.supervisor
+                  : item.gtype == "fdreply"
+                    ? item.target_user
+                    : null
           });
         } else if (this.props.match.params.type === "sent") {
           data_.push({
@@ -206,20 +205,20 @@ class Email extends Component {
               item.gtype == "status"
                 ? item.timestamp
                 : item.gtype == "feedback"
-                ? item.created_date
-                : item.gtype == "fdreply"
-                ? item.timestamp
-                : null
+                  ? item.created_date
+                  : item.gtype == "fdreply"
+                    ? item.timestamp
+                    : null
             ],
             status: [status],
             recipient:
               item.gtype == "status"
                 ? item.recipent.concat(item.cc_list)
                 : item.gtype == "feedback"
-                ? [item.supervisor]
-                : item.gtype == "fdreply"
-                ? [item.target_user]
-                : null
+                  ? [item.supervisor]
+                  : item.gtype == "fdreply"
+                    ? [item.target_user]
+                    : null
           });
         }
       }

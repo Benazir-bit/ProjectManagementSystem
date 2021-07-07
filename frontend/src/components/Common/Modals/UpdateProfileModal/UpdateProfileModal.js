@@ -1,15 +1,14 @@
 import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateProfile } from "../../../../actions/profile";
-import { Form, Modal, Button, Input, DatePicker, Select } from "antd";
+import { Form, Modal, Button, Input } from "antd";
 import "./UpdateProfileModal.css";
 
 const CollectionCreateForm = (
   class extends Component {
     render() {
       //   const { profile } = this.props.profile;
-      const { visible, onCancel, onCreate, form } = this.props;
+      const { visible, onCancel, onCreate } = this.props;
       // const { getFieldDecorator } = form;
       // const prefixSelector = getFieldDecorator("prefix", {
       //   initialValue: "88"

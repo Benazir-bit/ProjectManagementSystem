@@ -1,7 +1,6 @@
 import axios from "axios";
 import { GET_NOTIFICATIONS } from "./types";
 import { tokenConfig } from "./auth";
-import { createMessage } from "./alerts";
 
 export const getNotifications = () => (dispatch, getState) => {
   axios

@@ -123,7 +123,7 @@ class EditableTable extends Component {
     var table = document.getElementById(table_name);
     var amount = 0;
     for (var i = 1, row; (row = table.rows[i]); i++) {
-      if (i - 1 != idx) {
+      if (i - 1 !== idx) {
         for (var j = 0, col; (col = row.cells[j]); j++) {
           if (col.getElementsByTagName("input")[0]) {
             if (col.getElementsByTagName("input")[0].name == "amount") {
