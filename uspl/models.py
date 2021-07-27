@@ -21,6 +21,7 @@ class Project(models.Model):
     details = models.TextField(max_length=500)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='project_created_by', on_delete=models.CASCADE)
     created_date = models.DateField(blank=True, null=True)
+    started_date = models.DateField(blank=True, null=True, ) ##PMS added
     due_date = models.DateField(blank=True, null=True, )
     completed = models.BooleanField(default=False)
     completed_date = models.DateField(blank=True, null=True)
@@ -98,9 +99,14 @@ class Project(models.Model):
         
 class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    wbs_number = models.CharField(max_length=255,blank=True, null=True) ##PMS added
+    prerequisite = models.CharField(max_length=255,blank=True, null=True) ##PMS added
     name = models.CharField(blank=True, null=True,max_length=100)
     details = models.CharField(blank=True, null=True,max_length=500)
     created_date = models.DateField(blank=True, null=True, )
+    optimistic_time = models.FloatField(blank=True, null=True, )
+    most_likely_time = models.FloatField(blank=True, null=True, )
+    pessimistic_time = models.FloatField(blank=True, null=True, )
     created_by = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     started = models.BooleanField(default=False)
     started_date = models.DateField(blank=True, null=True, )
@@ -152,6 +158,10 @@ class Task(models.Model):
             self.submitted_date = timezone.now().date()
         if self.completed:
             self.completed_date = timezone.now().date()
+        
+        tasks = self.project.task_set.all()
+        if self.wbs_number in tasks:
+            raise ValueError("WBS number "+ self.wbs_number +" already exists for this project") 
         super(Task, self).save()
     
     def get_absolute_url(self):

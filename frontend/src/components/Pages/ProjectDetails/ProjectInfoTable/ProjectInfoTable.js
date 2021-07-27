@@ -84,7 +84,7 @@ class ProjectInfoTable extends Component {
               <td id="member_grp">
                 <b>Start Date</b>
               </td>
-              <td id="grp_description">{project.created_date}</td>
+              <td id="grp_description">{project.started_date}</td>
             </tr>
             <tr>
               <td id="member_grp">

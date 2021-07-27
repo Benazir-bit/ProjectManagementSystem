@@ -281,6 +281,14 @@ class TaskAssign extends Component {
                 </Link>
               </li>
               <li className="list-group-item">
+                <strong>WBS Number:</strong>&nbsp;
+                {this.props.task.wbs_number}
+              </li>
+              <li className="list-group-item">
+                <strong>Prerequisite:</strong>&nbsp;
+                {this.props.task.prerequisite}
+              </li>
+              <li className="list-group-item">
                 <strong>Created date:</strong>&nbsp;
                 {this.props.task.created_date}
               </li>

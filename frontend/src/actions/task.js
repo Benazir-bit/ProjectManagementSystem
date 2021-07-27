@@ -109,7 +109,12 @@ export const addNewTask = (
   deadline,
   // due_date,
   assigned_to,
-  note
+  note,
+  prerequisite,
+  wbs_number,
+  optimistic_time,
+  most_likely_time,
+  pessimistic_time
 ) => (dispatch, getState) => {
   const body = {
     project,
@@ -118,7 +123,12 @@ export const addNewTask = (
     deadline,
     // due_date,
     assigned_to,
-    note
+    note,
+    prerequisite,
+    wbs_number,
+    optimistic_time,
+    most_likely_time,
+    pessimistic_time
   };
   axios
     .post(`/uspl/api/tasks/`, body, tokenConfig(getState))
@@ -331,17 +341,31 @@ export const submitCancelTask = body => (dispatch, getState) => {
     });
 };
 
-export const updateTask = (id, name, details, deadline, assigned_to, note) => (
-  dispatch,
-  getState
-) => {
+export const updateTask = (
+  id,
+  name,
+  details,
+  deadline,
+  assigned_to,
+  note,
+  prerequisite,
+  wbs_number,
+  optimistic_time,
+  most_likely_time,
+  pessimistic_time
+) => (dispatch, getState) => {
   const body = {
     id,
     name,
     details,
     deadline,
     assigned_to,
-    note
+    note,
+    prerequisite,
+    wbs_number,
+    optimistic_time,
+    most_likely_time,
+    pessimistic_time
   };
   axios
     .put(`/uspl/api/tasks/`, body, tokenConfig(getState))

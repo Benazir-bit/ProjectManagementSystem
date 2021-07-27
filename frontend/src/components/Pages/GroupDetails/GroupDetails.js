@@ -72,7 +72,7 @@ class GroupDetails extends Component {
           "Project Title": (
             <Link to={`/project-details/${project.id}`}>{project.name}</Link>
           ),
-          "Started On": project.created_date,
+          "Started On": project.started_date,
           "Due Date": project.due_date,
           Status: <TableProgress percent={project.proj_completeion_rate} />
         };

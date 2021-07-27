@@ -46,6 +46,9 @@ const CollectionCreateForm = (
                   autosize={{ minRows: 2, maxRows: 6 }}
                 />
               </Form.Item>
+              <Form.Item label="Start Date" name="started_date" rules={[{ required: true, message: "Enter Start Date!" }]}>
+                <DatePicker disabledDate={d => !d || d.isBefore(today)} />
+              </Form.Item>
               <Form.Item label="Due Date" name="date_picker" rules={[{ required: true, message: "Enter Due Date!" }]}>
                 <DatePicker disabledDate={d => !d || d.isBefore(today)} />
               </Form.Item>
@@ -122,6 +125,7 @@ class AddProjectModal extends React.Component {
   };
   formRef = React.createRef();
   supervisorChange = value => {
+    console.log(this.formRef.current, 'ppppppppp')
     this.formRef.current.setFieldsValue({
       projMembers: undefined
     })
@@ -145,6 +149,7 @@ class AddProjectModal extends React.Component {
     const {
       projectName,
       details,
+      started_date,
       date_picker,
       supervisor,
       projMembers,
@@ -161,15 +166,13 @@ class AddProjectModal extends React.Component {
       date_picker.format("YYYY-MM-DD"),
       supervisor,
       projMem,
-      notes
+      notes,
+      started_date.format("YYYY-MM-DD"),
     );
     this.formRef.current.resetFields();
     this.setState({ visible: false, supervisor: null });
   };
 
-  saveFormRef = formRef => {
-    this.formRef = formRef;
-  };
 
   render() {
     return (
@@ -178,7 +181,7 @@ class AddProjectModal extends React.Component {
           Add New Project
         </Button>
         <CollectionCreateForm
-          wrappedComponentRef={this.formRef}
+          formRef={this.formRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}

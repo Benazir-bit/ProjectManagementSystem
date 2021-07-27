@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Form, Modal, Button, Input, Select, DatePicker } from "antd";
+import { Form, Modal, Button, Input, Select, DatePicker, InputNumber } from "antd";
 import ImageSmall from "../../ImageSmall/ImageSmall";
 import { addNewTask } from "../../../../actions/task";
 import moment from "moment";
@@ -43,7 +43,21 @@ const CollectionCreateForm = (
               <Form.Item label="Task Name" name="name" rules={[{ required: true, message: "Enter Task Name!" }]}>
                 <Input placeholder="Enter Task Name" />
               </Form.Item>
-
+              <Form.Item label="WBS Number" name="wbs_number" rules={[{ required: true, message: "Enter WBS Number!" }]}>
+                <Input/>
+              </Form.Item>
+              <Form.Item label="Prerequisitte WBS Number" name="prerequisite" rules={[{ required: false, message: "Enter Prerequisitte WBS Number!" }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="Optimistic Time" name="optimistic_time" rules={[{ required: true, message: "Enter Optimistic Time!" }]}>
+                <InputNumber min={0}/>
+              </Form.Item>
+              <Form.Item label="Most Likely Time" name="most_likely_time" rules={[{ required: true, message: "Enter Most Likely Time!" }]}>
+                <InputNumber min={0}/>
+              </Form.Item>
+              <Form.Item label="Pessimistic Time" name="pessimistic_time" rules={[{ required: true, message: "Enter Pessimistic Time!" }]}>
+                <InputNumber min={0}/>
+              </Form.Item>
               <Form.Item label="Details" name="details">
                 <TextArea
                   placeholder="Details About the Task"
@@ -65,6 +79,7 @@ const CollectionCreateForm = (
                   }
                 />
               </Form.Item>
+
 
               <Form.Item label="Assigned To" name="assigned_to" rules={[
                 { required: true, message: "Select Owner of the Task" }
@@ -120,7 +135,12 @@ class AddTaskModal extends React.Component {
       details,
       due_date,
       assigned_to,
-      notes
+      notes,
+      prerequisite,
+      wbs_number,
+      optimistic_time,
+      most_likely_time,
+      pessimistic_time
     } = this.formRef.current.getFieldsValue();
 
     this.props.addNewTask(
@@ -129,7 +149,12 @@ class AddTaskModal extends React.Component {
       details,
       due_date.format("YYYY-MM-DD"),
       assigned_to,
-      notes
+      notes,
+      prerequisite,
+      wbs_number,
+      optimistic_time,
+      most_likely_time,
+      pessimistic_time
     );
     this.formRef.current.resetFields();
     this.setState({ visible: false });

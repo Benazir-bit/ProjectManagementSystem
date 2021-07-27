@@ -41,7 +41,7 @@ class ProfileSmallSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField(source="get_full_name")
-    image = serializers.ImageField(source="profile.image")
+    image = serializers.ImageField(source="profile.image",use_url=True)
     dsg = serializers.CharField(source="profile.dsg.title", required=False)
     is_teamleader = serializers.BooleanField(source="profile.is_temaleader")
     is_hr = serializers.BooleanField(source="profile.is_hr", required=False)

@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { getProjectDetails } from "../../../actions/projects";
+import {
+  getProjectDetails
+  , getprojectchart 
+} from "../../../actions/projects";
 import { getTypeMembers } from "../../../actions/member";
 import { getTypeTasks } from "../../../actions/task";
 import TitleHeader from "../../Common/TitleHeader/TitleHeader";
@@ -17,8 +20,9 @@ import ProjectUpdateModal from "../../Common/Modals/ProjectUpdateModal/ProjectUp
 import DeleteModal from "../../Common/Modals/DeleteModal/DeleteModal";
 import AddTaskModal from "../../Common/Modals/AddTaskModal/AddTaskModal";
 import NoData from "../../Common/NoData/NoData";
-import ActivityList from "../../Layout/ActivityList/ActivityList";
-import { Layout, Button } from "antd";
+import ProjectGanttChart from "./ProjectGanttChart/ProjectGanttChart"
+// import ActivityList from "../../Layout/ActivityList/ActivityList";
+import { Layout } from "antd";
 import AddTaskUserModal from "../../Common/Modals/AddTaskModal/AddTaskUserModal";
 const { Content } = Layout;
 const { Option } = Select;
@@ -39,6 +43,7 @@ class ProjectDetails extends Component {
   componentDidMount() {
     this.props.getProjectDetails(this.props.match.params.id);
     this.props.getTypeMembers("project-group", this.props.match.params.id);
+    this.props.getprojectchart(this.props.match.params.id)
     this.setState({ fetchingData: true });
   }
 
@@ -243,6 +248,14 @@ class ProjectDetails extends Component {
                     <ProjectMembers project={this.props.project} />
                   </div>
 
+                  <div className="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                    <AllCardBody
+                      BodyId={"ProjectDetailCard"}
+                      cardTitle={"Project Gantt Chart"}
+                    >
+                      <ProjectGanttChart project_chart={this.props.project_chart}/>
+                    </AllCardBody>
+                  </div>
                   <div className="row">
                     <div
                       className="col-sm-12"
@@ -312,11 +325,13 @@ const mapStateToProps = state => ({
   project: state.projects.project,
   members: state.member.members,
   user: state.auth.user,
-  tasks: state.tasks.tasks
+  tasks: state.tasks.tasks,
+  project_chart: state.projects.project_chart
 });
 
 export default connect(mapStateToProps, {
   getProjectDetails,
   getTypeMembers,
-  getTypeTasks
+  getTypeTasks,
+  getprojectchart
 })(ProjectDetails);
