@@ -3,7 +3,11 @@ import { Bar } from '@ant-design/charts';
 import moment from 'moment';
 
 class ProjectGanttChart extends Component {
+
   render() {
+    if (!this.props.project_chart) {
+      return null
+    }
     var data = []
     let min_max = []
     this.props.project_chart.map((d) => {
@@ -38,14 +42,54 @@ class ProjectGanttChart extends Component {
       data: data,
       xField: 'values',
       yField: 'type',
-      xAxis: { tickCount: 20 },
+      xAxis: {
+        tickCount: 20,
+        range: [0, 1],
+        nice: true,
+        label: {
+          // rotate: Math.PI / 6,
+          // offset: 10,
+          // style: {
+          //   fill: '#aaa',
+          //   fontSize: 12,
+          // },
+        },
+        title: {
+          text: 'Timeline',
+          style: { fontSize: 16 },
+        },
+        tickLine: {
+          style: {
+            lineWidth: 2,
+            stroke: '#aaa',
+          },
+          length: 5,
+        },
+        grid: {
+          line: {
+            style: {
+              stroke: '#ddd',
+              lineDash: [4, 2],
+
+            },
+          },
+          // alternateColor: 'rgba(0,0,0,0.05)',
+        },
+      },
+      yAxis: {
+        title: {
+          text: 'WBS Tasks',
+          style: { fontSize: 16 },
+        },
+
+      },
       // isRange: true,
       meta: {
         values: {
           max: Date.parse(moment(max).format('YYYY-MM-DD')),
           min: Date.parse(moment(min).format('YYYY-MM-DD')),
           formatter: function formatter(val) {
-            let date = moment(val).format('DD-MMM-YY');
+            let date = moment(val).format('DD-MMM-YYYY');
             return date;
           },
         },
@@ -53,7 +97,11 @@ class ProjectGanttChart extends Component {
 
       label: {
         position: 'middle',
-        layout: [{ type: 'adjust-color' }],
+        layout: [
+          { type: 'interval-adjust-position' },
+          { type: 'interval-hide-overlap' },
+          { type: 'adjust-color' },
+        ],
         content: function formatter(val) {
           const date1 = new Date(val.values[0]);
           const date2 = new Date(val.values[1]);
@@ -62,6 +110,16 @@ class ProjectGanttChart extends Component {
           return diffDays;
         },
       },
+      tooltip: {
+        formatter: function formatter(val) {
+          return {
+            name: ''
+              .concat("timeline", ' '),
+            value: `${moment(val.values[0]).format("DD-MMM-YYYY")} - ${moment(val.values[1]).format("DD-MMM-YYYY")}`,
+          };
+        },
+      },
+      // scrollbar: { type: 'horizontal' },
     };
 
     return (
