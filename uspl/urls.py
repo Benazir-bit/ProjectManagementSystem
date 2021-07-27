@@ -60,6 +60,9 @@ urlpatterns = [
     path('api/user/', UserProfileAPI.as_view()),
     path('api/user/all/', UserProfileAllAPI.as_view()),
 
+    # Project Gantt Chart
+    path('api/project-chart/<int:id>', ProjectChartAPI.as_view()),
+
     # DASHBOARD PANEL API
     path('api/dashboard/panel/', DashboardPanelDataAPI.as_view()),
 

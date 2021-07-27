@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
 import { getUserAvgKPI } from "../../../../actions/profile";
 import TitleHeader from "../../../Common/TitleHeader/TitleHeader";

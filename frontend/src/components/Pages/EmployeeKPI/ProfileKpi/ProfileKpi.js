@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 import "./ProfileKpi.css";
 import AvgKPIGroup from "../AvgKPIGroup/AvgKPIGroup";
 import CircleProgress from "../../../Common/CircleProgress/CircleProgress";

@@ -4,7 +4,8 @@ import {
   GET_PROJECT_DETAIL,
   GET_ADMIN_PROJECTS,
   GET_GROUP_PROJECTS,
-  DELETE_MODAL_SUBMIT_DONE
+  DELETE_MODAL_SUBMIT_DONE,
+  GET_PROJECT_CHART
 } from "./types";
 import { tokenConfig } from "./auth";
 import { createMessage } from "./alerts";
@@ -75,6 +76,36 @@ export const getAdminDashboardProjects = () => (dispatch, getState) => {
       }
     });
 };
+export const getprojectchart = (id) => (dispatch, getState) => {
+  // dispatch({
+  //   type: GET_PROJECT_DETAIL,
+  //   payload: null
+  // });
+  axios
+    .get(`/uspl/api/project-chart/${id}`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_PROJECT_CHART,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      if (!err.response) {
+        dispatch(
+          createMessage("Network Error. Something went wrong!", "error")
+        );
+      } else {
+        dispatch(
+          dispatch(
+            createMessage(
+              `${err.response.status} ${err.response.statusText}`,
+              "error"
+            )
+          )
+        );
+      }
+    });
+};
 
 export const getProjectDetails = id => (dispatch, getState) => {
   dispatch({
@@ -115,7 +146,8 @@ export const addNewProject = (
   due_date,
   supervisor,
   members,
-  note
+  note,
+  started_date
 ) => (dispatch, getState) => {
   const body = {
     created_by,
@@ -125,7 +157,8 @@ export const addNewProject = (
     due_date,
     supervisor,
     members,
-    note
+    note,
+    started_date
   };
   axios
     .post(`/uspl/api/projects/`, body, tokenConfig(getState))
@@ -162,7 +195,8 @@ export const updateProject = (
   supervisor,
   members,
   note,
-  completed
+  started_date,
+
 ) => (dispatch, getState) => {
   const body = {
     id,
@@ -172,7 +206,7 @@ export const updateProject = (
     supervisor,
     members,
     note,
-    completed
+    started_date
   };
   axios
     .put(`/uspl/api/projects/`, body, tokenConfig(getState))

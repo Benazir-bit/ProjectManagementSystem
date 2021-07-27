@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { updateTask } from "../../../../actions/task";
 import moment from "moment";
-import { Form, Modal, Button, Input, Select, DatePicker } from "antd";
+import { Form, Modal, Button, Input, Select, DatePicker, InputNumber } from "antd";
 import ImageSmall from "../../ImageSmall/ImageSmall";
 import "./TaskUpdateModal.css";
 
@@ -34,11 +34,33 @@ const CollectionCreateForm = (
                 details: task.details,
                 deadline: moment(task.deadline, "YYYY-MM-DD"),
                 assigned_to: task.owner.id,
-                note: task.note
+                note: task.note,
+                wbs_number: task.wbs_number,
+                prerequisite: task.prerequisite,
+                optimistic_time: task.optimistic_time,
+                most_likely_time: task.most_likely_time,
+                pessimistic_time: task.pessimistic_time
+
               }}>
               <Form.Item label="Task Name" name="name" rules={[{ required: true, message: "Enter Task Name!" }]}>
                 <Input />
               </Form.Item>
+              <Form.Item label="WBS Number" name="wbs_number" rules={[{ required: true, message: "Enter WBS Number!" }]}>
+                <Input/>
+              </Form.Item>
+              <Form.Item label="Prerequisitte WBS Number" name="prerequisite" rules={[{ required: false, message: "Enter Prerequisitte WBS Number!" }]}>
+                <Input />
+              </Form.Item>
+              <Form.Item label="Optimistic Time" name="optimistic_time" rules={[{ required: true, message: "Enter Optimistic Time!" }]}>
+                <InputNumber min={0}/>
+              </Form.Item>
+              <Form.Item label="Most Likely Time" name="most_likely_time" rules={[{ required: true, message: "Enter Most Likely Time!" }]}>
+                <InputNumber min={0}/>
+              </Form.Item>
+              <Form.Item label="Pessimistic Time" name="pessimistic_time" rules={[{ required: true, message: "Enter Pessimistic Time!" }]}>
+                <InputNumber min={0}/>
+              </Form.Item>
+             
               <Form.Item label="Details" name="details">
                 <TextArea
                   placeholder="Details About the Task"
@@ -101,7 +123,12 @@ class TaskUpdateModal extends React.Component {
       details,
       deadline,
       assigned_to,
-      note
+      note,
+      prerequisite,
+      wbs_number,
+      optimistic_time,
+      most_likely_time,
+      pessimistic_time
     } = this.formRef.current.getFieldsValue();
     this.props.updateTask(
       this.props.task.id,
@@ -109,7 +136,12 @@ class TaskUpdateModal extends React.Component {
       details,
       deadline.format("YYYY-MM-DD"),
       assigned_to,
-      note
+      note,
+      prerequisite,
+      wbs_number,
+      optimistic_time,
+      most_likely_time,
+      pessimistic_time
     );
     this.formRef.current.resetFields();
     this.setState({ visible: false });

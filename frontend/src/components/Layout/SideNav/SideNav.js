@@ -128,7 +128,6 @@ class SideNav extends React.PureComponent {
             return (grp.name === "Core Director" ? true : false);
             // management = grp.name === "Core Director" ? true : false;
         });
-        //console.log(management, "kkkkkkkkkk");
         if (this.props.user.is_hr) {
             groups = (
                 <SubMenu
@@ -357,7 +356,7 @@ class SideNav extends React.PureComponent {
                                     <span>Dashboard</span>
                                 </Link>
                             </Menu.Item>
-                            {/* {groups} */}
+                            {groups}
 
                             {this.props.user.is_hr ? (
                                 <Menu.Item

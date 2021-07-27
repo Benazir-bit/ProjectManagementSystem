@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 # Pagination for REST FRAMEWORK TAKEN
 from rest_framework.pagination import LimitOffsetPagination
-
+import math
 # Email includes
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -731,6 +731,46 @@ class LoginAPI(generics.GenericAPIView):
         else:
             return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
+class ProjectChartAPI(APIView):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    def get(self, request, id):
+        # E (Mean PERT Average) = (O+4ML+P)/6   (by giving more weightage to most likely estimate)
+        project = Project.objects.get(id=id)
+        tasks =  project.task_set.all().order_by('wbs_number')
+        data = []
+        for task in tasks:
+            if task.prerequisite:
+                pre_task = Task.objects.get(wbs_number=task.prerequisite)
+                pre_val =  [x for x in data if x["type"] == pre_task.wbs_number]
+                if pre_val and pre_task.optimistic_time and pre_task.most_likely_time and pre_task.pessimistic_time and task.optimistic_time and task.most_likely_time and task.pessimistic_time:
+                    start = pre_val[0]["end"]
+                    expected_time = (task.optimistic_time + 4*task.most_likely_time + task.pessimistic_time)/6
+                    expected_time = int(math.ceil(expected_time))
+                    end =  start + datetime.timedelta(days=expected_time)
+                    data.append({
+                        "type":task.wbs_number,
+                        "start":start,
+                        "end":end,
+                        "values": [start, end]
+                    })
+                
+            else:
+                if task.optimistic_time and task.most_likely_time and task.pessimistic_time and project.started_date:
+                    start = project.started_date
+                    expected_time = (task.optimistic_time + 4*task.most_likely_time + task.pessimistic_time)/6
+                    expected_time = int(math.ceil(expected_time))
+                    end =  start + datetime.timedelta(days=expected_time)
+                    data.append({
+                        "type":task.wbs_number,
+                        "start":start,
+                        "end":end,
+                        "values": [start, end]
+                    })
+        return Response(data, status=status.HTTP_201_CREATED)
+        
 
 # For POST, UPDATE & DELETE Project
 class ProjectAPI(APIView):

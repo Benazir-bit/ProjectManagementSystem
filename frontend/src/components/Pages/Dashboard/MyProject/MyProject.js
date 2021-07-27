@@ -39,7 +39,7 @@ class MyProject extends Component {
           "Project Name": (
             <Link to={`/project-details/${project.id}`}>{project.name}</Link>
           ),
-          "Start Date": project.created_date,
+          "Start Date": project.started_date,
           "Due Date": project.due_date,
           Progress: <TableProgress percent={project.proj_completeion_rate} />
         };

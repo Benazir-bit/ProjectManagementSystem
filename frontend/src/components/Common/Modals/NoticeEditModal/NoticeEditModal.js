@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
 import { Form, Modal, Input, DatePicker, Checkbox } from "antd";
 import { updateNotice, getNoticeDetails } from "../../../../actions/notice";

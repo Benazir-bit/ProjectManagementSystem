@@ -37,7 +37,7 @@ const CollectionCreateForm = (
               <b>Project Name: {this.props.project_id.name}</b>
             </h5>
 
-            <Form layout="vertical" id="AddTaskModalForm">
+            <Form layout="vertical" id="AddTaskModalForm" ref={this.props.formRef}>
               <Form.Item label="Task Name" name="name" rules={[{ required: true, message: "Enter Task Name!" }]}>
                 <Input placeholder="Enter Task Name" />
               </Form.Item>
@@ -103,39 +103,24 @@ class AddTaskUserModal extends React.Component {
     this.setState({ visible: false });
   };
 
+  formRef = React.createRef();
+
   handleCreate = () => {
-    const { form } = this.formRef.props;
-    form.validateFields(err => {
-      if (err) {
-        return;
-      }
-      const { name, details, due_date, notes } = form.getFieldsValue();
-      console.log(
-        this.props.project.id,
-        name,
-        details,
-        due_date.format("YYYY-MM-DD"),
-        this.props.user.id,
-        notes,
-        true
-      );
-      this.props.addNewUserTask(
-        this.props.project.id,
-        name,
-        details,
-        due_date.format("YYYY-MM-DD"),
-        this.props.user.id,
-        notes,
-        true
-      );
-      form.resetFields();
-      this.setState({ visible: false });
-    });
+    const { name, details, due_date, notes } = this.formRef.current.getFieldsValue();
+    this.props.addNewUserTask(
+      this.props.project.id,
+      name,
+      details,
+      due_date.format("YYYY-MM-DD"),
+      this.props.user.id,
+      notes,
+      true
+    );
+    this.formRef.current.resetFields();
+    this.setState({ visible: false });
   };
 
-  saveFormRef = formRef => {
-    this.formRef = formRef;
-  };
+
 
   render() {
     return (
@@ -144,7 +129,7 @@ class AddTaskUserModal extends React.Component {
           Add New Task
         </Button>
         <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef}
+          formRef={this.formRef}
           visible={this.state.visible}
           onOk={this.handleCreate}
           confirmLoading={this.state.confirmLoading}
