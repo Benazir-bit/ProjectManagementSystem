@@ -192,7 +192,7 @@ class TaskListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ['id', 'project_name', 'name', 'project', 'overdue',
+        fields = ['id', 'project_name', 'name', 'project', 'overdue','wbs_number',
                   'created_date', 'deadline', 'status', 'assigned_to', 'time_remaining', 'issue_count']
 
 

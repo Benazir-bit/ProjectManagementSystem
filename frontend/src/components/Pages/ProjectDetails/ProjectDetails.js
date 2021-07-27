@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import {
   getProjectDetails
-  , getprojectchart 
+  , getprojectchart
 } from "../../../actions/projects";
 import { getTypeMembers } from "../../../actions/member";
 import { getTypeTasks } from "../../../actions/task";
@@ -113,6 +113,7 @@ class ProjectDetails extends Component {
     if (!this.props.tasks) {
       for (let i = 0; i < 3; i++) {
         let proj_object = {
+          "WBS Number": <Skeleton active loading={true} paragraph={false} />,
           "Task Title": <Skeleton active loading={true} paragraph={false} />,
           "Created On": <Skeleton active loading={true} paragraph={false} />,
           "Due Date": <Skeleton active loading={true} paragraph={false} />,
@@ -125,6 +126,7 @@ class ProjectDetails extends Component {
       notask = this.props.tasks.length == 0;
       this.props.tasks.map(task => {
         let proj_object = {
+          "WBS Number": task.wbs_number,
           "Task Title": (
             <Link key={task.id} to={`/task-details/${task.id}`}>
               <span
@@ -160,6 +162,7 @@ class ProjectDetails extends Component {
     }
     var tableData = {
       columns: [
+        "WBS Number",
         "Task Title",
         "Created On",
         "Due Date",
@@ -253,7 +256,7 @@ class ProjectDetails extends Component {
                       BodyId={"ProjectDetailCard"}
                       cardTitle={"Project Gantt Chart"}
                     >
-                      <ProjectGanttChart project_chart={this.props.project_chart}/>
+                      <ProjectGanttChart project_chart={this.props.project_chart} />
                     </AllCardBody>
                   </div>
                   <div className="row">

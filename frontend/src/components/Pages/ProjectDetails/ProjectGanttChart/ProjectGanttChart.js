@@ -3,7 +3,11 @@ import { Bar } from '@ant-design/charts';
 import moment from 'moment';
 
 class ProjectGanttChart extends Component {
+
   render() {
+    if (!this.props.project_chart) {
+      return null
+    }
     var data = []
     let min_max = []
     this.props.project_chart.map((d) => {

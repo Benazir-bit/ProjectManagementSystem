@@ -395,11 +395,11 @@ def TaskTableAPI(request, type, filter, id):
     fullName = None
     if (type == "group"):
         projects = Project.objects.filter(group__id=id).filter(completed=False)
-        tasks = Task.objects.filter(project__in=projects).order_by('-id')
+        tasks = Task.objects.filter(project__in=projects).order_by('wbs_number')
     elif (type == "project"):
-        tasks = Task.objects.filter(project__id=id).order_by('-id')
+        tasks = Task.objects.filter(project__id=id).order_by('wbs_number')
     elif (type == "user"):
-        tasks = Task.objects.filter(assigned_to__id=id).order_by('-id')
+        tasks = Task.objects.filter(assigned_to__id=id).order_by('wbs_number')
 
     if (filter == "overview"):
         if (type !=  "user"):
