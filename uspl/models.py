@@ -24,7 +24,7 @@ class Project(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='project_created_by', on_delete=models.CASCADE)
     created_date = models.DateField(blank=True, null=True)
     started_date = models.DateField(blank=True, null=True, ) ##PMS added
-    due_date = models.DateField(blank=True, null=True, )
+    due_date = models.DateField(blank=True, null=True, ) ## not used
     completed = models.BooleanField(default=False)
     completed_date = models.DateField(blank=True, null=True)
     supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='project_supervisor', on_delete=models.CASCADE)
@@ -35,10 +35,10 @@ class Project(models.Model):
     priority = models.PositiveIntegerField(blank=True, null=True)
     
     # Has due date for an instance of this object passed?
-    def overdue_status(self):
-        "Returns whether the Tasks's due date has passed or not."
-        if self.due_date and datetime.date.today() > self.due_date:
-            return True
+    # def overdue_status(self):
+    #     "Returns whether the Tasks's due date has passed or not."
+    #     if self.due_date and datetime.date.today() > self.due_date:
+    #         return True
          
     def __str__(self):
         return self.name
