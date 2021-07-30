@@ -49,9 +49,9 @@ const CollectionCreateForm = (
               <Form.Item label="Start Date" name="started_date" rules={[{ required: true, message: "Enter Start Date!" }]}>
                 <DatePicker disabledDate={d => !d || d.isBefore(today)} />
               </Form.Item>
-              <Form.Item label="Due Date" name="date_picker" rules={[{ required: true, message: "Enter Due Date!" }]}>
+              {/* <Form.Item label="Due Date" name="date_picker" rules={[{ required: true, message: "Enter Due Date!" }]}>
                 <DatePicker disabledDate={d => !d || d.isBefore(today)} />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="Supervisor" name="supervisor" rules={[
                 { required: true, message: "Select Project Supervisor!" }
               ]}>
@@ -150,7 +150,7 @@ class AddProjectModal extends React.Component {
       projectName,
       details,
       started_date,
-      date_picker,
+      // date_picker,
       supervisor,
       projMembers,
       notes
@@ -163,7 +163,7 @@ class AddProjectModal extends React.Component {
       this.props.group.id,
       projectName,
       details,
-      date_picker.format("YYYY-MM-DD"),
+      // date_picker.format("YYYY-MM-DD"),
       supervisor,
       projMem,
       notes,

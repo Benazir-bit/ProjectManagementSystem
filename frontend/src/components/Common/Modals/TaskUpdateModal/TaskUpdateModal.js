@@ -33,7 +33,7 @@ const CollectionCreateForm = (
               initialValues={{
                 name: task.name,
                 details: task.details,
-                deadline: moment(task.deadline, "YYYY-MM-DD"),
+                // deadline: moment(task.deadline, "YYYY-MM-DD"),
                 assigned_to: task.owner.id,
                 note: task.note,
                 wbs_number: task.wbs_number,

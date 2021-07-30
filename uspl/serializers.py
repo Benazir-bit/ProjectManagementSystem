@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User, Group
 from .models import *
 from django.contrib.auth import authenticate
-
+from django.db.models import Max
 # User Serializer
 
 
@@ -226,11 +226,18 @@ class ProjectListSerializer(serializers.ModelSerializer):
     proj_completeion_rate = serializers.FloatField(
         source='get_completeion_rate')
     group_name = serializers.CharField(source="group.name")
+    due_date = serializers.SerializerMethodField()
+
+    def get_due_date(self, project):
+        tasks = Task.objects.filter(project=project)
+        due_date = tasks.aggregate(Max('deadline'))[
+                'deadline__max']
+        return due_date
 
     class Meta:
         model = Project
         fields = ['proj_completeion_rate', 'group_name',
-                  'group', 'name', 'id', 'created_date', 'due_date', 'completed', 'completed_date']
+                  'group', 'name', 'id', 'created_date', 'started_date','due_date', 'completed', 'completed_date']
 
 
 class ProjectDetailsSerializer(serializers.ModelSerializer):
@@ -241,10 +248,16 @@ class ProjectDetailsSerializer(serializers.ModelSerializer):
     group_name = serializers.CharField(source="group.name", required=False)
 
     project_members = serializers.SerializerMethodField("get_members")
-
+    due_date = serializers.SerializerMethodField()
     def get_members(self, project):
         serializer = UserListSerializer(instance=project.members, many=True)
         return serializer.data
+
+    def get_due_date(self, project):
+        tasks = Task.objects.filter(project=project)
+        due_date = tasks.aggregate(Max('deadline'))[
+                'deadline__max']
+        return due_date
     # task_set = TaskListSerializer(many=True, read_only=True, required=False)
 
     class Meta:
