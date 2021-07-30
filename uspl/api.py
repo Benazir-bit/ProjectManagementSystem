@@ -741,32 +741,27 @@ class ProjectChartAPI(APIView):
         project = Project.objects.get(id=id)
         tasks =  project.task_set.all().order_by('wbs_number')
         data = []
+        
         for task in tasks:
             if task.prerequisite:
-                pre_task = Task.objects.get(wbs_number=task.prerequisite)
-                pre_val =  [x for x in data if x["type"] == pre_task.wbs_number]
-                if pre_val and pre_task.optimistic_time and pre_task.most_likely_time and pre_task.pessimistic_time and task.optimistic_time and task.most_likely_time and task.pessimistic_time:
-                    start = pre_val[0]["end"]
-                    expected_time = (task.optimistic_time + 4*task.most_likely_time + task.pessimistic_time)/6
-                    expected_time = int(math.ceil(expected_time))
-                    end =  start + datetime.timedelta(days=expected_time)
+                pre_task = Task.objects.get(wbs_number=task.prerequisite, project=project)
+                # pre_val =  [x for x in data if x["type"] == pre_task.wbs_number]
+                # if pre_val and pre_task.optimistic_time and pre_task.most_likely_time and pre_task.pessimistic_time and task.optimistic_time and task.most_likely_time and task.pessimistic_time:
+                #     start = pre_val[0]["end"]
+                if pre_task.deadline and task.deadline:
+                    start = pre_task.deadline
+                    end = task.deadline
                     data.append({
                         "type":task.wbs_number,
-                        "start":start,
-                        "end":end,
                         "values": [start, end]
                     })
                 
             else:
-                if task.optimistic_time and task.most_likely_time and task.pessimistic_time and project.started_date:
+                if task.deadline and project.started_date:
                     start = project.started_date
-                    expected_time = (task.optimistic_time + 4*task.most_likely_time + task.pessimistic_time)/6
-                    expected_time = int(math.ceil(expected_time))
-                    end =  start + datetime.timedelta(days=expected_time)
+                    end = task.deadline
                     data.append({
                         "type":task.wbs_number,
-                        "start":start,
-                        "end":end,
                         "values": [start, end]
                     })
         return Response(data, status=status.HTTP_201_CREATED)
@@ -829,10 +824,20 @@ class TaskAPI(APIView):
             raise PermissionDenied
 
         serializer = TaskDetailsSerializer(data=request.data)
+        if 'prerequisite' in request.data.keys():
+            pre_task = Task.objects.get(wbs_number=request.data['prerequisite'], project=project)
+            start = pre_task.deadline
+        else:
+            start = project.started_date
+        expected_time = (request.data['optimistic_time'] + 4*request.data['most_likely_time'] + request.data['pessimistic_time'])/6
+        expected_time = int(math.ceil(expected_time))
+        deadline =  start + datetime.timedelta(days=expected_time)
         if serializer.is_valid():
             serializer.save(created_date=timezone.now(),
-                            created_by=request.user)
-            project_tasks = project.task_set.all().order_by('-completed', '-id')
+                            created_by=request.user,
+                            deadline= deadline)
+            # project_tasks = project.task_set.all().order_by('-completed', '-id')
+            project_tasks = project.task_set.all().order_by('wbs_number')
             tasks_serializer = TaskListSerializer(project_tasks, many=True)
             project_serializer = ProjectDetailsSerializer(project)
             members = project.get_project_members().order_by('username')

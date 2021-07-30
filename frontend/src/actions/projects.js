@@ -121,6 +121,7 @@ export const getProjectDetails = id => (dispatch, getState) => {
       });
     })
     .catch(err => {
+
       if (!err.response) {
         dispatch(
           createMessage("Network Error. Something went wrong!", "error")

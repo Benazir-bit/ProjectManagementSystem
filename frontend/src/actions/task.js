@@ -8,6 +8,7 @@ import {
 } from "./types";
 import { tokenConfig } from "./auth";
 import { createMessage } from "./alerts";
+import { getprojectchart } from './projects'
 
 export const getTypeTaskOverview = (type, id) => (dispatch, getState) => {
   dispatch({
@@ -106,7 +107,7 @@ export const addNewTask = (
   project,
   name,
   details,
-  deadline,
+  // deadline,
   // due_date,
   assigned_to,
   note,
@@ -120,7 +121,7 @@ export const addNewTask = (
     project,
     name,
     details,
-    deadline,
+    // deadline,
     // due_date,
     assigned_to,
     note,
@@ -134,6 +135,7 @@ export const addNewTask = (
     .post(`/uspl/api/tasks/`, body, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage("Task Added Successfully", "success"));
+      dispatch(getprojectchart(project))
       dispatch({
         type: GET_TYPE_TASKS,
         payload: res.data.tasks
@@ -152,7 +154,7 @@ export const addNewTask = (
         dispatch(
           dispatch(
             createMessage(
-              `${err.response.status} ${err.response.statusText}`,
+              `${err.response.data['non_field_errors'][0]}`,
               "error"
             )
           )
@@ -345,7 +347,7 @@ export const updateTask = (
   id,
   name,
   details,
-  deadline,
+  // deadline,
   assigned_to,
   note,
   prerequisite,
@@ -358,7 +360,7 @@ export const updateTask = (
     id,
     name,
     details,
-    deadline,
+    // deadline,
     assigned_to,
     note,
     prerequisite,
@@ -385,7 +387,7 @@ export const updateTask = (
         dispatch(
           dispatch(
             createMessage(
-              `${err.response.status} ${err.response.statusText}`,
+              `${err.response.data['non_field_errors'][0]}`,
               "error"
             )
           )
