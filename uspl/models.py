@@ -8,9 +8,11 @@ from django.utils import timezone
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_save
 from django.contrib.auth.signals import user_logged_in
+import math
 from django.contrib import messages
 from django.db.models import Avg
 from weekly_status.models import WorkStatus
+from django.core.exceptions import ValidationError
 from django.template.defaultfilters import slugify
 from notification.signals import notify
 
@@ -159,9 +161,9 @@ class Task(models.Model):
         if self.completed:
             self.completed_date = timezone.now().date()
         
-        tasks = self.project.task_set.all()
-        if self.wbs_number in tasks:
-            raise ValueError("WBS number "+ self.wbs_number +" already exists for this project") 
+        # tasks = self.project.task_set.all()
+        # if tasks.filter(wbs_number = self.wbs_number):
+        #     raise ValidationError("WBS number "+ self.wbs_number +" already exists for this project") 
         super(Task, self).save()
     
     def get_absolute_url(self):

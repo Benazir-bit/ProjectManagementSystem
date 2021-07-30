@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { updateTask } from "../../../../actions/task";
 import moment from "moment";
+import { InfoCircleOutlined } from '@ant-design/icons';
 import { Form, Modal, Button, Input, Select, DatePicker, InputNumber } from "antd";
 import ImageSmall from "../../ImageSmall/ImageSmall";
 import "./TaskUpdateModal.css";
@@ -46,21 +47,31 @@ const CollectionCreateForm = (
                 <Input />
               </Form.Item>
               <Form.Item label="WBS Number" name="wbs_number" rules={[{ required: true, message: "Enter WBS Number!" }]}>
-                <Input/>
-              </Form.Item>
-              <Form.Item label="Prerequisitte WBS Number" name="prerequisite" rules={[{ required: false, message: "Enter Prerequisitte WBS Number!" }]}>
                 <Input />
               </Form.Item>
-              <Form.Item label="Optimistic Time" name="optimistic_time" rules={[{ required: true, message: "Enter Optimistic Time!" }]}>
-                <InputNumber min={0}/>
+              <Form.Item label="Optimistic Time"
+                tooltip={{
+                  title: 'Represents the shortest estimated time period within which a task is likely to be completed',
+                  icon: <InfoCircleOutlined />,
+                }}
+                name="optimistic_time" rules={[{ required: true, message: "Enter Optimistic Time!" }]}>
+                <InputNumber min={0} />
               </Form.Item>
-              <Form.Item label="Most Likely Time" name="most_likely_time" rules={[{ required: true, message: "Enter Most Likely Time!" }]}>
-                <InputNumber min={0}/>
+              <Form.Item label="Most Likely Time"
+                tooltip={{
+                  title: 'The best or most reasonable estimate of how long it should take to complete a task',
+                  icon: <InfoCircleOutlined />,
+                }}
+                name="most_likely_time" rules={[{ required: true, message: "Enter Most Likely Time!" }]}>
+                <InputNumber min={0} />
               </Form.Item>
-              <Form.Item label="Pessimistic Time" name="pessimistic_time" rules={[{ required: true, message: "Enter Pessimistic Time!" }]}>
-                <InputNumber min={0}/>
+              <Form.Item label="Pessimistic Time" tooltip={{
+                title: 'Represents the longest estimated time period within which a task is likely to be completed',
+                icon: <InfoCircleOutlined />,
+              }}
+                name="pessimistic_time" rules={[{ required: true, message: "Enter Pessimistic Time!" }]}>
+                <InputNumber min={0} />
               </Form.Item>
-             
               <Form.Item label="Details" name="details">
                 <TextArea
                   placeholder="Details About the Task"
@@ -68,10 +79,10 @@ const CollectionCreateForm = (
                 />
               </Form.Item>
 
-              <Form.Item label="Due Date" name="deadline" rules={[{ required: true, message: "Enter Due Date!" }]}>
+              {/* <Form.Item label="Due Date" name="deadline" rules={[{ required: false, message: "Enter Due Date!" }]}>
 
                 <DatePicker disabledDate={d => !d || d.isBefore(today)} />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="Task Owner" name="assigned_to" rules={[{ required: true, message: "Select Task Owner!" }]}>
                 <Select
                   style={{ width: "100%", height: "36px" }}
@@ -121,7 +132,7 @@ class TaskUpdateModal extends React.Component {
     const {
       name,
       details,
-      deadline,
+      // deadline,
       assigned_to,
       note,
       prerequisite,
@@ -130,11 +141,12 @@ class TaskUpdateModal extends React.Component {
       most_likely_time,
       pessimistic_time
     } = this.formRef.current.getFieldsValue();
+
     this.props.updateTask(
       this.props.task.id,
       name,
       details,
-      deadline.format("YYYY-MM-DD"),
+      // deadline ? deadline.format("YYYY-MM-DD") : deadline,
       assigned_to,
       note,
       prerequisite,

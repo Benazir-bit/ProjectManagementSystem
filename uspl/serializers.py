@@ -214,6 +214,13 @@ class TaskDetailsSerializer(serializers.ModelSerializer):
         model = Task
         fields = '__all__'
 
+    def validate(self, data):
+        if 'project' in data.keys() and  'wbs_number' in data.keys():
+            tasks = Task.objects.filter(project= data['project'])
+            if tasks.filter(wbs_number = data['wbs_number']):
+                raise serializers.ValidationError(
+                        {"WBS number "+ data['wbs_number']+" already exists for this project"})
+        return data
 
 class ProjectListSerializer(serializers.ModelSerializer):
     proj_completeion_rate = serializers.FloatField(

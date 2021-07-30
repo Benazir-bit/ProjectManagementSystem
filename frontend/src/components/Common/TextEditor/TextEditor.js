@@ -47,9 +47,9 @@ import "react-quill/dist/quill.snow.css";
 class TextEditor extends Component {
   getValues = () => {
     this.props.setParentState(this.state.text);
-    var range = this.quillRef.getSelection();
-    let position = range ? range.index : 0;
-    this.quillRef.setText(position, "");
+    // var range = this.quillRef.getSelection();
+    // let position = range ? range.index : 0;
+    // this.quillRef.setText(position, "");
   };
   constructor(props) {
     super(props);
